@@ -23,6 +23,8 @@ namespace ApplicationVeloMax
         public MainWindow()
         {
             InitializeComponent();
+            Console.WriteLine("test");
+            Console.ReadKey();
         }
     }
 }
