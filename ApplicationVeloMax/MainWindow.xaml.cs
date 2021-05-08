@@ -64,6 +64,7 @@ namespace ApplicationVeloMax
                     Console.WriteLine(data);
                     if (i != reader.FieldCount) Console.Write(" ; ");
                     else Console.WriteLine();
+                    Console.WriteLine("\n");
                 }
             }
 
