@@ -29,5 +29,10 @@ namespace ApplicationVeloMax.Models
             get { return nom; }
             set { nom = value; }
         }
+
+        public override string ToString()
+        {
+            return $"{this.id}; {this.nom}";
+        }
     }
 }
