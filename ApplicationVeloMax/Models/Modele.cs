@@ -8,6 +8,8 @@ namespace ApplicationVeloMax.Models
 {
     public class Modele
     {
+        static public List<Modele> ensembleModele = new List<Modele>();
+
         private int id;
         private string nom;
         private decimal prixUnitaire;
@@ -23,6 +25,7 @@ namespace ApplicationVeloMax.Models
             if (f != null) this.GrandeurModele = f;
             LigneProduit l = LigneProduit.ensembleLigneProduit.Find(lp => lp.Id == idLigneProduit);
             if (l != null) this.LigneProduitModele = l;
+            if (ensembleModele.Find(m => m.Id == this.Id) == null) ensembleModele.Add(this);
         }
 
         public int Id
@@ -75,7 +78,7 @@ namespace ApplicationVeloMax.Models
 
         public override string ToString()
         {
-            return $"{this.id} ; {this.nom} ; {this.prixUnitaire} ; {this.quantite} ; {this.grandeurModele.Nom} ; {this.ligneProduitModele.Nom}";
+            return $"{this.id} ; {this.nom} ; {this.prixUnitaire} ; {this.quantite} ; {this.grandeurModele.Nom} ; {this.ligneProduitModele.Nom} ; {this.dateE}";
         }
     }
 }

@@ -14,7 +14,7 @@ namespace ApplicationVeloMax.Models
 
         public LigneProduit()
         {
-            ensembleLigneProduit.Add(this);
+            if(ensembleLigneProduit.Find(p => p.Id == this.Id) == null) ensembleLigneProduit.Add(this);
         }
 
         public int Id

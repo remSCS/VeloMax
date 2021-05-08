@@ -16,46 +16,37 @@ using MySql.Data.MySqlClient;
 using System.Data;
 using ApplicationVeloMax.Models;
 using ApplicationVeloMax.Communication;
+using System.ComponentModel;
+using System.Collections.ObjectModel;
 
 namespace ApplicationVeloMax
 {
-    public partial class MainWindow : Window
+    public partial class MainWindow : Window, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        private ObservableCollection<Modele> _modeles;
+        public ObservableCollection<Modele> Modeles
+        {
+            get { return _modeles; }
+            set
+            {
+                _modeles = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Modeles"));
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
 
-            DataAccess cs = new DataAccess("SERVER=84.102.235.128;PORT=3306;DATABASE=velomax;UID=RemoteAdmin;PASSWORD=Password@123");
+            //"SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123"
+            new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
             DataAccess.GetAllGrandeurs();
             DataAccess.GetAllLigneProduits();
             DataAccess.GetAllModels();
-        }
 
-        static void sqlRequest(MySqlConnection cnn, string request, List<MySqlParameter> parameters = null)
-        {
-            var cmd = new MySqlCommand(request, cnn);
-
-            MySqlDataReader reader = cmd.ExecuteReader();
-
-            while (reader.Read()) // Récupère les données
-            {
-                for (int i = 0; i < reader.FieldCount; i++)
-                {
-                    string data = "";
-                    if (!reader.IsDBNull(i))
-                    {
-                        data = reader.GetString(i);
-                    }
-                    Console.WriteLine(data);
-                    if (i != reader.FieldCount) Console.Write(" ; ");
-                    else Console.WriteLine();
-                }
-            }
-
-            Console.WriteLine("Done");
-
-            reader.Close();
-            cmd.Dispose();
+            Modeles = new ObservableCollection<Modele>(Modele.ensembleModele);
         }
     }
 }

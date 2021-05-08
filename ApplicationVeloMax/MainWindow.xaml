@@ -4,9 +4,32 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax"
-        mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="Fenetre de test" Height="450" Width="800" FontFamily="Helvetica">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <DataGrid Grid.Row="0" Grid.Column="0" 
+                    Margin="10" 
+                    IsReadOnly="True" 
+                    ItemsSource="{Binding Modeles, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                    ToolTip="A faire"
+                    AutoGenerateColumns="True" GridLinesVisibility="All" Width="auto" >
+            <!--<DataGrid.Columns>
+                <DataGridTextColumn Width="auto" Header="First Name" Binding="{Binding FirstName}"/>
+                <DataGridTextColumn Width="auto" Header="Last Name" Binding="{Binding LastName}"/>
+                <DataGridTextColumn Width="auto" Header="Gender" Binding="{Binding Gender}"/>
+                <DataGridTextColumn Width="auto" Header="Birthday" Binding="{Binding BirthDate.Date, StringFormat=dd/MM/yyyy}"/>
+                <DataGridTextColumn Width="*" Header="Email Address" Binding="{Binding EmailAddress}"/>
+                <DataGridTextColumn Width="auto" Header="Password" Binding="{Binding Password}"/>
+                <DataGridTextColumn Width="auto" Header="Country" Binding="{Binding Address.Country}"/>
+            </DataGrid.Columns>-->
+
+        </DataGrid>
     </Grid>
 </Window>
