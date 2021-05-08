@@ -31,7 +31,7 @@ namespace ApplicationVeloMax.Models
 
         public override string ToString()
         {
-            return $"{this.id}; + {this.nom}";
+            return $"{this.id} ; {this.nom}";
         }
     }
 }

@@ -40,7 +40,9 @@ namespace ApplicationVeloMax
             MessageBox.Show("Connected successfully");
             #endregion
 
-            MySQLRequest("select * from modele", cnn);
+            GetAllGrandeurs(cnn);
+            GetAllLigneProduits(cnn);
+            GetAllModels(cnn);
             cnn.Close();
         }
 
@@ -73,14 +75,55 @@ namespace ApplicationVeloMax
             cmd.Dispose();
         }
 
-        static void MySQLRequest(string requete, MySqlConnection connexion)
+        static void GetAllGrandeurs(MySqlConnection connexion)
         {
             DataTable dt = new DataTable();
-            MySqlCommand com = new MySqlCommand(requete, connexion);
+            MySqlCommand com = new MySqlCommand("select * from grandeur;", connexion);
+            MySqlDataAdapter da = new MySqlDataAdapter(com);
+            da.Fill(dt);
+
+            List<Grandeur> grandeurs = new List<Grandeur>();
+            foreach (DataRow i in dt.Rows)
+            {
+                grandeurs.Add(new Grandeur()
+                {
+                    Id = i.Field<int>("idGrandeur"),
+                    Nom = i.Field<string>("nomGrandeur")
+                });
+            }
+            MessageBox.Show("Grandeur done");
+        }
+
+        static void GetAllLigneProduits(MySqlConnection connexion) 
+        {
+            DataTable dt = new DataTable();
+            MySqlCommand com = new MySqlCommand("select * from LigneProduit;", connexion);
+            MySqlDataAdapter da = new MySqlDataAdapter(com);
+            da.Fill(dt);
+
+            List<LigneProduit> lignesProduits = new List<LigneProduit>();
+
+            foreach (DataRow i in dt.Rows)
+            {
+                lignesProduits.Add(new LigneProduit()
+                {
+                    Id = i.Field<int>("idLigneProduit"),
+                    Nom = i.Field<string>("nomLigneProduit")
+                });
+            }
+            MessageBox.Show("Ligne Produit done");
+        }
+
+        static void GetAllModels(MySqlConnection connexion)
+        {
+            DataTable dt = new DataTable();
+            MySqlCommand com = new MySqlCommand("select * from modele;", connexion);
             MySqlDataAdapter da = new MySqlDataAdapter(com);
             da.Fill(dt);
 
             List<Modele> modeles = new List<Modele>();
+
+            Console.WriteLine("NOmbre de grandeurs : " + Grandeur.ensembleGrandeurs.Count());
 
             foreach (DataRow i in dt.Rows)
             {
@@ -97,62 +140,6 @@ namespace ApplicationVeloMax
             }
 
             foreach (var m in modeles) Console.WriteLine(m);
-        }
-
-        static void GetAllGrandeurs(MySqlConnection connexion) 
-        {
-            DataTable dt = new DataTable();
-            MySqlCommand com = new MySqlCommand("", connexion);
-            MySqlDataAdapter da = new MySqlDataAdapter(com);
-            da.Fill(dt);
-
-            List<Grandeur> grandeurs = new List<Grandeur>();
-            foreach (DataRow i in dt.Rows)
-            {
-                modeles.Add(new Modele(i.Field<int>("idGrandeur"), i.Field<int>("idLigneProduit"))
-                {
-                    Id = i.Field<int>("idModele"),
-                    Nom = i.Field<string>("nomModele"),
-                    PrixUnitaire = i.Field<decimal>("prixUnitaireModele"),
-                    Quantite = i.Field<int>("quantiteModele"),
-                    DateE = i.Field<DateTime>("dateEModele"),
-                    DateS = i.Field<DateTime>("dateSModele"),
-                });
-                Console.WriteLine();
-
-            }
-        static void GetAllLigneProduits(MySqlConnection connexion) 
-        {
-            DataTable dt = new DataTable();
-            MySqlCommand com = new MySqlCommand("", connexion);
-            MySqlDataAdapter da = new MySqlDataAdapter(com);
-            da.Fill(dt);
-
-            List<LigneProduit> lignesProduits = new List<LigneProduit>();
-        }
-        static void GetAllModels(MySqlConnection connexion)
-        {
-            DataTable dt = new DataTable();
-            MySqlCommand com = new MySqlCommand("", connexion);
-            MySqlDataAdapter da = new MySqlDataAdapter(com);
-            da.Fill(dt);
-
-            List<Modele> modeles = new List<Modele>();
-
-            foreach (DataRow i in dt.Rows)
-            {
-                modeles.Add(new Modele(i.Field<int>("idGrandeur"), i.Field<int>("idLigneProduit"))
-                {
-                    Id = i.Field<int>("idModele"),
-                    Nom = i.Field<string>("nomModele"),
-                    PrixUnitaire = i.Field<decimal>("prixUnitaireModele"),
-                    Quantite = i.Field<int>("quantiteModele"),
-                    DateE = i.Field<DateTime>("dateEModele"),
-                    DateS = i.Field<DateTime>("dateSModele"),
-                });
-                Console.WriteLine();
-            }
-
         }
     }
 }

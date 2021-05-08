@@ -19,8 +19,10 @@ namespace ApplicationVeloMax.Models
 
         public Modele(int idGrandeur, int idLigneProduit)
         {
-            Grandeur f = Grandeur.ensembleGrandeurs.Find(g => g.ID == idGrandeur);
+            Grandeur f = Grandeur.ensembleGrandeurs.Find(g => g.Id == idGrandeur);
             if (f != null) this.GrandeurModele = f;
+            LigneProduit l = LigneProduit.ensembleLigneProduit.Find(lp => lp.Id == idLigneProduit);
+            if (l != null) this.LigneProduitModele = l;
         }
 
         public int Id
@@ -73,7 +75,7 @@ namespace ApplicationVeloMax.Models
 
         public override string ToString()
         {
-            return $"{this.id} ; {this.nom} ; {this.prixUnitaire} ; {this.quantite} ; {this.grandeurModele} ; {this.ligneProduitModele}";
+            return $"{this.id} ; {this.nom} ; {this.prixUnitaire} ; {this.quantite} ; {this.grandeurModele.Nom} ; {this.ligneProduitModele.Nom}";
         }
     }
 }
