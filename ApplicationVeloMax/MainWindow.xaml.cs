@@ -29,7 +29,7 @@ namespace ApplicationVeloMax
             MySqlConnection cnn = null;
             try
             {
-                string cs = "SERVER=localhost;PORT=3306;DATABASE=velomax;UID=RemoteAdmin;PASSWORD=Password@123";
+                string cs = "SERVER=84.102.235.128;PORT=3306;DATABASE=velomax;UID=RemoteAdmin;PASSWORD=Password@123";
                 cnn = new MySqlConnection(cs);
                 cnn.Open();
             }
@@ -40,8 +40,6 @@ namespace ApplicationVeloMax
             }
             MessageBox.Show("Connected successfully");
             #endregion
-
-
 
             Console.ReadKey();
         }
@@ -64,7 +62,6 @@ namespace ApplicationVeloMax
                     Console.WriteLine(data);
                     if (i != reader.FieldCount) Console.Write(" ; ");
                     else Console.WriteLine();
-                    Console.WriteLine("\n");
                 }
             }
 
