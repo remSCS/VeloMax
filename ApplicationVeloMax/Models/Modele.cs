@@ -15,6 +15,13 @@ namespace ApplicationVeloMax.Models
         private DateTime dateS;
         private Grandeur grandeurModele;
         private LigneProduit ligneProduitModele;
+        private int quantite;
+
+        public Modele(int idGrandeur, int idLigneProduit)
+        {
+            Grandeur f = Grandeur.ensembleGrandeurs.Find(g => g.ID == idGrandeur);
+            if (f != null) this.GrandeurModele = f;
+        }
 
         public int Id
         {
@@ -28,10 +35,22 @@ namespace ApplicationVeloMax.Models
             set { nom = value; }
         }
 
+        public Grandeur GrandeurModele
+        {
+            get { return grandeurModele; }
+            set { grandeurModele = value; }
+        }
+
         public decimal PrixUnitaire
         {
             get { return prixUnitaire; }
             set { prixUnitaire = value; }
+        }
+
+        public LigneProduit LigneProduitModele
+        {
+            get { return ligneProduitModele; }
+            set { ligneProduitModele = value; }
         }
 
         public DateTime DateE
@@ -46,16 +65,15 @@ namespace ApplicationVeloMax.Models
             set { dateS = value; }
         }
 
-        public Grandeur GrandeurModele
+        public int Quantite
         {
-            get { return grandeurModele; }
-            set { grandeurModele = value; }
+            get { return quantite; }
+            set { quantite = value; }
         }
 
-        public LigneProduit LigneProduitModele
+        public override string ToString()
         {
-            get { return ligneProduitModele; }
-            set { ligneProduitModele = value; }
+            return $"{this.id} ; {this.nom} ; {this.prixUnitaire} ; {this.quantite} ; {this.grandeurModele} ; {this.ligneProduitModele}";
         }
     }
 }

@@ -8,8 +8,15 @@ namespace ApplicationVeloMax.Models
 {
     public class Grandeur
     {
+        static public List<Grandeur> ensembleGrandeurs = new List<Grandeur>();
+
         private int id;
         private string nom;
+
+        public Grandeur()
+        {
+            ensembleGrandeurs.Add(this);
+        }
 
         public int ID
         {

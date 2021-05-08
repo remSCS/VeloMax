@@ -13,12 +13,11 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
+using System.Data;
+using ApplicationVeloMax.Models;
 
 namespace ApplicationVeloMax
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
         public MainWindow()
@@ -41,8 +40,11 @@ namespace ApplicationVeloMax
             MessageBox.Show("Connected successfully");
             #endregion
 
-            Console.ReadKey();
+            MySQLRequest("select * from modele", cnn);
+            cnn.Close();
         }
+
+
 
         static void sqlRequest(MySqlConnection cnn, string request, List<MySqlParameter> parameters = null)
         {
@@ -69,6 +71,88 @@ namespace ApplicationVeloMax
 
             reader.Close();
             cmd.Dispose();
+        }
+
+        static void MySQLRequest(string requete, MySqlConnection connexion)
+        {
+            DataTable dt = new DataTable();
+            MySqlCommand com = new MySqlCommand(requete, connexion);
+            MySqlDataAdapter da = new MySqlDataAdapter(com);
+            da.Fill(dt);
+
+            List<Modele> modeles = new List<Modele>();
+
+            foreach (DataRow i in dt.Rows)
+            {
+                modeles.Add(new Modele(i.Field<int>("idGrandeur"), i.Field<int>("idLigneProduit"))
+                {
+                    Id = i.Field<int>("idModele"),
+                    Nom = i.Field<string>("nomModele"),
+                    PrixUnitaire = i.Field<decimal>("prixUnitaireModele"),
+                    Quantite = i.Field<int>("quantiteModele"),
+                    DateE = i.Field<DateTime>("dateEModele"),
+                    DateS = i.Field<DateTime>("dateSModele"),
+                });
+                Console.WriteLine();
+            }
+
+            foreach (var m in modeles) Console.WriteLine(m);
+        }
+
+        static void GetAllGrandeurs(MySqlConnection connexion) 
+        {
+            DataTable dt = new DataTable();
+            MySqlCommand com = new MySqlCommand("", connexion);
+            MySqlDataAdapter da = new MySqlDataAdapter(com);
+            da.Fill(dt);
+
+            List<Grandeur> grandeurs = new List<Grandeur>();
+            foreach (DataRow i in dt.Rows)
+            {
+                modeles.Add(new Modele(i.Field<int>("idGrandeur"), i.Field<int>("idLigneProduit"))
+                {
+                    Id = i.Field<int>("idModele"),
+                    Nom = i.Field<string>("nomModele"),
+                    PrixUnitaire = i.Field<decimal>("prixUnitaireModele"),
+                    Quantite = i.Field<int>("quantiteModele"),
+                    DateE = i.Field<DateTime>("dateEModele"),
+                    DateS = i.Field<DateTime>("dateSModele"),
+                });
+                Console.WriteLine();
+
+            }
+        static void GetAllLigneProduits(MySqlConnection connexion) 
+        {
+            DataTable dt = new DataTable();
+            MySqlCommand com = new MySqlCommand("", connexion);
+            MySqlDataAdapter da = new MySqlDataAdapter(com);
+            da.Fill(dt);
+
+            List<LigneProduit> lignesProduits = new List<LigneProduit>();
+        }
+        static void GetAllModels(MySqlConnection connexion)
+        {
+            DataTable dt = new DataTable();
+            MySqlCommand com = new MySqlCommand("", connexion);
+            MySqlDataAdapter da = new MySqlDataAdapter(com);
+            da.Fill(dt);
+
+            List<Modele> modeles = new List<Modele>();
+
+            foreach (DataRow i in dt.Rows)
+            {
+                modeles.Add(new Modele(i.Field<int>("idGrandeur"), i.Field<int>("idLigneProduit"))
+                {
+                    Id = i.Field<int>("idModele"),
+                    Nom = i.Field<string>("nomModele"),
+                    PrixUnitaire = i.Field<decimal>("prixUnitaireModele"),
+                    Quantite = i.Field<int>("quantiteModele"),
+                    DateE = i.Field<DateTime>("dateEModele"),
+                    DateS = i.Field<DateTime>("dateSModele"),
+                });
+                Console.WriteLine();
+            }
+
         }
     }
 }

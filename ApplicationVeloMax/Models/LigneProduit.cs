@@ -8,8 +8,14 @@ namespace ApplicationVeloMax.Models
 {
     public class LigneProduit
     {
+        static public List<LigneProduit> ensembleLigneProduit = new List<LigneProduit>();
         private int id;
         private string nom;
+
+        public LigneProduit()
+        {
+            ensembleLigneProduit.Add(this);
+        }
 
         public int Id
         {
