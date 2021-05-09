@@ -13,6 +13,7 @@
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <DataGrid Grid.Row="0" Grid.Column="0" 
@@ -32,12 +33,29 @@
             </DataGrid.Columns>-->
 
         </DataGrid>
+        
         <DataGrid Grid.Row="0" Grid.Column="1"
                   Margin="10"
                   IsReadOnly="True"
                   AutoGenerateColumns="True" GridLinesVisibility="All"
                   ItemsSource="{Binding Adresses, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
             
+        </DataGrid>
+        
+        <DataGrid Grid.Row="1" Grid.Column="0"
+                  Margin="10"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="True" GridLinesVisibility="All"
+                  ItemsSource="{Binding Grandeurs, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+
+        </DataGrid>
+
+        <DataGrid Grid.Row="1" Grid.Column="1"
+                  Margin="10"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="True" GridLinesVisibility="All"
+                  ItemsSource="{Binding LignesProduits, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+
         </DataGrid>
     </Grid>
 </Window>

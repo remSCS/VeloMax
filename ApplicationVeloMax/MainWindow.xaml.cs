@@ -47,6 +47,28 @@ namespace ApplicationVeloMax
             }
         }
 
+        private ObservableCollection<Grandeur> _grandeurs;
+        public ObservableCollection<Grandeur> Grandeurs
+        {
+            get { return _grandeurs; }
+            set
+            {
+                _grandeurs = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Grandeurs"));
+            }
+        }
+
+        private ObservableCollection<LigneProduit> _lignesProduits;
+        public ObservableCollection<LigneProduit> LignesProduits
+        {
+            get { return _lignesProduits; }
+            set
+            {
+                _lignesProduits = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("LignesProduits"));
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -62,6 +84,8 @@ namespace ApplicationVeloMax
 
             Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
             Adresses = new ObservableCollection<Adresse>(Adresse.Ensemble);
+            Grandeurs = new ObservableCollection<Grandeur>(Grandeur.Ensemble);
+            LignesProduits = new ObservableCollection<LigneProduit>(LigneProduit.Ensemble);
         }
     }
 }
