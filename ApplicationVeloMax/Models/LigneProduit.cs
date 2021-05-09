@@ -8,13 +8,14 @@ namespace ApplicationVeloMax.Models
 {
     public class LigneProduit
     {
-        static public List<LigneProduit> ensembleLigneProduit = new List<LigneProduit>();
+        static private List<LigneProduit> ensemble = new List<LigneProduit>();
+
         private int id;
         private string nom;
 
         public LigneProduit()
         {
-            if(ensembleLigneProduit.Find(p => p.Id == this.Id) == null) ensembleLigneProduit.Add(this);
+            if(ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
 
         public int Id
@@ -32,6 +33,11 @@ namespace ApplicationVeloMax.Models
         public override string ToString()
         {
             return $"{this.id} ; {this.nom}";
+        }
+
+        static public List<LigneProduit> Ensemble
+        {
+            get { return ensemble; }
         }
     }
 }

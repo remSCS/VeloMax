@@ -8,12 +8,14 @@ namespace ApplicationVeloMax.Models
 {
     public class Libelle
     {
+        static private List<Libelle> ensemble = new List<Libelle>();
+        
         private int id;
         private string nom;
 
         public Libelle()
         {
-
+            if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
 
         public int Id
@@ -26,6 +28,11 @@ namespace ApplicationVeloMax.Models
         {
             get { return nom; }
             set { nom = value; }
+        }
+
+        static public List<Libelle> Ensemble
+        {
+            get { return ensemble; }
         }
     }
 }

@@ -8,6 +8,8 @@ namespace ApplicationVeloMax.Models
 {
     public class FournisseurPiece
     {
+        static private List<FournisseurPiece> ensemble = new List<FournisseurPiece>();
+
         private PieceDetachee pieceDetacheeFournisseur;
         private Fournisseur fournisseurPieceDetachee;
         private decimal prix;
@@ -16,7 +18,7 @@ namespace ApplicationVeloMax.Models
 
         public FournisseurPiece()
         {
-
+            if (ensemble.Find(e => e.FournisseurPieceDetachee.Siret == this.FournisseurPieceDetachee.Siret && e.PieceDetacheeFournisseur.Id == this.PieceDetacheeFournisseur.Id) == null) ensemble.Add(this);
         }
 
         public PieceDetachee PieceDetacheeFournisseur
@@ -47,6 +49,11 @@ namespace ApplicationVeloMax.Models
         {
             get { return numCatalogue; }
             set { numCatalogue = value; }
+        }
+
+        static public List<FournisseurPiece> Ensemble
+        {
+            get { return ensemble; }
         }
     }
 }

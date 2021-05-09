@@ -8,13 +8,15 @@ namespace ApplicationVeloMax.Models
 {
     public class ClientPart
     {
+        static private List<ClientPart> ensemble = new List<ClientPart>();
+
         private int id;
         private Fidelio fidelioFournisseur;
         private DateTime dateDebutFidelo;
 
         public ClientPart()
         {
-
+            if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
 
         public int Id
@@ -33,6 +35,11 @@ namespace ApplicationVeloMax.Models
         {
             get { return dateDebutFidelo; }
             set { dateDebutFidelo = value; }
+        }
+
+        static public List<ClientPart> Ensemble
+        {
+            get { return ensemble; }
         }
     }
 }

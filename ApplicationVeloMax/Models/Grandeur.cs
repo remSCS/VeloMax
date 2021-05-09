@@ -8,14 +8,14 @@ namespace ApplicationVeloMax.Models
 {
     public class Grandeur
     {
-        static public List<Grandeur> ensembleGrandeurs = new List<Grandeur>();
+        static private List<Grandeur> ensemble = new List<Grandeur>();
 
         private int id;
         private string nom;
 
         public Grandeur()
         {
-            ensembleGrandeurs.Add(this);
+            if(ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
 
         public int Id
@@ -33,6 +33,11 @@ namespace ApplicationVeloMax.Models
         public override string ToString()
         {
             return $"{this.id}; {this.nom}";
+        }
+
+        static public List<Grandeur> Ensemble
+        {
+            get { return ensemble; }
         }
     }
 }

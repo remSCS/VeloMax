@@ -8,6 +8,8 @@ namespace ApplicationVeloMax.Models
 {
     public class Client
     {
+        static private List<Client> ensemble = new List<Client>();
+
         private int id;
         private Adresse adresseClient;
         private Contact contactClient;
@@ -16,7 +18,7 @@ namespace ApplicationVeloMax.Models
 
         public Client()
         {
-
+            if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
 
         public int Id
@@ -47,6 +49,11 @@ namespace ApplicationVeloMax.Models
         {
             get { return clientProClient; }
             set { clientProClient = value; }
+        }
+
+        static public List<Client> Ensemble
+        {
+            get { return ensemble; }
         }
     }
 }

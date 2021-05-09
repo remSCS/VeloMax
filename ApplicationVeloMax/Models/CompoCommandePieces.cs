@@ -8,13 +8,15 @@ namespace ApplicationVeloMax.Models
 {
     public class CompoCommandePieces
     {
+        static private List<CompoCommandePieces> ensemble = new List<CompoCommandePieces>();
+
         private Commande commandePiece;
         private PieceDetachee pieceCompoCommande;
         private int quantite;
 
         public CompoCommandePieces()
         {
-
+            if (ensemble.Find(e => e.commandePiece.Id == this.CommandePiece.Id) == null) ensemble.Add(this);
         }
 
         public Commande CommandePiece
@@ -33,6 +35,11 @@ namespace ApplicationVeloMax.Models
         {
             get { return quantite; }
             set { quantite = value; }
+        }
+
+        static public List<CompoCommandePieces> Ensemble
+        {
+            get { return ensemble; }
         }
     }
 }

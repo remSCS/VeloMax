@@ -1,4 +1,5 @@
-﻿using System;
+﻿using ApplicationVeloMax.Communication;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -8,6 +9,8 @@ namespace ApplicationVeloMax.Models
 {
     public class PieceDetachee
     {
+        static private List<PieceDetachee> ensemble = new List<PieceDetachee>();
+
         private int id;
         private string reference;
         private string nom;
@@ -18,7 +21,7 @@ namespace ApplicationVeloMax.Models
 
         public PieceDetachee()
         {
-
+            if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
 
         public int Id
@@ -61,6 +64,16 @@ namespace ApplicationVeloMax.Models
         {
             get { return quantite; }
             set { quantite = value; }
+        }
+
+        static public List<PieceDetachee> Ensemble
+        {
+            get { return ensemble; }
+        }
+
+        static public void Update()
+        {
+            ensemble = new List<PieceDetachee>();
         }
     }
 }

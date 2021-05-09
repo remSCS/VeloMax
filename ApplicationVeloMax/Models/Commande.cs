@@ -8,6 +8,8 @@ namespace ApplicationVeloMax.Models
 {
     public class Commande
     {
+        static private List<Commande> ensemble = new List<Commande>();
+
         private int id;
         private DateTime dateE;
         private DateTime dateS;
@@ -16,7 +18,7 @@ namespace ApplicationVeloMax.Models
 
         public Commande()
         {
-
+            if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
 
         public int Id
@@ -47,6 +49,11 @@ namespace ApplicationVeloMax.Models
         {
             get { return clientCommande; }
             set { clientCommande = value; }
+        }
+
+        static public List<Commande> Ensemble
+        {
+            get { return ensemble; }
         }
     }
 }

@@ -8,6 +8,8 @@ namespace ApplicationVeloMax.Models
 {
     public class Fournisseur
     {
+        static private List<Fournisseur> ensemble = new List<Fournisseur>();
+
         private int siret;
         private string nom;
         private Contact contactFournisseur;
@@ -16,7 +18,7 @@ namespace ApplicationVeloMax.Models
 
         public Fournisseur()
         {
-
+            if (ensemble.Find(e => e.Siret == this.Siret) == null) ensemble.Add(this);
         }
 
         public int Siret
@@ -47,6 +49,11 @@ namespace ApplicationVeloMax.Models
         {
             get { return libelleFournisseur; }
             set { libelleFournisseur = value; }
+        }
+
+        static public List<Fournisseur> Ensemble
+        {
+            get { return ensemble; }
         }
     }
 }

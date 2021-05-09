@@ -8,6 +8,8 @@ namespace ApplicationVeloMax.Models
 {
     public class Adresse
     {
+        static private List<Adresse> ensemble = new List<Adresse>();
+
         private int id;
         private string ligne1;
         private string ligne2;
@@ -18,7 +20,7 @@ namespace ApplicationVeloMax.Models
 
         public Adresse()
         {
-
+            if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
 
         public int Id
@@ -61,6 +63,11 @@ namespace ApplicationVeloMax.Models
         {
             get { return pays; }
             set { pays = value; }
+        }
+
+        static public List<Adresse> Ensemble
+        {
+            get { return ensemble; }
         }
     }
 }

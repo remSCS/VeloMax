@@ -8,7 +8,7 @@ namespace ApplicationVeloMax.Models
 {
     public class Modele
     {
-        static public List<Modele> ensembleModele = new List<Modele>();
+        static private List<Modele> ensemble = new List<Modele>();
 
         private int id;
         private string nom;
@@ -21,11 +21,11 @@ namespace ApplicationVeloMax.Models
 
         public Modele(int idGrandeur, int idLigneProduit)
         {
-            Grandeur f = Grandeur.ensembleGrandeurs.Find(g => g.Id == idGrandeur);
+            Grandeur f = Grandeur.Ensemble.Find(g => g.Id == idGrandeur);
             if (f != null) this.GrandeurModele = f;
-            LigneProduit l = LigneProduit.ensembleLigneProduit.Find(lp => lp.Id == idLigneProduit);
+            LigneProduit l = LigneProduit.Ensemble.Find(lp => lp.Id == idLigneProduit);
             if (l != null) this.LigneProduitModele = l;
-            if (ensembleModele.Find(m => m.Id == this.Id) == null) ensembleModele.Add(this);
+            if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
 
         public int Id
@@ -79,6 +79,11 @@ namespace ApplicationVeloMax.Models
         public override string ToString()
         {
             return $"{this.id} ; {this.nom} ; {this.prixUnitaire} ; {this.quantite} ; {this.grandeurModele.Nom} ; {this.ligneProduitModele.Nom} ; {this.dateE}";
+        }
+
+        static public List<Modele> Ensemble
+        {
+            get { return ensemble; }
         }
     }
 }

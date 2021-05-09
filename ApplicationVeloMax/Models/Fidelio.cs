@@ -8,6 +8,8 @@ namespace ApplicationVeloMax.Models
 {
     public class Fidelio
     {
+        static private List<Fidelio> ensemble = new List<Fidelio>();
+
         private int id;
         private string nom;
         private string description;
@@ -17,7 +19,7 @@ namespace ApplicationVeloMax.Models
 
         public Fidelio()
         {
-
+            if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
 
         public int Id
@@ -54,6 +56,11 @@ namespace ApplicationVeloMax.Models
         {
             get { return dureeJours; }
             set { dureeJours = value; }
+        }
+
+        static public List<Fidelio> Ensemble
+        {
+            get { return ensemble; }
         }
     }
 }

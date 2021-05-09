@@ -8,12 +8,16 @@ namespace ApplicationVeloMax.Models
 {
     public class Composition
     {
+        static private List<Composition> ensemble = new List<Composition>();
+
         private Modele modeleComposition;
         private PieceDetachee pieceDetacheeComposition;
 
         public Composition()
         {
-
+            if (ensemble.Find(e =>
+             e.ModeleComposition.Id == this.ModeleComposition.Id &&
+             e.PieceDetacheeComposition.Id == this.PieceDetacheeComposition.Id) == null) ensemble.Add(this);
         }
 
         public Modele ModeleComposition
@@ -26,6 +30,11 @@ namespace ApplicationVeloMax.Models
         {
             get { return pieceDetacheeComposition; }
             set { pieceDetacheeComposition = value; }
+        }
+
+        static public List<Composition> Ensemble
+        {
+            get { return ensemble; }
         }
     }
 }
