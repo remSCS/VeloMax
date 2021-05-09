@@ -69,6 +69,17 @@ namespace ApplicationVeloMax
             }
         }
 
+        private ObservableCollection<Commande> _commandes;
+        public ObservableCollection<Commande> Commandes
+        {
+            get { return _commandes; }
+            set
+            {
+                _commandes = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Commandes"));
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
@@ -86,6 +97,8 @@ namespace ApplicationVeloMax
             Adresses = new ObservableCollection<Adresse>(Adresse.Ensemble);
             Grandeurs = new ObservableCollection<Grandeur>(Grandeur.Ensemble);
             LignesProduits = new ObservableCollection<LigneProduit>(LigneProduit.Ensemble);
+            Commandes = new ObservableCollection<Commande>(Commande.Ensemble);
+
         }
     }
 }

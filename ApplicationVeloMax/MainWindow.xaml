@@ -14,6 +14,7 @@
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
         <DataGrid Grid.Row="0" Grid.Column="0" 
@@ -55,6 +56,14 @@
                   IsReadOnly="True"
                   AutoGenerateColumns="True" GridLinesVisibility="All"
                   ItemsSource="{Binding LignesProduits, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+
+        </DataGrid>
+
+        <DataGrid Grid.Row="2" Grid.ColumnSpan="2"
+                  Margin="10"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="True" GridLinesVisibility="All"
+                  ItemsSource="{Binding Commandes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
 
         </DataGrid>
     </Grid>
