@@ -21,9 +21,9 @@ namespace ApplicationVeloMax.Models
 
         public Modele(int idGrandeur, int idLigneProduit)
         {
-            Grandeur f = Grandeur.Ensemble.Find(g => g.Id == idGrandeur);
-            if (f != null) this.GrandeurModele = f;
-            LigneProduit l = LigneProduit.Ensemble.Find(lp => lp.Id == idLigneProduit);
+            Grandeur g = Grandeur.Ensemble.Find(e => e.Id == idGrandeur);
+            if (g != null) this.GrandeurModele = g;
+            LigneProduit l = LigneProduit.Ensemble.Find(e => e.Id == idLigneProduit);
             if (l != null) this.LigneProduitModele = l;
             if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }

@@ -16,8 +16,12 @@ namespace ApplicationVeloMax.Models
         private int delai;
         private string numCatalogue;
 
-        public FournisseurPiece()
+        public FournisseurPiece(int idPiece, int idFournisseur)
         {
+            PieceDetachee p = PieceDetachee.Ensemble.Find(e => e.Id == idPiece);
+            if (p != null) this.PieceDetacheeFournisseur = p;
+            Fournisseur f = Fournisseur.Ensemble.Find(e => e.Siret == idFournisseur);
+            if (f != null) this.FournisseurPieceDetachee = f;
             if (ensemble.Find(e => e.FournisseurPieceDetachee.Siret == this.FournisseurPieceDetachee.Siret && e.PieceDetacheeFournisseur.Id == this.PieceDetacheeFournisseur.Id) == null) ensemble.Add(this);
         }
 

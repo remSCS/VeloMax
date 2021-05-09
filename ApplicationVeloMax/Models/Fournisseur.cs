@@ -16,8 +16,14 @@ namespace ApplicationVeloMax.Models
         private Adresse adresseFournisseur;
         private Libelle libelleFournisseur;
 
-        public Fournisseur()
+        public Fournisseur(int idContact, int idAdresse, int idLibelle)
         {
+            Contact c = Contact.Ensemble.Find(e => e.Id == idContact);
+            if (c != null) this.ContactFournisseur = c;
+            Adresse a = Adresse.Ensemble.Find(e => e.Id == idAdresse);
+            if (a != null) this.AdresseFournisseur = a;
+            Libelle l = Libelle.Ensemble.Find(e => e.Id == idLibelle);
+            if (l != null) this.LibelleFournisseur = l;
             if (ensemble.Find(e => e.Siret == this.Siret) == null) ensemble.Add(this);
         }
 

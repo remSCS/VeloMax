@@ -14,8 +14,12 @@ namespace ApplicationVeloMax.Models
         private PieceDetachee pieceCompoCommande;
         private int quantite;
 
-        public CompoCommandePieces()
+        public CompoCommandePieces(int idCommande, int idPiece)
         {
+            Commande c = Commande.Ensemble.Find(e => e.Id == idCommande);
+            if (c != null) this.CommandePiece = c;
+            PieceDetachee p = PieceDetachee.Ensemble.Find(e => e.Id == idPiece);
+            if (p != null) this.PieceCompoCommande = p;
             if (ensemble.Find(e => e.commandePiece.Id == this.CommandePiece.Id) == null) ensemble.Add(this);
         }
 

@@ -14,8 +14,12 @@ namespace ApplicationVeloMax.Models
         private Modele veloCompoCommande;
         private int quantite;
 
-        public CompoCommandeVelo()
+        public CompoCommandeVelo(int idCommande, int idModele)
         {
+            Commande c = Commande.Ensemble.Find(e => e.Id == idCommande);
+            if (c != null) this.CommandeVelo = c;
+            Modele v = Modele.Ensemble.Find(e => e.Id == idModele);
+            if (v != null) this.VeloCompoCommande = v;
             if (ensemble.Find(e => e.CommandeVelo.Id == this.CommandeVelo.Id) == null) ensemble.Add(this);
         }
 

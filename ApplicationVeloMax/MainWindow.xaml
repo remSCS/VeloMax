@@ -9,6 +9,7 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
@@ -19,7 +20,7 @@
                     IsReadOnly="True" 
                     ItemsSource="{Binding Modeles, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                     ToolTip="A faire"
-                    AutoGenerateColumns="True" GridLinesVisibility="All" Width="auto" >
+                    AutoGenerateColumns="True" GridLinesVisibility="All">
             <!--<DataGrid.Columns>
                 <DataGridTextColumn Width="auto" Header="First Name" Binding="{Binding FirstName}"/>
                 <DataGridTextColumn Width="auto" Header="Last Name" Binding="{Binding LastName}"/>
@@ -30,6 +31,13 @@
                 <DataGridTextColumn Width="auto" Header="Country" Binding="{Binding Address.Country}"/>
             </DataGrid.Columns>-->
 
+        </DataGrid>
+        <DataGrid Grid.Row="0" Grid.Column="1"
+                  Margin="10"
+                  IsReadOnly="True"
+                  AutoGenerateColumns="True" GridLinesVisibility="All"
+                  ItemsSource="{Binding Adresses, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+            
         </DataGrid>
     </Grid>
 </Window>

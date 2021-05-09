@@ -13,7 +13,7 @@ namespace ApplicationVeloMax.Models
         private int id;
         private string ligne1;
         private string ligne2;
-        private int codePostal;
+        private string codePostal;
         private string ville;
         private string province;
         private string pays;
@@ -47,7 +47,7 @@ namespace ApplicationVeloMax.Models
             set { ville = value; }
         }
 
-        public int CodePostal
+        public string CodePostal
         {
             get { return codePostal; }
             set { codePostal = value; }

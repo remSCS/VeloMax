@@ -36,17 +36,32 @@ namespace ApplicationVeloMax
             }
         }
 
+        private ObservableCollection<Adresse> _adresses;
+        public ObservableCollection<Adresse> Adresses
+        {
+            get { return _adresses; }
+            set
+            {
+                _adresses = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Adresses"));
+            }
+        }
+
         public MainWindow()
         {
             InitializeComponent();
 
             //"SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123"
             new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
-            DataAccess.GetAllGrandeurs();
-            DataAccess.GetAllLigneProduits();
-            DataAccess.GetAllModels();
 
-            Modeles = new ObservableCollection<Modele>(Modele.ensembleModele);
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            DataAccess.RefreshDB();
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            MessageBox.Show($"{elapsedMs}ms to get data from DB as localhost");
+
+            Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
+            Adresses = new ObservableCollection<Adresse>(Adresse.Ensemble);
         }
     }
 }

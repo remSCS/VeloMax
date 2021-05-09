@@ -16,8 +16,12 @@ namespace ApplicationVeloMax.Models
         private Adresse adresseLivraison;
         private Client clientCommande;
 
-        public Commande()
+        public Commande(int idAdresse, int idClient)
         {
+            Adresse a = Adresse.Ensemble.Find(e => e.Id == idAdresse);
+            if (a != null) this.AdresseLivraison = a;
+            Client c = Client.Ensemble.Find(e => e.Id == idClient);
+            if (c != null) this.ClientCommande = c;
             if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
 

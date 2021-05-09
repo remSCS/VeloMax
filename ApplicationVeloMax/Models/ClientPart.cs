@@ -14,8 +14,10 @@ namespace ApplicationVeloMax.Models
         private Fidelio fidelioFournisseur;
         private DateTime dateDebutFidelo;
 
-        public ClientPart()
+        public ClientPart(int idFidelio)
         {
+            Fidelio f = Fidelio.Ensemble.Find(e => e.Id == idFidelio);
+            if (f != null) this.FidelioFournisseur = f;
             if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
 

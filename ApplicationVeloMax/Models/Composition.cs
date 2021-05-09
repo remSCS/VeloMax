@@ -13,8 +13,13 @@ namespace ApplicationVeloMax.Models
         private Modele modeleComposition;
         private PieceDetachee pieceDetacheeComposition;
 
-        public Composition()
+        public Composition(int idModele, int idPiece)
         {
+            Modele m = Modele.Ensemble.Find(e => e.Id == idModele);
+            if (m != null) this.ModeleComposition = m;
+            PieceDetachee p = PieceDetachee.Ensemble.Find(e => e.Id == idPiece);
+            if (p != null) this.PieceDetacheeComposition = p;
+
             if (ensemble.Find(e =>
              e.ModeleComposition.Id == this.ModeleComposition.Id &&
              e.PieceDetacheeComposition.Id == this.PieceDetacheeComposition.Id) == null) ensemble.Add(this);

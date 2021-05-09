@@ -16,8 +16,16 @@ namespace ApplicationVeloMax.Models
         private ClientPart clientPartClient;
         private ClientPro clientProClient;
 
-        public Client()
+        public Client(int idAdresse, int idContact, int idClientPart, int idClientPro)
         {
+            Adresse a = Adresse.Ensemble.Find(e => e.Id == idAdresse);
+            if (a != null) this.AdresseClient = a;
+            Contact c = Contact.Ensemble.Find(e => e.Id == idContact);
+            if (c != null) this.ContactClient = c;
+            ClientPart cpart = ClientPart.Ensemble.Find(e => e.Id == idClientPart);
+            if (cpart != null) this.ClientPartClient = cpart;
+            ClientPro cpro = ClientPro.Ensemble.Find(e => e.Id == idClientPro);
+            if (cpro != null) this.clientProClient = cpro;
             if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
 
