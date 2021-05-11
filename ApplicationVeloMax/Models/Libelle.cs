@@ -30,6 +30,11 @@ namespace ApplicationVeloMax.Models
             set { nom = value; }
         }
 
+        public override string ToString()
+        {
+            return $"{this.Nom}";
+        }
+
         static public List<Libelle> Ensemble
         {
             get { return ensemble; }

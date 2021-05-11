@@ -65,6 +65,16 @@ namespace ApplicationVeloMax.Models
             set { pays = value; }
         }
 
+        public override string ToString()
+        {
+            string str = $"{this.ligne1}";
+            if(this.ligne2 != "" && this.ligne2 != null) str += $", {this.ligne2}";
+            str += $", {this.CodePostal}, {this.ville}";
+            if (this.province != "" && this.province != null) str += $", {this.province}";
+            str += $", {this.pays}";
+            return str;
+        }
+
         static public List<Adresse> Ensemble
         {
             get { return ensemble; }

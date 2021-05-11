@@ -91,6 +91,17 @@ namespace ApplicationVeloMax.Views
             }
         }
 
+        private ObservableCollection<Fournisseur> _fournisseurs;
+        public ObservableCollection<Fournisseur> Fournisseurs
+        {
+            get { return _fournisseurs; }
+            set
+            {
+                _fournisseurs = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Fournisseurs"));
+            }
+        }
+
         public AdminView()
         {
             InitializeComponent();
@@ -110,6 +121,7 @@ namespace ApplicationVeloMax.Views
             LignesProduits = new ObservableCollection<LigneProduit>(LigneProduit.Ensemble);
             Commandes = new ObservableCollection<Commande>(Commande.Ensemble);
             PiecesDetachees = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble);
+            Fournisseurs = new ObservableCollection<Fournisseur>(Fournisseur.Ensemble);
         }
     }
 }

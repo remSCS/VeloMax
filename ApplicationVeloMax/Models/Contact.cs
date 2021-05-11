@@ -51,6 +51,11 @@ namespace ApplicationVeloMax.Models
             set { tel = value; }
         }
 
+        public override string ToString()
+        {
+            return this.nom;
+        }
+
         static public List<Contact> Ensemble
         {
             get { return ensemble; }
