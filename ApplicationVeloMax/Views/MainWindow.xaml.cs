@@ -87,18 +87,17 @@ namespace ApplicationVeloMax
             //"SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123"
             new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
 
-            var watch = System.Diagnostics.Stopwatch.StartNew();
+            //var watch = System.Diagnostics.Stopwatch.StartNew();
             DataAccess.RefreshDB();
-            watch.Stop();
-            var elapsedMs = watch.ElapsedMilliseconds;
-            MessageBox.Show($"{elapsedMs}ms to get data from DB as localhost");
+            //watch.Stop();
+            //var elapsedMs = watch.ElapsedMilliseconds;
+            //MessageBox.Show($"{elapsedMs}ms to get data from DB as localhost");
 
             Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
             Adresses = new ObservableCollection<Adresse>(Adresse.Ensemble);
             Grandeurs = new ObservableCollection<Grandeur>(Grandeur.Ensemble);
             LignesProduits = new ObservableCollection<LigneProduit>(LigneProduit.Ensemble);
             Commandes = new ObservableCollection<Commande>(Commande.Ensemble);
-
         }
     }
 }

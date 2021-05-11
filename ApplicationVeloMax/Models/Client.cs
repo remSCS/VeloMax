@@ -22,10 +22,17 @@ namespace ApplicationVeloMax.Models
             if (a != null) this.AdresseClient = a;
             Contact c = Contact.Ensemble.Find(e => e.Id == idContact);
             if (c != null) this.ContactClient = c;
-            ClientPart cpart = ClientPart.Ensemble.Find(e => e.Id == idClientPart);
-            if (cpart != null) this.ClientPartClient = cpart;
-            ClientPro cpro = ClientPro.Ensemble.Find(e => e.Id == idClientPro);
-            if (cpro != null) this.clientProClient = cpro;
+
+            if(idClientPart == 0)
+            {
+                ClientPro cp = ClientPro.Ensemble.Find(e => e.Id == idClientPro);
+                if (cp != null) this.clientProClient = cp;
+            }
+            else
+            {
+                ClientPart cp = ClientPart.Ensemble.Find(e => e.Id == idClientPart);
+                if (cp != null) this.ClientPartClient = cp;
+            }
             if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
 

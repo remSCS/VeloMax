@@ -156,7 +156,7 @@ namespace ApplicationVeloMax.Communication
                     {
                         Id = i.Field<int>("idFidelio"),
                         Nom = i.Field<string>("nomFidelio"),
-                        Description = i.Field<string>("descriptionFidelio"),
+                        Description = i.Field<string>("descriptionFidelioo"),
                         Cout = i.Field<decimal>("coutFidelio"),
                         Rabais = i.Field<decimal>("rabaisFidelio"),
                         DureeJours = i.Field<int>("dureeJoursFidelio")
@@ -175,8 +175,6 @@ namespace ApplicationVeloMax.Communication
                 da.Fill(dt);
 
                 List<Modele> modeles = new List<Modele>();
-
-                Console.WriteLine("NOmbre de grandeurs : " + Grandeur.Ensemble.Count());
 
                 foreach (DataRow i in dt.Rows)
                 {
@@ -234,8 +232,8 @@ namespace ApplicationVeloMax.Communication
                 {
                     new Fournisseur(i.Field<int>("idContact"), i.Field<int>("idAdresse"), i.Field<int>("idLibelle"))
                     {
-                        Siret = i.Field<int>("idPiece"),
-                        Nom = i.Field<string>("refPiece")
+                        Siret = i.Field<int>("siretFournisseur"),
+                        Nom = i.Field<string>("nomFournisseur")
                     };
                 }
             }
@@ -272,12 +270,12 @@ namespace ApplicationVeloMax.Communication
 
                 foreach (DataRow i in dt.Rows)
                 {
-                    new ClientPro()
-                    {
-                        Id = i.Field<int>("idClientPro"),
-                        NomEntreprise = i.Field<string>("nomEntreprise"),
-                        Remise = i.Field<decimal>("remise")
-                    };
+                        new ClientPro()
+                        {
+                            Id = i.Field<int>("idClientPro"),
+                            NomEntreprise = i.Field<string>("nomEntreprise"),
+                            Remise = i.Field<decimal>("remise")
+                        };                       
                 }
             }
         }
@@ -293,13 +291,26 @@ namespace ApplicationVeloMax.Communication
 
                 foreach (DataRow i in dt.Rows)
                 {
-                    new Client(i.Field<int>("idAdresse"),
+                    if (DBNull.Value.Equals(i["idClientPart"]))
+                    {
+                        new Client(i.Field<int>("idAdresse"),
+                        i.Field<int>("idContact"),
+                        0,
+                        i.Field<int>("idClientPro"))
+                        {
+                            Id = i.Field<int>("idClient")
+                        };
+                    }
+                    else
+                    {
+                        new Client(i.Field<int>("idAdresse"),
                         i.Field<int>("idContact"),
                         i.Field<int>("idClientPart"),
-                        i.Field<int>("idClientPro"))
-                    {
-                        Id = i.Field<int>("idClient")
-                    };
+                        0)
+                        {
+                            Id = i.Field<int>("idClient")
+                        };
+                    }
                 }
             }
         }
