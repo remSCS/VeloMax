@@ -19,9 +19,9 @@ using ApplicationVeloMax.Communication;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 
-namespace ApplicationVeloMax
+namespace ApplicationVeloMax.Views
 {
-    public partial class MainWindow : Window, INotifyPropertyChanged
+    public partial class AdminView : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -80,7 +80,7 @@ namespace ApplicationVeloMax
             }
         }
 
-        public MainWindow()
+        public AdminView()
         {
             InitializeComponent();
 

@@ -32,7 +32,7 @@ namespace ApplicationVeloMax.Models
 
         public override string ToString()
         {
-            return $"{this.id} ; {this.nom}";
+            return $"{this.nom}";
         }
 
         static public List<LigneProduit> Ensemble

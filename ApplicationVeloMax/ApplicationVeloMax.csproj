@@ -125,6 +125,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Communication\DataAccess.cs" />
+    <Compile Include="Converters\SizeConverter.cs" />
     <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -185,6 +186,27 @@
       <ProductName>.NET Framework 3.5 SP1</ProductName>
       <Install>false</Install>
     </BootstrapperPackage>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Bike_Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Pieces_Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Stock_Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Clients_Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Fournisseur_Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Commandes_Logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="img\Search_Logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
