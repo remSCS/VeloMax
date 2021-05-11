@@ -102,6 +102,52 @@ namespace ApplicationVeloMax.Views
             }
         }
 
+        private ObservableCollection<Fidelio> _fidelios;
+        public ObservableCollection<Fidelio> Fidelios
+        {
+            get { return _fidelios; }
+            set
+            {
+                _fidelios = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Fidelios"));
+            }
+        }
+
+        private ObservableCollection<Client> _clients;
+        public ObservableCollection<Client> Clients
+        {
+            get { return _clients; }
+            set
+            {
+                _clients = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Clients"));
+                ClientsParts = new ObservableCollection<ClientPart>(ClientPart.Ensemble);
+                ClientsPros = new ObservableCollection<ClientPro>(ClientPro.Ensemble);
+            }
+        }
+
+        private ObservableCollection<ClientPart> _clientsParts;
+        public ObservableCollection<ClientPart> ClientsParts
+        {
+            get { return _clientsParts; }
+            set
+            {
+                _clientsParts = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("ClientsParts"));
+            }
+        }
+
+        private ObservableCollection<ClientPro> _clientsPros;
+        public ObservableCollection<ClientPro> ClientsPros
+        {
+            get { return _clientsPros; }
+            set
+            {
+                _clientsPros = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("ClientsPros"));
+            }
+        }
+
         public AdminView()
         {
             InitializeComponent();
@@ -122,6 +168,8 @@ namespace ApplicationVeloMax.Views
             Commandes = new ObservableCollection<Commande>(Commande.Ensemble);
             PiecesDetachees = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble);
             Fournisseurs = new ObservableCollection<Fournisseur>(Fournisseur.Ensemble);
+            Fidelios = new ObservableCollection<Fidelio>(Fidelio.Ensemble);
+            Clients = new ObservableCollection<Client>(Client.Ensemble);
         }
     }
 }
