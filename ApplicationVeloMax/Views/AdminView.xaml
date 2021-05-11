@@ -44,11 +44,12 @@
 
         <TabControl x:Name="myTabControl" TabStripPlacement="Left" Margin="-2">
 
+            <!--#region Tab Modeles-->
             <TabItem>
                 <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <Image Source="/img/Bike_Logo.png" Height="25" ToolTip="Afficher la liste des modèles" HorizontalAlignment="Left"/>
-                        <Label Content="Modeles" Foreground="Black" FontStyle="Italic" HorizontalAlignment="Right"/>
+                        <Label Content="Modeles" Foreground="Black" FontStyle="Italic" HorizontalAlignment="Left"/>
                     </StackPanel>
                 </TabItem.Header>
 
@@ -274,16 +275,43 @@
                 </TabControl>
 
             </TabItem>
+            <!--#endregion-->
 
+            <!--#region Tab Stocks-->
             <TabItem>
                 <TabItem.Header>
-                    <StackPanel Orientation="Horizontal">
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <Image Source="/img/Stock_Logo.png" Height="30" ToolTip="Afficher la liste des modèles" HorizontalAlignment="Left"/>
-                        <Label Content="Stock" Foreground="Black" FontStyle="Italic"/>
+                        <Label Content="Stock" Foreground="Black" FontStyle="Italic" HorizontalAlignment="Left"/>
                     </StackPanel>
                 </TabItem.Header>
-            </TabItem>
 
+                <TabControl Margin="-2">
+
+                    <TabItem Height="50" VerticalAlignment="Top" Margin="-2">
+                        <TabItem.Header>
+                            <Label Grid.Row="0" Margin="10,10,10,0" Content="Vélos" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
+                        </TabItem.Header>
+                    </TabItem>
+
+                    <TabItem Height="50" VerticalAlignment="Top" Margin="-2">
+                        <TabItem.Header>
+                            <Label Grid.Row="0" Margin="10,10,10,0" Content="Pièces détachées" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
+                        </TabItem.Header>
+                    </TabItem>
+
+                    <TabItem Height="50" VerticalAlignment="Top" Margin="-2">
+                        <TabItem.Header>
+                            <Label Grid.Row="0" Margin="10,10,10,0" Content="A recommander" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
+                        </TabItem.Header>
+                    </TabItem>
+
+                </TabControl>
+
+            </TabItem>
+            <!--#endregion-->
+
+            <!--#region Tab Clients-->
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -291,8 +319,31 @@
                         <Label Content="Clients" Foreground="Black" FontStyle="Italic"/>
                     </StackPanel>
                 </TabItem.Header>
-            </TabItem>
 
+                <TabControl Margin="-2">
+                    <TabItem Height="50" VerticalAlignment="Top" Margin="-2">
+                        <TabItem.Header>
+                            <Label Grid.Row="0" Margin="10,10,10,0" Content="Particuliers" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
+                        </TabItem.Header>
+                    </TabItem>
+
+                    <TabItem Height="50" VerticalAlignment="Top" Margin="-2">
+                        <TabItem.Header>
+                            <Label Grid.Row="0" Margin="10,10,10,0" Content="Professionnels" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
+                        </TabItem.Header>
+                    </TabItem>
+
+                    <TabItem Height="50" VerticalAlignment="Top" Margin="-2">
+                        <TabItem.Header>
+                            <Label Grid.Row="0" Margin="10,10,10,0" Content="Fidelio" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
+                        </TabItem.Header>
+                    </TabItem>
+                </TabControl>
+                
+            </TabItem>
+            <!--#endregion-->
+
+            <!--#region Tab Fournisseurs-->
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -301,7 +352,9 @@
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
-
+            <!--#endregion-->
+            
+            <!--#region Tab Commandes-->
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal">
@@ -310,9 +363,10 @@
                     </StackPanel>
                 </TabItem.Header>
             </TabItem>
+            <!--#endregion-->
             
         </TabControl>
-        
+
     </Grid>
-    
+
 </Window>
