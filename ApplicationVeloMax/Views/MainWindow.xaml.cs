@@ -80,6 +80,17 @@ namespace ApplicationVeloMax.Views
             }
         }
 
+        private ObservableCollection<PieceDetachee> _piecesDetachees;
+        public ObservableCollection<PieceDetachee> PiecesDetachees
+        {
+            get { return _piecesDetachees; }
+            set
+            {
+                _piecesDetachees = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("PiecesDetachees"));
+            }
+        }
+
         public AdminView()
         {
             InitializeComponent();
@@ -98,6 +109,7 @@ namespace ApplicationVeloMax.Views
             Grandeurs = new ObservableCollection<Grandeur>(Grandeur.Ensemble);
             LignesProduits = new ObservableCollection<LigneProduit>(LigneProduit.Ensemble);
             Commandes = new ObservableCollection<Commande>(Commande.Ensemble);
+            PiecesDetachees = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble);
         }
     }
 }
