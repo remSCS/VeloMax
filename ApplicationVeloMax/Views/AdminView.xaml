@@ -151,7 +151,8 @@
 
                             <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
                                       IsReadOnly="True" ItemsSource="{Binding Modeles, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                                      ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All">
+                                      ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" >
+                                
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
                                     <DataGridTextColumn Width="*" Header="Grandeur" Binding="{Binding GrandeurModele}"/>
@@ -835,7 +836,7 @@
 
                     <StackPanel Grid.Row="2" Margin="10,10,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
                         <Button Margin="5,0" Padding="5" Content="Modifier"
-                                Foreground="White" Background="#a7a7a7">
+                                Foreground="White" Background="#a7a7a7" Click="Button_Click">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="10"/>
@@ -879,7 +880,13 @@
 
                     <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
                                       IsReadOnly="True" ItemsSource="{Binding Commandes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      SelectedItem="{Binding SelectedCommande, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                                       ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All">
+                        <DataGrid.Resources>
+                            <Style TargetType="DataGridRow">
+                                <EventSetter Event="MouseDoubleClick" Handler="Commandes_Row_DoubleClick"/>
+                            </Style>
+                        </DataGrid.Resources>
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
                             <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ClientCommande}"/>
