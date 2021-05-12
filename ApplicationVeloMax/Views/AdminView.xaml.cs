@@ -193,7 +193,6 @@ namespace ApplicationVeloMax.Views
 
         private void Commandes_Row_DoubleClick(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show(sender.ToString());
             new CommandeDetailView(SelectedCommande).ShowDialog();
         }
 
