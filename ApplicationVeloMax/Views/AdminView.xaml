@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Converters"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="Gestion Administrateur - VéloMax" Height="450" Width="800" FontFamily="Helvetica" Background="#e4e4e4">
+        Title="Gestion Administrateur - VéloMax" Icon="/img/VeloMax_Logo.png" Height="450" Width="800" FontFamily="Helvetica" Background="#e4e4e4">
 
     <Window.Resources>
         <local:SizeConverter x:Key="sizeConverter"/>
@@ -290,10 +290,10 @@
                     </StackPanel>
                 </TabItem.Header>
 
-                <TabControl Margin="-2">
+                <TabControl  TabStripPlacement="Top" Margin="-4">
 
                     <!--#region Vélos-->
-                    <TabItem Height="50" VerticalAlignment="Top" Margin="-2">
+                    <TabItem Height="50" VerticalAlignment="Top">
                         <TabItem.Header>
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="Vélos" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>
@@ -301,7 +301,7 @@
                     <!--#endregion-->
 
                     <!--#region Pièces détachées-->
-                    <TabItem Height="50" VerticalAlignment="Top" Margin="-2">
+                    <TabItem Height="50" VerticalAlignment="Top">
                         <TabItem.Header>
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="Pièces détachées" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>
@@ -309,7 +309,7 @@
                     <!--#endregion-->
 
                     <!--#region A recommander-->
-                    <TabItem Height="50" VerticalAlignment="Top" Margin="-2">
+                    <TabItem Height="50" VerticalAlignment="Top">
                         <TabItem.Header>
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="A recommander" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>
@@ -330,10 +330,10 @@
                     </StackPanel>
                 </TabItem.Header>
 
-                <TabControl Margin="-2">
+                <TabControl TabStripPlacement="Top" Margin="-4">
 
                     <!--#region Particuliers-->
-                    <TabItem Height="50" VerticalAlignment="Top" Margin="-2">
+                    <TabItem Height="50" VerticalAlignment="Top">
                         <TabItem.Header>
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="Particuliers" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>
@@ -441,7 +441,7 @@
                     <!--#endregion-->
 
                     <!--#region Professionnels-->
-                    <TabItem Height="50" VerticalAlignment="Top" Margin="-2">
+                    <TabItem Height="50" VerticalAlignment="Top">
                         <TabItem.Header>
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="Professionnels" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>
@@ -549,7 +549,7 @@
                     <!--#endregion-->
 
                     <!--#region Fidelio-->
-                    <TabItem Height="50" VerticalAlignment="Top" Margin="-2">
+                    <TabItem Height="50" VerticalAlignment="Top">
                         <TabItem.Header>
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="Fidelio" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>

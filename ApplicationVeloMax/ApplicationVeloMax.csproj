@@ -210,7 +210,7 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\icone_velomax.png" />
+    <Resource Include="img\VeloMax_Logo.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
