@@ -24,7 +24,10 @@ namespace ApplicationVeloMax.Models
             if (c != null) this.ClientCommande = c;
             if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
+        public Commande()
+        {
 
+        }
         public int Id
         {
             get { return id; }

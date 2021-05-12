@@ -125,6 +125,9 @@
     <Compile Include="Views\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Commandes\CommandeDetailView.xaml.cs">
+      <DependentUpon>CommandeDetailView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Adresse.cs" />
@@ -208,9 +211,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Commandes\CommandeDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\VeloMax_Logo.png" />
+    <Resource Include="img\Velomax_Logo.png" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -18,6 +18,7 @@ using ApplicationVeloMax.Models;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
 using ApplicationVeloMax.ViewModels;
+using ApplicationVeloMax.Views.Commandes;
 
 namespace ApplicationVeloMax.Views
 {
@@ -25,6 +26,7 @@ namespace ApplicationVeloMax.Views
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
+        #region ViewModels
         private ObservableCollection<Modele> _modeles;
         public ObservableCollection<Modele> Modeles
         {
@@ -69,6 +71,7 @@ namespace ApplicationVeloMax.Views
             }
         }
 
+        #region COMMANDES
         private ObservableCollection<Commande> _commandes;
         public ObservableCollection<Commande> Commandes
         {
@@ -79,6 +82,19 @@ namespace ApplicationVeloMax.Views
                 PropertyChanged(this, new PropertyChangedEventArgs("Commandes"));
             }
         }
+
+        private Commande _selectedCommande = new Commande();
+        public Commande SelectedCommande 
+        {
+            get { return _selectedCommande; }
+            set
+            {
+                _selectedCommande = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedCommande"));
+            }
+        }
+
+        #endregion
 
         private ObservableCollection<PieceDetachee> _piecesDetachees;
         public ObservableCollection<PieceDetachee> PiecesDetachees
@@ -147,13 +163,13 @@ namespace ApplicationVeloMax.Views
                 PropertyChanged(this, new PropertyChangedEventArgs("ClientsPros"));
             }
         }
-
+        #endregion
         public AdminView()
         {
             InitializeComponent();
 
-            //"SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123"
-            new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
+            new DataAccess("SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
+            //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
 
 
             //var watch = System.Diagnostics.Stopwatch.StartNew();
@@ -173,6 +189,16 @@ namespace ApplicationVeloMax.Views
             Fournisseurs = new ObservableCollection<Fournisseur>(Fournisseur.Ensemble);
             Fidelios = new ObservableCollection<Fidelio>(Fidelio.Ensemble);
             Clients = new ObservableCollection<Client>(Client.Ensemble);
+        }
+
+        private void commandes_DoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new CommandeDetailView(SelectedCommande).ShowDialog();
+        }
+
+        private void commandesModifier_button_Click(object sender, RoutedEventArgs e)
+        {
+            new CommandeDetailView(SelectedCommande).ShowDialog();
         }
     }
 }
