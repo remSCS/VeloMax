@@ -10,7 +10,6 @@ namespace ApplicationVeloMax.Models
     {
         static private List<ClientPro> ensemblePros = new List<ClientPro>();
 
-        private int id;
         private string nomEntreprise;
         private decimal remise;
 

@@ -15,9 +15,9 @@ using System.Windows.Shapes;
 using MySql.Data.MySqlClient;
 using System.Data;
 using ApplicationVeloMax.Models;
-using ApplicationVeloMax.Communication;
 using System.ComponentModel;
 using System.Collections.ObjectModel;
+using ApplicationVeloMax.ViewModels;
 
 namespace ApplicationVeloMax.Views
 {

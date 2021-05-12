@@ -120,7 +120,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Communication\DataAccess.cs" />
+    <Compile Include="ViewModels\DataAccess.cs" />
     <Compile Include="Converters\SizeConverter.cs" />
     <Compile Include="Views\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>

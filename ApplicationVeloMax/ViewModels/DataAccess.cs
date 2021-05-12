@@ -8,7 +8,7 @@ using System.Windows;
 using ApplicationVeloMax.Models;
 using MySql.Data.MySqlClient;
 
-namespace ApplicationVeloMax.Communication
+namespace ApplicationVeloMax.ViewModels
 {
     public class DataAccess
     {
