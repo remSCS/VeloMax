@@ -153,7 +153,8 @@ namespace ApplicationVeloMax.Views
             InitializeComponent();
 
             //"SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123"
-            new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
+            new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
+
 
             //var watch = System.Diagnostics.Stopwatch.StartNew();
             //DataAccess.RefreshDBUsingSP();
