@@ -5,7 +5,9 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Converters"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="Gestion Administrateur - VéloMax" Height="450" Width="800" FontFamily="Helvetica" Background="#e4e4e4">
+        Title="Gestion Administrateur - VéloMax" Icon="/img/Velomax_Logo.png"
+        Height="450" Width="800" FontFamily="Helvetica" Background="#e4e4e4">
+    
 
     <Window.Resources>
         <local:SizeConverter x:Key="sizeConverter"/>
