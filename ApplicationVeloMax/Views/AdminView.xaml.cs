@@ -191,15 +191,14 @@ namespace ApplicationVeloMax.Views
             Clients = new ObservableCollection<Client>(Client.Ensemble);
         }
 
-        private void Commandes_Row_DoubleClick(object sender, MouseButtonEventArgs e)
+        private void commandes_DoubleClick(object sender, MouseButtonEventArgs e)
         {
             new CommandeDetailView(SelectedCommande).ShowDialog();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        private void commandesModifier_button_Click(object sender, RoutedEventArgs e)
         {
             new CommandeDetailView(SelectedCommande).ShowDialog();
-            
         }
     }
 }

@@ -837,8 +837,8 @@
                     </TextBox>
 
                     <StackPanel Grid.Row="2" Margin="10,10,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button Margin="5,0" Padding="5" Content="Modifier"
-                                Foreground="White" Background="#a7a7a7" Click="Button_Click">
+                        <Button x:Name="commandesModifier_button" Margin="5,0" Padding="5" Content="Modifier"
+                                Foreground="White" Background="#a7a7a7" Click="commandesModifier_button_Click" >
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="10"/>
@@ -886,7 +886,7 @@
                                       ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All">
                         <DataGrid.Resources>
                             <Style TargetType="DataGridRow">
-                                <EventSetter Event="MouseDoubleClick" Handler="Commandes_Row_DoubleClick"/>
+                                <EventSetter Event="MouseDoubleClick" Handler="commandes_DoubleClick"/>
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>
