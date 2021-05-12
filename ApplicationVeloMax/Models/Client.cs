@@ -6,33 +6,22 @@ using System.Threading.Tasks;
 
 namespace ApplicationVeloMax.Models
 {
-    public class Client
+    public abstract class Client
     {
         static private List<Client> ensemble = new List<Client>();
 
         private int id;
         private Adresse adresseClient;
         private Contact contactClient;
-        private ClientPart clientPartClient;
-        private ClientPro clientProClient;
+        private DateTime dateAdherance;
 
-        public Client(int idAdresse, int idContact, int idClientPart, int idClientPro)
+        public Client(int idAdresse, int idContact)
         {
             Adresse a = Adresse.Ensemble.Find(e => e.Id == idAdresse);
             if (a != null) this.AdresseClient = a;
             Contact c = Contact.Ensemble.Find(e => e.Id == idContact);
             if (c != null) this.ContactClient = c;
 
-            if(idClientPart == 0)
-            {
-                ClientPro cp = ClientPro.Ensemble.Find(e => e.Id == idClientPro);
-                if (cp != null) this.clientProClient = cp;
-            }
-            else
-            {
-                ClientPart cp = ClientPart.Ensemble.Find(e => e.Id == idClientPart);
-                if (cp != null) this.ClientPartClient = cp;
-            }
             if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
 
@@ -53,17 +42,16 @@ namespace ApplicationVeloMax.Models
             get { return contactClient; }
             set { contactClient = value; }
         }
-        
-        public ClientPart ClientPartClient
+
+        public DateTime DateAdherance
         {
-            get { return clientPartClient; }
-            set { clientPartClient = value; }
+            get { return dateAdherance; }
+            set { dateAdherance = value; }
         }
 
-        public ClientPro ClientProClient
+        public override string ToString()
         {
-            get { return clientProClient; }
-            set { clientProClient = value; }
+            return $"{this.ContactClient}";
         }
 
         static public List<Client> Ensemble

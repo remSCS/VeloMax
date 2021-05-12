@@ -431,8 +431,8 @@
                                       ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
-                                    <DataGridTextColumn Width="*" Header="Client" Binding="{Binding FidelioFournisseur.Nom}"/>
-                                    <DataGridTextColumn Width="*" Header="Date de début" Binding="{Binding DateDebutFidelio, StringFormat=dd/MM/yyy}"/>
+                                    <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ContactClient}"/>
+                                    <DataGridTextColumn Width="*" Header="Date d'adhérance" Binding="{Binding DateAdherance, StringFormat=dd/MM/yyy}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>

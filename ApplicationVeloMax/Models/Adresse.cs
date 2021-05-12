@@ -18,8 +18,10 @@ namespace ApplicationVeloMax.Models
         private string province;
         private string pays;
 
-        public Adresse()
+        public Adresse(string ligne2 = "", string province = "")
         {
+            this.Ligne2 = ligne2;
+            this.Province = province;
             if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
         }
 

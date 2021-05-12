@@ -6,31 +6,28 @@ using System.Threading.Tasks;
 
 namespace ApplicationVeloMax.Models
 {
-    public class ClientPart
+    public class ClientPart : Client
     {
-        static private List<ClientPart> ensemble = new List<ClientPart>();
+        static private List<ClientPart> ensembleParticuliers = new List<ClientPart>();
 
-        private int id;
-        private Fidelio fidelioFournisseur;
+        private Fidelio fidelioClient;
         private DateTime dateDebutFidelo;
 
-        public ClientPart(int idFidelio)
+        public ClientPart(int idAdresse, int idContact, int idFidelio, DateTime debutFidelio) : base(idAdresse, idContact)
         {
-            Fidelio f = Fidelio.Ensemble.Find(e => e.Id == idFidelio);
-            if (f != null) this.FidelioFournisseur = f;
-            if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
+            if (idFidelio == 0) this.FidelioClient = null;
+            else
+            {
+                Fidelio f = Fidelio.Ensemble.Find(e => e.Id == idFidelio);
+                if (f != null) this.FidelioClient = f;
+            }
+            if (ensembleParticuliers.Find(e => e.Id == this.Id) == null) ensembleParticuliers.Add(this);
         }
 
-        public int Id
+        public Fidelio FidelioClient
         {
-            get { return id; }
-            set { id = value; }
-        }
-
-        public Fidelio FidelioFournisseur
-        {
-            get { return fidelioFournisseur; }
-            set { fidelioFournisseur = value; }
+            get { return fidelioClient; }
+            set { fidelioClient = value; }
         }
 
         public DateTime DateDebutFidelio
@@ -39,9 +36,9 @@ namespace ApplicationVeloMax.Models
             set { dateDebutFidelo = value; }
         }
 
-        static public List<ClientPart> Ensemble
+        static public List<ClientPart> EnsembleParticuliers
         {
-            get { return ensemble; }
+            get { return ensembleParticuliers; }
         }
     }
 }

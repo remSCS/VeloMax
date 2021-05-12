@@ -121,8 +121,8 @@ namespace ApplicationVeloMax.Views
             {
                 _clients = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("Clients"));
-                ClientsParts = new ObservableCollection<ClientPart>(ClientPart.Ensemble);
-                ClientsPros = new ObservableCollection<ClientPro>(ClientPro.Ensemble);
+                ClientsParts = new ObservableCollection<ClientPart>(ClientPart.EnsembleParticuliers);
+                ClientsPros = new ObservableCollection<ClientPro>(ClientPro.EnsemblePros);
             }
         }
 
@@ -155,11 +155,11 @@ namespace ApplicationVeloMax.Views
             //"SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123"
             new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
 
-            //var watch = System.Diagnostics.Stopwatch.StartNew();
-            DataAccess.RefreshDB();
-            //watch.Stop();
-            //var elapsedMs = watch.ElapsedMilliseconds;
-            //MessageBox.Show($"{elapsedMs}ms to get data from DB as localhost");
+            var watch = System.Diagnostics.Stopwatch.StartNew();
+            DataAccess.RefreshDBUsingSP();
+            watch.Stop();
+            var elapsedMs = watch.ElapsedMilliseconds;
+            MessageBox.Show($"{elapsedMs}ms to get data from DB as localhost");
 
             Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
             Adresses = new ObservableCollection<Adresse>(Adresse.Ensemble);

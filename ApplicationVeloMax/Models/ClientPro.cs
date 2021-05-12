@@ -6,23 +6,17 @@ using System.Threading.Tasks;
 
 namespace ApplicationVeloMax.Models
 {
-    public class ClientPro
+    public class ClientPro : Client
     {
-        static private List<ClientPro> ensemble = new List<ClientPro>();
+        static private List<ClientPro> ensemblePros = new List<ClientPro>();
 
         private int id;
         private string nomEntreprise;
         private decimal remise;
 
-        public ClientPro()
+        public ClientPro(int idAdresse, int idContact) : base(idAdresse, idContact)
         {
-            if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
-        }
-
-        public int Id
-        {
-            get { return id; }
-            set { id = value; }
+            if (ensemblePros.Find(e => e.Id == this.Id) == null) ensemblePros.Add(this);
         }
 
         public string NomEntreprise
@@ -37,9 +31,9 @@ namespace ApplicationVeloMax.Models
             set { remise = value; }
         }
 
-        static public List<ClientPro> Ensemble
+        static public List<ClientPro> EnsemblePros
         {
-            get { return ensemble; }
+            get { return ensemblePros; }
         }
     }
 }
