@@ -8,7 +8,6 @@
         Title="Gestion Administrateur - VéloMax" Icon="/img/Velomax_Logo.png"
         Height="450" Width="800" FontFamily="Helvetica" Background="#e4e4e4">
     
-
     <Window.Resources>
         <local:SizeConverter x:Key="sizeConverter"/>
         <Style TargetType="{x:Type TabItem}">
@@ -296,7 +295,7 @@
                 <TabControl Margin="-4">
 
                     <!--#region Vélos-->
-                    <TabItem Height="50" VerticalAlignment="Top" >
+                    <TabItem Height="50" VerticalAlignment="Top">
                         <TabItem.Header>
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="Vélos" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>
@@ -312,7 +311,7 @@
                     <!--#endregion-->
 
                     <!--#region A recommander-->
-                    <TabItem Height="50" VerticalAlignment="Top" >
+                    <TabItem Height="50" VerticalAlignment="Top">
                         <TabItem.Header>
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="A recommander" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>
@@ -336,7 +335,7 @@
                 <TabControl Margin="-4">
 
                     <!--#region Particuliers-->
-                    <TabItem Height="50" VerticalAlignment="Top" >
+                    <TabItem Height="50" VerticalAlignment="Top">
                         <TabItem.Header>
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="Particuliers" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>
@@ -444,7 +443,7 @@
                     <!--#endregion-->
 
                     <!--#region Professionnels-->
-                    <TabItem Height="50" VerticalAlignment="Top" >
+                    <TabItem Height="50" VerticalAlignment="Top">
                         <TabItem.Header>
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="Professionnels" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>
@@ -552,7 +551,7 @@
                     <!--#endregion-->
 
                     <!--#region Fidelio-->
-                    <TabItem Height="50" VerticalAlignment="Top" >
+                    <TabItem Height="50" VerticalAlignment="Top">
                         <TabItem.Header>
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="Fidelio" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>
@@ -804,7 +803,7 @@
                     <Label Grid.Row="0" Margin="10,10,10,0" Content="Commandes" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
 
                     <TextBox Grid.Row="1" Padding="5" Margin="10,10,10,0"
-                                 Text="Rechercher par nom de modele...">
+                             Text="Rechercher par nom de modele...">
                         <TextBox.Background>
                             <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
                         </TextBox.Background>
@@ -837,8 +836,8 @@
                     </TextBox>
 
                     <StackPanel Grid.Row="2" Margin="10,10,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button x:Name="commandesModifier_button" Margin="5,0" Padding="5" Content="Modifier"
-                                Foreground="White" Background="#a7a7a7" Click="commandesModifier_button_Click" >
+                        <Button x:Name="commandesModifierButton" Margin="5,0" Padding="5" Content="Modifier"
+                                Foreground="White" Background="#a7a7a7" Click="commandesModifierButton_Click" >
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="10"/>
@@ -880,13 +879,13 @@
                         </Button>
                     </StackPanel>
 
-                    <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ItemsSource="{Binding Commandes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                                      SelectedItem="{Binding SelectedCommande, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                                      ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All">
+                    <DataGrid x:Name="commandesDataGrid" Grid.Row="3" Grid.Column="0" Margin="10" 
+                              IsReadOnly="True" ItemsSource="{Binding Commandes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                              SelectedItem="{Binding SelectedCommande, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                              ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All">
                         <DataGrid.Resources>
                             <Style TargetType="DataGridRow">
-                                <EventSetter Event="MouseDoubleClick" Handler="commandes_DoubleClick"/>
+                                <EventSetter Event="MouseDoubleClick" Handler="commandesDataGridRow_MouseDoubleClick"/>
                             </Style>
                         </DataGrid.Resources>
                         <DataGrid.Columns>

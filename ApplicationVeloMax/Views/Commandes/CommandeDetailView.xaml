@@ -4,12 +4,14 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Commandes"
-        mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="CommandeDetailView" Height="450" Width="800">
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="Commande - Détails" Icon="/img/Commandes_Logo.png"
+        Height="450" Width="800" FontFamily="Helvetica" Background="#e4e4e4">
+    
     <Grid>
        
         <Grid.RowDefinitions>
-            <RowDefinition />
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
@@ -17,5 +19,7 @@
             <Label Content="Commande n°" FontFamily="Helvetica" FontSize="24" FontWeight="Bold" />
             <Label Content="{Binding SelectedCommande.Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="Helvetica" FontSize="24" FontWeight="Bold" />
         </StackPanel>
+        
     </Grid>
+    
 </Window>

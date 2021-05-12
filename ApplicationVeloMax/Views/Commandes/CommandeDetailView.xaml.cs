@@ -34,11 +34,12 @@ namespace ApplicationVeloMax.Views.Commandes
                
             }
         }
+
         public CommandeDetailView(Commande _inputCommande)
         {
             InitializeComponent();
+
             SelectedCommande = _inputCommande;
-            
         }
     }
 }
