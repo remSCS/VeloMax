@@ -173,6 +173,33 @@ namespace ApplicationVeloMax.ViewModels
             }
         }
 
+        static public void GetAllPiecesDetacheesUsingSP()
+        {
+            using (var connexion = GetConnection())
+            {
+                DataTable dt = new DataTable();
+                MySqlCommand com = GetCorrectCommand("piecedetachee");
+                MySqlDataAdapter da = new MySqlDataAdapter(com);
+                da.Fill(dt);
+
+                foreach (DataRow i in dt.Rows)
+                {
+                    DateTime dateS = new DateTime();
+                    if (!DBNull.Value.Equals(i["dateSPiece"])) dateS = i.Field<DateTime>("dateSPiece");
+                    new PieceDetachee()
+                    {
+                        Id = i.Field<int>("idPiece"),
+                        Reference = i.Field<string>("refPiece"),
+                        Nom = i.Field<string>("nomPiece"),
+                        Description = i.Field<string>("descriptionPiece"),
+                        DateE = i.Field<DateTime>("dateEPiece"),
+                        DateS = dateS,
+                        Quantite = i.Field<int>("quantitePiece")
+                    };
+                }
+            }
+        }
+
         static public void GetAllModelsUsingSP()
         {
             using (var connexion = GetConnection())
@@ -199,35 +226,17 @@ namespace ApplicationVeloMax.ViewModels
                     });
                     Console.WriteLine();
                 }
-
-                foreach (var m in modeles) Console.WriteLine(m);
             }
-        }
 
-        static public void GetAllPiecesDetacheesUsingSP()
-        {
             using (var connexion = GetConnection())
             {
                 DataTable dt = new DataTable();
-                MySqlCommand com = GetCorrectCommand("piecedetachee");
+                MySqlCommand com = GetCorrectCommand("composition");
                 MySqlDataAdapter da = new MySqlDataAdapter(com);
                 da.Fill(dt);
 
                 foreach (DataRow i in dt.Rows)
-                {
-                    DateTime dateS = new DateTime();
-                    if (!DBNull.Value.Equals(i["dateSPiece"])) dateS = i.Field<DateTime>("dateSPiece");
-                    new PieceDetachee()
-                    {
-                        Id = i.Field<int>("idPiece"),
-                        Reference = i.Field<string>("refPiece"),
-                        Nom = i.Field<string>("nomPiece"),
-                        Description = i.Field<string>("descriptionPiece"),
-                        DateE = i.Field<DateTime>("dateEPiece"),
-                        DateS = dateS,
-                        Quantite = i.Field<int>("quantitePiece")
-                    };
-                }
+                    Modele.Ensemble.Find(m => m.Id == i.Field<int>("idModele")).PiecesComposition.Add(PieceDetachee.Ensemble.Find(p => p.Id == i.Field<int>("idPieceDetachee")));
             }
         }
 
@@ -334,22 +343,6 @@ namespace ApplicationVeloMax.ViewModels
             }
         }
 
-        static public void GetAllCompositionsUsingSP()
-        {
-            using (var connexion = GetConnection())
-            {
-                DataTable dt = new DataTable();
-                MySqlCommand com = GetCorrectCommand("composition");
-                MySqlDataAdapter da = new MySqlDataAdapter(com);
-                da.Fill(dt);
-
-                foreach (DataRow i in dt.Rows)
-                {
-                    new Composition(i.Field<int>("idModele"), i.Field<int>("idPieceDetachee"));
-                }
-            }
-        }
-
         static public void GetAllCommandesUsingSP()
         {
             using (var connexion = GetConnection())
@@ -411,7 +404,6 @@ namespace ApplicationVeloMax.ViewModels
             GetAllFournisseursUsingSP();
             GetAllClientsUsingSP();
             GetAllFournisseursPiecesUsingSP();
-            GetAllCompositionsUsingSP();
             GetAllCommandesUsingSP();
         }
 

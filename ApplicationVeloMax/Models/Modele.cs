@@ -17,6 +17,7 @@ namespace ApplicationVeloMax.Models
         private DateTime dateS;
         private Grandeur grandeurModele;
         private LigneProduit ligneProduitModele;
+        private List<PieceDetachee> piecesComposition = new List<PieceDetachee>();
         private int quantite;
 
         public Modele(int idGrandeur, int idLigneProduit)
@@ -74,6 +75,12 @@ namespace ApplicationVeloMax.Models
         {
             get { return quantite; }
             set { quantite = value; }
+        }
+
+        public List<PieceDetachee> PiecesComposition
+        {
+            get { return piecesComposition; }
+            set { piecesComposition = value; }
         }
 
         public override string ToString()
