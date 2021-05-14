@@ -436,10 +436,13 @@ namespace ApplicationVeloMax.ViewModels
             using (var connexion = GetConnection())
             {
                 connexion.Open();
-                MySqlCommand com = new MySqlCommand($"UPDATE modeles SET stockModele={newStock} WHERE idModele={toModify.Id}");
+                MySqlCommand com = new MySqlCommand("UpdateStockModele", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@id", MySqlDbType.Int64).Value = toModify.Id;
+                com.Parameters.Add("@qte", MySqlDbType.Int64).Value = newStock;
+                var reader = com.ExecuteReader();
+                connexion.Close();
                 Modele.Ensemble.Clear();
                 GetAllModelsUsingSP();
-                MessageBox.Show("Test");
             }
             return toReturn;
         }
