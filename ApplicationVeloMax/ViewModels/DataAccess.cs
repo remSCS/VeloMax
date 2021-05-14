@@ -36,7 +36,6 @@ namespace ApplicationVeloMax.ViewModels
             using (var connexion = GetConnection())
             {
                 DataTable dt = new DataTable();
-                //MySqlCommand com = new MySqlCommand("GetAdresses", connexion) { CommandType = CommandType.StoredProcedure };
                 MySqlCommand com = GetCorrectCommand("adresse");
                 MySqlDataAdapter da = new MySqlDataAdapter(com);
                 da.Fill(dt);
@@ -174,6 +173,33 @@ namespace ApplicationVeloMax.ViewModels
             }
         }
 
+        static public void GetAllPiecesDetacheesUsingSP()
+        {
+            using (var connexion = GetConnection())
+            {
+                DataTable dt = new DataTable();
+                MySqlCommand com = GetCorrectCommand("piecedetachee");
+                MySqlDataAdapter da = new MySqlDataAdapter(com);
+                da.Fill(dt);
+
+                foreach (DataRow i in dt.Rows)
+                {
+                    DateTime dateS = new DateTime();
+                    if (!DBNull.Value.Equals(i["dateSPiece"])) dateS = i.Field<DateTime>("dateSPiece");
+                    new PieceDetachee()
+                    {
+                        Id = i.Field<int>("idPiece"),
+                        Reference = i.Field<string>("refPiece"),
+                        Nom = i.Field<string>("nomPiece"),
+                        Description = i.Field<string>("descriptionPiece"),
+                        DateE = i.Field<DateTime>("dateEPiece"),
+                        DateS = dateS,
+                        Quantite = i.Field<int>("quantitePiece")
+                    };
+                }
+            }
+        }
+
         static public void GetAllModelsUsingSP()
         {
             using (var connexion = GetConnection())
@@ -200,35 +226,17 @@ namespace ApplicationVeloMax.ViewModels
                     });
                     Console.WriteLine();
                 }
-
-                foreach (var m in modeles) Console.WriteLine(m);
             }
-        }
 
-        static public void GetAllPiecesDetacheesUsingSP()
-        {
             using (var connexion = GetConnection())
             {
                 DataTable dt = new DataTable();
-                MySqlCommand com = GetCorrectCommand("piecedetachee");
+                MySqlCommand com = GetCorrectCommand("composition");
                 MySqlDataAdapter da = new MySqlDataAdapter(com);
                 da.Fill(dt);
 
                 foreach (DataRow i in dt.Rows)
-                {
-                    DateTime dateS = new DateTime();
-                    if (!DBNull.Value.Equals(i["dateSPiece"])) dateS = i.Field<DateTime>("dateSPiece");
-                    new PieceDetachee()
-                    {
-                        Id = i.Field<int>("idPiece"),
-                        Reference = i.Field<string>("refPiece"),
-                        Nom = i.Field<string>("nomPiece"),
-                        Description = i.Field<string>("descriptionPiece"),
-                        DateE = i.Field<DateTime>("dateEPiece"),
-                        DateS = dateS,
-                        Quantite = i.Field<int>("quantitePiece")
-                    };
-                }
+                    Modele.Ensemble.Find(m => m.Id == i.Field<int>("idModele")).PiecesComposition.Add(PieceDetachee.Ensemble.Find(p => p.Id == i.Field<int>("idPieceDetachee")));
             }
         }
 
@@ -335,22 +343,6 @@ namespace ApplicationVeloMax.ViewModels
             }
         }
 
-        static public void GetAllCompositionsUsingSP()
-        {
-            using (var connexion = GetConnection())
-            {
-                DataTable dt = new DataTable();
-                MySqlCommand com = GetCorrectCommand("composition");
-                MySqlDataAdapter da = new MySqlDataAdapter(com);
-                da.Fill(dt);
-
-                foreach (DataRow i in dt.Rows)
-                {
-                    new Composition(i.Field<int>("idModele"), i.Field<int>("idPieceDetachee"));
-                }
-            }
-        }
-
         static public void GetAllCommandesUsingSP()
         {
             using (var connexion = GetConnection())
@@ -372,10 +364,7 @@ namespace ApplicationVeloMax.ViewModels
                     };
                 }
             }
-        }
 
-        static public void GetAllComposCommandesPiecesUsingSP()
-        {
             using (var connexion = GetConnection())
             {
                 DataTable dt = new DataTable();
@@ -384,17 +373,10 @@ namespace ApplicationVeloMax.ViewModels
                 da.Fill(dt);
 
                 foreach (DataRow i in dt.Rows)
-                {
-                    new CompoCommandePieces(i.Field<int>("idCommande"), i.Field<int>("idPiece"))
-                    {
-                        Quantite = i.Field<int>("quantite")
-                    };
-                }
+                    for(int j = 0; j < i.Field<int>("quantite"); j++)
+                        Commande.Ensemble.Find(c => c.Id == i.Field<int>("idCommande")).PiecesCommande.Add(PieceDetachee.Ensemble.Find(p => p.Id == i.Field<int>("idPiece")));
             }
-        }
 
-        static public void GetAllComposCommandesVelosUsingSP()
-        {
             using (var connexion = GetConnection())
             {
                 DataTable dt = new DataTable();
@@ -403,12 +385,8 @@ namespace ApplicationVeloMax.ViewModels
                 da.Fill(dt);
 
                 foreach (DataRow i in dt.Rows)
-                {
-                    new CompoCommandeVelo(i.Field<int>("idCommande"), i.Field<int>("idModele"))
-                    {
-                        Quantite = i.Field<int>("quantite")
-                    };
-                }
+                    for (int j = 0; j < i.Field<int>("quantite"); j++)
+                        Commande.Ensemble.Find(c => c.Id == i.Field<int>("idCommande")).ModelesCommande.Add(Modele.Ensemble.Find(m => m.Id == i.Field<int>("idModele")));
             }
         }
         #endregion
@@ -426,12 +404,10 @@ namespace ApplicationVeloMax.ViewModels
             GetAllFournisseursUsingSP();
             GetAllClientsUsingSP();
             GetAllFournisseursPiecesUsingSP();
-            GetAllCompositionsUsingSP();
             GetAllCommandesUsingSP();
-            GetAllComposCommandesPiecesUsingSP();
-            GetAllComposCommandesVelosUsingSP();
         }
 
+        #region Removing data from server
         static public bool RemoveFromModeles(Modele toRemove)
         {
             using (var connexion = GetConnection())
@@ -465,20 +441,6 @@ namespace ApplicationVeloMax.ViewModels
                     GetAllClientsUsingSP();
                 }
                 else toReturn = false;
-            }
-            return toReturn;
-        }
-
-        static public bool ModifyStockModele(Modele toModify,int newStock)
-        {
-            bool toReturn = true;
-            using(var connexion = GetConnection())
-            {
-                connexion.Open();
-                MySqlCommand com = new MySqlCommand($"UPDATE modeles SET stockModele={newStock} WHERE idModele={toModify.Id}");
-                Modele.Ensemble.Clear();
-                GetAllModelsUsingSP();
-                MessageBox.Show("Test");
             }
             return toReturn;
         }
