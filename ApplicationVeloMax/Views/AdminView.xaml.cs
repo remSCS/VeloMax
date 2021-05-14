@@ -200,8 +200,8 @@ namespace ApplicationVeloMax.Views
             InitializeComponent();
 
             //new DataAccess("SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
-            //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
-            new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=root;PASSWORD=root");
+            new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
+            //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=root;PASSWORD=root");
 
             //var watch = System.Diagnostics.Stopwatch.StartNew();
             //DataAccess.RefreshDBUsingSP();
@@ -228,14 +228,18 @@ namespace ApplicationVeloMax.Views
         private void commandesModifierButton_Click(object sender, RoutedEventArgs e) => new CommandeDetailView(SelectedCommande).ShowDialog();
         #endregion
 
+
         private void removeModeleButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedModele == null || !Modeles.Contains(SelectedModele)) MessageBox.Show("Veuillez sélectionner un modèle à supprimer.");
             else
             {
-                DataAccess.RemoveFromModeles(SelectedModele);
-                Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
-                MessageBox.Show("Modele supprimé");
+                
+                {
+                    DataAccess.RemoveFromModeles(SelectedModele);
+                    Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
+                    MessageBox.Show("Modele supprimé");
+                }
             }
         }
 
@@ -244,12 +248,16 @@ namespace ApplicationVeloMax.Views
             if (SelectedClient == null || !Clients.Contains(SelectedClient)) MessageBox.Show("Veuillez sélectionner un client à supprimer.");
             else
             {
-                if (DataAccess.RemoveFromClients(SelectedClient))
+                MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir supprimer ce client ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if (res == MessageBoxResult.Yes)
                 {
-                    Clients = new ObservableCollection<Client>(Client.Ensemble);
-                    MessageBox.Show("Client supprimé");
-                }
-                else MessageBox.Show("Impossible de supprimer un client ayant un historique de commande.");
+                    if (DataAccess.RemoveFromClients(SelectedClient))
+                    {
+                        Clients = new ObservableCollection<Client>(Client.Ensemble);
+                        MessageBox.Show("Client supprimé");
+                    }
+                    else MessageBox.Show("Impossible de supprimer un client ayant un historique de commande.");
+                }  
             }
         }
     }
