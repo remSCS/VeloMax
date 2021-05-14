@@ -15,6 +15,8 @@ namespace ApplicationVeloMax.Models
         private DateTime dateS;
         private Adresse adresseLivraison;
         private Client clientCommande;
+        private List<PieceDetachee> piecesCommandes = new List<PieceDetachee>();
+        private List<Modele> modelesCommande = new List<Modele>();
 
         public Commande() { }
 
@@ -55,6 +57,18 @@ namespace ApplicationVeloMax.Models
         {
             get { return clientCommande; }
             set { clientCommande = value; }
+        }
+
+        public List<PieceDetachee> PiecesCommande
+        {
+            get { return piecesCommandes; }
+            set { piecesCommandes = value; }
+        }
+
+        public List<Modele> ModelesCommande
+        {
+            get { return modelesCommande; }
+            set { modelesCommande = value; }
         }
 
         static public List<Commande> Ensemble

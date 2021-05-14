@@ -36,7 +36,6 @@ namespace ApplicationVeloMax.ViewModels
             using (var connexion = GetConnection())
             {
                 DataTable dt = new DataTable();
-                //MySqlCommand com = new MySqlCommand("GetAdresses", connexion) { CommandType = CommandType.StoredProcedure };
                 MySqlCommand com = GetCorrectCommand("adresse");
                 MySqlDataAdapter da = new MySqlDataAdapter(com);
                 da.Fill(dt);
@@ -372,10 +371,7 @@ namespace ApplicationVeloMax.ViewModels
                     };
                 }
             }
-        }
 
-        static public void GetAllComposCommandesPiecesUsingSP()
-        {
             using (var connexion = GetConnection())
             {
                 DataTable dt = new DataTable();
@@ -384,17 +380,10 @@ namespace ApplicationVeloMax.ViewModels
                 da.Fill(dt);
 
                 foreach (DataRow i in dt.Rows)
-                {
-                    new CompoCommandePieces(i.Field<int>("idCommande"), i.Field<int>("idPiece"))
-                    {
-                        Quantite = i.Field<int>("quantite")
-                    };
-                }
+                    for(int j = 0; j < i.Field<int>("quantite"); j++)
+                        Commande.Ensemble.Find(c => c.Id == i.Field<int>("idCommande")).PiecesCommande.Add(PieceDetachee.Ensemble.Find(p => p.Id == i.Field<int>("idPiece")));
             }
-        }
 
-        static public void GetAllComposCommandesVelosUsingSP()
-        {
             using (var connexion = GetConnection())
             {
                 DataTable dt = new DataTable();
@@ -403,12 +392,8 @@ namespace ApplicationVeloMax.ViewModels
                 da.Fill(dt);
 
                 foreach (DataRow i in dt.Rows)
-                {
-                    new CompoCommandeVelo(i.Field<int>("idCommande"), i.Field<int>("idModele"))
-                    {
-                        Quantite = i.Field<int>("quantite")
-                    };
-                }
+                    for (int j = 0; j < i.Field<int>("quantite"); j++)
+                        Commande.Ensemble.Find(c => c.Id == i.Field<int>("idCommande")).ModelesCommande.Add(Modele.Ensemble.Find(m => m.Id == i.Field<int>("idModele")));
             }
         }
         #endregion
@@ -428,10 +413,9 @@ namespace ApplicationVeloMax.ViewModels
             GetAllFournisseursPiecesUsingSP();
             GetAllCompositionsUsingSP();
             GetAllCommandesUsingSP();
-            GetAllComposCommandesPiecesUsingSP();
-            GetAllComposCommandesVelosUsingSP();
         }
 
+        #region Removing data from server
         static public bool RemoveFromModeles(Modele toRemove)
         {
             using (var connexion = GetConnection())
@@ -468,5 +452,6 @@ namespace ApplicationVeloMax.ViewModels
             }
             return toReturn;
         }
+        #endregion
     }
 }

@@ -135,8 +135,6 @@
     <Compile Include="Models\ClientPart.cs" />
     <Compile Include="Models\ClientPro.cs" />
     <Compile Include="Models\Commande.cs" />
-    <Compile Include="Models\CompoCommandePieces.cs" />
-    <Compile Include="Models\CompoCommandeVelo.cs" />
     <Compile Include="Models\Composition.cs" />
     <Compile Include="Models\Contact.cs" />
     <Compile Include="Models\Fidelio.cs" />
