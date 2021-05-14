@@ -199,9 +199,9 @@ namespace ApplicationVeloMax.Views
         {
             InitializeComponent();
 
-            //new DataAccess("SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
+            new DataAccess("SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
             //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
-            new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=root;PASSWORD=root");
+            //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=root;PASSWORD=root");
 
             //var watch = System.Diagnostics.Stopwatch.StartNew();
             //DataAccess.RefreshDBUsingSP();
@@ -250,6 +250,21 @@ namespace ApplicationVeloMax.Views
                     MessageBox.Show("Client supprimé");
                 }
                 else MessageBox.Show("Impossible de supprimer un client ayant un historique de commande.");
+            }
+        }
+
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }                                                                                                        
+
+        private void AddQuantiteButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (DataAccess.ModifyStockModele(SelectedModele, SelectedModele.Quantite+1))
+            {
+                MessageBox.Show("Ok");
+                Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
+
             }
         }
     }

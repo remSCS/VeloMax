@@ -468,5 +468,19 @@ namespace ApplicationVeloMax.ViewModels
             }
             return toReturn;
         }
+
+        static public bool ModifyStockModele(Modele toModify,int newStock)
+        {
+            bool toReturn = true;
+            using(var connexion = GetConnection())
+            {
+                connexion.Open();
+                MySqlCommand com = new MySqlCommand($"UPDATE modeles SET stockModele={newStock} WHERE idModele={toModify.Id}");
+                Modele.Ensemble.Clear();
+                GetAllModelsUsingSP();
+                MessageBox.Show("Test");
+            }
+            return toReturn;
+        }
     }
 }
