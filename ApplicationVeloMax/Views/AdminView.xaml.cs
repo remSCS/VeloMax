@@ -199,8 +199,8 @@ namespace ApplicationVeloMax.Views
         {
             InitializeComponent();
 
-            new DataAccess("SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
-            //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
+            //new DataAccess("SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
+            new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
             //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=root;PASSWORD=root");
 
             //var watch = System.Diagnostics.Stopwatch.StartNew();
@@ -261,16 +261,24 @@ namespace ApplicationVeloMax.Views
             }
         }
 
-        
+        #region Stocks
         private void AddQuantiteButton_Click(object sender, RoutedEventArgs e)
         {
 
             if (DataAccess.ModifyStockModele(SelectedModele, SelectedModele.Quantite + 1))
             {
-                MessageBox.Show("Ok");
                 Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
-
             }
         }
+
+        private void DelQuantiteButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (DataAccess.ModifyStockModele(SelectedModele, SelectedModele.Quantite-1))
+            {
+                Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
+            }
+        }
+        #endregion
     }
 }

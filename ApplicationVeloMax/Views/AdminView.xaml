@@ -307,7 +307,14 @@
                                 <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
                                 <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
                                 <DataGridTextColumn Width="auto" CanUserResize="False" Header="Prix" Binding="{Binding PrixUnitaire}"/>
-                                <DataGridTextColumn Width="auto" Header="Quantité" Binding="{Binding Quantite}"/>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="-" Click="DelQuantiteButton_Click"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Width="auto" Header="Quantité"  Binding="{Binding Quantite}"/>
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>

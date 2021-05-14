@@ -7,10 +7,11 @@
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="Commande - Détails" Icon="/img/Commandes_Logo.png"
         Height="450" Width="800" FontFamily="Helvetica" Background="#e4e4e4">
-    
+
     <Grid>
-       
+
         <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
             <RowDefinition Height="auto"/>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
@@ -47,9 +48,19 @@
                     <Label Content="{Binding SelectedCommande.DateS , StringFormat=dd/MM/yyyy}" />
                 </StackPanel>
             </StackPanel>
-            
+
         </Grid>
-        
+        <DataGrid Grid.Row="2" Margin="10"
+                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                                      ItemsSource="{Binding SelectedCommande.PiecesCommande, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
+                <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
+                <DataGridTextColumn Width="*" Header="Référence" Binding="{Binding Reference}"/>
+                <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}"/>
+
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
-    
+
 </Window>
