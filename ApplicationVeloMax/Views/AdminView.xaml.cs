@@ -234,7 +234,8 @@ namespace ApplicationVeloMax.Views
             if (SelectedModele == null || !Modeles.Contains(SelectedModele)) MessageBox.Show("Veuillez sélectionner un modèle à supprimer.");
             else
             {
-                
+                MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir supprimer ce modèle ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if (res == MessageBoxResult.Yes)
                 {
                     DataAccess.RemoveFromModeles(SelectedModele);
                     Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
