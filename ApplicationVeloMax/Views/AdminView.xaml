@@ -45,12 +45,12 @@
 
         <TabControl x:Name="myTabControl" TabStripPlacement="Left" Margin="-2">
 
-            <!--#region Tab Modeles-->
+            <!--#region Tab Produits-->
             <TabItem>
                 <TabItem.Header>
                     <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
                         <Image Source="/img/Bike_Logo.png" Height="25" ToolTip="Afficher la liste des modèles" HorizontalAlignment="Left"/>
-                        <Label Content="Modeles" Foreground="Black" FontStyle="Italic" HorizontalAlignment="Left"/>
+                        <Label Content="Produits" Foreground="Black" FontStyle="Italic" HorizontalAlignment="Left"/>
                     </StackPanel>
                 </TabItem.Header>
 
@@ -120,9 +120,8 @@
                                         </Style>
                                     </Button.Resources>
                                 </Button>
-
-                                <Button Margin="5,0" Padding="5" Content="Supprimer"
-                                Foreground="White" Background="#c14141">
+                                <Button x:Name="removeModeleButton" Margin="5,0" Padding="5" Content="Supprimer"
+                                Foreground="White" Background="#c14141" Click="removeModeleButton_Click">
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="10"/>
@@ -134,7 +133,6 @@
                                         </Style>
                                     </Button.Resources>
                                 </Button>
-
                                 <Button Margin="5,0" Padding="5" Content="Ajouter"
                                 Foreground="White" Background="#6abb74">
                                     <Button.Resources>
@@ -151,10 +149,11 @@
                             </StackPanel>
 
                             <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ItemsSource="{Binding Modeles, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                                      ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" >
-                                
+                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                                      ItemsSource="{Binding Modeles, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      SelectedItem="{Binding SelectedModele, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                 <DataGrid.Columns>
+                                    <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
                                     <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
                                     <DataGridTextColumn Width="*" Header="Grandeur" Binding="{Binding GrandeurModele}"/>
                                     <DataGridTextColumn Width="*" Header="Ligne" Binding="{Binding LigneProduitModele}"/>
