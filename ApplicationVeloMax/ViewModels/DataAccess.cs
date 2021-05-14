@@ -432,21 +432,41 @@ namespace ApplicationVeloMax.ViewModels
             GetAllComposCommandesVelosUsingSP();
         }
 
-        static public void RemoveFromModeles(List<Modele> toRemove)
+        static public bool RemoveFromModeles(Modele toRemove)
         {
             using (var connexion = GetConnection())
             {
-                foreach (var m in toRemove)
+                connexion.Open();
+                MySqlCommand com = new MySqlCommand("RemoveModele", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@id", MySqlDbType.Int64).Value = toRemove.Id;
+                var reader = com.ExecuteReader();
+                connexion.Close();
+            }
+            Modele.Ensemble.Clear();
+            GetAllModelsUsingSP();
+            return true;
+        }
+
+        static public bool RemoveFromClients(Client toRemove)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                if (Commande.Ensemble.Exists(c => c.ClientCommande.Id == toRemove.Id) == false)
                 {
                     connexion.Open();
-                    MySqlCommand com = new MySqlCommand("RemoveModele", connexion) { CommandType = CommandType.StoredProcedure };
-                    com.Parameters.Add("@id", MySqlDbType.Int64).Value = m.Id;
+                    MySqlCommand com = new MySqlCommand("RemoveClient", connexion) { CommandType = CommandType.StoredProcedure };
+                    com.Parameters.Add("@id", MySqlDbType.Int64).Value = toRemove.Id;
                     var reader = com.ExecuteReader();
                     connexion.Close();
+                    Client.Ensemble.Clear();
+                    ClientPart.EnsembleParticuliers.Clear();
+                    ClientPro.EnsemblePros.Clear();
+                    GetAllClientsUsingSP();
                 }
+                else toReturn = false;
             }
-            Modele.Clear();
-            GetAllModelsUsingSP();
+            return toReturn;
         }
     }
 }

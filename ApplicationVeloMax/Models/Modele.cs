@@ -85,7 +85,5 @@ namespace ApplicationVeloMax.Models
         {
             get { return ensemble; }
         }
-
-        static public void Clear() => ensemble.Clear();
     }
 }

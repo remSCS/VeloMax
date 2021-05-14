@@ -185,6 +185,13 @@ namespace ApplicationVeloMax.Views
                 PropertyChanged(this, new PropertyChangedEventArgs("ClientsPros"));
             }
         }
+
+        private Client _selectedClient;
+        public Client SelectedClient
+        {
+            get { return _selectedClient; }
+            set { _selectedClient = value; }
+        }
         #endregion
         #endregion
 
@@ -215,19 +222,34 @@ namespace ApplicationVeloMax.Views
             Clients = new ObservableCollection<Client>(Client.Ensemble);
         }
 
+        #region Détails Commande
         private void commandesDataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new CommandeDetailView(SelectedCommande).ShowDialog();
 
         private void commandesModifierButton_Click(object sender, RoutedEventArgs e) => new CommandeDetailView(SelectedCommande).ShowDialog();
+        #endregion
 
         private void removeModeleButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedModele == null || !Modeles.Contains(SelectedModele)) MessageBox.Show("Veuillez sélectionner un modèle à supprimer.");
             else
             {
-                List<Modele> toRemove = new List<Modele>() { SelectedModele };
-                DataAccess.RemoveFromModeles(toRemove);
+                DataAccess.RemoveFromModeles(SelectedModele);
                 Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
                 MessageBox.Show("Modele supprimé");
+            }
+        }
+
+        private void supprimerClientButtons_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedClient == null || !Clients.Contains(SelectedClient)) MessageBox.Show("Veuillez sélectionner un client à supprimer.");
+            else
+            {
+                if (DataAccess.RemoveFromClients(SelectedClient))
+                {
+                    Clients = new ObservableCollection<Client>(Client.Ensemble);
+                    MessageBox.Show("Client supprimé");
+                }
+                else MessageBox.Show("Impossible de supprimer un client ayant un historique de commande.");
             }
         }
     }

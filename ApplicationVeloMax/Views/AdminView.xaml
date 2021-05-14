@@ -398,8 +398,8 @@
                                     </Button.Resources>
                                 </Button>
 
-                                <Button Margin="5,0" Padding="5" Content="Supprimer"
-                                Foreground="White" Background="#c14141">
+                                <Button x:Name="supprimerClientPartButton" Margin="5,0" Padding="5" Content="Supprimer"
+                                Foreground="White" Background="#c14141" Click="supprimerClientButtons_Click">
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="10"/>
@@ -428,8 +428,9 @@
                             </StackPanel>
 
                             <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ItemsSource="{Binding ClientsParts, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                                      ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All">
+                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      ItemsSource="{Binding ClientsParts, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      SelectedItem="{Binding SelectedClient, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
                                     <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ContactClient}"/>
@@ -506,8 +507,8 @@
                                     </Button.Resources>
                                 </Button>
 
-                                <Button Margin="5,0" Padding="5" Content="Supprimer"
-                                Foreground="White" Background="#c14141">
+                                <Button x:Name="supprimerClientProButton" Margin="5,0" Padding="5" Content="Supprimer"
+                                Foreground="White" Background="#c14141" Click="supprimerClientButtons_Click">
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="10"/>
@@ -536,8 +537,9 @@
                             </StackPanel>
 
                             <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ItemsSource="{Binding ClientsPros, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                                      ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All">
+                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      ItemsSource="{Binding ClientsPros, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      SelectedItem="{Binding SelectedClient, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
                                     <DataGridTextColumn Width="*" Header="Entreprise" Binding="{Binding NomEntreprise}"/>
