@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ApplicationVeloMax.Converters"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="Gestion Administrateur - VéloMax" Icon="/img/Velomax_Logo.png"
-        Height="450" Width="800" FontFamily="Helvetica" Background="#e4e4e4">
+        Height="810" Width="1440" FontFamily="Helvetica" Background="#e4e4e4">
     
     <Window.Resources>
         <local:SizeConverter x:Key="sizeConverter"/>
@@ -301,7 +301,7 @@
 
                         <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
                                       IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
-                                      ItemsSource="{Binding Modeles, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      ItemsSource="{Binding Modeles, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedItem="{Binding SelectedModele, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <DataGrid.Columns>
                                 <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
@@ -332,6 +332,34 @@
                         <TabItem.Header>
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="Pièces détachées" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>
+                        
+                        <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
+                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                                      ItemsSource="{Binding PiecesDetachees, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      SelectedItem="{Binding SelectedPiece, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
+                                <DataGridTextColumn Width="auto" Header="Ref." CanUserResize="False" Binding="{Binding Reference}"/>
+                                <DataGridTextColumn Width="auto" Header="Nom" Binding="{Binding Nom}"/>
+                                <DataGridTextColumn Width="*" Header="Description"  Binding="{Binding Description}"/>
+                                
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="-" Click="DelQuantitePieceButton_Click"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                                <DataGridTextColumn Width="auto" Header="Quantité"  Binding="{Binding Quantite}"/>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="+" Click="AddQuantitePieceButton_Click"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
                     </TabItem>
                     <!--#endregion-->
 
@@ -340,6 +368,8 @@
                         <TabItem.Header>
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="A recommander" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>
+
+                        
                     </TabItem>
                     <!--#endregion-->
 
@@ -921,6 +951,7 @@
                             <DataGridTextColumn Width="*" Header="Adresse" Binding="{Binding AdresseLivraison}"/>
                             <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date effectuée" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
                             <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date à faire pour" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
+                            <DataGridTextColumn Width="*" Header="Statut" Binding="{Binding Statut}"/>
                         </DataGrid.Columns>
                     </DataGrid>
                 </Grid>

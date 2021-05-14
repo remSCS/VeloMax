@@ -44,9 +44,10 @@ namespace ApplicationVeloMax.Views
         public Modele SelectedModele
         {
             get { return _selectedModele; }
-            set { _selectedModele = value;}
+            set { _selectedModele = value; }
         }
         #endregion
+
 
         #region Adresses
         private ObservableCollection<Adresse> _adresses;
@@ -120,6 +121,17 @@ namespace ApplicationVeloMax.Views
             {
                 _piecesDetachees = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("PiecesDetachees"));
+            }
+        }
+
+        private PieceDetachee _selectedPiece;
+        public PieceDetachee SelectedPiece
+        {
+            get { return _selectedPiece; }
+            set
+            {
+                _selectedPiece = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedPiece"));
             }
         }
         #endregion
@@ -199,8 +211,8 @@ namespace ApplicationVeloMax.Views
         {
             InitializeComponent();
 
-            //new DataAccess("SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
-            new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
+            new DataAccess("SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
+            //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
             //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=root;PASSWORD=root");
 
             //var watch = System.Diagnostics.Stopwatch.StartNew();
@@ -274,9 +286,27 @@ namespace ApplicationVeloMax.Views
         private void DelQuantiteButton_Click(object sender, RoutedEventArgs e)
         {
 
-            if (DataAccess.ModifyStockModele(SelectedModele, SelectedModele.Quantite-1))
+            if (DataAccess.ModifyStockModele(SelectedModele, SelectedModele.Quantite - 1))
             {
                 Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
+            }
+        }
+
+        private void AddQuantitePieceButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (DataAccess.ModifyStockPiece(SelectedPiece, SelectedPiece.Quantite + 1))
+            {
+                PiecesDetachees = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble);
+            }
+        }
+
+        private void DelQuantitePieceButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (DataAccess.ModifyStockPiece(SelectedPiece, SelectedPiece.Quantite - 1))
+            {
+                PiecesDetachees = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble);
             }
         }
         #endregion

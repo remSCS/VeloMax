@@ -448,6 +448,23 @@ namespace ApplicationVeloMax.ViewModels
             return toReturn;
         }
 
+        static public bool ModifyStockPiece(PieceDetachee toModify, int newStock)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                connexion.Open();
+                MySqlCommand com = new MySqlCommand("UpdateStockPiece", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@id", MySqlDbType.Int64).Value = toModify.Id;
+                com.Parameters.Add("@qte", MySqlDbType.Int64).Value = newStock;
+                var reader = com.ExecuteReader();
+                connexion.Close();
+                PieceDetachee.Ensemble.Clear();
+                GetAllPiecesDetacheesUsingSP();
+            }
+            return toReturn;
+        }
+
         static public void RefreshDBUsingSP()
         {
             GetAllAdressesUsingSP();
