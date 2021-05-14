@@ -264,13 +264,13 @@ namespace ApplicationVeloMax.Views
         
         private void AddQuantiteButton_Click(object sender, RoutedEventArgs e)
         {
-            /*
-            if (DataAccess.ModifyStockModele(SelectedModele, SelectedModele.Quantite+1))
+
+            if (DataAccess.ModifyStockModele(SelectedModele, SelectedModele.Quantite + 1))
             {
                 MessageBox.Show("Ok");
                 Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
 
-            }*/
+            }
         }
     }
 }
