@@ -391,22 +391,6 @@ namespace ApplicationVeloMax.ViewModels
         }
         #endregion
 
-        static public void RefreshDBUsingSP()
-        {
-            GetAllAdressesUsingSP();
-            GetAllContactsUsingSP();
-            GetAllLibellesUsingSP();
-            GetAllGrandeursUsingSP();
-            GetAllLigneProduitsUsingSP();
-            GetAllFideliosUsingSP();
-            GetAllModelsUsingSP();
-            GetAllPiecesDetacheesUsingSP();
-            GetAllFournisseursUsingSP();
-            GetAllClientsUsingSP();
-            GetAllFournisseursPiecesUsingSP();
-            GetAllCommandesUsingSP();
-        }
-
         #region Removing data from server
         static public bool RemoveFromModeles(Modele toRemove)
         {
@@ -443,6 +427,23 @@ namespace ApplicationVeloMax.ViewModels
                 else toReturn = false;
             }
             return toReturn;
+        }
+        #endregion
+
+        static public void RefreshDBUsingSP()
+        {
+            GetAllAdressesUsingSP();
+            GetAllContactsUsingSP();
+            GetAllLibellesUsingSP();
+            GetAllGrandeursUsingSP();
+            GetAllLigneProduitsUsingSP();
+            GetAllFideliosUsingSP();
+            GetAllModelsUsingSP();
+            GetAllPiecesDetacheesUsingSP();
+            GetAllFournisseursUsingSP();
+            GetAllClientsUsingSP();
+            GetAllFournisseursPiecesUsingSP();
+            GetAllCommandesUsingSP();
         }
     }
 }
