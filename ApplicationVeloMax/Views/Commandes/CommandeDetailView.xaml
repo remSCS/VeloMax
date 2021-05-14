@@ -15,10 +15,40 @@
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Orientation="Horizontal">
+        <StackPanel Orientation="Horizontal" Grid.Row="0">
             <Label Content="Commande n°" FontFamily="Helvetica" FontSize="24" FontWeight="Bold" />
             <Label Content="{Binding SelectedCommande.Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="Helvetica" FontSize="24" FontWeight="Bold" />
         </StackPanel>
+
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <StackPanel Orientation="Vertical" Grid.Column="0">
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Date : "/>
+                    <Label Content="{Binding SelectedCommande.DateE, StringFormat=dd/MM/yyyy }" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Nom client : "/>
+                    <Label Content="{Binding SelectedCommande.ClientCommande.ContactClient.FullName }" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Adresse client : "/>
+                    <Label Content="{Binding SelectedCommande.ClientCommande.AdresseClient.FullAdresse }" />
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal">
+                    <Label Content="Date de livraison prévue : "/>
+                    <Label Content="{Binding SelectedCommande.DateS , StringFormat=dd/MM/yyyy}" />
+                </StackPanel>
+            </StackPanel>
+            
+        </Grid>
         
     </Grid>
     

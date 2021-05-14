@@ -56,6 +56,11 @@ namespace ApplicationVeloMax.Models
             return this.nom;
         }
 
+        public string FullName
+        {
+            get{ return this.prenom + " " + this.nom; }
+        }
+
         static public List<Contact> Ensemble
         {
             get { return ensemble; }
