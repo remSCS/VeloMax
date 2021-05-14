@@ -9,10 +9,14 @@ namespace ApplicationVeloMax.Models
     public class Commande
     {
         static private List<Commande> ensemble = new List<Commande>();
+        static private List<Commande> ensemblePrep = new List<Commande>();
+        static private List<Commande> ensembleAnul = new List<Commande>();
+        static private List<Commande> ensembleDone = new List<Commande>();
 
         private int id;
         private DateTime dateE;
         private DateTime dateS;
+        private string statut;
         private Adresse adresseLivraison;
         private Client clientCommande;
         private List<PieceDetachee> piecesCommandes = new List<PieceDetachee>();
@@ -27,6 +31,12 @@ namespace ApplicationVeloMax.Models
             Client c = Client.Ensemble.Find(e => e.Id == idClient);
             if (c != null) this.ClientCommande = c;
             if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
+            switch (this.Statut)
+            {
+                case "En cours de préparation": EnsemblePrep.Add(this); break;
+                case "Annulée": EnsembleAnul.Add(this); break;
+                case "Terminée": EnsembleDone.Add(this); break;
+            }
         }
 
         public int Id
@@ -45,6 +55,12 @@ namespace ApplicationVeloMax.Models
         {
             get { return dateS; }
             set { dateS = value; }
+        }
+
+        public string Statut
+        {
+            get { return statut; }
+            set { statut = value; }
         }
 
         public Adresse AdresseLivraison
@@ -74,6 +90,29 @@ namespace ApplicationVeloMax.Models
         static public List<Commande> Ensemble
         {
             get { return ensemble; }
+        }
+
+        static public List<Commande> EnsemblePrep
+        {
+            get { return ensemblePrep; }
+        }
+
+        static public List<Commande> EnsembleAnul
+        {
+            get { return ensembleAnul; }
+        }
+               
+        static public List<Commande> EnsembleDone
+        {
+            get { return ensembleDone; }
+        }
+
+        static public void ClearEnsembles()
+        {
+            Ensemble.Clear();
+            EnsemblePrep.Clear();
+            EnsembleAnul.Clear();
+            EnsembleDone.Clear();
         }
     }
 }

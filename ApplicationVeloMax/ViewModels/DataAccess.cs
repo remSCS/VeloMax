@@ -348,7 +348,7 @@ namespace ApplicationVeloMax.ViewModels
             using (var connexion = GetConnection())
             {
                 DataTable dt = new DataTable();
-                MySqlCommand com = GetCorrectCommand("commande");
+                MySqlCommand com = GetCorrectCommand("commande natural join statut");
                 MySqlDataAdapter da = new MySqlDataAdapter(com);
                 da.Fill(dt);
 
@@ -360,7 +360,8 @@ namespace ApplicationVeloMax.ViewModels
                     {
                         Id = i.Field<int>("idCommande"),
                         DateE = i.Field<DateTime>("dateECommande"),
-                        DateS = dateS
+                        DateS = dateS,
+                        Statut = i.Field<string>("nomStatut")
                     };
                 }
             }
