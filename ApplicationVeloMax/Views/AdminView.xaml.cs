@@ -27,6 +27,8 @@ namespace ApplicationVeloMax.Views
         public event PropertyChangedEventHandler PropertyChanged;
 
         #region ViewModels
+
+        #region Modèles
         private ObservableCollection<Modele> _modeles;
         public ObservableCollection<Modele> Modeles
         {
@@ -38,6 +40,15 @@ namespace ApplicationVeloMax.Views
             }
         }
 
+        private Modele _selectedModele;
+        public Modele SelectedModele
+        {
+            get { return _selectedModele; }
+            set { _selectedModele = value;}
+        }
+        #endregion
+
+        #region Adresses
         private ObservableCollection<Adresse> _adresses;
         public ObservableCollection<Adresse> Adresses
         {
@@ -48,7 +59,9 @@ namespace ApplicationVeloMax.Views
                 PropertyChanged(this, new PropertyChangedEventArgs("Adresses"));
             }
         }
+        #endregion
 
+        #region Grandeurs
         private ObservableCollection<Grandeur> _grandeurs;
         public ObservableCollection<Grandeur> Grandeurs
         {
@@ -59,7 +72,9 @@ namespace ApplicationVeloMax.Views
                 PropertyChanged(this, new PropertyChangedEventArgs("Grandeurs"));
             }
         }
+        #endregion
 
+        #region Lignes Produits
         private ObservableCollection<LigneProduit> _lignesProduits;
         public ObservableCollection<LigneProduit> LignesProduits
         {
@@ -70,8 +85,9 @@ namespace ApplicationVeloMax.Views
                 PropertyChanged(this, new PropertyChangedEventArgs("LignesProduits"));
             }
         }
+        #endregion
 
-        #region COMMANDES
+        #region Commandes
         private ObservableCollection<Commande> _commandes;
         public ObservableCollection<Commande> Commandes
         {
@@ -84,7 +100,7 @@ namespace ApplicationVeloMax.Views
         }
 
         private Commande _selectedCommande = new Commande();
-        public Commande SelectedCommande 
+        public Commande SelectedCommande
         {
             get { return _selectedCommande; }
             set
@@ -93,9 +109,9 @@ namespace ApplicationVeloMax.Views
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedCommande"));
             }
         }
-
         #endregion
 
+        #region Pièces
         private ObservableCollection<PieceDetachee> _piecesDetachees;
         public ObservableCollection<PieceDetachee> PiecesDetachees
         {
@@ -106,7 +122,9 @@ namespace ApplicationVeloMax.Views
                 PropertyChanged(this, new PropertyChangedEventArgs("PiecesDetachees"));
             }
         }
+        #endregion
 
+        #region Fournisseurs
         private ObservableCollection<Fournisseur> _fournisseurs;
         public ObservableCollection<Fournisseur> Fournisseurs
         {
@@ -117,7 +135,9 @@ namespace ApplicationVeloMax.Views
                 PropertyChanged(this, new PropertyChangedEventArgs("Fournisseurs"));
             }
         }
+        #endregion
 
+        #region Fidelios
         private ObservableCollection<Fidelio> _fidelios;
         public ObservableCollection<Fidelio> Fidelios
         {
@@ -128,7 +148,9 @@ namespace ApplicationVeloMax.Views
                 PropertyChanged(this, new PropertyChangedEventArgs("Fidelios"));
             }
         }
+        #endregion
 
+        #region Clients
         private ObservableCollection<Client> _clients;
         public ObservableCollection<Client> Clients
         {
@@ -163,6 +185,14 @@ namespace ApplicationVeloMax.Views
                 PropertyChanged(this, new PropertyChangedEventArgs("ClientsPros"));
             }
         }
+
+        private Client _selectedClient;
+        public Client SelectedClient
+        {
+            get { return _selectedClient; }
+            set { _selectedClient = value; }
+        }
+        #endregion
         #endregion
 
         public AdminView()
@@ -192,8 +222,35 @@ namespace ApplicationVeloMax.Views
             Clients = new ObservableCollection<Client>(Client.Ensemble);
         }
 
+        #region Détails Commande
         private void commandesDataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new CommandeDetailView(SelectedCommande).ShowDialog();
 
         private void commandesModifierButton_Click(object sender, RoutedEventArgs e) => new CommandeDetailView(SelectedCommande).ShowDialog();
+        #endregion
+
+        private void removeModeleButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedModele == null || !Modeles.Contains(SelectedModele)) MessageBox.Show("Veuillez sélectionner un modèle à supprimer.");
+            else
+            {
+                DataAccess.RemoveFromModeles(SelectedModele);
+                Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
+                MessageBox.Show("Modele supprimé");
+            }
+        }
+
+        private void supprimerClientButtons_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedClient == null || !Clients.Contains(SelectedClient)) MessageBox.Show("Veuillez sélectionner un client à supprimer.");
+            else
+            {
+                if (DataAccess.RemoveFromClients(SelectedClient))
+                {
+                    Clients = new ObservableCollection<Client>(Client.Ensemble);
+                    MessageBox.Show("Client supprimé");
+                }
+                else MessageBox.Show("Impossible de supprimer un client ayant un historique de commande.");
+            }
+        }
     }
 }
