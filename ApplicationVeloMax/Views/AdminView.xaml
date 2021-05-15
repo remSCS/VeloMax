@@ -379,7 +379,23 @@
                         <TabItem.Header>
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="A recommander" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>
-
+                        <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
+                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                                      ItemsSource="{Binding PiecesDetacheesStock, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      >
+                            <DataGrid.Columns>
+                                <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
+                                <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
+                                <DataGridTextColumn Width="auto" Header="Quantité" Binding="{Binding Quantite}"/>
+                                <DataGridTemplateColumn>
+                                    <DataGridTemplateColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="Commander"/>
+                                        </DataTemplate>
+                                    </DataGridTemplateColumn.CellTemplate>
+                                </DataGridTemplateColumn>
+                            </DataGrid.Columns>
+                        </DataGrid>
 
                     </TabItem>
                     <!--#endregion-->

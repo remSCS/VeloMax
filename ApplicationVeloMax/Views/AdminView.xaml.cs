@@ -189,7 +189,19 @@ namespace ApplicationVeloMax.Views
             set
             {
                 _piecesDetachees = value;
+                PiecesDetacheesStock = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble.FindAll(p => p.Quantite <= 2));
                 PropertyChanged(this, new PropertyChangedEventArgs("PiecesDetachees"));
+            }
+        }
+
+        private ObservableCollection<PieceDetachee> _piecesDetacheesStock;
+        public ObservableCollection<PieceDetachee> PiecesDetacheesStock
+        {
+            get { return _piecesDetachees; }
+            set
+            {
+                _piecesDetacheesStock = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("PiecesDetacheesStock"));
             }
         }
 
@@ -299,8 +311,8 @@ namespace ApplicationVeloMax.Views
         {
             InitializeComponent();
 
-            //new DataAccess("SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
-            new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
+            new DataAccess("SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
+            //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
             //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=root;PASSWORD=root");
 
             //var watch = System.Diagnostics.Stopwatch.StartNew();
