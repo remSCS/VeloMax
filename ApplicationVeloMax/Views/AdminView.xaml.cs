@@ -38,7 +38,19 @@ namespace ApplicationVeloMax.Views
             set
             {
                 _modeles = value;
+                ModelesStock = new ObservableCollection<Modele>(Modele.Ensemble.FindAll(p => p.Quantite <= 2));
                 PropertyChanged(this, new PropertyChangedEventArgs("Modeles"));
+            }
+        }
+
+        private ObservableCollection<Modele> _modelesStock;
+        public ObservableCollection<Modele> ModelesStock
+        {
+            get { return _modelesStock; }
+            set
+            {
+                _modelesStock = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("ModelesStock"));
             }
         }
 
@@ -197,7 +209,7 @@ namespace ApplicationVeloMax.Views
         private ObservableCollection<PieceDetachee> _piecesDetacheesStock;
         public ObservableCollection<PieceDetachee> PiecesDetacheesStock
         {
-            get { return _piecesDetachees; }
+            get { return _piecesDetacheesStock; }
             set
             {
                 _piecesDetacheesStock = value;
