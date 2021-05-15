@@ -35,7 +35,6 @@ namespace ApplicationVeloMax.Views.Pieces
                 if (dateSTb.SelectedDate < dateETb.SelectedDate) dateSTb.SelectedDate = dateETb.SelectedDate;
                 dateETb.DisplayDateEnd = DateTime.Today;
                 dateSTb.DisplayDateStart = Piece.DateE;
-                dateSTb.DisplayDateEnd = DateTime.Today;
                 PropertyChanged(this, new PropertyChangedEventArgs("Piece"));
             }
         }

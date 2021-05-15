@@ -32,9 +32,9 @@ namespace ApplicationVeloMax.Views.Modeles
             set
             {
                 _selectedModele = value;
+                if (dateSTb.SelectedDate < dateETb.SelectedDate) dateSTb.SelectedDate = dateETb.SelectedDate;
                 dateETb.DisplayDateEnd = DateTime.Today;
                 dateSTb.DisplayDateStart = SelectedModele.DateE;
-                dateSTb.DisplayDateEnd = DateTime.Today;
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedModele"));
             }
         }
@@ -102,5 +102,7 @@ namespace ApplicationVeloMax.Views.Modeles
         }
 
         private void cancelButton_Click(object sender, RoutedEventArgs e) => this.Close();
+
+        private void dateETb_SelectedDateChanged(object sender, SelectionChangedEventArgs e) => SelectedModele = SelectedModele;
     }
 }

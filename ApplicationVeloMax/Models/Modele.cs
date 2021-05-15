@@ -20,6 +20,8 @@ namespace ApplicationVeloMax.Models
         private List<PieceDetachee> piecesComposition = new List<PieceDetachee>();
         private int quantite;
 
+        public Modele() { }
+
         public Modele(int idGrandeur, int idLigneProduit)
         {
             Grandeur g = Grandeur.Ensemble.Find(e => e.Id == idGrandeur);

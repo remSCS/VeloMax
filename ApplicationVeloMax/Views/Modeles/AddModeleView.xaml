@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ApplicationVeloMax.Converters"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="Ajout Modèle - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="NoResize"
-        Height="330" Width="400" FontFamily="Helvetica" Background="#e4e4e4">
+        Height="340" Width="400" FontFamily="Helvetica" Background="#e4e4e4">
 
     <Grid>
 
@@ -31,27 +31,28 @@
 
         <StackPanel Orientation="Vertical" Margin="5" Grid.Column="1">
             <TextBox x:Name="idTb" Margin="5" Height="25" IsReadOnly="True" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedModele.Id, Mode=OneWay}" Background="#FF9B9B9B"/>
+                     Text="{Binding Modele.Id, Mode=TwoWay}" Background="#FF9B9B9B"/>
 
             <TextBox x:Name="nomTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedModele.Nom, Mode=OneWay}"/>
+                     Text="{Binding Modele.Nom, Mode=TwoWay}"/>
 
             <ComboBox x:Name="grandeurTb" Margin="5" Height="25" DisplayMemberPath="Nom" VerticalContentAlignment="Center"
-                      SelectedValue="{Binding SelectedModele.GrandeurModele, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      ItemsSource="{Binding Grandeurs, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                      SelectedValue="{Binding Modele.GrandeurModele, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding Grandeurs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox x:Name="prixTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedModele.PrixUnitaire, Mode=OneWay}"/>
+                     Text="{Binding Modele.PrixUnitaire, Mode=TwoWay}"/>
 
             <ComboBox x:Name="ligneTb" Margin="5" Height="25" DisplayMemberPath="Nom" VerticalContentAlignment="Center"
-                      SelectedValue="{Binding SelectedModele.LigneProduitModele, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      ItemsSource="{Binding LignesProduits, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                      SelectedValue="{Binding Modele.LigneProduitModele, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding LignesProduits, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <DatePicker x:Name="dateETb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                        Text="{Binding SelectedModele.DateE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        SelectedDate="{Binding Modele.DateE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedDateChanged="dateETb_SelectedDateChanged"/>
 
             <DatePicker x:Name="dateSTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                        Text="{Binding SelectedModele.DateS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        SelectedDate="{Binding Modele.DateS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 

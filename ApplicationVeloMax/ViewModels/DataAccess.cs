@@ -631,6 +631,32 @@ namespace ApplicationVeloMax.ViewModels
             }
             return toReturn;
         }
+
+        static public bool AddModele(Modele toAdd)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                if (Modele.Ensemble.Exists(p => p.Id == toAdd.Id) == true)
+                {
+                    connexion.Open();
+                    MySqlCommand com = new MySqlCommand("CreateModele", connexion) { CommandType = CommandType.StoredProcedure };
+                    com.Parameters.Add("@id", MySqlDbType.Int64).Value = toAdd.Id;
+                    com.Parameters.Add("@nom", MySqlDbType.VarChar).Value = toAdd.Nom;
+                    com.Parameters.Add("@idG", MySqlDbType.Int64).Value = toAdd.GrandeurModele.Id;
+                    com.Parameters.Add("@idL", MySqlDbType.Int64).Value = toAdd.LigneProduitModele.Id;
+                    com.Parameters.Add("@prix", MySqlDbType.Decimal).Value = toAdd.PrixUnitaire;
+                    com.Parameters.Add("@de", MySqlDbType.Date).Value = toAdd.DateE;
+                    com.Parameters.Add("@ds", MySqlDbType.Date).Value = toAdd.DateS;
+                    com.Parameters.Add("@qte", MySqlDbType.Int64).Value = toAdd.Quantite;
+                    try { com.ExecuteReader(); }
+                    catch { return false; }
+                    RefreshDBUsingSP();
+                }
+                else toReturn = false;
+            }
+            return toReturn;
+        }
         #endregion
 
         static public void RefreshDBUsingSP()
