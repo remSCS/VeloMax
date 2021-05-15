@@ -22,6 +22,7 @@ using ApplicationVeloMax.Views.Commandes;
 using ApplicationVeloMax.Views.Modeles;
 using ApplicationVeloMax.Views.Pieces;
 using ApplicationVeloMax.Views.Stock;
+using ApplicationVeloMax.Views.Fidelios;
 
 namespace ApplicationVeloMax.Views
 {
@@ -515,6 +516,17 @@ namespace ApplicationVeloMax.Views
                     }
                     else MessageBox.Show("Impossible de supprimer un client ayant un historique de commande. Voulez vous migrer les clients ayant ce type de compte ? (à faire)");
                 }
+            }
+        }
+
+        private void editFidelioButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedFidelio == null) MessageBox.Show("Veuillez sélectionner un programme.");
+            else
+            {
+                new EditFidelioView(SelectedFidelio).ShowDialog();
+                DataAccess.RefreshDBUsingSP();
+                RefreshProperties();
             }
         }
         #endregion

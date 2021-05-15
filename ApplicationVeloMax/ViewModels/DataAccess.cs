@@ -164,7 +164,7 @@ namespace ApplicationVeloMax.ViewModels
                     {
                         Id = i.Field<int>("idFidelio"),
                         Nom = i.Field<string>("nomFidelio"),
-                        Description = i.Field<string>("descriptionFidelioo"),
+                        Description = i.Field<string>("descriptionFidelio"),
                         Cout = i.Field<decimal>("coutFidelio"),
                         Rabais = i.Field<decimal>("rabaisFidelio"),
                         DureeJours = i.Field<int>("dureeJoursFidelio")
