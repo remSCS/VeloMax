@@ -31,7 +31,7 @@ namespace ApplicationVeloMax.Views.Stock
             set
             {
                 _pieceADetailler = value;
-                PropertyChanged(this,new PropertyChangedEventArgs("PiecADetailler"));
+                PropertyChanged(this,new PropertyChangedEventArgs("PieceADetailler"));
             }
         }
 
@@ -47,9 +47,9 @@ namespace ApplicationVeloMax.Views.Stock
         }
         public StockPieceFournisseurs(PieceDetachee pieceADetailler)
         {
-            pieceADetailler = PieceADetailler;
-            Fournisseurs = new ObservableCollection<FournisseurPiece>(FournisseurPiece.Ensemble.FindAll(fp => fp.PieceDetacheeFournisseur.Id == pieceADetailler.Id));
             InitializeComponent();
+            PieceADetailler = pieceADetailler;
+            Fournisseurs = new ObservableCollection<FournisseurPiece>(FournisseurPiece.Ensemble.FindAll(fp => fp.PieceDetacheeFournisseur.Id == pieceADetailler.Id));
         }
     }
 }
