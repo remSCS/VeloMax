@@ -348,7 +348,7 @@ namespace ApplicationVeloMax.ViewModels
             using (var connexion = GetConnection())
             {
                 DataTable dt = new DataTable();
-                MySqlCommand com = GetCorrectCommand("commande natural join statut");
+                MySqlCommand com = GetCorrectCommand("commande");
                 MySqlDataAdapter da = new MySqlDataAdapter(com);
                 da.Fill(dt);
 
@@ -356,15 +356,21 @@ namespace ApplicationVeloMax.ViewModels
                 {
                     DateTime dateS = new DateTime();
                     if (!DBNull.Value.Equals(i["dateSCommande"])) dateS = i.Field<DateTime>("dateSCommande");
-                    new Commande(i.Field<int>("idAdresse"), i.Field<int>("idClient"))
+                    int s = i.Field<int>("idStatut");
+                    string str = "";
+                    if (s == 1) str = "En cours de préparation";
+                    if (s == 2) str = "Annulée";
+                    if (s == 3) str = "Terminée";
+                    new Commande(i.Field<int>("idAdresse"), i.Field<int>("idClient"), i.Field<int>("idStatut"))
                     {
                         Id = i.Field<int>("idCommande"),
                         DateE = i.Field<DateTime>("dateECommande"),
                         DateS = dateS,
-                        Statut = i.Field<string>("nomStatut")
+                        Statut = str
                     };
                 }
-            }
+                Console.WriteLine(Commande.EnsembleAnnul); 
+        }
 
             using (var connexion = GetConnection())
             {
@@ -389,6 +395,7 @@ namespace ApplicationVeloMax.ViewModels
                     for (int j = 0; j < i.Field<int>("quantite"); j++)
                         Commande.Ensemble.Find(c => c.Id == i.Field<int>("idCommande")).ModelesCommande.Add(Modele.Ensemble.Find(m => m.Id == i.Field<int>("idModele")));
             }
+            Console.WriteLine(Commande.EnsembleAnnul); 
         }
         #endregion
 
@@ -429,8 +436,29 @@ namespace ApplicationVeloMax.ViewModels
             }
             return toReturn;
         }
+
+        static public bool RemoveFromOrders(Commande toRemove)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                if (Commande.Ensemble.Exists(c => c.ClientCommande.Id == toRemove.Id) == false)
+                {
+                    connexion.Open();
+                    MySqlCommand com = new MySqlCommand("RemoveOrder", connexion) { CommandType = CommandType.StoredProcedure };
+                    com.Parameters.Add("@id", MySqlDbType.Int64).Value = toRemove.Id;
+                    var reader = com.ExecuteReader();
+                    connexion.Close();
+                    Commande.ClearEnsembles();
+                    GetAllCommandesUsingSP();
+                }
+                else toReturn = false;
+            }
+            return toReturn;
+        }
         #endregion
 
+        #region Editing data from server
         static public bool ModifyStockModele(Modele toModify, int newStock)
         {
             bool toReturn = true;
@@ -464,6 +492,7 @@ namespace ApplicationVeloMax.ViewModels
             }
             return toReturn;
         }
+        #endregion
 
         static public void RefreshDBUsingSP()
         {

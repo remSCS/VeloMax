@@ -7,7 +7,7 @@
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="Gestion Administrateur - VéloMax" Icon="/img/Velomax_Logo.png"
         Height="810" Width="1440" FontFamily="Helvetica" Background="#e4e4e4">
-    
+
     <Window.Resources>
         <local:SizeConverter x:Key="sizeConverter"/>
         <Style TargetType="{x:Type TabItem}">
@@ -332,7 +332,7 @@
                         <TabItem.Header>
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="Pièces détachées" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>
-                        
+
                         <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
                                       IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
                                       ItemsSource="{Binding PiecesDetachees, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
@@ -342,7 +342,7 @@
                                 <DataGridTextColumn Width="auto" Header="Ref." CanUserResize="False" Binding="{Binding Reference}"/>
                                 <DataGridTextColumn Width="auto" Header="Nom" Binding="{Binding Nom}"/>
                                 <DataGridTextColumn Width="*" Header="Description"  Binding="{Binding Description}"/>
-                                
+
                                 <DataGridTemplateColumn>
                                     <DataGridTemplateColumn.CellTemplate>
                                         <DataTemplate>
@@ -369,7 +369,7 @@
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="A recommander" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>
 
-                        
+
                     </TabItem>
                     <!--#endregion-->
 
@@ -846,115 +846,364 @@
                     </StackPanel>
                 </TabItem.Header>
 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="*"/>
-                    </Grid.RowDefinitions>
+                <TabControl TabStripPlacement="Top" Margin="-4">
+                    <!--#region Toutes-->
+                    <TabItem Height="50" VerticalAlignment="Top">
+                        <TabItem.Header>
+                            <Label Grid.Row="0" Margin="10,10,10,0" Content="Toutes" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
+                        </TabItem.Header>
 
-                    <Label Grid.Row="0" Margin="10,10,10,0" Content="Commandes" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
 
-                    <TextBox Grid.Row="1" Padding="5" Margin="10,10,10,0"
+                            <TextBox Grid.Row="0" Padding="5" Margin="10,10,10,0"
                              Text="Rechercher par nom de modele...">
-                        <TextBox.Background>
-                            <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
-                        </TextBox.Background>
-                        <TextBox.Style>
-                            <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                                <Style.Resources>
-                                    <Style TargetType="Border">
-                                        <Setter Property="CornerRadius" Value="10"/>
+                                <TextBox.Background>
+                                    <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
+                                </TextBox.Background>
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <Style.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                <VisualBrush.Visual>
+                                                    <Label Content="Rechercher par nom de modele..." Opacity="0.5" FontSize="14" />
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Style.Resources>
+                                        <Style.Triggers>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="Text" Value="{x:Static sys:String.Empty}"/>
+                                                    <Condition Property="IsFocused"  Value="False"/>
+                                                </MultiTrigger.Conditions>
+                                                <MultiTrigger.Setters>
+                                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                                </MultiTrigger.Setters>
+                                            </MultiTrigger>
+                                        </Style.Triggers>
                                     </Style>
-                                    <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                        <VisualBrush.Visual>
-                                            <Label Content="Rechercher par nom de modele..." Opacity="0.5" FontSize="14" />
-                                        </VisualBrush.Visual>
-                                    </VisualBrush>
-                                </Style.Resources>
-                                <Style.Triggers>
-                                    <MultiTrigger>
-                                        <MultiTrigger.Conditions>
-                                            <Condition Property="Text" Value="{x:Static sys:String.Empty}"/>
-                                            <Condition Property="IsFocused"  Value="False"/>
-                                        </MultiTrigger.Conditions>
-                                        <MultiTrigger.Setters>
-                                            <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                        </MultiTrigger.Setters>
-                                    </MultiTrigger>
-                                </Style.Triggers>
-                            </Style>
-                        </TextBox.Style>
+                                </TextBox.Style>
 
-                    </TextBox>
+                            </TextBox>
 
-                    <StackPanel Grid.Row="2" Margin="10,10,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
-                        <Button x:Name="commandesModifierButton" Margin="5,0" Padding="5" Content="Modifier"
+                            <StackPanel Grid.Row="1" Margin="10,10,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button x:Name="commandesModifierButton" Margin="5,0" Padding="5" Content="Modifier"
                                 Foreground="White" Background="#a7a7a7" Click="commandesModifierButton_Click" >
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsFocused" Value="true">
-                                            <Setter Property="Background" Value="Black"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Resources>
-                        </Button>
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsFocused" Value="true">
+                                                    <Setter Property="Background" Value="Black"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Resources>
+                                </Button>
 
-                        <Button Margin="5,0" Padding="5" Content="Supprimer"
-                                Foreground="White" Background="#c14141">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsFocused" Value="true">
-                                            <Setter Property="Background" Value="Black"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Resources>
-                        </Button>
+                                <Button x:Name="cancelOrderButton" Margin="5,0" Padding="5" Content="Annuler"
+                                Foreground="White" Background="#c14141" Click="cancelOrderButton_Click">
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsFocused" Value="true">
+                                                    <Setter Property="Background" Value="Black"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Resources>
+                                </Button>
 
-                        <Button Margin="5,0" Padding="5" Content="Ajouter"
+                                <Button x:Name="deleteOrderButton" Margin="5,0" Padding="5" Content="Supprimer"
+                                Foreground="White" Background="#c14141" Click="deleteOrderButton_Click">
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsFocused" Value="true">
+                                                    <Setter Property="Background" Value="Black"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Resources>
+                                </Button>
+
+                                <Button x:Name="addOrderButton" Margin="5,0" Padding="5" Content="Ajouter"
                                 Foreground="White" Background="#6abb74">
-                            <Button.Resources>
-                                <Style TargetType="Border">
-                                    <Setter Property="CornerRadius" Value="10"/>
-                                    <Style.Triggers>
-                                        <Trigger Property="IsFocused" Value="true">
-                                            <Setter Property="Background" Value="Black"/>
-                                        </Trigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </Button.Resources>
-                        </Button>
-                    </StackPanel>
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsFocused" Value="true">
+                                                    <Setter Property="Background" Value="Black"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Resources>
+                                </Button>
+                            </StackPanel>
 
-                    <DataGrid x:Name="commandesDataGrid" Grid.Row="3" Grid.Column="0" Margin="10" 
-                              IsReadOnly="True" ItemsSource="{Binding Commandes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                              SelectedItem="{Binding SelectedCommande, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
-                              ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All">
-                        <DataGrid.Resources>
-                            <Style TargetType="DataGridRow">
-                                <EventSetter Event="MouseDoubleClick" Handler="commandesDataGridRow_MouseDoubleClick"/>
-                            </Style>
-                        </DataGrid.Resources>
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
-                            <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ClientCommande}"/>
-                            <DataGridTextColumn Width="*" Header="Adresse" Binding="{Binding AdresseLivraison}"/>
-                            <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date effectuée" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
-                            <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date à faire pour" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
-                            <DataGridTextColumn Width="*" Header="Statut" Binding="{Binding Statut}"/>
-                        </DataGrid.Columns>
-                    </DataGrid>
-                </Grid>
+                            <DataGrid Grid.Row="2" Grid.Column="0" Margin="10" 
+                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      ItemsSource="{Binding Commandes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedItem="{Binding SelectedCommande, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseDoubleClick" Handler="commandesModifierButton_Click"/>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
+                                    <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ClientCommande}"/>
+                                    <DataGridTextColumn Width="*" Header="Adresse" Binding="{Binding AdresseLivraison}"/>
+                                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date effectuée" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
+                                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date à faire pour" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
+                                    <DataGridTextColumn Width="*" Header="Statut" Binding="{Binding Statut}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                    <!--#endregion-->
+
+                    <!--#region En préparation-->
+                    <TabItem Height="50" VerticalAlignment="Top">
+                        <TabItem.Header>
+                            <Label Grid.Row="0" Margin="10,10,10,0" Content="En préparation" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
+                        </TabItem.Header>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBox Grid.Row="0" Padding="5" Margin="10,10,10,0"
+                             Text="Rechercher par nom de modele...">
+                                <TextBox.Background>
+                                    <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
+                                </TextBox.Background>
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <Style.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                <VisualBrush.Visual>
+                                                    <Label Content="Rechercher par nom de modele..." Opacity="0.5" FontSize="14" />
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Style.Resources>
+                                        <Style.Triggers>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="Text" Value="{x:Static sys:String.Empty}"/>
+                                                    <Condition Property="IsFocused"  Value="False"/>
+                                                </MultiTrigger.Conditions>
+                                                <MultiTrigger.Setters>
+                                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                                </MultiTrigger.Setters>
+                                            </MultiTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+
+                            </TextBox>
+
+                            <StackPanel Grid.Row="1" Margin="10,10,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
+                                <Button Margin="5,0" Padding="5" Content="Modifier"
+                                        Foreground="White" Background="#a7a7a7" Click="commandesToDoModifierButton_Click" >
+                                    <Button.Resources>
+                                        <Style TargetType="Border">
+                                            <Setter Property="CornerRadius" Value="10"/>
+                                            <Style.Triggers>
+                                                <Trigger Property="IsFocused" Value="true">
+                                                    <Setter Property="Background" Value="Black"/>
+                                                </Trigger>
+                                            </Style.Triggers>
+                                        </Style>
+                                    </Button.Resources>
+                                </Button>
+                            </StackPanel>
+
+                            <DataGrid x:Name="ordersToPrepare" Grid.Row="2" Grid.Column="0" Margin="10" 
+                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      ItemsSource="{Binding CommandesPrep, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedItem="{Binding SelectedCommandeToDo, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseDoubleClick" Handler="commandesToDoModifierButton_Click"/>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
+                                    <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ClientCommande}"/>
+                                    <DataGridTextColumn Width="*" Header="Adresse" Binding="{Binding AdresseLivraison}"/>
+                                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date effectuée" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
+                                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date à faire pour" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
+                                    <DataGridTextColumn Width="*" Header="Statut" Binding="{Binding Statut}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                    <!--#endregion-->
+
+                    <!--#region Done-->
+                    <TabItem Height="50" VerticalAlignment="Top">
+                        <TabItem.Header>
+                            <Label Grid.Row="0" Margin="10,10,10,0" Content="Terminées" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
+                        </TabItem.Header>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBox Grid.Row="0" Padding="5" Margin="10,10,10,0"
+                             Text="Rechercher par nom de modele..." Grid.ColumnSpan="2">
+                                <TextBox.Background>
+                                    <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
+                                </TextBox.Background>
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <Style.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                <VisualBrush.Visual>
+                                                    <Label Content="Rechercher par nom de modele..." Opacity="0.5" FontSize="14" />
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Style.Resources>
+                                        <Style.Triggers>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="Text" Value="{x:Static sys:String.Empty}"/>
+                                                    <Condition Property="IsFocused"  Value="False"/>
+                                                </MultiTrigger.Conditions>
+                                                <MultiTrigger.Setters>
+                                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                                </MultiTrigger.Setters>
+                                            </MultiTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+
+                            </TextBox>
+
+                            <DataGrid x:Name="doneOrdersDatagrid" Grid.Row="1" Grid.Column="0" Margin="10"
+                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      ItemsSource="{Binding CommandesDone, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedItem="{Binding SelectedCommandeDone, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseDoubleClick" Handler="commandesDoneModifierButton_Click"/>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
+                                    <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ClientCommande}"/>
+                                    <DataGridTextColumn Width="*" Header="Adresse" Binding="{Binding AdresseLivraison}"/>
+                                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date effectuée" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
+                                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date à faire pour" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
+                                    <DataGridTextColumn Width="*" Header="Statut" Binding="{Binding Statut}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                    <!--#endregion-->
+
+                    <!--#region Annulées-->
+                    <TabItem Height="50" VerticalAlignment="Top">
+                        <TabItem.Header>
+                            <Label Grid.Row="0" Margin="10,10,10,0" Content="Annulées" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
+                        </TabItem.Header>
+
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <TextBox Grid.Row="0" Padding="5" Margin="10,10,10,0"
+                             Text="Rechercher par nom de modele...">
+                                <TextBox.Background>
+                                    <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
+                                </TextBox.Background>
+                                <TextBox.Style>
+                                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
+                                        <Style.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                            </Style>
+                                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
+                                                <VisualBrush.Visual>
+                                                    <Label Content="Rechercher par nom de modele..." Opacity="0.5" FontSize="14" />
+                                                </VisualBrush.Visual>
+                                            </VisualBrush>
+                                        </Style.Resources>
+                                        <Style.Triggers>
+                                            <MultiTrigger>
+                                                <MultiTrigger.Conditions>
+                                                    <Condition Property="Text" Value="{x:Static sys:String.Empty}"/>
+                                                    <Condition Property="IsFocused"  Value="False"/>
+                                                </MultiTrigger.Conditions>
+                                                <MultiTrigger.Setters>
+                                                    <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
+                                                </MultiTrigger.Setters>
+                                            </MultiTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBox.Style>
+
+                            </TextBox>
+
+                            <DataGrid x:Name="cancelledOrdersDatagrid" Grid.Row="1" Grid.Column="0" Margin="10" 
+                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      ItemsSource="{Binding CommandesAnnul, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedItem="{Binding SelectedCommandeCancelled, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseDoubleClick" Handler="commandesCancelledModifierButton_Click"/>
+                                    </Style>
+                                </DataGrid.Resources>
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
+                                    <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ClientCommande}"/>
+                                    <DataGridTextColumn Width="*" Header="Adresse" Binding="{Binding AdresseLivraison}"/>
+                                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date effectuée" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
+                                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date à faire pour" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
+                                    <DataGridTextColumn Width="*" Header="Statut" Binding="{Binding Statut}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                    </TabItem>
+                    <!--#endregion-->
+                </TabControl>
 
             </TabItem>
             <!--#endregion-->

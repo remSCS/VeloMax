@@ -100,6 +100,39 @@ namespace ApplicationVeloMax.Views
             }
         }
 
+        private ObservableCollection<Commande> _commandesAnnul;
+        public ObservableCollection<Commande> CommandesAnnul
+        {
+            get { return _commandesAnnul; }
+            set
+            {
+                _commandesAnnul = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("CommandesAnnul"));
+            }
+        }
+
+        private ObservableCollection<Commande> _commandesPrep;
+        public ObservableCollection<Commande> CommandesPrep
+        {
+            get { return _commandesPrep; }
+            set
+            {
+                _commandesPrep = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("CommandesPrep"));
+            }
+        }
+
+        private ObservableCollection<Commande> _commandesDone;
+        public ObservableCollection<Commande> CommandesDone
+        {
+            get { return _commandesDone; }
+            set
+            {
+                _commandesDone = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("CommandesDone"));
+            }
+        }
+
         private Commande _selectedCommande = new Commande();
         public Commande SelectedCommande
         {
@@ -107,7 +140,42 @@ namespace ApplicationVeloMax.Views
             set
             {
                 _selectedCommande = value;
+                if(SelectedCommande != null && CommandesPrep.Contains(SelectedCommande)) cancelOrderButton.Visibility = Visibility.Visible;
+                else cancelOrderButton.Visibility = Visibility.Hidden;
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedCommande"));
+            }
+        }
+
+        private Commande _selectedCommandeCancelled = new Commande();
+        public Commande SelectedCommandeCancelled
+        {
+            get { return _selectedCommandeCancelled; }
+            set
+            {
+                _selectedCommandeCancelled = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedCommandeCancelled"));
+            }
+        }
+
+        private Commande _selectedCommandeToDo = new Commande();
+        public Commande SelectedCommandeToDo
+        {
+            get { return _selectedCommandeToDo; }
+            set
+            {
+                _selectedCommandeToDo = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedCommandeToDo"));
+            }
+        }
+
+        private Commande _selectedCommandeDone = new Commande();
+        public Commande SelectedCommandeDone
+        {
+            get { return _selectedCommandeDone; }
+            set
+            {
+                _selectedCommandeDone = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedCommandeDone"));
             }
         }
         #endregion
@@ -211,8 +279,8 @@ namespace ApplicationVeloMax.Views
         {
             InitializeComponent();
 
-            new DataAccess("SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
-            //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
+            //new DataAccess("SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
+            new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
             //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=root;PASSWORD=root");
 
             //var watch = System.Diagnostics.Stopwatch.StartNew();
@@ -228,6 +296,9 @@ namespace ApplicationVeloMax.Views
             Grandeurs = new ObservableCollection<Grandeur>(Grandeur.Ensemble);
             LignesProduits = new ObservableCollection<LigneProduit>(LigneProduit.Ensemble);
             Commandes = new ObservableCollection<Commande>(Commande.Ensemble);
+            CommandesAnnul = new ObservableCollection<Commande>(Commande.EnsembleAnnul);
+            CommandesPrep = new ObservableCollection<Commande>(Commande.EnsemblePrep);
+            CommandesDone = new ObservableCollection<Commande>(Commande.EnsembleDone);
             PiecesDetachees = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble);
             Fournisseurs = new ObservableCollection<Fournisseur>(Fournisseur.Ensemble);
             Fidelios = new ObservableCollection<Fidelio>(Fidelio.Ensemble);
@@ -235,9 +306,52 @@ namespace ApplicationVeloMax.Views
         }
 
         #region Détails Commande
-        private void commandesDataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new CommandeDetailView(SelectedCommande).ShowDialog();
+        private void commandesModifierButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CheckIfSelected(SelectedCommande)) new CommandeDetailView(SelectedCommande).ShowDialog();
+            else MessageBox.Show("Veuillez choisir une commande");
+        }
 
-        private void commandesModifierButton_Click(object sender, RoutedEventArgs e) => new CommandeDetailView(SelectedCommande).ShowDialog();
+        private void commandesDoneModifierButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CheckIfSelected(SelectedCommandeDone)) new CommandeDetailView(SelectedCommandeDone).ShowDialog();
+            else MessageBox.Show("Veuillez choisir une commande");
+        }
+
+        private void commandesCancelledModifierButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CheckIfSelected(SelectedCommandeCancelled)) new CommandeDetailView(SelectedCommandeCancelled).ShowDialog();
+            else MessageBox.Show("Veuillez choisir une commande");
+        }
+
+        private void commandesToDoModifierButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (CheckIfSelected(SelectedCommandeToDo)) new CommandeDetailView(SelectedCommandeToDo).ShowDialog();
+            else MessageBox.Show("Veuillez choisir une commande");
+        }
+
+        private void deleteOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedCommande == null || !Commande.Ensemble.Contains(SelectedCommande)) MessageBox.Show("Veuillez sélectionner une commande à supprimer.");
+            else
+            {
+                MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir défnitivement supprimer cette commande ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if (res == MessageBoxResult.Yes)
+                {
+                    DataAccess.RemoveFromOrders(SelectedCommande);
+                    Commandes = new ObservableCollection<Commande>(Commande.Ensemble);
+                    CommandesAnnul = new ObservableCollection<Commande>(Commande.EnsembleAnnul);
+                    CommandesPrep = new ObservableCollection<Commande>(Commande.EnsemblePrep);
+                    CommandesDone = new ObservableCollection<Commande>(Commande.EnsembleDone);
+                    MessageBox.Show("Modele supprimé");
+                }
+            }
+        }
+
+        private void cancelOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
         #endregion
 
         private void removeModeleButton_Click(object sender, RoutedEventArgs e)
@@ -310,5 +424,12 @@ namespace ApplicationVeloMax.Views
             }
         }
         #endregion
+
+        private bool CheckIfSelected(object input)
+        {
+            bool correct = false;
+            if (input != null) correct = true;
+            return correct;
+        }
     }
 }

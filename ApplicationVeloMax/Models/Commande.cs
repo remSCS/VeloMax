@@ -10,7 +10,7 @@ namespace ApplicationVeloMax.Models
     {
         static private List<Commande> ensemble = new List<Commande>();
         static private List<Commande> ensemblePrep = new List<Commande>();
-        static private List<Commande> ensembleAnul = new List<Commande>();
+        static private List<Commande> ensembleAnnul = new List<Commande>();
         static private List<Commande> ensembleDone = new List<Commande>();
 
         private int id;
@@ -24,18 +24,18 @@ namespace ApplicationVeloMax.Models
 
         public Commande() { }
 
-        public Commande(int idAdresse, int idClient)
+        public Commande(int idAdresse, int idClient, int idStatut)
         {
             Adresse a = Adresse.Ensemble.Find(e => e.Id == idAdresse);
             if (a != null) this.AdresseLivraison = a;
             Client c = Client.Ensemble.Find(e => e.Id == idClient);
             if (c != null) this.ClientCommande = c;
             if (ensemble.Find(e => e.Id == this.Id) == null) ensemble.Add(this);
-            switch (this.Statut)
+            switch (idStatut)
             {
-                case "En cours de préparation": EnsemblePrep.Add(this); break;
-                case "Annulée": EnsembleAnul.Add(this); break;
-                case "Terminée": EnsembleDone.Add(this); break;
+                case 1: EnsemblePrep.Add(this); break;
+                case 2: EnsembleAnnul.Add(this); break;
+                case 3: EnsembleDone.Add(this); break;
             }
         }
 
@@ -97,9 +97,9 @@ namespace ApplicationVeloMax.Models
             get { return ensemblePrep; }
         }
 
-        static public List<Commande> EnsembleAnul
+        static public List<Commande> EnsembleAnnul
         {
-            get { return ensembleAnul; }
+            get { return ensembleAnnul; }
         }
                
         static public List<Commande> EnsembleDone
@@ -111,7 +111,7 @@ namespace ApplicationVeloMax.Models
         {
             Ensemble.Clear();
             EnsemblePrep.Clear();
-            EnsembleAnul.Clear();
+            EnsembleAnnul.Clear();
             EnsembleDone.Clear();
         }
     }
