@@ -21,6 +21,7 @@ using ApplicationVeloMax.ViewModels;
 using ApplicationVeloMax.Views.Commandes;
 using ApplicationVeloMax.Views.Modeles;
 using ApplicationVeloMax.Views.Pieces;
+using ApplicationVeloMax.Views.Stock;
 
 namespace ApplicationVeloMax.Views
 {
@@ -225,6 +226,17 @@ namespace ApplicationVeloMax.Views
             {
                 _selectedPiece = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedPiece"));
+            }
+        }
+
+        private PieceDetachee _selectedPieceStock;
+        public PieceDetachee SelectedPieceStock
+        {
+            get { return _selectedPieceStock; }
+            set
+            {
+                _selectedPieceStock = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedPieceStock"));
             }
         }
         #endregion
@@ -542,6 +554,12 @@ namespace ApplicationVeloMax.Views
             {
                 PiecesDetachees = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble);
             }
+        }
+
+        private void PieceStockDetail_Click(object sender, RoutedEventArgs e)
+        {
+            new StockPieceFournisseurs(SelectedPieceStock).ShowDialog();
+            
         }
         #endregion
 

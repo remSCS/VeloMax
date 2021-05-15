@@ -1,0 +1,30 @@
+﻿<Window x:Class="ApplicationVeloMax.Views.Stock.StockPieceFournisseurs"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ApplicationVeloMax.Views.Stock"
+        mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="StockPieceFournisseurs" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Content="{Binding PieceADetailler.Nom}"
+               FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
+
+        <DataGrid  Margin="10,0,10,10" 
+                                IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                                      ItemsSource="{Binding Fournisseurs, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="auto" Header="SIRET"  Binding="{Binding FournisseurPieceDetachee.Siret}"/>
+                <DataGridTextColumn Width="*" Header="Fournisseur"  Binding="{Binding FournisseurPieceDetachee.Nom}"/>
+                <DataGridTextColumn Width="*" Header="Contact"  Binding="{Binding FournisseurPieceDetachee.ContactFournisseur.FullName}"/>
+                <DataGridTextColumn Width="auto" Header="Délai" Binding="{Binding Delai}"/>
+                <DataGridTextColumn Width="auto" Header="Qualificatif"  Binding="{Binding FournisseurPieceDetachee.LibelleFournisseur}"/>
+            </DataGrid.Columns>
+        </DataGrid>
+    </Grid>
+</Window>

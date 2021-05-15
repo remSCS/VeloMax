@@ -140,6 +140,9 @@
     <Compile Include="Views\Pieces\EditPieceView.xaml.cs">
       <DependentUpon>EditPieceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Stock\StockPieceFournisseurs.xaml.cs">
+      <DependentUpon>StockPieceFournisseurs.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Adresse.cs" />
@@ -237,6 +240,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pieces\EditPieceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Stock\StockPieceFournisseurs.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

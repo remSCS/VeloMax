@@ -413,7 +413,13 @@
                             
                             <DataGrid  Margin="10,0,10,10" Grid.Column="1" Grid.Row="1"
                                 IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
-                                      ItemsSource="{Binding PiecesDetacheesStock, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
+                                      ItemsSource="{Binding PiecesDetacheesStock, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                                      SelectedItem="{Binding SelectedPieceStock, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseDoubleClick" Handler="PieceStockDetail_Click"/>
+                                    </Style>
+                                </DataGrid.Resources>
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
                                     <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
