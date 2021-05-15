@@ -44,21 +44,20 @@ namespace ApplicationVeloMax.Views.Fidelios
 
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-            int id;
-            string nom;
-            string description;
-            decimal cout;
-            decimal rabais;
-            int duree;
-
+            int id = SelectedFidelio.Id;
+            string nom = SelectedFidelio.Nom;
+            string description = SelectedFidelio.Description;
+            decimal cout = SelectedFidelio.Cout;
+            decimal rabais = SelectedFidelio.Rabais;
+            int duree = SelectedFidelio.DureeJours;
             try
             {
-                id = SelectedFidelio.Id;
-                nom = SelectedFidelio.Nom;
-                description = SelectedFidelio.Description;
-                cout = SelectedFidelio.Cout;
-                rabais = SelectedFidelio.Rabais;
-                duree = SelectedFidelio.DureeJours;
+                id = Convert.ToInt32(idTb.Text);
+                nom = nomTb.Text;
+                description = descTb.Text;
+                cout = Convert.ToDecimal(coutTb.Text);
+                rabais = Convert.ToDecimal(rabaisTb.Text);
+                duree = Convert.ToInt32(dureeTb.Text);
             }
             catch (Exception ex)
             {

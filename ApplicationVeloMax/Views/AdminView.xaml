@@ -745,8 +745,8 @@
                                     </Button.Resources>
                                 </Button>
 
-                                <Button Margin="5,0" Padding="5" Content="Ajouter"
-                                Foreground="White" Background="#6abb74">
+                                <Button Name="addFidelioButton" Margin="5,0" Padding="5" Content="Ajouter"
+                                Foreground="White" Background="#6abb74" Click="addFidelioButton_Click">
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="10"/>
@@ -764,6 +764,11 @@
                                       IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
                                       ItemsSource="{Binding Fidelios, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedItem="{Binding SelectedFidelio, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseDoubleClick" Handler="editFidelioButton_Click"/>
+                                    </Style>
+                                </DataGrid.Resources>
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
                                     <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>

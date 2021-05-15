@@ -335,17 +335,9 @@ namespace ApplicationVeloMax.Views
         public AdminView()
         {
             InitializeComponent();
-
-            new DataAccess("SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
-            //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
+            //new DataAccess("SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
+            new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
             //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=root;PASSWORD=root");
-
-            //var watch = System.Diagnostics.Stopwatch.StartNew();
-            //DataAccess.RefreshDBUsingSP();
-            //watch.Stop();
-            //var elapsedMs = watch.ElapsedMilliseconds;
-            //MessageBox.Show($"{elapsedMs}ms to get data from DB as localhost");
-
             RefreshProperties();
         }
 
@@ -483,24 +475,8 @@ namespace ApplicationVeloMax.Views
         #endregion
 
         #region Clients
-        private void supprimerClientButtons_Click(object sender, RoutedEventArgs e)
-        {
-            if (SelectedClient == null || !Clients.Contains(SelectedClient)) MessageBox.Show("Veuillez sélectionner un client à supprimer.");
-            else
-            {
-                MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir supprimer ce client ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-                if (res == MessageBoxResult.Yes)
-                {
-                    if (DataAccess.RemoveFromClients(SelectedClient))
-                    {
-                        Clients = new ObservableCollection<Client>(Client.Ensemble);
-                        MessageBox.Show("Client supprimé");
-                    }
-                    else MessageBox.Show("Impossible de supprimer un client ayant un historique de commande.");
-                }
-            }
-        }
 
+        #region Fidelio
         private void removeFidelioButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedFidelio == null || !Fidelios.Contains(SelectedFidelio)) MessageBox.Show("Veuillez sélectionner un type de compte Fidélio.");
@@ -529,6 +505,37 @@ namespace ApplicationVeloMax.Views
                 RefreshProperties();
             }
         }
+
+        private void addFidelioButton_Click(object sender, RoutedEventArgs e)
+        {
+            new AddFidelioView().ShowDialog();
+            DataAccess.RefreshDBUsingSP();
+            RefreshProperties();
+        }
+        #endregion
+
+        #region Particuliers
+        private void supprimerClientButtons_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedClient == null || !Clients.Contains(SelectedClient)) MessageBox.Show("Veuillez sélectionner un client à supprimer.");
+            else
+            {
+                MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir supprimer ce client ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if (res == MessageBoxResult.Yes)
+                {
+                    if (DataAccess.RemoveFromClients(SelectedClient))
+                    {
+                        Clients = new ObservableCollection<Client>(Client.Ensemble);
+                        MessageBox.Show("Client supprimé");
+                    }
+                    else MessageBox.Show("Impossible de supprimer un client ayant un historique de commande.");
+                }
+            }
+        }
+        #endregion
+
+        #region Profesionnels
+        #endregion
         #endregion
 
         #region Stocks
@@ -617,5 +624,7 @@ namespace ApplicationVeloMax.Views
             Fidelios = new ObservableCollection<Fidelio>(Fidelio.Ensemble);
             Clients = new ObservableCollection<Client>(Client.Ensemble);
         }
+
+        
     }
 }

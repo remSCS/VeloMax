@@ -680,6 +680,29 @@ namespace ApplicationVeloMax.ViewModels
             }
             return toReturn;
         }
+
+        static public bool AddFidelio(Fidelio toAdd)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                if (Fidelio.Ensemble.Exists(m => m.Id == toAdd.Id))
+                {
+                    connexion.Open();
+                    MySqlCommand com = new MySqlCommand("CreateFidelio", connexion) { CommandType = CommandType.StoredProcedure };
+                    com.Parameters.Add("@id", MySqlDbType.Int64).Value = toAdd.Id;
+                    com.Parameters.Add("@nom", MySqlDbType.VarChar).Value = toAdd.Nom;
+                    com.Parameters.Add("@d", MySqlDbType.VarChar).Value = toAdd.Description;
+                    com.Parameters.Add("@cout", MySqlDbType.Decimal).Value = toAdd.Cout;
+                    com.Parameters.Add("@rabais", MySqlDbType.Decimal).Value = toAdd.Rabais;
+                    com.Parameters.Add("@duree", MySqlDbType.Int64).Value = toAdd.DureeJours;
+                    try { com.ExecuteReader(); }
+                    catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+                    RefreshDBUsingSP();
+                }
+            }
+            return toReturn;
+        }
         #endregion
 
         static public void RefreshDBUsingSP()
