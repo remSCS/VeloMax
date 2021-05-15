@@ -128,8 +128,14 @@
     <Compile Include="Views\Commandes\CommandeDetailView.xaml.cs">
       <DependentUpon>CommandeDetailView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Modeles\AddModeleView.xaml.cs">
+      <DependentUpon>AddModeleView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Modeles\EditModeleView.xaml.cs">
       <DependentUpon>EditModeleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pieces\AddPieceView.xaml.cs">
+      <DependentUpon>AddPieceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pieces\EditPieceView.xaml.cs">
       <DependentUpon>EditPieceView.xaml</DependentUpon>
@@ -218,7 +224,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Modeles\AddModeleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Modeles\EditModeleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pieces\AddPieceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
