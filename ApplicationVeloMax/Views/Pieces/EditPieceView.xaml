@@ -30,22 +30,23 @@
 
         <StackPanel Orientation="Vertical" Margin="5" Grid.Column="1">
             <TextBox x:Name="idTb" Margin="5" Height="25" IsReadOnly="True" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedPiece.Id, Mode=OneWay}" Background="#FF9B9B9B"/>
+                     Text="{Binding SelectedPiece.Id, Mode=TwoWay}" Background="#FF9B9B9B"/>
 
             <TextBox x:Name="refTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedPiece.Reference, Mode=OneWay}"/>
+                     Text="{Binding SelectedPiece.Reference, Mode=TwoWay}"/>
 
             <TextBox  x:Name="nomTb" Margin="5" Height="25" VerticalContentAlignment="Center"
                       Text="{Binding SelectedPiece.Nom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             
             <TextBox x:Name="descTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedPiece.Description, Mode=OneWay}"/>
+                     Text="{Binding SelectedPiece.Description, Mode=TwoWay}"/>
 
             <DatePicker x:Name="dateETb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                        Text="{Binding SelectedPiece.DateE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        SelectedDate="{Binding SelectedPiece.DateE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                        SelectedDateChanged="dateETb_SelectedDateChanged"/>
 
             <DatePicker x:Name="dateSTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                        Text="{Binding SelectedPiece.DateS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        SelectedDate="{Binding SelectedPiece.DateS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 

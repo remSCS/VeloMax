@@ -25,8 +25,6 @@ namespace ApplicationVeloMax.Views.Pieces
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-
-
         private PieceDetachee _piece;
         public PieceDetachee Piece
         {
