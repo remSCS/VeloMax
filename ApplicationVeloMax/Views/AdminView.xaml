@@ -380,6 +380,48 @@
                             <Label Grid.Row="0" Margin="10,10,10,0" Content="A recommander" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
                         </TabItem.Header>
 
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="*"/>
+                            </Grid.ColumnDefinitions>
+
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="auto"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Label Content="Vélos à recommander" 
+                                   FontFamily="Helvetica" FontSize="16" FontWeight="Bold"
+                                   Grid.Row="0" Grid.Column="0" 
+                                   Margin="10,0,0,0"/>
+                            
+                            <DataGrid  Margin="10,0,10,10" Grid.Column="0" Grid.Row="1"
+                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                                      ItemsSource="{Binding ModelesStock, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
+                                    <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
+                                    <DataGridTextColumn Width="auto" Header="Quantité" Binding="{Binding Quantite}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+
+                            <Label Content="Pièces à recommander" 
+                                   FontFamily="Helvetica" FontSize="16" FontWeight="Bold"
+                                   Grid.Row="0" Grid.Column="1" 
+                                   Margin="10,0,0,0"/>
+                            
+                            <DataGrid  Margin="10,0,10,10" Grid.Column="1" Grid.Row="1"
+                                IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                                      ItemsSource="{Binding PiecesDetacheesStock, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
+                                    <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
+                                    <DataGridTextColumn Width="auto" Header="Quantité" Binding="{Binding Quantite}"/>
+                                </DataGrid.Columns>
+                            </DataGrid>
+                        </Grid>
+                        
 
                     </TabItem>
                     <!--#endregion-->
