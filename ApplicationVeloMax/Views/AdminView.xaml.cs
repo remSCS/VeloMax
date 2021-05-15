@@ -429,6 +429,20 @@ namespace ApplicationVeloMax.Views
                 RefreshProperties();
             }
         }
+
+        private void addPartButton_Click(object sender, RoutedEventArgs e)
+        {
+            new AddPieceView().ShowDialog();
+            DataAccess.RefreshDBUsingSP();
+            RefreshProperties();
+        }
+
+        private void addModeleButton_Click(object sender, RoutedEventArgs e)
+        {
+            new AddModeleView().ShowDialog();
+            DataAccess.RefreshDBUsingSP();
+            RefreshProperties();
+        }
         #endregion
 
         #region Clients

@@ -133,8 +133,8 @@
                                         </Style>
                                     </Button.Resources>
                                 </Button>
-                                <Button Margin="5,0" Padding="5" Content="Ajouter"
-                                Foreground="White" Background="#6abb74">
+                                <Button x:Name="addModeleButton" Margin="5,0" Padding="5" Content="Ajouter"
+                                Foreground="White" Background="#6abb74" Click="addModeleButton_Click">
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="10"/>
@@ -250,8 +250,8 @@
                                     </Button.Resources>
                                 </Button>
 
-                                <Button Margin="5,0" Padding="5" Content="Ajouter"
-                                Foreground="White" Background="#6abb74">
+                                <Button x:Name="addPartButton" Margin="5,0" Padding="5" Content="Ajouter"
+                                Foreground="White" Background="#6abb74" Click="addPartButton_Click">
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="10"/>

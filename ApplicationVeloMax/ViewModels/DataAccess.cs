@@ -606,6 +606,33 @@ namespace ApplicationVeloMax.ViewModels
         }
         #endregion
 
+        #region Adding data to server
+        static public bool AddPiece(PieceDetachee toAdd)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                if (PieceDetachee.Ensemble.Exists(p => p.Id == toAdd.Id) == true)
+                {
+                    connexion.Open();
+                    MySqlCommand com = new MySqlCommand("CreatePiece", connexion) { CommandType = CommandType.StoredProcedure };
+                    com.Parameters.Add("@id", MySqlDbType.Int64).Value = toAdd.Id;
+                    com.Parameters.Add("@ref", MySqlDbType.VarChar).Value = toAdd.Reference;
+                    com.Parameters.Add("@nom", MySqlDbType.VarChar).Value = toAdd.Nom;
+                    com.Parameters.Add("@d", MySqlDbType.VarChar).Value = toAdd.Description;
+                    com.Parameters.Add("@de", MySqlDbType.Date).Value = toAdd.DateE;
+                    com.Parameters.Add("@ds", MySqlDbType.Date).Value = toAdd.DateS;
+                    com.Parameters.Add("@qte", MySqlDbType.Int64).Value = toAdd.Quantite;
+                    try { com.ExecuteReader(); }
+                    catch { return false; }
+                    RefreshDBUsingSP();
+                }
+                else toReturn = false;
+            }
+            return toReturn;
+        }
+        #endregion
+
         static public void RefreshDBUsingSP()
         {
             Adresse.Ensemble.Clear();
