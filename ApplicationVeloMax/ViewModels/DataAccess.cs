@@ -359,8 +359,8 @@ namespace ApplicationVeloMax.ViewModels
                     int s = i.Field<int>("idStatut");
                     string str = "";
                     if (s == 1) str = "En cours de préparation";
-                    if (s == 2) str = "Annulée";
-                    if (s == 3) str = "Terminée";
+                    if (s == 2) str = "Terminée";
+                    if (s == 3) str = "Annulée";
                     new Commande(i.Field<int>("idAdresse"), i.Field<int>("idClient"), i.Field<int>("idStatut"))
                     {
                         Id = i.Field<int>("idCommande"),
@@ -369,8 +369,8 @@ namespace ApplicationVeloMax.ViewModels
                         Statut = str
                     };
                 }
-                Console.WriteLine(Commande.EnsembleAnnul); 
-        }
+                Console.WriteLine(Commande.EnsembleAnnul);
+            }
 
             using (var connexion = GetConnection())
             {
@@ -380,7 +380,7 @@ namespace ApplicationVeloMax.ViewModels
                 da.Fill(dt);
 
                 foreach (DataRow i in dt.Rows)
-                    for(int j = 0; j < i.Field<int>("quantite"); j++)
+                    for (int j = 0; j < i.Field<int>("quantite"); j++)
                         Commande.Ensemble.Find(c => c.Id == i.Field<int>("idCommande")).PiecesCommande.Add(PieceDetachee.Ensemble.Find(p => p.Id == i.Field<int>("idPiece")));
             }
 
@@ -395,7 +395,7 @@ namespace ApplicationVeloMax.ViewModels
                     for (int j = 0; j < i.Field<int>("quantite"); j++)
                         Commande.Ensemble.Find(c => c.Id == i.Field<int>("idCommande")).ModelesCommande.Add(Modele.Ensemble.Find(m => m.Id == i.Field<int>("idModele")));
             }
-            Console.WriteLine(Commande.EnsembleAnnul); 
+            Console.WriteLine(Commande.EnsembleAnnul);
         }
         #endregion
 
@@ -407,11 +407,28 @@ namespace ApplicationVeloMax.ViewModels
                 connexion.Open();
                 MySqlCommand com = new MySqlCommand("RemoveModele", connexion) { CommandType = CommandType.StoredProcedure };
                 com.Parameters.Add("@id", MySqlDbType.Int64).Value = toRemove.Id;
-                var reader = com.ExecuteReader();
+                try { com.ExecuteReader(); }
+                catch { return false; }
                 connexion.Close();
             }
             Modele.Ensemble.Clear();
             GetAllModelsUsingSP();
+            return true;
+        }
+
+        static public bool RemoveFromParts(PieceDetachee toRemove)
+        {
+            using (var connexion = GetConnection())
+            {
+                connexion.Open();
+                MySqlCommand com = new MySqlCommand("RemovePiece", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@id", MySqlDbType.Int64).Value = toRemove.Id;
+                try { com.ExecuteReader(); }
+                catch { return false; }
+                connexion.Close();
+            }
+            PieceDetachee.Ensemble.Clear();
+            GetAllPiecesDetacheesUsingSP();
             return true;
         }
 
@@ -425,7 +442,8 @@ namespace ApplicationVeloMax.ViewModels
                     connexion.Open();
                     MySqlCommand com = new MySqlCommand("RemoveClient", connexion) { CommandType = CommandType.StoredProcedure };
                     com.Parameters.Add("@id", MySqlDbType.Int64).Value = toRemove.Id;
-                    var reader = com.ExecuteReader();
+                    try { com.ExecuteReader(); }
+                    catch { return false; }
                     connexion.Close();
                     Client.Ensemble.Clear();
                     ClientPart.EnsembleParticuliers.Clear();
@@ -442,19 +460,52 @@ namespace ApplicationVeloMax.ViewModels
             bool toReturn = true;
             using (var connexion = GetConnection())
             {
-                if (Commande.Ensemble.Exists(c => c.ClientCommande.Id == toRemove.Id) == false)
+                if (Commande.Ensemble.Exists(c => c.Id == toRemove.Id) == true)
                 {
                     connexion.Open();
-                    MySqlCommand com = new MySqlCommand("RemoveOrder", connexion) { CommandType = CommandType.StoredProcedure };
+                    MySqlCommand com = new MySqlCommand("RemoveCommande", connexion) { CommandType = CommandType.StoredProcedure };
                     com.Parameters.Add("@id", MySqlDbType.Int64).Value = toRemove.Id;
-                    var reader = com.ExecuteReader();
-                    connexion.Close();
+                    try { com.ExecuteReader(); }
+                    catch { return false; }
+                     connexion.Close();
                     Commande.ClearEnsembles();
                     GetAllCommandesUsingSP();
                 }
                 else toReturn = false;
             }
             return toReturn;
+        }
+
+        static public bool RemoveFromFidelios(Fidelio toRemove)
+        {
+            using (var connexion = GetConnection())
+            {
+                connexion.Open();
+                MySqlCommand com = new MySqlCommand("RemoveFidelio", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@id", MySqlDbType.Int64).Value = toRemove.Id;
+                try { com.ExecuteReader(); }
+                catch { return false; }
+                connexion.Close();
+            }
+            Fidelio.Ensemble.Clear();
+            GetAllFideliosUsingSP();
+            return true;
+        }
+
+        static public bool RemoveFromFournisseurs(Fournisseur toRemove)
+        {
+            using (var connexion = GetConnection())
+            {
+                connexion.Open();
+                MySqlCommand com = new MySqlCommand("RemoveFournisseur", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@srt", MySqlDbType.Int64).Value = toRemove.Siret;
+                try { com.ExecuteReader(); }
+                catch { return false; }
+                connexion.Close();
+            }
+            Fournisseur.Ensemble.Clear();
+            GetAllFournisseursUsingSP();
+            return true;
         }
         #endregion
 
@@ -489,6 +540,27 @@ namespace ApplicationVeloMax.ViewModels
                 connexion.Close();
                 PieceDetachee.Ensemble.Clear();
                 GetAllPiecesDetacheesUsingSP();
+            }
+            return toReturn;
+        }
+
+        static public bool EditOrderStatus(Commande toRemove, int newStatusId)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                if (Commande.Ensemble.Exists(c => c.Id == toRemove.Id))
+                {
+                    connexion.Open();
+                    MySqlCommand com = new MySqlCommand("UpdateCommandeStatut", connexion) { CommandType = CommandType.StoredProcedure };
+                    com.Parameters.Add("@id", MySqlDbType.Int64).Value = toRemove.Id;
+                    com.Parameters.Add("@stat", MySqlDbType.Int64).Value = newStatusId;
+                    com.ExecuteReader();
+                    connexion.Close();
+                    Commande.ClearEnsembles();
+                    GetAllCommandesUsingSP();
+                }
+                else toReturn = false;
             }
             return toReturn;
         }

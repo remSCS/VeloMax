@@ -231,8 +231,8 @@
                                     </Button.Resources>
                                 </Button>
 
-                                <Button Margin="5,0" Padding="5" Content="Supprimer"
-                                Foreground="White" Background="#c14141">
+                                <Button x:Name="removePartButton" Margin="5,0" Padding="5" Content="Supprimer"
+                                Foreground="White" Background="#c14141" Click="removePartButton_Click">
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="10"/>
@@ -261,8 +261,9 @@
                             </StackPanel>
 
                             <DataGrid Grid.Row="2" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ItemsSource="{Binding PiecesDetachees, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                                      ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All">
+                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      ItemsSource="{Binding PiecesDetachees, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      SelectedItem="{Binding SelectedPiece, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="*" Header="Référence" Binding="{Binding Reference}"/>
                                     <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
@@ -672,8 +673,8 @@
                                     </Button.Resources>
                                 </Button>
 
-                                <Button Margin="5,0" Padding="5" Content="Supprimer"
-                                Foreground="White" Background="#c14141">
+                                <Button x:Name="removeFidelioButton" Margin="5,0" Padding="5" Content="Supprimer"
+                                Foreground="White" Background="#c14141" Click="removeFidelioButton_Click">
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="10"/>
@@ -702,8 +703,9 @@
                             </StackPanel>
 
                             <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ItemsSource="{Binding Fidelios, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                                      ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All">
+                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      ItemsSource="{Binding Fidelios, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                                      SelectedItem="{Binding SelectedFidelio, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
                                     <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
@@ -792,8 +794,8 @@
                             </Button.Resources>
                         </Button>
 
-                        <Button Margin="5,0" Padding="5" Content="Supprimer"
-                                Foreground="White" Background="#c14141">
+                        <Button x:Name="removeFournisseurButton" Margin="5,0" Padding="5" Content="Supprimer"
+                                Foreground="White" Background="#c14141" Click="removeFournisseurButton_Click">
                             <Button.Resources>
                                 <Style TargetType="Border">
                                     <Setter Property="CornerRadius" Value="10"/>
@@ -822,8 +824,9 @@
                     </StackPanel>
 
                     <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ItemsSource="{Binding Fournisseurs, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                                      ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All">
+                              IsReadOnly="True"  ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                              ItemsSource="{Binding Fournisseurs, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
+                              SelectedItem="{Binding SelectedFournisseur, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" Header="SIRET" Binding="{Binding Siret}"/>
                             <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>

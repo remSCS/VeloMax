@@ -34,8 +34,8 @@ namespace ApplicationVeloMax.Models
             switch (idStatut)
             {
                 case 1: EnsemblePrep.Add(this); break;
-                case 2: EnsembleAnnul.Add(this); break;
-                case 3: EnsembleDone.Add(this); break;
+                case 2: EnsembleDone.Add(this); break;
+                case 3: EnsembleAnnul.Add(this); break;
             }
         }
 

@@ -48,7 +48,6 @@ namespace ApplicationVeloMax.Views
         }
         #endregion
 
-
         #region Adresses
         private ObservableCollection<Adresse> _adresses;
         public ObservableCollection<Adresse> Adresses
@@ -140,7 +139,7 @@ namespace ApplicationVeloMax.Views
             set
             {
                 _selectedCommande = value;
-                if(SelectedCommande != null && CommandesPrep.Contains(SelectedCommande)) cancelOrderButton.Visibility = Visibility.Visible;
+                if (SelectedCommande != null && CommandesPrep.Contains(SelectedCommande)) cancelOrderButton.Visibility = Visibility.Visible;
                 else cancelOrderButton.Visibility = Visibility.Hidden;
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedCommande"));
             }
@@ -215,6 +214,17 @@ namespace ApplicationVeloMax.Views
                 PropertyChanged(this, new PropertyChangedEventArgs("Fournisseurs"));
             }
         }
+
+        private Fournisseur _selectedFournisseur;
+        public Fournisseur SelectedFournisseur
+        {
+            get { return _selectedFournisseur; }
+            set
+            {
+                _selectedFournisseur = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedFournisseur"));
+            }
+        }
         #endregion
 
         #region Fidelios
@@ -228,6 +238,14 @@ namespace ApplicationVeloMax.Views
                 PropertyChanged(this, new PropertyChangedEventArgs("Fidelios"));
             }
         }
+
+        private Fidelio _selectedFidelio;
+        public Fidelio SelectedFidelio
+        {
+            get { return _selectedFidelio; }
+            set { _selectedFidelio = value; }
+        }
+
         #endregion
 
         #region Clients
@@ -289,23 +307,10 @@ namespace ApplicationVeloMax.Views
             //var elapsedMs = watch.ElapsedMilliseconds;
             //MessageBox.Show($"{elapsedMs}ms to get data from DB as localhost");
 
-            DataAccess.RefreshDBUsingSP();
-
-            Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
-            Adresses = new ObservableCollection<Adresse>(Adresse.Ensemble);
-            Grandeurs = new ObservableCollection<Grandeur>(Grandeur.Ensemble);
-            LignesProduits = new ObservableCollection<LigneProduit>(LigneProduit.Ensemble);
-            Commandes = new ObservableCollection<Commande>(Commande.Ensemble);
-            CommandesAnnul = new ObservableCollection<Commande>(Commande.EnsembleAnnul);
-            CommandesPrep = new ObservableCollection<Commande>(Commande.EnsemblePrep);
-            CommandesDone = new ObservableCollection<Commande>(Commande.EnsembleDone);
-            PiecesDetachees = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble);
-            Fournisseurs = new ObservableCollection<Fournisseur>(Fournisseur.Ensemble);
-            Fidelios = new ObservableCollection<Fidelio>(Fidelio.Ensemble);
-            Clients = new ObservableCollection<Client>(Client.Ensemble);
+            RefreshProperties();
         }
 
-        #region Détails Commande
+        #region Commandes
         private void commandesModifierButton_Click(object sender, RoutedEventArgs e)
         {
             if (CheckIfSelected(SelectedCommande)) new CommandeDetailView(SelectedCommande).ShowDialog();
@@ -343,17 +348,31 @@ namespace ApplicationVeloMax.Views
                     CommandesAnnul = new ObservableCollection<Commande>(Commande.EnsembleAnnul);
                     CommandesPrep = new ObservableCollection<Commande>(Commande.EnsemblePrep);
                     CommandesDone = new ObservableCollection<Commande>(Commande.EnsembleDone);
-                    MessageBox.Show("Modele supprimé");
+                    MessageBox.Show("Comande supprimée");
                 }
             }
         }
 
         private void cancelOrderButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (SelectedCommande == null || !Commande.Ensemble.Contains(SelectedCommande)) MessageBox.Show("Veuillez sélectionner une commande à supprimer.");
+            else
+            {
+                MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir annuler et archiver cette commande ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if (res == MessageBoxResult.Yes)
+                {
+                    DataAccess.EditOrderStatus(SelectedCommande, 3);
+                    Commandes = new ObservableCollection<Commande>(Commande.Ensemble);
+                    CommandesAnnul = new ObservableCollection<Commande>(Commande.EnsembleAnnul);
+                    CommandesPrep = new ObservableCollection<Commande>(Commande.EnsemblePrep);
+                    CommandesDone = new ObservableCollection<Commande>(Commande.EnsembleDone);
+                    MessageBox.Show("Commande annulée");
+                }
+            }
         }
         #endregion
 
+        #region Produits
         private void removeModeleButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedModele == null || !Modeles.Contains(SelectedModele)) MessageBox.Show("Veuillez sélectionner un modèle à supprimer.");
@@ -369,6 +388,26 @@ namespace ApplicationVeloMax.Views
             }
         }
 
+        private void removePartButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedPiece == null || !PiecesDetachees.Contains(SelectedPiece)) MessageBox.Show("Veuillez sélectionner une pièce à supprimer.");
+            else
+            {
+                MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir supprimer cette pièce ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if (res == MessageBoxResult.Yes)
+                {
+                    if (!DataAccess.RemoveFromParts(SelectedPiece)) MessageBox.Show("Cette pièce est utilisée ailleurs !");
+                    else
+                    {
+                        PiecesDetachees = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble);
+                        MessageBox.Show("Pièce supprimé");
+                    }
+                }
+            }
+        }
+        #endregion
+
+        #region Clients
         private void supprimerClientButtons_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedClient == null || !Clients.Contains(SelectedClient)) MessageBox.Show("Veuillez sélectionner un client à supprimer.");
@@ -386,6 +425,25 @@ namespace ApplicationVeloMax.Views
                 }
             }
         }
+
+        private void removeFidelioButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedFidelio == null || !Fidelios.Contains(SelectedFidelio)) MessageBox.Show("Veuillez sélectionner un type de compte Fidélio.");
+            else
+            {
+                MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir supprimer ce type de compte Fidélio ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if (res == MessageBoxResult.Yes)
+                {
+                    if (DataAccess.RemoveFromFidelios(SelectedFidelio))
+                    {
+                        Fidelios = new ObservableCollection<Fidelio>(Fidelio.Ensemble);
+                        MessageBox.Show("Fidélio supprimé");
+                    }
+                    else MessageBox.Show("Impossible de supprimer un client ayant un historique de commande. Voulez vous migrer les clients ayant ce type de compte ? (à faire)");
+                }
+            }
+        }
+        #endregion
 
         #region Stocks
         private void AddQuantiteButton_Click(object sender, RoutedEventArgs e)
@@ -425,11 +483,48 @@ namespace ApplicationVeloMax.Views
         }
         #endregion
 
+        #region Fournisseurs
+        private void removeFournisseurButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedFournisseur == null || !Fournisseurs.Contains(SelectedFournisseur)) MessageBox.Show("Veuillez sélectionner un fournisseur.");
+            else
+            {
+                MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir supprimer fournisseur ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if (res == MessageBoxResult.Yes)
+                {
+                    if (DataAccess.RemoveFromFournisseurs(SelectedFournisseur))
+                    {
+                        Fournisseurs = new ObservableCollection<Fournisseur>(Fournisseur.Ensemble);
+                        MessageBox.Show("Founrisseur supprimé");
+                    }
+                    else MessageBox.Show("Impossible de supprimer un fournisseur actif.");
+                }
+            }
+        }
+        #endregion
+
         private bool CheckIfSelected(object input)
         {
             bool correct = false;
             if (input != null) correct = true;
             return correct;
+        }
+
+        private void RefreshProperties()
+        {
+            DataAccess.RefreshDBUsingSP();
+            Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
+            Adresses = new ObservableCollection<Adresse>(Adresse.Ensemble);
+            Grandeurs = new ObservableCollection<Grandeur>(Grandeur.Ensemble);
+            LignesProduits = new ObservableCollection<LigneProduit>(LigneProduit.Ensemble);
+            Commandes = new ObservableCollection<Commande>(Commande.Ensemble);
+            CommandesAnnul = new ObservableCollection<Commande>(Commande.EnsembleAnnul);
+            CommandesPrep = new ObservableCollection<Commande>(Commande.EnsemblePrep);
+            CommandesDone = new ObservableCollection<Commande>(Commande.EnsembleDone);
+            PiecesDetachees = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble);
+            Fournisseurs = new ObservableCollection<Fournisseur>(Fournisseur.Ensemble);
+            Fidelios = new ObservableCollection<Fidelio>(Fidelio.Ensemble);
+            Clients = new ObservableCollection<Client>(Client.Ensemble);
         }
     }
 }
