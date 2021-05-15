@@ -1,0 +1,56 @@
+﻿<Window x:Class="ApplicationVeloMax.Views.Modeles.EditModeleView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ApplicationVeloMax.Converters"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="Edition Modèle - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="NoResize"
+        Height="330" Width="400" FontFamily="Helvetica" Background="#e4e4e4">
+    
+    <Grid Margin="0,0,0,-1">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="auto"/>
+        </Grid.RowDefinitions>
+
+        <StackPanel Orientation="Vertical" Margin="5" Grid.Column="0">
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Numéro du modèle"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Nom du modèle "/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Grandeur du modèle"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Prix unitaire du modèle"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Ligne produit du modèle"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Date d'introduction"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Date de sortie du marché"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Margin="5" Grid.Column="1">
+            <TextBox x:Name="idTb" Margin="5" Height="25" IsReadOnly="True" Text="{Binding SelectedModele.Id, Mode=OneWay}"/>
+            <TextBox x:Name="nomTb" Margin="5" Height="25" Text="{Binding SelectedModele.Nom, Mode=OneWay}"/>
+            <ComboBox x:Name="grandeurTb" Margin="5" Height="25" DisplayMemberPath="Nom"
+                      SelectedValue="{Binding SelectedModele.GrandeurModele, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding Grandeurs, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="prixTb" Margin="5" Height="25" Text="{Binding SelectedModele.PrixUnitaire, Mode=OneWay}"/>
+            <ComboBox x:Name="ligneTb" Margin="5" Height="25" DisplayMemberPath="Nom"
+                      SelectedValue="{Binding SelectedModele.LigneProduitModele, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                      ItemsSource="{Binding LignesProduits, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBox x:Name="dateETb" Margin="5" Height="25" Text="{Binding SelectedModele.DateE, StringFormat=dd/MM/yyyy, Mode=OneWay}"/>
+            <TextBox x:Name="dateSTb" Margin="5" Height="25" Text="{Binding SelectedModele.DateS, StringFormat=dd/MM/yyyy, Mode=OneWay}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                    HorizontalAlignment="Right">
+            <Button x:Name="saveButton" Padding="5" Margin="5" Content="Enregistrer les modifications"
+                    Click="saveButton_Click"/>
+            <Button x:Name="cancelButton" Padding="5" Margin="5" Content="Annuler"
+                    Click="cancelButton_Click"/>
+        </StackPanel>
+    </Grid>
+    
+</Window>
+<!--SelectedItem="{Binding SelectedModele.LigneProduitModele, Mode=OneWayToSource}"
+SelectedItem="{Binding SelectedModele.GrandeurModele, Mode=OneWayToSource}"-->

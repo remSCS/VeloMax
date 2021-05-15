@@ -19,6 +19,7 @@ using System.ComponentModel;
 using System.Collections.ObjectModel;
 using ApplicationVeloMax.ViewModels;
 using ApplicationVeloMax.Views.Commandes;
+using ApplicationVeloMax.Views.Modeles;
 
 namespace ApplicationVeloMax.Views
 {
@@ -403,6 +404,17 @@ namespace ApplicationVeloMax.Views
                         MessageBox.Show("Pièce supprimé");
                     }
                 }
+            }
+        }
+
+        private void editModeleButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedModele == null) MessageBox.Show("Veuillez sélectionner un modèle.");
+            else
+            {
+                new EditModeleView(SelectedModele).ShowDialog();
+                DataAccess.RefreshDBUsingSP();
+                RefreshProperties();
             }
         }
         #endregion

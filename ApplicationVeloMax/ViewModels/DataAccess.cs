@@ -564,10 +564,52 @@ namespace ApplicationVeloMax.ViewModels
             }
             return toReturn;
         }
-        #endregion
 
+        static public bool FullyEditModele(int id, string nom, Grandeur grandeur, decimal prixUnitaire, LigneProduit ligneproduit, DateTime dateE, DateTime dateS)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                if (Modele.Ensemble.Exists(m => m.Id == id))
+                {
+                    connexion.Open();
+                    MySqlCommand com = new MySqlCommand("EditModele", connexion) { CommandType = CommandType.StoredProcedure };
+                    com.Parameters.Add("@id", MySqlDbType.Int64).Value = id;
+                    com.Parameters.Add("@nom", MySqlDbType.VarChar).Value = nom;
+                    com.Parameters.Add("@idG", MySqlDbType.Int64).Value = Grandeur.Ensemble.Find(g => g.Id == grandeur.Id).Id;
+                    com.Parameters.Add("@prix", MySqlDbType.Decimal).Value = prixUnitaire;
+                    com.Parameters.Add("@idL", MySqlDbType.Int64).Value = LigneProduit.Ensemble.Find(l => l.Id == ligneproduit.Id).Id;
+                    com.Parameters.Add("@de", MySqlDbType.Date).Value = dateE;
+                    com.Parameters.Add("@ds", MySqlDbType.Date).Value = dateS;
+                    try { com.ExecuteReader(); }
+                    catch(Exception e) { MessageBox.Show(e.ToString()); return false; }
+                    connexion.Close();
+                    Modele.Ensemble.Clear();
+                    GetAllModelsUsingSP();
+                }
+            }
+            return toReturn;
+        }
+        #endregion
+        
+   
         static public void RefreshDBUsingSP()
         {
+            Adresse.Ensemble.Clear();
+            Client.Ensemble.Clear();
+            ClientPart.EnsembleParticuliers.Clear();
+            ClientPro.EnsemblePros.Clear();
+            Commande.ClearEnsembles();
+            Contact.Ensemble.Clear();
+            Fidelio.Ensemble.Clear();
+            Fournisseur.Ensemble.Clear();
+            FournisseurPiece.Ensemble.Clear();
+            Grandeur.Ensemble.Clear();
+            Libelle.Ensemble.Clear();
+            LigneProduit.Ensemble.Clear();
+            Modele.Ensemble.Clear();
+            PieceDetachee.Ensemble.Clear();
+
             GetAllAdressesUsingSP();
             GetAllContactsUsingSP();
             GetAllLibellesUsingSP();
