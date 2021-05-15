@@ -409,7 +409,6 @@ namespace ApplicationVeloMax.ViewModels
                 com.Parameters.Add("@id", MySqlDbType.Int64).Value = toRemove.Id;
                 try { com.ExecuteReader(); }
                 catch { return false; }
-                connexion.Close();
             }
             Modele.Ensemble.Clear();
             GetAllModelsUsingSP();
@@ -425,7 +424,6 @@ namespace ApplicationVeloMax.ViewModels
                 com.Parameters.Add("@id", MySqlDbType.Int64).Value = toRemove.Id;
                 try { com.ExecuteReader(); }
                 catch { return false; }
-                connexion.Close();
             }
             PieceDetachee.Ensemble.Clear();
             GetAllPiecesDetacheesUsingSP();
@@ -444,7 +442,6 @@ namespace ApplicationVeloMax.ViewModels
                     com.Parameters.Add("@id", MySqlDbType.Int64).Value = toRemove.Id;
                     try { com.ExecuteReader(); }
                     catch { return false; }
-                    connexion.Close();
                     Client.Ensemble.Clear();
                     ClientPart.EnsembleParticuliers.Clear();
                     ClientPro.EnsemblePros.Clear();
@@ -467,7 +464,6 @@ namespace ApplicationVeloMax.ViewModels
                     com.Parameters.Add("@id", MySqlDbType.Int64).Value = toRemove.Id;
                     try { com.ExecuteReader(); }
                     catch { return false; }
-                     connexion.Close();
                     Commande.ClearEnsembles();
                     GetAllCommandesUsingSP();
                 }
@@ -485,7 +481,6 @@ namespace ApplicationVeloMax.ViewModels
                 com.Parameters.Add("@id", MySqlDbType.Int64).Value = toRemove.Id;
                 try { com.ExecuteReader(); }
                 catch { return false; }
-                connexion.Close();
             }
             Fidelio.Ensemble.Clear();
             GetAllFideliosUsingSP();
@@ -501,7 +496,6 @@ namespace ApplicationVeloMax.ViewModels
                 com.Parameters.Add("@srt", MySqlDbType.Int64).Value = toRemove.Siret;
                 try { com.ExecuteReader(); }
                 catch { return false; }
-                connexion.Close();
             }
             Fournisseur.Ensemble.Clear();
             GetAllFournisseursUsingSP();
@@ -520,7 +514,6 @@ namespace ApplicationVeloMax.ViewModels
                 com.Parameters.Add("@id", MySqlDbType.Int64).Value = toModify.Id;
                 com.Parameters.Add("@qte", MySqlDbType.Int64).Value = newStock;
                 var reader = com.ExecuteReader();
-                connexion.Close();
                 Modele.Ensemble.Clear();
                 GetAllModelsUsingSP();
             }
@@ -537,7 +530,6 @@ namespace ApplicationVeloMax.ViewModels
                 com.Parameters.Add("@id", MySqlDbType.Int64).Value = toModify.Id;
                 com.Parameters.Add("@qte", MySqlDbType.Int64).Value = newStock;
                 var reader = com.ExecuteReader();
-                connexion.Close();
                 PieceDetachee.Ensemble.Clear();
                 GetAllPiecesDetacheesUsingSP();
             }
@@ -556,7 +548,6 @@ namespace ApplicationVeloMax.ViewModels
                     com.Parameters.Add("@id", MySqlDbType.Int64).Value = toRemove.Id;
                     com.Parameters.Add("@stat", MySqlDbType.Int64).Value = newStatusId;
                     com.ExecuteReader();
-                    connexion.Close();
                     Commande.ClearEnsembles();
                     GetAllCommandesUsingSP();
                 }
@@ -582,8 +573,7 @@ namespace ApplicationVeloMax.ViewModels
                     com.Parameters.Add("@de", MySqlDbType.Date).Value = dateE;
                     com.Parameters.Add("@ds", MySqlDbType.Date).Value = dateS;
                     try { com.ExecuteReader(); }
-                    catch(Exception e) { MessageBox.Show(e.ToString()); return false; }
-                    connexion.Close();
+                    catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
                     Modele.Ensemble.Clear();
                     GetAllModelsUsingSP();
                 }
@@ -608,7 +598,6 @@ namespace ApplicationVeloMax.ViewModels
                     com.Parameters.Add("@ds", MySqlDbType.Date).Value = dateS;
                     try { com.ExecuteReader(); }
                     catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
-                    connexion.Close();
                     PieceDetachee.Ensemble.Clear();
                     GetAllPiecesDetacheesUsingSP();
                 }
@@ -646,6 +635,22 @@ namespace ApplicationVeloMax.ViewModels
             GetAllClientsUsingSP();
             GetAllFournisseursPiecesUsingSP();
             GetAllCommandesUsingSP();
+        }
+
+        static public int GetHighestId(string tableName)
+        {
+            int toReturn = 0;
+            using (var connexion = GetConnection())
+            {
+                connexion.Open();
+                MySqlCommand com = new MySqlCommand("HighestId", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@tableName", MySqlDbType.VarChar).Value = tableName;
+                var returnedParameter = com.Parameters.Add("@n", MySqlDbType.Int64);
+                returnedParameter.Direction = ParameterDirection.Output;
+                com.ExecuteNonQuery();
+                toReturn = Convert.ToInt32(returnedParameter.Value);
+            }
+            return toReturn;
         }
     }
 }
