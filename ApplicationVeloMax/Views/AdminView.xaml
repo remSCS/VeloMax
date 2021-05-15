@@ -164,7 +164,7 @@
                                     <DataGridTextColumn Width="*" Header="Ligne" Binding="{Binding LigneProduitModele}"/>
                                     <DataGridTextColumn Width="auto" CanUserResize="False" Header="Intro" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
                                     <DataGridTextColumn Width="auto" CanUserResize="False" Header="Sortie" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
-                                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Prix" Binding="{Binding PrixUnitaire}"/>
+                                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Prix" Binding="{Binding PrixUnitaire, StringFormat=€ {0}}"/>
                                 </DataGrid.Columns>
                             </DataGrid>
                         </Grid>

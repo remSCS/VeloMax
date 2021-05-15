@@ -51,6 +51,11 @@ namespace ApplicationVeloMax.Models
             set { tel = value; }
         }
 
+        public string FormatTel
+        {
+            get { return Convert.ToInt32(Tel).ToString("0# ## ## ## ##"); }
+        }
+
         public override string ToString()
         {
             return this.nom;

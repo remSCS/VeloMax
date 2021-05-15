@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Stock"
         mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="StockPieceFournisseurs" Height="450" Width="800">
+        Title="{Binding PieceADetailler.Nom, StringFormat={}{0} - Fournisseurs}" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
@@ -13,16 +13,19 @@
         </Grid.RowDefinitions>
 
         <Label Content="{Binding PieceADetailler.Nom}"
-               FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
+               FontFamily="Helvetica" FontSize="24" FontWeight="Bold"
+               Grid.Row="0"/>
 
-        <DataGrid  Margin="10,0,10,10" 
+        <DataGrid  Margin="10,0,10,10" Grid.Row="1"
                                 IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
                                       ItemsSource="{Binding Fournisseurs, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
             <DataGrid.Columns>
                 <DataGridTextColumn Width="auto" Header="SIRET"  Binding="{Binding FournisseurPieceDetachee.Siret}"/>
                 <DataGridTextColumn Width="*" Header="Fournisseur"  Binding="{Binding FournisseurPieceDetachee.Nom}"/>
                 <DataGridTextColumn Width="*" Header="Contact"  Binding="{Binding FournisseurPieceDetachee.ContactFournisseur.FullName}"/>
-                <DataGridTextColumn Width="auto" Header="Délai" Binding="{Binding Delai}"/>
+                <DataGridTextColumn Width="auto" Header="Email"  Binding="{Binding FournisseurPieceDetachee.ContactFournisseur.Email}"/>
+                <DataGridTextColumn Width="auto" Header="Teléphone"  Binding="{Binding FournisseurPieceDetachee.ContactFournisseur.FormatTel}"/>
+                <DataGridTextColumn Width="auto" Header="Délai" Binding="{Binding Delai, StringFormat={}{0} jours }"/>
                 <DataGridTextColumn Width="auto" Header="Qualificatif"  Binding="{Binding FournisseurPieceDetachee.LibelleFournisseur}"/>
             </DataGrid.Columns>
         </DataGrid>

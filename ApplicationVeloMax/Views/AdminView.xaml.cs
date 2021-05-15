@@ -570,9 +570,7 @@ namespace ApplicationVeloMax.Views
 
         private void PieceStockDetail_Click(object sender, RoutedEventArgs e)
         {
-            MessageBox.Show(Convert.ToString(SelectedPieceStock.Id));
             new StockPieceFournisseurs(SelectedPieceStock).ShowDialog();
-            
         }
         #endregion
 
