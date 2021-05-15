@@ -222,8 +222,8 @@
                             </TextBox>
 
                             <StackPanel Grid.Row="1" Margin="10,10,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button Margin="5,0" Padding="5" Content="Modifier"
-                                Foreground="White" Background="#a7a7a7">
+                                <Button x:Name="editPieceButton" Margin="5,0" Padding="5" Content="Modifier"
+                                Foreground="White" Background="#a7a7a7" Click="editPieceButton_Click">
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="10"/>
@@ -269,6 +269,11 @@
                                       IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
                                       ItemsSource="{Binding PiecesDetachees, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedItem="{Binding SelectedPiece, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseDoubleClick" Handler="editPieceButton_Click"/>
+                                    </Style>
+                                </DataGrid.Resources>
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="*" Header="Référence" Binding="{Binding Reference}"/>
                                     <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>

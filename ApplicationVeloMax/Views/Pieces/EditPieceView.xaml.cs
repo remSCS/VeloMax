@@ -16,28 +16,14 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
-namespace ApplicationVeloMax.Views.Modeles
+namespace ApplicationVeloMax.Views.Pieces
 {
     /// <summary>
-    /// Interaction logic for EditModeleView.xaml
+    /// Interaction logic for EditPieceView.xaml
     /// </summary>
-    public partial class EditModeleView : Window, INotifyPropertyChanged
+    public partial class EditPieceView : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-
-        private Modele _selectedModele;
-        public Modele SelectedModele
-        {
-            get { return _selectedModele; }
-            set
-            {
-                _selectedModele = value;
-                dateETb.DisplayDateEnd = DateTime.Today;
-                dateSTb.DisplayDateStart = SelectedModele.DateE;
-                dateSTb.DisplayDateEnd = DateTime.Today;
-                PropertyChanged(this, new PropertyChangedEventArgs("SelectedModele"));
-            }
-        }
 
         private ObservableCollection<Grandeur> _grandeurs;
         public ObservableCollection<Grandeur> Grandeurs
@@ -45,7 +31,7 @@ namespace ApplicationVeloMax.Views.Modeles
             get { return _grandeurs; }
             set
             {
-                _grandeurs = value; 
+                _grandeurs = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("Grandeurs"));
             }
         }
@@ -54,35 +40,51 @@ namespace ApplicationVeloMax.Views.Modeles
         public ObservableCollection<LigneProduit> LignesProduits
         {
             get { return _lignesProduits; }
-            set { _lignesProduits = value; 
-                PropertyChanged(this, new PropertyChangedEventArgs("LignesProduits")); }
+            set
+            {
+                _lignesProduits = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("LignesProduits"));
+            }
         }
 
+        private PieceDetachee _selectedPiece;
+        public PieceDetachee SelectedPiece
+        {
+            get { return _selectedPiece; }
+            set
+            {
+                _selectedPiece = value;
+                dateETb.DisplayDateEnd = DateTime.Today;
+                dateSTb.DisplayDateStart = SelectedPiece.DateE;
+                dateSTb.DisplayDateEnd = DateTime.Today;
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedPiece"));
+            }
+        }
 
-        public EditModeleView(Modele _input)
+        public EditPieceView(PieceDetachee _input)
         {
             InitializeComponent();
-            SelectedModele = _input;
+            SelectedPiece = _input;
             Grandeurs = new ObservableCollection<Grandeur>(Grandeur.Ensemble);
             LignesProduits = new ObservableCollection<LigneProduit>(LigneProduit.Ensemble);
         }
 
+        private void cancelButton_Click(object sender, RoutedEventArgs e) => this.Close();
+
         private void saveButton_Click(object sender, RoutedEventArgs e)
         {
-            int id = SelectedModele.Id;
-            string nom = SelectedModele.Nom;
-            Grandeur grandeur = SelectedModele.GrandeurModele;
-            decimal prix = SelectedModele.PrixUnitaire;
-            LigneProduit ligne = SelectedModele.LigneProduitModele;
-            DateTime de = SelectedModele.DateE;
-            DateTime ds = SelectedModele.DateS;
+            int id = SelectedPiece.Id;
+            string reference = SelectedPiece.Reference;
+            string nom = SelectedPiece.Nom;
+            string description = SelectedPiece.Description;
+            DateTime de = SelectedPiece.DateE;
+            DateTime ds = SelectedPiece.DateS;
 
             try
             {
                 nom = nomTb.Text;
-                grandeur = (Grandeur)grandeurTb.SelectedItem;
-                prix = Convert.ToDecimal(prixTb.Text);
-                ligne = (LigneProduit)ligneTb.SelectedItem;
+                reference = refTb.Text;
+                description = descTb.Text;
                 de = DateTime.Parse(dateETb.Text);
                 ds = DateTime.Parse(dateSTb.Text);
             }
@@ -91,16 +93,12 @@ namespace ApplicationVeloMax.Views.Modeles
                 MessageBox.Show("Veuillez vérifier le format !\nErreur : " + ex.ToString());
                 return;
             }
-
-            if (!DataAccess.FullyEditModele(id, nom, grandeur, prix, ligne, de, ds)) MessageBox.Show("Modification impossible.");
-
+            if (!DataAccess.FullyEditPiece(id, reference, nom, description, de, ds)) MessageBox.Show("Modification impossible.");
             else
             {
                 MessageBox.Show("Modifications effectuées");
                 this.Close();
             }
         }
-
-        private void cancelButton_Click(object sender, RoutedEventArgs e) => this.Close();
     }
 }

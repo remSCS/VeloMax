@@ -20,6 +20,7 @@ using System.Collections.ObjectModel;
 using ApplicationVeloMax.ViewModels;
 using ApplicationVeloMax.Views.Commandes;
 using ApplicationVeloMax.Views.Modeles;
+using ApplicationVeloMax.Views.Pieces;
 
 namespace ApplicationVeloMax.Views
 {
@@ -413,6 +414,17 @@ namespace ApplicationVeloMax.Views
             else
             {
                 new EditModeleView(SelectedModele).ShowDialog();
+                DataAccess.RefreshDBUsingSP();
+                RefreshProperties();
+            }
+        }
+
+        private void editPieceButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedPiece == null) MessageBox.Show("Veuillez sélectionner une pièce.");
+            else
+            {
+                new EditPieceView(SelectedPiece).ShowDialog();
                 DataAccess.RefreshDBUsingSP();
                 RefreshProperties();
             }

@@ -131,6 +131,9 @@
     <Compile Include="Views\Modeles\EditModeleView.xaml.cs">
       <DependentUpon>EditModeleView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Pieces\EditPieceView.xaml.cs">
+      <DependentUpon>EditPieceView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Adresse.cs" />
@@ -219,6 +222,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Pieces\EditPieceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\Velomax_Logo.png" />
@@ -226,7 +233,6 @@
   <ItemGroup>
     <Folder Include="Views\Clients\" />
     <Folder Include="Views\Fournisseurs\" />
-    <Folder Include="Views\Pieces\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

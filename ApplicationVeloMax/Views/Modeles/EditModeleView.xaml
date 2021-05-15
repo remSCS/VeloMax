@@ -7,8 +7,9 @@
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="Edition Modèle - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="NoResize"
         Height="330" Width="400" FontFamily="Helvetica" Background="#e4e4e4">
-    
-    <Grid Margin="0,0,0,-1">
+
+    <Grid>
+        
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
@@ -29,17 +30,28 @@
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Margin="5" Grid.Column="1">
-            <TextBox x:Name="idTb" Margin="5" Height="25" IsReadOnly="True" Text="{Binding SelectedModele.Id, Mode=OneWay}"/>
-            <TextBox x:Name="nomTb" Margin="5" Height="25" Text="{Binding SelectedModele.Nom, Mode=OneWay}"/>
-            <ComboBox x:Name="grandeurTb" Margin="5" Height="25" DisplayMemberPath="Nom"
+            <TextBox x:Name="idTb" Margin="5" Height="25" IsReadOnly="True" VerticalContentAlignment="Center"
+                     Text="{Binding SelectedModele.Id, Mode=OneWay}" Background="#FF9B9B9B"/>
+
+            <TextBox x:Name="nomTb" Margin="5" Height="25" VerticalContentAlignment="Center"
+                     Text="{Binding SelectedModele.Nom, Mode=OneWay}"/>
+
+            <ComboBox x:Name="grandeurTb" Margin="5" Height="25" DisplayMemberPath="Nom" VerticalContentAlignment="Center"
                       SelectedValue="{Binding SelectedModele.GrandeurModele, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding Grandeurs, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBox x:Name="prixTb" Margin="5" Height="25" Text="{Binding SelectedModele.PrixUnitaire, Mode=OneWay}"/>
-            <ComboBox x:Name="ligneTb" Margin="5" Height="25" DisplayMemberPath="Nom"
+
+            <TextBox x:Name="prixTb" Margin="5" Height="25" VerticalContentAlignment="Center"
+                     Text="{Binding SelectedModele.PrixUnitaire, Mode=OneWay}"/>
+
+            <ComboBox x:Name="ligneTb" Margin="5" Height="25" DisplayMemberPath="Nom" VerticalContentAlignment="Center"
                       SelectedValue="{Binding SelectedModele.LigneProduitModele, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
                       ItemsSource="{Binding LignesProduits, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
-            <TextBox x:Name="dateETb" Margin="5" Height="25" Text="{Binding SelectedModele.DateE, StringFormat=dd/MM/yyyy, Mode=OneWay}"/>
-            <TextBox x:Name="dateSTb" Margin="5" Height="25" Text="{Binding SelectedModele.DateS, StringFormat=dd/MM/yyyy, Mode=OneWay}"/>
+
+            <DatePicker x:Name="dateETb" Margin="5" Height="25" VerticalContentAlignment="Center"
+                        Text="{Binding SelectedModele.DateE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <DatePicker x:Name="dateSTb" Margin="5" Height="25" VerticalContentAlignment="Center"
+                        Text="{Binding SelectedModele.DateS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
@@ -49,8 +61,7 @@
             <Button x:Name="cancelButton" Padding="5" Margin="5" Content="Annuler"
                     Click="cancelButton_Click"/>
         </StackPanel>
+        
     </Grid>
-    
+
 </Window>
-<!--SelectedItem="{Binding SelectedModele.LigneProduitModele, Mode=OneWayToSource}"
-SelectedItem="{Binding SelectedModele.GrandeurModele, Mode=OneWayToSource}"-->

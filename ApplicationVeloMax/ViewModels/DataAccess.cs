@@ -590,9 +590,33 @@ namespace ApplicationVeloMax.ViewModels
             }
             return toReturn;
         }
+
+        static public bool FullyEditPiece(int id, string reference, string nom, string description, DateTime dateE, DateTime dateS)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                if (PieceDetachee.Ensemble.Exists(p => p.Id == id))
+                {
+                    connexion.Open();
+                    MySqlCommand com = new MySqlCommand("EditPiece", connexion) { CommandType = CommandType.StoredProcedure };
+                    com.Parameters.Add("@id", MySqlDbType.Int64).Value = id;
+                    com.Parameters.Add("@ref", MySqlDbType.VarChar).Value = reference;
+                    com.Parameters.Add("@nom", MySqlDbType.VarChar).Value = nom;
+                    com.Parameters.Add("@d", MySqlDbType.VarChar).Value = description;
+                    com.Parameters.Add("@de", MySqlDbType.Date).Value = dateE;
+                    com.Parameters.Add("@ds", MySqlDbType.Date).Value = dateS;
+                    try { com.ExecuteReader(); }
+                    catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+                    connexion.Close();
+                    PieceDetachee.Ensemble.Clear();
+                    GetAllPiecesDetacheesUsingSP();
+                }
+            }
+            return toReturn;
+        }
         #endregion
-        
-   
+
         static public void RefreshDBUsingSP()
         {
             Adresse.Ensemble.Clear();
