@@ -128,6 +128,9 @@
     <Compile Include="Views\Commandes\CommandeDetailView.xaml.cs">
       <DependentUpon>CommandeDetailView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Fidelios\EditFidelioView.xaml.cs">
+      <DependentUpon>EditFidelioView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Modeles\AddModeleView.xaml.cs">
       <DependentUpon>AddModeleView.xaml</DependentUpon>
     </Compile>
@@ -224,6 +227,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Commandes\CommandeDetailView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Fidelios\EditFidelioView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -604,6 +604,29 @@ namespace ApplicationVeloMax.ViewModels
             }
             return toReturn;
         }
+
+        static public bool FullyEditFidelio(int id, string nom, string description, decimal cout, decimal rabais, int duree)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                if (Fidelio.Ensemble.Exists(m => m.Id == id))
+                {
+                    connexion.Open();
+                    MySqlCommand com = new MySqlCommand("EditFidelio", connexion) { CommandType = CommandType.StoredProcedure };
+                    com.Parameters.Add("@id", MySqlDbType.Int64).Value = id;
+                    com.Parameters.Add("@nom", MySqlDbType.VarChar).Value = nom;
+                    com.Parameters.Add("@d", MySqlDbType.VarChar).Value = description;
+                    com.Parameters.Add("@cout", MySqlDbType.Decimal).Value = cout;
+                    com.Parameters.Add("@rabais", MySqlDbType.Decimal).Value = rabais;
+                    com.Parameters.Add("@duree", MySqlDbType.Int64).Value = duree;
+                    try { com.ExecuteReader(); }
+                    catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+                    RefreshDBUsingSP();
+                }
+            }
+            return toReturn;
+        }
         #endregion
 
         #region Adding data to server
