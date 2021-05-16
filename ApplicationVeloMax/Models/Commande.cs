@@ -63,6 +63,17 @@ namespace ApplicationVeloMax.Models
             set { statut = value; }
         }
 
+        public decimal MontantCommande
+        {
+            get
+            {
+                decimal output = 0;
+                foreach (var p in PiecesCommande) output += p.PrixVente;
+                foreach (var m in ModelesCommande) output += m.PrixUnitaire;
+                return output;
+            }
+        }
+
         public Adresse AdresseLivraison
         {
             get { return adresseLivraison; }
