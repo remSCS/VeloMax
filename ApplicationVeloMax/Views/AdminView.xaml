@@ -43,9 +43,23 @@
 
     <DockPanel>
         <Menu DockPanel.Dock="Top" x:Name="displayMenu">
-            <MenuItem Header="Test"/>
+            <MenuItem Header="Fichier">
+                <MenuItem Header="Fermer"/>
+            </MenuItem>
+            <MenuItem Header="Outils">
+                <MenuItem Header="Exporter en XML">
+                    <MenuItem Header="Table 1"/>
+                    <MenuItem Header="Table 2"/>
+                    <MenuItem Header="Table 3"/>
+                </MenuItem>
+                <MenuItem Header="Exporter en JSON">
+                    <MenuItem Header="Table 1"/>
+                    <MenuItem Header="Table 2"/>
+                    <MenuItem Header="Table 3"/>
+                </MenuItem>
+            </MenuItem>
         </Menu>
-        
+
         <Grid>
 
             <TabControl x:Name="myTabControl" TabStripPlacement="Left" Margin="-2">
@@ -928,6 +942,7 @@
                     </TabItem.Header>
 
                     <TabControl TabStripPlacement="Top" Margin="-4">
+
                         <!--#region Toutes-->
                         <TabItem Height="50" VerticalAlignment="Top">
                             <TabItem.Header>
@@ -1074,7 +1089,7 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBox Grid.Row="0" Padding="5" Margin="10,10,10,0"
-                             Text="Rechercher par nom de modele...">
+                                         Text="Rechercher par nom de modele...">
                                     <TextBox.Background>
                                         <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
                                     </TextBox.Background>
@@ -1160,7 +1175,7 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBox Grid.Row="0" Padding="5" Margin="10,10,10,0"
-                             Text="Rechercher par nom de modele..." Grid.ColumnSpan="2">
+                                         Text="Rechercher par nom de modele..." Grid.ColumnSpan="2">
                                     <TextBox.Background>
                                         <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
                                     </TextBox.Background>
