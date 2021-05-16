@@ -13,7 +13,7 @@ namespace ApplicationVeloMax.Models
         private Fidelio fidelioClient;
         private DateTime dateDebutFidelo;
 
-        public ClientPart(int idAdresse, int idContact, int idFidelio, DateTime debutFidelio) : base(idAdresse, idContact)
+        public ClientPart(int idAdresse, int idContact, int idFidelio) : base(idAdresse, idContact)
         {
             if (idFidelio == 0) this.FidelioClient = null;
             else

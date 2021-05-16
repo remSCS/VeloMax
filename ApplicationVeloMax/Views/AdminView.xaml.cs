@@ -23,6 +23,7 @@ using ApplicationVeloMax.Views.Modeles;
 using ApplicationVeloMax.Views.Pieces;
 using ApplicationVeloMax.Views.Stock;
 using ApplicationVeloMax.Views.Fidelios;
+using ApplicationVeloMax.Views.Clients;
 
 namespace ApplicationVeloMax.Views
 {
@@ -404,6 +405,7 @@ namespace ApplicationVeloMax.Views
         #endregion
 
         #region Produits
+        #region Modeles
         private void removeModeleButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedModele == null || !Modeles.Contains(SelectedModele)) MessageBox.Show("Veuillez sélectionner un modèle à supprimer.");
@@ -419,6 +421,24 @@ namespace ApplicationVeloMax.Views
             }
         }
 
+        private void editModeleButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedModele == null) MessageBox.Show("Veuillez sélectionner un modèle.");
+            else
+            {
+                new EditModeleView(SelectedModele).ShowDialog();
+                RefreshProperties();
+            }
+        }
+
+        private void addModeleButton_Click(object sender, RoutedEventArgs e)
+        {
+            new AddModeleView().ShowDialog();
+            RefreshProperties();
+        }
+        #endregion
+
+        #region Pièces
         private void removePartButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedPiece == null || !PiecesDetachees.Contains(SelectedPiece)) MessageBox.Show("Veuillez sélectionner une pièce à supprimer.");
@@ -437,24 +457,12 @@ namespace ApplicationVeloMax.Views
             }
         }
 
-        private void editModeleButton_Click(object sender, RoutedEventArgs e)
-        {
-            if (SelectedModele == null) MessageBox.Show("Veuillez sélectionner un modèle.");
-            else
-            {
-                new EditModeleView(SelectedModele).ShowDialog();
-                DataAccess.RefreshDBUsingSP();
-                RefreshProperties();
-            }
-        }
-
         private void editPieceButton_Click(object sender, RoutedEventArgs e)
         {
             if (SelectedPiece == null) MessageBox.Show("Veuillez sélectionner une pièce.");
             else
             {
                 new EditPieceView(SelectedPiece).ShowDialog();
-                DataAccess.RefreshDBUsingSP();
                 RefreshProperties();
             }
         }
@@ -462,19 +470,29 @@ namespace ApplicationVeloMax.Views
         private void addPartButton_Click(object sender, RoutedEventArgs e)
         {
             new AddPieceView().ShowDialog();
-            DataAccess.RefreshDBUsingSP();
-            RefreshProperties();
-        }
-
-        private void addModeleButton_Click(object sender, RoutedEventArgs e)
-        {
-            new AddModeleView().ShowDialog();
-            DataAccess.RefreshDBUsingSP();
             RefreshProperties();
         }
         #endregion
+        #endregion
 
         #region Clients
+        private void supprimerClientButtons_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedClient == null || !Clients.Contains(SelectedClient)) MessageBox.Show("Veuillez sélectionner un client à supprimer.");
+            else
+            {
+                MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir supprimer ce client ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if (res == MessageBoxResult.Yes)
+                {
+                    if (DataAccess.RemoveFromClients(SelectedClient))
+                    {
+                        Clients = new ObservableCollection<Client>(Client.Ensemble);
+                        MessageBox.Show("Client supprimé");
+                    }
+                    else MessageBox.Show("Impossible de supprimer un client ayant un historique de commande.");
+                }
+            }
+        }
 
         #region Fidelio
         private void removeFidelioButton_Click(object sender, RoutedEventArgs e)
@@ -501,7 +519,6 @@ namespace ApplicationVeloMax.Views
             else
             {
                 new EditFidelioView(SelectedFidelio).ShowDialog();
-                DataAccess.RefreshDBUsingSP();
                 RefreshProperties();
             }
         }
@@ -509,76 +526,49 @@ namespace ApplicationVeloMax.Views
         private void addFidelioButton_Click(object sender, RoutedEventArgs e)
         {
             new AddFidelioView().ShowDialog();
-            DataAccess.RefreshDBUsingSP();
             RefreshProperties();
         }
         #endregion
 
         #region Particuliers
-        private void supprimerClientButtons_Click(object sender, RoutedEventArgs e)
+        private void editClientPartButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedClient == null || !Clients.Contains(SelectedClient)) MessageBox.Show("Veuillez sélectionner un client à supprimer.");
-            else
-            {
-                MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir supprimer ce client ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
-                if (res == MessageBoxResult.Yes)
-                {
-                    if (DataAccess.RemoveFromClients(SelectedClient))
-                    {
-                        Clients = new ObservableCollection<Client>(Client.Ensemble);
-                        MessageBox.Show("Client supprimé");
-                    }
-                    else MessageBox.Show("Impossible de supprimer un client ayant un historique de commande.");
-                }
-            }
+            new EditClientPartView((ClientPart) SelectedClient).ShowDialog();
+            RefreshProperties();
         }
         #endregion
 
         #region Profesionnels
+        private void editClientProButton_Click(object sender, RoutedEventArgs e)
+        {
+            new EditClientProView((ClientPro)SelectedClient).ShowDialog();
+            RefreshProperties();
+        }
         #endregion
         #endregion
 
         #region Stocks
         private void AddQuantiteButton_Click(object sender, RoutedEventArgs e)
         {
-
-            if (DataAccess.ModifyStockModele(SelectedModele, SelectedModele.Quantite + 1))
-            {
-                Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
-            }
+            if (DataAccess.ModifyStockModele(SelectedModele, SelectedModele.Quantite + 1)) Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
         }
 
         private void DelQuantiteButton_Click(object sender, RoutedEventArgs e)
         {
-
-            if (DataAccess.ModifyStockModele(SelectedModele, SelectedModele.Quantite - 1))
-            {
-                Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
-            }
+            if (DataAccess.ModifyStockModele(SelectedModele, SelectedModele.Quantite - 1)) Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
         }
 
         private void AddQuantitePieceButton_Click(object sender, RoutedEventArgs e)
         {
-
-            if (DataAccess.ModifyStockPiece(SelectedPiece, SelectedPiece.Quantite + 1))
-            {
-                PiecesDetachees = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble);
-            }
+            if (DataAccess.ModifyStockPiece(SelectedPiece, SelectedPiece.Quantite + 1)) PiecesDetachees = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble);
         }
 
         private void DelQuantitePieceButton_Click(object sender, RoutedEventArgs e)
         {
-
-            if (DataAccess.ModifyStockPiece(SelectedPiece, SelectedPiece.Quantite - 1))
-            {
-                PiecesDetachees = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble);
-            }
+            if (DataAccess.ModifyStockPiece(SelectedPiece, SelectedPiece.Quantite - 1)) PiecesDetachees = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble);
         }
 
-        private void PieceStockDetail_Click(object sender, RoutedEventArgs e)
-        {
-            new StockPieceFournisseurs(SelectedPieceStock).ShowDialog();
-        }
+        private void PieceStockDetail_Click(object sender, RoutedEventArgs e) => new StockPieceFournisseurs(SelectedPieceStock).ShowDialog();
         #endregion
 
         #region Fournisseurs
@@ -624,7 +614,5 @@ namespace ApplicationVeloMax.Views
             Fidelios = new ObservableCollection<Fidelio>(Fidelio.Ensemble);
             Clients = new ObservableCollection<Client>(Client.Ensemble);
         }
-
-        
     }
 }

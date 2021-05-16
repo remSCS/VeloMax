@@ -125,6 +125,12 @@
     <Compile Include="Views\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Clients\EditClientPartView.xaml.cs">
+      <DependentUpon>EditClientPartView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Clients\EditClientProView.xaml.cs">
+      <DependentUpon>EditClientProView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Commandes\CommandeDetailView.xaml.cs">
       <DependentUpon>CommandeDetailView.xaml</DependentUpon>
     </Compile>
@@ -229,6 +235,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Clients\EditClientPartView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Clients\EditClientProView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Commandes\CommandeDetailView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -266,7 +280,6 @@
     <Resource Include="img\Velomax_Logo.png" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Views\Clients\" />
     <Folder Include="Views\Fournisseurs\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -283,10 +283,11 @@ namespace ApplicationVeloMax.ViewModels
                     new ClientPart(
                         i.Field<int>("idAdresse"),
                         i.Field<int>("idContact"),
-                        idF, dF)
+                        idF)
                     {
                         Id = i.Field<int>("idClient"),
-                        DateAdherance = dateA
+                        DateAdherance = dateA,
+                        DateDebutFidelio = dF
                     };
                 }
             }
@@ -620,6 +621,72 @@ namespace ApplicationVeloMax.ViewModels
                     com.Parameters.Add("@cout", MySqlDbType.Decimal).Value = cout;
                     com.Parameters.Add("@rabais", MySqlDbType.Decimal).Value = rabais;
                     com.Parameters.Add("@duree", MySqlDbType.Int64).Value = duree;
+                    try { com.ExecuteReader(); }
+                    catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+                    RefreshDBUsingSP();
+                }
+            }
+            return toReturn;
+        }
+
+        static public bool FullyEditClientPart(int id, DateTime adherance, string nom, string prenom, string tel, string mail, string l1, string l2, string cp, string ville, string province, string pays, int idFidelio, DateTime dateFidelio)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                if (Client.Ensemble.Exists(c => c.Id == id))
+                {
+                    connexion.Open();
+                    MySqlCommand com = new MySqlCommand("EditClientPart", connexion) { CommandType = CommandType.StoredProcedure };
+                    com.Parameters.Add("@id", MySqlDbType.Int64).Value = id;
+                    com.Parameters.Add("@idC", MySqlDbType.Int64).Value = ClientPart.Ensemble.Find(c => c.Id == id).ContactClient.Id;
+                    com.Parameters.Add("@idA", MySqlDbType.Int64).Value = ClientPart.Ensemble.Find(c => c.Id == id).AdresseClient.Id;
+                    com.Parameters.Add("@idF", MySqlDbType.Int64).Value = idFidelio;
+                    com.Parameters.Add("@nom", MySqlDbType.VarChar).Value = nom;
+                    com.Parameters.Add("@prenom", MySqlDbType.VarChar).Value = prenom;
+                    com.Parameters.Add("@tel", MySqlDbType.VarChar).Value = tel;
+                    com.Parameters.Add("@mail", MySqlDbType.VarChar).Value = mail;
+                    com.Parameters.Add("@l1", MySqlDbType.VarChar).Value = l1;
+                    com.Parameters.Add("@l2", MySqlDbType.VarChar).Value = l2;
+                    com.Parameters.Add("@cp", MySqlDbType.VarChar).Value = cp;
+                    com.Parameters.Add("@ville", MySqlDbType.VarChar).Value = ville;
+                    com.Parameters.Add("@province", MySqlDbType.VarChar).Value = province;
+                    com.Parameters.Add("@pays", MySqlDbType.VarChar).Value = pays;
+                    com.Parameters.Add("@adherance", MySqlDbType.Date).Value = adherance;
+                    com.Parameters.Add("@df", MySqlDbType.Date).Value = dateFidelio;
+                    try { com.ExecuteReader(); }
+                    catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+                    RefreshDBUsingSP();
+                }
+            }
+            return toReturn;
+        }
+
+        static public bool FullyEditClientPro(int id, DateTime adherance, string nom, string prenom, string tel, string mail, string l1, string l2, string cp, string ville, string province, string pays, string entreprise, decimal remise)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                if (Client.Ensemble.Exists(c => c.Id == id))
+                {
+                    connexion.Open();
+                    MySqlCommand com = new MySqlCommand("EditClientPro", connexion) { CommandType = CommandType.StoredProcedure };
+                    com.Parameters.Add("@id", MySqlDbType.Int64).Value = id;
+                    com.Parameters.Add("@idC", MySqlDbType.Int64).Value = ClientPart.Ensemble.Find(c => c.Id == id).ContactClient.Id;
+                    com.Parameters.Add("@idA", MySqlDbType.Int64).Value = ClientPart.Ensemble.Find(c => c.Id == id).AdresseClient.Id;
+                    com.Parameters.Add("@nom", MySqlDbType.VarChar).Value = nom;
+                    com.Parameters.Add("@prenom", MySqlDbType.VarChar).Value = prenom;
+                    com.Parameters.Add("@tel", MySqlDbType.VarChar).Value = tel;
+                    com.Parameters.Add("@mail", MySqlDbType.VarChar).Value = mail;
+                    com.Parameters.Add("@l1", MySqlDbType.VarChar).Value = l1;
+                    com.Parameters.Add("@l2", MySqlDbType.VarChar).Value = l2;
+                    com.Parameters.Add("@cp", MySqlDbType.VarChar).Value = cp;
+                    com.Parameters.Add("@ville", MySqlDbType.VarChar).Value = ville;
+                    com.Parameters.Add("@province", MySqlDbType.VarChar).Value = province;
+                    com.Parameters.Add("@pays", MySqlDbType.VarChar).Value = pays;
+                    com.Parameters.Add("@adherance", MySqlDbType.Date).Value = adherance;
+                    com.Parameters.Add("@entreprise", MySqlDbType.VarChar).Value = entreprise;
+                    com.Parameters.Add("@rem", MySqlDbType.Decimal).Value = remise;
                     try { com.ExecuteReader(); }
                     catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
                     RefreshDBUsingSP();

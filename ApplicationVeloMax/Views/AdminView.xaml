@@ -499,8 +499,8 @@
                             </TextBox>
 
                             <StackPanel Grid.Row="2" Margin="10,10,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button Margin="5,0" Padding="5" Content="Modifier"
-                                Foreground="White" Background="#a7a7a7">
+                                <Button x:Name="editClientPartButton" Margin="5,0" Padding="5" Content="Modifier"
+                                Foreground="White" Background="#a7a7a7" Click="editClientPartButton_Click">
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="10"/>
@@ -546,6 +546,11 @@
                                       IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
                                       ItemsSource="{Binding ClientsParts, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedItem="{Binding SelectedClient, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseDoubleClick" Handler="editClientPartButton_Click"/>
+                                    </Style>
+                                </DataGrid.Resources>
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
                                     <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ContactClient}"/>
@@ -608,8 +613,8 @@
                             </TextBox>
 
                             <StackPanel Grid.Row="2" Margin="10,10,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
-                                <Button Margin="5,0" Padding="5" Content="Modifier"
-                                Foreground="White" Background="#a7a7a7">
+                                <Button x:Name="editClientProButton" Margin="5,0" Padding="5" Content="Modifier"
+                                Foreground="White" Background="#a7a7a7" Click="editClientProButton_Click">
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="10"/>
@@ -655,6 +660,11 @@
                                       IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
                                       ItemsSource="{Binding ClientsPros, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedItem="{Binding SelectedClient, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                                <DataGrid.Resources>
+                                    <Style TargetType="DataGridRow">
+                                        <EventSetter Event="MouseDoubleClick" Handler="editClientProButton_Click"/>
+                                    </Style>
+                                </DataGrid.Resources>
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
                                     <DataGridTextColumn Width="*" Header="Entreprise" Binding="{Binding NomEntreprise}"/>

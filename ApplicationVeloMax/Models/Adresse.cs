@@ -71,6 +71,7 @@ namespace ApplicationVeloMax.Models
         {
             get { return $"{this.ligne1} \n {this.ligne2} \n {this.codePostal} {this.ville} \n {this.province}, {this.pays}"; }
         }
+
         public override string ToString()
         {
             string str = $"{this.ligne1}";
