@@ -2,6 +2,7 @@
 using ApplicationVeloMax.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -18,14 +19,14 @@ using System.Windows.Shapes;
 namespace ApplicationVeloMax.Views.Clients
 {
     /// <summary>
-    /// Interaction logic for AddClientProView.xaml
+    /// Interaction logic for AddClientPartView.xaml
     /// </summary>
-    public partial class AddClientProView : Window, INotifyPropertyChanged
+    public partial class AddClientPartView : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ClientPro _clientToAdd;
-        public ClientPro ClientToAdd
+        private ClientPart _clientToAdd;
+        public ClientPart ClientToAdd
         {
             get { return _clientToAdd; }
             set
@@ -35,9 +36,21 @@ namespace ApplicationVeloMax.Views.Clients
             }
         }
 
-        public AddClientProView()
+        private ObservableCollection<Fidelio> _fidelios;
+        public ObservableCollection<Fidelio> Fidelios
+        {
+            get { return _fidelios; }
+            set
+            {
+                _fidelios = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Fidelios"));
+            }
+        }
+
+        public AddClientPartView()
         {
             InitializeComponent();
+            Fidelios = new ObservableCollection<Fidelio>(Fidelio.Ensemble);
             Contact contactToAdd = new Contact()
             {
                 Id = DataAccess.GetHighestId("contact") + 1,
@@ -46,7 +59,6 @@ namespace ApplicationVeloMax.Views.Clients
                 Email = "",
                 Tel = ""
             };
-
             Adresse adresseToAdd = new Adresse()
             {
                 Id = DataAccess.GetHighestId("adresse") + 1,
@@ -57,24 +69,42 @@ namespace ApplicationVeloMax.Views.Clients
                 Pays = "",
                 Province = ""
             };
-
-            ClientPro clientProToAdd = new ClientPro(adresseToAdd.Id, contactToAdd.Id)
+            ClientPart clientPartToAdd = new ClientPart(adresseToAdd.Id, contactToAdd.Id, -1)
             {
                 Id = DataAccess.GetHighestId("client") + 1,
-                NomEntreprise = "",
-                Remise = 0M,
-                DateAdherance = DateTime.Today
+                DateAdherance = DateTime.Today,
+                DateDebutFidelio = DateTime.Today
             };
-            ClientToAdd = clientProToAdd;
+            ClientToAdd = clientPartToAdd;
+            fidelioCB.IsChecked = false;
+            SetStatusUnchecked();
         }
+
+        private void SetStatusUnchecked()
+        {
+            if (ClientToAdd.FidelioClient != null) { ClientToAdd.FidelioClient = null; ClientToAdd.DateDebutFidelio = DateTime.Today; }
+            fidelioCombo.Visibility = Visibility.Hidden;
+            dateLabel.Visibility = Visibility.Hidden;
+            dateFidelioPicker.Visibility = Visibility.Hidden;
+        }
+
+        private void SetStatusChecked()
+        {
+            if (ClientToAdd.FidelioClient == null) { ClientToAdd.DateDebutFidelio = DateTime.Today; }
+            fidelioCombo.Visibility = Visibility.Visible;
+            dateLabel.Visibility = Visibility.Visible;
+            dateFidelioPicker.Visibility = Visibility.Visible;
+        }
+
+        private void fidelioCB_Checked(object sender, RoutedEventArgs e) => SetStatusChecked();
+
+        private void fidelioCB_Unchecked(object sender, RoutedEventArgs e) => SetStatusUnchecked();
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-
             try
             {
                 ClientToAdd.DateAdherance = (DateTime)dateAdhePicker.SelectedDate;
-                ClientToAdd.Remise = Convert.ToDecimal(remiseTb.Text);
             }
             catch (Exception ex)
             {
@@ -84,17 +114,20 @@ namespace ApplicationVeloMax.Views.Clients
 
             Adresse matchingA = Adresse.Ensemble.Find(a => a.ToString() == ClientToAdd.AdresseClient.ToString());
             Contact matchingC = Contact.Ensemble.Find(c => c.ToString() == ClientToAdd.ContactClient.ToString());
-            if(matchingA != null)
+            if (matchingA != null)
             {
                 Adresse.Ensemble.Remove(ClientToAdd.AdresseClient);
                 ClientToAdd.AdresseClient = matchingA;
             }
-            if(matchingC != null)
+            if (matchingC != null)
             {
                 Contact.Ensemble.Remove(ClientToAdd.ContactClient);
                 ClientToAdd.ContactClient = matchingC;
             }
-            if (!DataAccess.AddClientPro(ClientToAdd)) MessageBox.Show("Modification impossible.");
+            int idF;
+            if (ClientToAdd.FidelioClient == null) idF = -1;
+            else idF = ClientToAdd.FidelioClient.Id;
+            if (!DataAccess.AddClientPart(ClientToAdd, idF)) MessageBox.Show("Modification impossible.");
             else
             {
                 MessageBox.Show("Client ajouté !");
@@ -107,7 +140,7 @@ namespace ApplicationVeloMax.Views.Clients
             Adresse.Ensemble.Remove(ClientToAdd.AdresseClient);
             Contact.Ensemble.Remove(ClientToAdd.ContactClient);
             Client.Ensemble.Remove(ClientToAdd);
-            ClientPro.EnsemblePros.Remove(ClientToAdd);
+            ClientPart.EnsembleParticuliers.Remove(ClientToAdd);
             this.Close();
         }
     }

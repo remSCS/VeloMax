@@ -72,6 +72,7 @@
                                 <RowDefinition Height="auto"/>
                                 <RowDefinition Height="*"/>
                             </Grid.RowDefinitions>
+                            
                             <TextBox Grid.Row="1" Padding="5" Margin="10,10,10,0"
                                  Text="Rechercher par nom de modele...">
                                 <TextBox.Background>
@@ -217,7 +218,6 @@
                                         </Style.Triggers>
                                     </Style>
                                 </TextBox.Style>
-
                             </TextBox>
 
                             <StackPanel Grid.Row="1" Margin="10,10,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
@@ -526,8 +526,8 @@
                                     </Button.Resources>
                                 </Button>
 
-                                <Button Margin="5,0" Padding="5" Content="Ajouter"
-                                Foreground="White" Background="#6abb74">
+                                <Button x:Name="addClientPartClient" Margin="5,0" Padding="5" Content="Ajouter"
+                                Foreground="White" Background="#6abb74" Click="addClientPartClient_Click">
                                     <Button.Resources>
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="10"/>

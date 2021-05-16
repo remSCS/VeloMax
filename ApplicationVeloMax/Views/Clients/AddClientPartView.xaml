@@ -1,11 +1,11 @@
-﻿<Window x:Class="ApplicationVeloMax.Views.Clients.AddClientProView"
+﻿<Window x:Class="ApplicationVeloMax.Views.Clients.AddClientPartView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Converters" 
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="Ajout Client Professionnel - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="CanResize"
+        Title="Ajout Client Particulier - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="CanResize"
         Height="360" Width="640" FontFamily="Helvetica" Background="#e4e4e4" MinHeight="360" MinWidth="550">
 
     <Grid>
@@ -37,8 +37,10 @@
             <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Email"/>
             <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Teléphone"/>
             <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Date d'adhérence"/>
-            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Nom de l'entreprise"/>
-            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Remise"/>
+            <CheckBox x:Name="fidelioCB" Height="25" HorizontalAlignment="Right" Margin="5" Padding="5" 
+                      Content="Adhérent Fidélio" VerticalContentAlignment="Center"
+                      Checked="fidelioCB_Checked"  Unchecked="fidelioCB_Unchecked"/>
+            <Label x:Name="dateLabel" Height="25" HorizontalAlignment="Right" Margin="5" Content="Date d'adhésion"/>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Margin="5" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
@@ -60,11 +62,12 @@
             <DatePicker x:Name="dateAdhePicker" Margin="5" Height="25" VerticalContentAlignment="Center"
                         SelectedDate="{Binding ClientToAdd.DateAdherance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <TextBox x:Name="entrepriseTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding ClientToAdd.NomEntreprise, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <ComboBox x:Name="fidelioCombo" Margin="5" Height="25" VerticalContentAlignment="Center" DisplayMemberPath="Nom"
+                      ItemsSource="{Binding Fidelios, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding ClientToAdd.FidelioClient, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-            <TextBox x:Name="remiseTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding ClientToAdd.Remise, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+            <DatePicker x:Name="dateFidelioPicker" Margin="5" Height="25" VerticalContentAlignment="Center"
+                        SelectedDate="{Binding ClientToAdd.DateDebutFidelio, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         </StackPanel>
 
@@ -102,9 +105,9 @@
         <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="2" Grid.ColumnSpan="5"
                     HorizontalAlignment="Right">
             <Button x:Name="addButton" Padding="5" Margin="5" Content="Ajouter"
-                    Click="addButton_Click"  IsDefault="True"/>
+                    Click="addButton_Click" IsDefault="True"/>
             <Button x:Name="cancelButton" Padding="5" Margin="5" Content="Annuler"
-                    Click="cancelButton_Click"  IsCancel="True"/>
+                    Click="cancelButton_Click" IsCancel="True"/>
         </StackPanel>
     </Grid>
 

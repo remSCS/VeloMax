@@ -10,8 +10,7 @@ namespace ApplicationVeloMax.Converters
             System.Globalization.CultureInfo culture)
         {
             double width = Double.Parse(value.ToString());
-            //Subtract 1, otherwise we could overflow to two rows.
-            return 0.2 * width - 1; // Returns a quarter
+            return 0.2 * width - 1;
         }
 
         public object ConvertBack(object value, Type targetType, object parameter,

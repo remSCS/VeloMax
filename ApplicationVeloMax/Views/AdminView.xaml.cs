@@ -32,7 +32,6 @@ namespace ApplicationVeloMax.Views
         public event PropertyChangedEventHandler PropertyChanged;
 
         #region ViewModels
-
         #region Modèles
         private ObservableCollection<Modele> _modeles;
         public ObservableCollection<Modele> Modeles
@@ -285,7 +284,6 @@ namespace ApplicationVeloMax.Views
             get { return _selectedFidelio; }
             set { _selectedFidelio = value; }
         }
-
         #endregion
 
         #region Clients
@@ -540,6 +538,12 @@ namespace ApplicationVeloMax.Views
                 new EditClientPartView((ClientPart)SelectedClient).ShowDialog();
                 RefreshProperties();
             }
+        }
+
+        private void addClientPartClient_Click(object sender, RoutedEventArgs e)
+        {
+            new AddClientPartView().ShowDialog();
+            RefreshProperties();
         }
         #endregion
 
