@@ -41,5 +41,20 @@ namespace ApplicationVeloMax.Views.Commandes
 
             SelectedCommande = _inputCommande;
         }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void commandesModifierButton_Click(object sender, MouseButtonEventArgs e)
+        {
+            new FactureCommande(SelectedCommande).ShowDialog();
+        }
+
+        private void FactureButton_Click(object sender, RoutedEventArgs e)
+        {
+            new FactureCommande(SelectedCommande).ShowDialog();
+        }
     }
 }

@@ -69,13 +69,21 @@ namespace ApplicationVeloMax.Models
 
         public string FullAdresse
         {
-            get { return $"{this.ligne1} \n {this.ligne2} \n {this.codePostal} {this.ville} \n {this.province}, {this.pays}"; }
+            get
+            {
+                string str = $"{this.Ligne1}\n";
+                if (this.ligne2 != "" && this.ligne2 != null) str += $"{this.Ligne2}\n";
+                str += $"{this.CodePostal}, {this.ville}\n";
+                if (this.province != "" && this.province != null) str += $"{this.province}, ";
+                str += $"{this.pays}";
+                return str;
+            }
         }
 
         public override string ToString()
         {
             string str = $"{this.ligne1}";
-            if(this.ligne2 != "" && this.ligne2 != null) str += $", {this.ligne2}";
+            if (this.ligne2 != "" && this.ligne2 != null) str += $", {this.ligne2}";
             str += $", {this.CodePostal}, {this.ville}";
             if (this.province != "" && this.province != null) str += $", {this.province}";
             str += $", {this.pays}";
