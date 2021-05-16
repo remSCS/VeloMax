@@ -146,6 +146,12 @@
     <Compile Include="Views\Fidelios\EditFidelioView.xaml.cs">
       <DependentUpon>EditFidelioView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Fournisseurs\AddFournisseurView.xaml.cs">
+      <DependentUpon>AddFournisseurView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Fournisseurs\EditFournisseurView.xaml.cs">
+      <DependentUpon>EditFournisseurView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Modeles\AddModeleView.xaml.cs">
       <DependentUpon>AddModeleView.xaml</DependentUpon>
     </Compile>
@@ -269,6 +275,14 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Fournisseurs\AddFournisseurView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Fournisseurs\EditFournisseurView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Modeles\AddModeleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -293,8 +307,6 @@
   <ItemGroup>
     <Resource Include="img\Velomax_Logo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Views\Fournisseurs\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -24,6 +24,7 @@ using ApplicationVeloMax.Views.Pieces;
 using ApplicationVeloMax.Views.Stock;
 using ApplicationVeloMax.Views.Fidelios;
 using ApplicationVeloMax.Views.Clients;
+using ApplicationVeloMax.Views.Fournisseurs;
 
 namespace ApplicationVeloMax.Views
 {
@@ -611,6 +612,23 @@ namespace ApplicationVeloMax.Views
                 }
             }
         }
+
+        private void editFournisseurButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedFournisseur == null) MessageBox.Show("Veuillez sélectioner un fournisseur à modifider.");
+            else
+            {
+                new EditFournisseurView().ShowDialog();
+                RefreshProperties();
+            }
+        }
+
+        private void addFourinsseurButton_Click(object sender, RoutedEventArgs e)
+        {
+            new EditFournisseurView().ShowDialog();
+            RefreshProperties();
+
+        }
         #endregion
 
         private bool CheckIfSelected(object input)
@@ -645,8 +663,8 @@ namespace ApplicationVeloMax.Views
             }
             else
             {
-                if(e.SystemKey == Key.LeftAlt && displayMenu.Visibility == Visibility.Visible)
-                displayMenu.Visibility = Visibility.Collapsed;
+                if (e.SystemKey == Key.LeftAlt && displayMenu.Visibility == Visibility.Visible)
+                    displayMenu.Visibility = Visibility.Collapsed;
             }
         }
     }
