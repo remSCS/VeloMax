@@ -696,6 +696,38 @@ namespace ApplicationVeloMax.ViewModels
             }
             return toReturn;
         }
+        
+        static public bool FullyEditFournisseur(int siret, int idLibelle, string nomFournisseur, string nom, string prenom, string tel, string mail, string l1, string l2, string cp, string ville, string province, string pays)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                if (Fournisseur.Ensemble.Exists(f => f.Siret == siret))
+                {
+                    connexion.Open();
+                    MySqlCommand com = new MySqlCommand("EditFournisseur", connexion) { CommandType = CommandType.StoredProcedure };
+                    com.Parameters.Add("@siret", MySqlDbType.Int64).Value = siret;
+                    com.Parameters.Add("@idC", MySqlDbType.Int64).Value = Fournisseur.Ensemble.Find(f => f.Siret == siret).ContactFournisseur.Id;
+                    com.Parameters.Add("@idA", MySqlDbType.Int64).Value = Fournisseur.Ensemble.Find(f => f.Siret == siret).AdresseFournisseur.Id;
+                    com.Parameters.Add("@idL", MySqlDbType.Int64).Value = Fournisseur.Ensemble.Find(f => f.Siret == siret).LibelleFournisseur.Id;
+                    com.Parameters.Add("@nom", MySqlDbType.VarChar).Value = nom;
+                    com.Parameters.Add("@prenom", MySqlDbType.VarChar).Value = prenom;
+                    com.Parameters.Add("@tel", MySqlDbType.VarChar).Value = tel;
+                    com.Parameters.Add("@mail", MySqlDbType.VarChar).Value = mail;
+                    com.Parameters.Add("@l1", MySqlDbType.VarChar).Value = l1;
+                    com.Parameters.Add("@l2", MySqlDbType.VarChar).Value = l2;
+                    com.Parameters.Add("@cp", MySqlDbType.VarChar).Value = cp;
+                    com.Parameters.Add("@ville", MySqlDbType.VarChar).Value = ville;
+                    com.Parameters.Add("@province", MySqlDbType.VarChar).Value = province;
+                    com.Parameters.Add("@pays", MySqlDbType.VarChar).Value = pays;
+                    com.Parameters.Add("@nomF", MySqlDbType.VarChar).Value = nomFournisseur;
+                    try { com.ExecuteReader(); }
+                    catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+                    RefreshDBUsingSP();
+                }
+            }
+            return toReturn;
+        }
         #endregion
 
         #region Adding data to server

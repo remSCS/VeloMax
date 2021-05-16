@@ -1,6 +1,8 @@
 ﻿using ApplicationVeloMax.Models;
+using ApplicationVeloMax.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -23,30 +25,51 @@ namespace ApplicationVeloMax.Views.Fournisseurs
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private ClientPart _selectedClient;
-        public ClientPart SelectedClient
+        private Fournisseur _selectedFournisseur;
+        public Fournisseur SelectedFournisseur
         {
-            get { return _selectedClient; }
+            get { return _selectedFournisseur; }
             set
             {
-                _selectedClient = value;
-                PropertyChanged(this, new PropertyChangedEventArgs("SelectedClient"));
+                _selectedFournisseur = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedFournisseur"));
             }
         }
 
-        public EditFournisseurView()
+        private ObservableCollection<Libelle> _libelles;
+        public ObservableCollection<Libelle> Libelles
+        {
+            get { return _libelles; }
+            set
+            {
+                _libelles = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Libelles"));
+            }
+        }
+
+        public EditFournisseurView(Fournisseur _input)
         {
             InitializeComponent();
+            SelectedFournisseur = _input;
+            Libelles = new ObservableCollection<Libelle>(Libelle.Ensemble);
         }
 
         private void editButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!DataAccess.FullyEditFournisseur(SelectedFournisseur.Siret,
+                SelectedFournisseur.LibelleFournisseur.Id, SelectedFournisseur.Nom,
+                SelectedFournisseur.ContactFournisseur.Nom, SelectedFournisseur.ContactFournisseur.Prenom,
+                SelectedFournisseur.ContactFournisseur.Tel, SelectedFournisseur.ContactFournisseur.Email,
+                SelectedFournisseur.AdresseFournisseur.Ligne1, SelectedFournisseur.AdresseFournisseur.Ligne2,
+                SelectedFournisseur.AdresseFournisseur.CodePostal, SelectedFournisseur.AdresseFournisseur.Ville,
+                SelectedFournisseur.AdresseFournisseur.Province, SelectedFournisseur.AdresseFournisseur.Pays)) MessageBox.Show("Modification impossible.");
+            else
+            {
+                MessageBox.Show("Fournisseur modifié!");
+                this.Close();
+            }
         }
 
-        private void cancelButton_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        private void cancelButton_Click(object sender, RoutedEventArgs e) => this.Close();
     }
 }
