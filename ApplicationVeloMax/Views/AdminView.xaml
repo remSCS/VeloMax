@@ -61,7 +61,6 @@
         </Menu>
 
         <Grid>
-
             <TabControl x:Name="myTabControl" TabStripPlacement="Left" Margin="-2">
 
                 <!--#region Tab Produits-->
@@ -872,8 +871,8 @@
                         </TextBox>
 
                         <StackPanel Grid.Row="2" Margin="10,10,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
-                            <Button Margin="5,0" Padding="5" Content="Modifier"
-                                Foreground="White" Background="#a7a7a7">
+                            <Button x:Name="editFournisseurButton" Margin="5,0" Padding="5" Content="Modifier"
+                                    Foreground="White" Background="#a7a7a7" Click="editFournisseurButton_Click">
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="10"/>
@@ -900,8 +899,8 @@
                                 </Button.Resources>
                             </Button>
 
-                            <Button Margin="5,0" Padding="5" Content="Ajouter"
-                                Foreground="White" Background="#6abb74">
+                            <Button x:Name="addFourinsseurButton" Margin="5,0" Padding="5" Content="Ajouter"
+                                Foreground="White" Background="#6abb74" Click="addFourinsseurButton_Click">
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="10"/>
@@ -1305,7 +1304,6 @@
                 <!--#endregion-->
 
             </TabControl>
-
         </Grid>
     </DockPanel>
 </Window>
