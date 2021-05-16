@@ -85,7 +85,7 @@
 
         <StackPanel Orientation="Vertical" Margin="5" Grid.Column="4" Grid.Row="1">
             <TextBox x:Name="l1TB" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedClient.AdresseClient.Ligne1, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding SelectedClient.AdresseClient.Ligne1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox x:Name="l2TB" Margin="5" Height="25" VerticalContentAlignment="Center"
                      Text="{Binding SelectedClient.AdresseClient.Ligne2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>

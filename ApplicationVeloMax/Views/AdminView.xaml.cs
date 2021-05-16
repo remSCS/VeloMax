@@ -533,15 +533,30 @@ namespace ApplicationVeloMax.Views
         #region Particuliers
         private void editClientPartButton_Click(object sender, RoutedEventArgs e)
         {
-            new EditClientPartView((ClientPart) SelectedClient).ShowDialog();
-            RefreshProperties();
+
+            if (SelectedClient == null) MessageBox.Show("Veuillez sélectionner un client.");
+            else
+            {
+                new EditClientPartView((ClientPart)SelectedClient).ShowDialog();
+                RefreshProperties();
+            }
         }
         #endregion
 
         #region Profesionnels
         private void editClientProButton_Click(object sender, RoutedEventArgs e)
         {
-            new EditClientProView((ClientPro)SelectedClient).ShowDialog();
+            if (SelectedClient == null) MessageBox.Show("Veuillez sélectionner un client.");
+            else
+            {
+                new EditClientProView((ClientPro)SelectedClient).ShowDialog();
+                RefreshProperties();
+            }
+        }
+
+        private void addClientProButton_Click(object sender, RoutedEventArgs e)
+        {
+            new AddClientProView().ShowDialog();
             RefreshProperties();
         }
         #endregion

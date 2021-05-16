@@ -1,11 +1,11 @@
-﻿<Window x:Class="ApplicationVeloMax.Views.Clients.EditClientProView"
+﻿<Window x:Class="ApplicationVeloMax.Views.Clients.AddClientProView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Converters" 
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="Edition Client Professionnel - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="CanResize"
+        Title="Add Client Pro - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="CanResize"
         Height="360" Width="640" FontFamily="Helvetica" Background="#e4e4e4" MinHeight="360" MinWidth="550">
 
     <Grid>
@@ -26,7 +26,7 @@
 
         <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" 
                FontSize="14" FontWeight="Bold" Content="Contact"/>
-        
+
         <Label Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" 
                FontSize="14" FontWeight="Bold" Content="Adresse"/>
 
@@ -43,28 +43,28 @@
 
         <StackPanel Orientation="Vertical" Margin="5" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">
             <TextBox x:Name="idTb" Margin="5" Height="25" IsReadOnly="True" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedClient.Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Background="#FF9B9B9B"/>
+                     Text="{Binding ClientToAdd.Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Background="#FF9B9B9B"/>
 
             <TextBox x:Name="nomTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedClient.ContactClient.Nom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding ClientToAdd.ContactClient.Nom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox  x:Name="prenomTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                      Text="{Binding SelectedClient.ContactClient.Prenom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                      Text="{Binding ClientToAdd.ContactClient.Prenom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox x:Name="mailTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedClient.ContactClient.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding ClientToAdd.ContactClient.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox x:Name="telTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedClient.ContactClient.Tel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding ClientToAdd.ContactClient.Tel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <DatePicker x:Name="dateAdhePicker" Margin="5" Height="25" VerticalContentAlignment="Center"
-                        SelectedDate="{Binding SelectedClient.DateAdherance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                        SelectedDate="{Binding ClientToAdd.DateAdherance, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox x:Name="entrepriseTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedClient.NomEntreprise, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding ClientToAdd.NomEntreprise, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox x:Name="remiseTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedClient.Remise, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding ClientToAdd.Remise, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
         </StackPanel>
 
@@ -81,30 +81,30 @@
 
         <StackPanel Orientation="Vertical" Margin="5" Grid.Column="4" Grid.Row="1">
             <TextBox x:Name="l1TB" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedClient.AdresseClient.Ligne1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding ClientToAdd.AdresseClient.Ligne1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox x:Name="l2TB" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedClient.AdresseClient.Ligne2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding ClientToAdd.AdresseClient.Ligne2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox  x:Name="cpTB" Margin="5" Height="25" VerticalContentAlignment="Center"
-                      Text="{Binding SelectedClient.AdresseClient.CodePostal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                      Text="{Binding ClientToAdd.AdresseClient.CodePostal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox x:Name="villeTB" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedClient.AdresseClient.Ville, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding ClientToAdd.AdresseClient.Ville, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox x:Name="provTB" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedClient.AdresseClient.Province, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding ClientToAdd.AdresseClient.Province, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox x:Name="paysTB" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding SelectedClient.AdresseClient.Pays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding ClientToAdd.AdresseClient.Pays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
         </StackPanel>
 
         <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="2" Grid.ColumnSpan="5"
                     HorizontalAlignment="Right">
-            <Button x:Name="editButton" Padding="5" Margin="5" Content="Enregistrer les modifications"
-                    Click="editButton_Click" IsDefault="True"/>
+            <Button x:Name="addButton" Padding="5" Margin="5" Content="Ajouter"
+                    Click="addButton_Click"  IsDefault="True"/>
             <Button x:Name="cancelButton" Padding="5" Margin="5" Content="Annuler"
-                    Click="cancelButton_Click" IsCancel="True"/>
+                    Click="cancelButton_Click"  IsCancel="True"/>
         </StackPanel>
     </Grid>
 

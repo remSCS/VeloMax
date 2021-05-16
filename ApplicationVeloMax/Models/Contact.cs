@@ -56,10 +56,7 @@ namespace ApplicationVeloMax.Models
             get { return Convert.ToInt32(Tel).ToString("0# ## ## ## ##"); }
         }
 
-        public override string ToString()
-        {
-            return this.nom;
-        }
+        public override string ToString() => $"{this.Nom} {this.Prenom} - {this.Tel} - {this.Email}";
 
         public string FullName
         {

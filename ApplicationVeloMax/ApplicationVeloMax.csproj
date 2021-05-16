@@ -125,6 +125,9 @@
     <Compile Include="Views\AdminView.xaml.cs">
       <DependentUpon>AdminView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Clients\AddClientProView.xaml.cs">
+      <DependentUpon>AddClientProView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Clients\EditClientPartView.xaml.cs">
       <DependentUpon>EditClientPartView.xaml</DependentUpon>
     </Compile>
@@ -232,6 +235,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="Views\AdminView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Clients\AddClientProView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

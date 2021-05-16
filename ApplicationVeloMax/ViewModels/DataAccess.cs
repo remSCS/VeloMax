@@ -770,6 +770,39 @@ namespace ApplicationVeloMax.ViewModels
             }
             return toReturn;
         }
+
+        static public bool AddClientPro(ClientPro toAdd)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                if (Client.Ensemble.Exists(c => c.Id == toAdd.Id))
+                {
+                    connexion.Open();
+                    MySqlCommand com = new MySqlCommand("CreateClientPro", connexion) { CommandType = CommandType.StoredProcedure };
+                    com.Parameters.Add("@id", MySqlDbType.Int64).Value = toAdd.Id;
+                    com.Parameters.Add("@idC", MySqlDbType.Int64).Value = toAdd.ContactClient.Id;
+                    com.Parameters.Add("@idA", MySqlDbType.Int64).Value = toAdd.AdresseClient.Id;
+                    com.Parameters.Add("@nom", MySqlDbType.VarChar).Value = toAdd.ContactClient.Nom;
+                    com.Parameters.Add("@prenom", MySqlDbType.VarChar).Value = toAdd.ContactClient.Prenom;
+                    com.Parameters.Add("@tel", MySqlDbType.VarChar).Value = toAdd.ContactClient.Tel;
+                    com.Parameters.Add("@mail", MySqlDbType.VarChar).Value = toAdd.ContactClient.Email;
+                    com.Parameters.Add("@l1", MySqlDbType.VarChar).Value = toAdd.AdresseClient.Ligne1;
+                    com.Parameters.Add("@l2", MySqlDbType.VarChar).Value = toAdd.AdresseClient.Ligne2;
+                    com.Parameters.Add("@cp", MySqlDbType.VarChar).Value = toAdd.AdresseClient.CodePostal;
+                    com.Parameters.Add("@ville", MySqlDbType.VarChar).Value = toAdd.AdresseClient.Ville;
+                    com.Parameters.Add("@province", MySqlDbType.VarChar).Value = toAdd.AdresseClient.Province;
+                    com.Parameters.Add("@pays", MySqlDbType.VarChar).Value = toAdd.AdresseClient.Pays;
+                    com.Parameters.Add("@adherance", MySqlDbType.Date).Value = toAdd.DateAdherance;
+                    com.Parameters.Add("@entreprise", MySqlDbType.VarChar).Value = toAdd.NomEntreprise;
+                    com.Parameters.Add("@rem", MySqlDbType.Decimal).Value = toAdd.Remise;
+                    try { com.ExecuteReader(); }
+                    catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+                    RefreshDBUsingSP();
+                }
+            }
+            return toReturn;
+        }
         #endregion
 
         static public void RefreshDBUsingSP()
