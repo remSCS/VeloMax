@@ -32,6 +32,15 @@ namespace ApplicationVeloMax.Views
         public event PropertyChangedEventHandler PropertyChanged;
 
         #region ViewModels
+        #region Menu
+        private Visibility isMenuVisible;
+        public Visibility IsMenuVisible
+        {
+            get { return isMenuVisible; }
+            set { isMenuVisible = value; }
+        }
+        #endregion
+
         #region Modèles
         private ObservableCollection<Modele> _modeles;
         public ObservableCollection<Modele> Modeles
@@ -632,6 +641,19 @@ namespace ApplicationVeloMax.Views
             Fournisseurs = new ObservableCollection<Fournisseur>(Fournisseur.Ensemble);
             Fidelios = new ObservableCollection<Fidelio>(Fidelio.Ensemble);
             Clients = new ObservableCollection<Client>(Client.Ensemble);
+        }
+
+        private void Window_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.SystemKey == Key.LeftAlt && displayMenu.Visibility == Visibility.Collapsed)
+            {
+                displayMenu.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                if(e.SystemKey == Key.LeftAlt && displayMenu.Visibility == Visibility.Visible)
+                displayMenu.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }
