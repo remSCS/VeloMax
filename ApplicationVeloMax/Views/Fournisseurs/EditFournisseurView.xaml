@@ -37,10 +37,6 @@
             <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Email"/>
             <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Teléphone"/>
             <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Date d'adhérence"/>
-            <CheckBox x:Name="fidelioCB" Height="25" HorizontalAlignment="Right" Margin="5" Padding="5" 
-                      Content="Adhérent Fidélio" VerticalContentAlignment="Center"
-                      Checked="fidelioCB_Checked" Unchecked="fidelioCB_Unchecked"/>
-            <Label x:Name="dateLabel" Height="25" HorizontalAlignment="Right" Margin="5" Content="Date d'adhésion"/>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Margin="5" Grid.Column="1" Grid.Row="1" Grid.RowSpan="2">

@@ -38,5 +38,15 @@ namespace ApplicationVeloMax.Views.Fournisseurs
         {
             InitializeComponent();
         }
+
+        private void editButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void cancelButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
