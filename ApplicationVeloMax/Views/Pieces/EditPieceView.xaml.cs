@@ -79,6 +79,7 @@ namespace ApplicationVeloMax.Views.Pieces
             string description = SelectedPiece.Description;
             DateTime de = SelectedPiece.DateE;
             DateTime ds = SelectedPiece.DateS;
+            decimal prix = SelectedPiece.PrixVente;
 
             try
             {
@@ -87,13 +88,14 @@ namespace ApplicationVeloMax.Views.Pieces
                 description = descTb.Text;
                 de = DateTime.Parse(dateETb.Text);
                 ds = DateTime.Parse(dateSTb.Text);
+                prix = Convert.ToDecimal(prixTb.Text);
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Veuillez vérifier le format !\nErreur : " + ex.ToString());
                 return;
             }
-            if (!DataAccess.FullyEditPiece(id, reference, nom, description, de, ds)) MessageBox.Show("Modification impossible.");
+            if (!DataAccess.FullyEditPiece(id, reference, nom, description, de, ds, prix)) MessageBox.Show("Modification impossible.");
             else
             {
                 MessageBox.Show("Modifications effectuées");

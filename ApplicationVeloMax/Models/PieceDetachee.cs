@@ -17,6 +17,7 @@ namespace ApplicationVeloMax.Models
         private DateTime dateE;
         private DateTime dateS;
         private int quantite;
+        private decimal prixVente;
 
         public PieceDetachee()
         {
@@ -45,6 +46,12 @@ namespace ApplicationVeloMax.Models
         {
             get { return description; }
             set { description = value; }
+        }
+
+        public decimal PrixVente
+        {
+            get { return prixVente; }
+            set { prixVente = value; }
         }
 
         public DateTime DateE

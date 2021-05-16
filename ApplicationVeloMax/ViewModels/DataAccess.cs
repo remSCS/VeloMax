@@ -194,7 +194,8 @@ namespace ApplicationVeloMax.ViewModels
                         Description = i.Field<string>("descriptionPiece"),
                         DateE = i.Field<DateTime>("dateEPiece"),
                         DateS = dateS,
-                        Quantite = i.Field<int>("quantitePiece")
+                        Quantite = i.Field<int>("quantitePiece"),
+                        PrixVente = i.Field<decimal>("prixVentePiece")
                     };
                 }
             }
@@ -582,7 +583,7 @@ namespace ApplicationVeloMax.ViewModels
             return toReturn;
         }
 
-        static public bool FullyEditPiece(int id, string reference, string nom, string description, DateTime dateE, DateTime dateS)
+        static public bool FullyEditPiece(int id, string reference, string nom, string description, DateTime dateE, DateTime dateS, decimal prix)
         {
             bool toReturn = true;
             using (var connexion = GetConnection())
@@ -597,6 +598,7 @@ namespace ApplicationVeloMax.ViewModels
                     com.Parameters.Add("@d", MySqlDbType.VarChar).Value = description;
                     com.Parameters.Add("@de", MySqlDbType.Date).Value = dateE;
                     com.Parameters.Add("@ds", MySqlDbType.Date).Value = dateS;
+                    com.Parameters.Add("@prix", MySqlDbType.Decimal).Value = prix;
                     try { com.ExecuteReader(); }
                     catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
                     PieceDetachee.Ensemble.Clear();
@@ -713,6 +715,7 @@ namespace ApplicationVeloMax.ViewModels
                     com.Parameters.Add("@de", MySqlDbType.Date).Value = toAdd.DateE;
                     com.Parameters.Add("@ds", MySqlDbType.Date).Value = toAdd.DateS;
                     com.Parameters.Add("@qte", MySqlDbType.Int64).Value = toAdd.Quantite;
+                    com.Parameters.Add("@prix", MySqlDbType.Decimal).Value = toAdd.PrixVente;
                     try { com.ExecuteReader(); }
                     catch { return false; }
                     RefreshDBUsingSP();

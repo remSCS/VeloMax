@@ -50,7 +50,8 @@ namespace ApplicationVeloMax.Views.Pieces
                 Description = "",
                 Quantite = 0,
                 DateE = DateTime.Today,
-                DateS = DateTime.Today
+                DateS = DateTime.Today,
+                PrixVente = 0M
             };
             Piece = toAdd;
         }
@@ -67,6 +68,7 @@ namespace ApplicationVeloMax.Views.Pieces
             string reference = Piece.Reference;
             string nom = Piece.Nom;
             string description = Piece.Description;
+            decimal prix = Piece.PrixVente;
             DateTime de = Piece.DateE;
             DateTime ds = Piece.DateS;
 
@@ -77,6 +79,7 @@ namespace ApplicationVeloMax.Views.Pieces
                 Piece.Description = descTb.Text;
                 Piece.DateE = DateTime.Parse(dateETb.Text);
                 Piece.DateS = DateTime.Parse(dateSTb.Text);
+                Piece.PrixVente = Convert.ToDecimal(prixTb.Text);
             }
             catch (Exception ex)
             {

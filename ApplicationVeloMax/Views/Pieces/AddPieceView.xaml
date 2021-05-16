@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ApplicationVeloMax.Converters"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="Ajout Pièce - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="NoResize"
-        Height="300" Width="400" FontFamily="Helvetica" Background="#e4e4e4">
+        Height="330" Width="400" FontFamily="Helvetica" Background="#e4e4e4">
 
     <Grid>
 
@@ -24,6 +24,7 @@
             <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Référence de la pièce"/>
             <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Nom de la pièce"/>
             <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Description de la pièce"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Prix de vente de la pièce"/>
             <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Date d'introduction"/>
             <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Date de sortie du marché"/>
         </StackPanel>
@@ -40,6 +41,9 @@
 
             <TextBox x:Name="descTb" Margin="5" Height="25" VerticalContentAlignment="Center"
                      Text="{Binding Piece.Description, Mode=TwoWay}"/>
+
+            <TextBox x:Name="prixTb" Margin="5" Height="25" VerticalContentAlignment="Center"
+                     Text="{Binding Piece.PrixVente, Mode=TwoWay}"/>
 
             <DatePicker x:Name="dateETb" Margin="5" Height="25" VerticalContentAlignment="Center"
                         SelectedDate="{Binding Piece.DateE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
