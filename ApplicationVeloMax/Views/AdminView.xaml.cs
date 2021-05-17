@@ -676,5 +676,10 @@ namespace ApplicationVeloMax.Views
                     displayMenu.Visibility = Visibility.Collapsed;
             }
         }
+
+        private void DetailPro_Click(object sender, MouseButtonEventArgs e)
+        {
+            new DetailClientPro((ClientPro)SelectedClient).ShowDialog();
+        }
     }
 }

@@ -139,6 +139,9 @@
     <Compile Include="Views\Clients\AddClientProView.xaml.cs">
       <DependentUpon>AddClientProView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Clients\DetailClientPro.xaml.cs">
+      <DependentUpon>DetailClientPro.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Clients\EditClientPartView.xaml.cs">
       <DependentUpon>EditClientPartView.xaml</DependentUpon>
     </Compile>
@@ -263,6 +266,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Clients\AddClientProView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Clients\DetailClientPro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

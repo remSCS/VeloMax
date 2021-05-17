@@ -680,7 +680,7 @@
                                       SelectedItem="{Binding SelectedClient, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Resources>
                                         <Style TargetType="DataGridRow">
-                                            <EventSetter Event="MouseDoubleClick" Handler="editClientProButton_Click"/>
+                                            <EventSetter Event="MouseDoubleClick" Handler="DetailPro_Click"/>
                                         </Style>
                                     </DataGrid.Resources>
                                     <DataGrid.Columns>
