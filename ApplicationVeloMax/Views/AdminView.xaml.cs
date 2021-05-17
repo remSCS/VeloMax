@@ -637,7 +637,7 @@ namespace ApplicationVeloMax.Views
                     if (DataAccess.RemoveFromFournisseurs(SelectedFournisseur))
                     {
                         Fournisseurs = new ObservableCollection<Fournisseur>(Fournisseur.Ensemble);
-                        MessageBox.Show("Founrisseur supprimé");
+                        MessageBox.Show("Fournisseur supprimé");
                     }
                     else MessageBox.Show("Impossible de supprimer un fournisseur actif.");
                 }
