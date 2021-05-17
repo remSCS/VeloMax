@@ -498,6 +498,16 @@ namespace ApplicationVeloMax.Views
             new AddPieceView().ShowDialog();
             RefreshProperties();
         }
+
+        private void pieceDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (SelectedPiece == null) MessageBox.Show("Veuillez choisir une pièce");
+            else
+            {
+                new DetailPieceView(SelectedPiece).ShowDialog();
+                RefreshProperties();
+            }
+        }
         #endregion
         #endregion
 
@@ -660,6 +670,16 @@ namespace ApplicationVeloMax.Views
             new AddFournisseurView().ShowDialog();
             RefreshProperties();
         }
+
+        private void FournisseursDetail_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (SelectedFournisseur == null) MessageBox.Show("Veuillez sélectionner un fournisseur !");
+            else
+            {
+                new DetailFournisseurView(SelectedFournisseur).ShowDialog();
+                RefreshProperties();
+            }
+        }
         #endregion
 
         private bool CheckIfSelected(object input)
@@ -699,14 +719,6 @@ namespace ApplicationVeloMax.Views
             }
         }
 
-        private void FournisseursDetail_Click(object sender, MouseButtonEventArgs e)
-        {
-            if (SelectedFournisseur == null) MessageBox.Show("Veuillez sélectionner un fournisseur !");
-            else
-            {
-                new DetailFournisseurView(SelectedFournisseur).ShowDialog();
-                RefreshProperties();
-            }
-        }
+
     }
 }

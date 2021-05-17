@@ -1,4 +1,5 @@
 ﻿using ApplicationVeloMax.Models;
+using ApplicationVeloMax.Views.Pieces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -64,9 +65,6 @@ namespace ApplicationVeloMax.Views.Modeles
             SelectedModele = _input;
         }
 
-        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            MessageBox.Show("coucou");
-        }
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new DetailPieceView(SelectedPiece).ShowDialog();
     }
 }

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Clients"
         mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="{Binding SelectedModele.Nom, StringFormat={}{0} - Détails}" 
-        Height="600" Width="950" WindowStartupLocation="CenterScreen">
+        Title="{Binding SelectedPiece.Nom, StringFormat={}{0} - Détails}" 
+        Height="600" Width="1000" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Vertical" Grid.Column="0">
-            <Label Content="{Binding SelectedModele.Id}" ContentStringFormat="Modèle #{0}" FontSize="16" FontWeight="Light"/>
+            <Label Content="{Binding SelectedPiece.Id}" ContentStringFormat="Pièce #{0}" FontSize="16" FontWeight="Light"/>
             <GroupBox Header="Informations" Margin="10,5">
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
@@ -103,9 +103,9 @@
                     <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
                     <DataGridTextColumn Width="*" Header="Grandeur" Binding="{Binding GrandeurModele}"/>
                     <DataGridTextColumn Width="*" Header="Ligne" Binding="{Binding LigneProduitModele}"/>
-                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Intro" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
-                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Sortie" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
-                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Prix" Binding="{Binding PrixUnitaire, StringFormat=€ {0}}"/>
+                    <DataGridTextColumn Width="*" CanUserResize="False" Header="Intro" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
+                    <DataGridTextColumn Width="*" CanUserResize="False" Header="Sortie" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
+                    <DataGridTextColumn Width="*" CanUserResize="False" Header="Prix" Binding="{Binding PrixUnitaire, StringFormat=€ {0}}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
