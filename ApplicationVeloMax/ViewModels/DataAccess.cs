@@ -903,6 +903,35 @@ namespace ApplicationVeloMax.ViewModels
             }
             return toReturn;
         }
+
+        static public bool AddCommande(Commande toAdd)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                if (Fournisseur.Ensemble.Exists(c => c.Siret == toAdd.Id))
+                {
+                    connexion.Open();
+                    MySqlCommand com = new MySqlCommand("CreateCommande", connexion) { CommandType = CommandType.StoredProcedure };
+                    com.Parameters.Add("@id", MySqlDbType.Int64).Value = toAdd.Id;
+                    com.Parameters.Add("@dE", MySqlDbType.Date).Value = toAdd.DateE;
+                    com.Parameters.Add("@dS", MySqlDbType.Date).Value = toAdd.DateS;
+                    com.Parameters.Add("@idC", MySqlDbType.Int64).Value = toAdd.ClientCommande.Id;
+                    com.Parameters.Add("@idS", MySqlDbType.Int64).Value = 1;
+                    com.Parameters.Add("@idA", MySqlDbType.Int64).Value = toAdd.AdresseLivraison.Id;
+                    com.Parameters.Add("@l1", MySqlDbType.VarChar).Value = toAdd.AdresseLivraison.Ligne1;
+                    com.Parameters.Add("@l2", MySqlDbType.VarChar).Value = toAdd.AdresseLivraison.Ligne2;
+                    com.Parameters.Add("@cp", MySqlDbType.VarChar).Value = toAdd.AdresseLivraison.CodePostal;
+                    com.Parameters.Add("@ville", MySqlDbType.VarChar).Value = toAdd.AdresseLivraison.Ville;
+                    com.Parameters.Add("@province", MySqlDbType.VarChar).Value = toAdd.AdresseLivraison.Province;
+                    com.Parameters.Add("@pays", MySqlDbType.VarChar).Value = toAdd.AdresseLivraison.Pays;
+                    try { com.ExecuteReader(); }
+                    catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+                    RefreshDBUsingSP();
+                }
+            }
+            return toReturn;
+        }
         #endregion
 
         static public void RefreshDBUsingSP()

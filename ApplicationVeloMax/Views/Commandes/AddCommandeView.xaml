@@ -43,7 +43,7 @@
                 <TextBox x:Name="siretTb" Margin="5" Height="25" IsReadOnly="True" VerticalContentAlignment="Center"
                      Text="{Binding CommandeToAdd.Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Background="#FF9B9B9B"/>
 
-                <DatePicker Margin="5" Height="25" VerticalContentAlignment="Center" Focusable="False" Background="#FF9B9B9B"
+                <DatePicker Margin="5" Height="25" VerticalContentAlignment="Center" IsHitTestVisible="False" Background="#FF9B9B9B"
                      SelectedDate="{Binding CommandeToAdd.DateE, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <DatePicker x:Name="dueDate" Margin="5" Height="25" VerticalAlignment="Center"
