@@ -44,7 +44,6 @@ namespace ApplicationVeloMax.Views.Modeles
             set
             {
                 _selectedPiece = value;
-                MessageBox.Show("scwitch");
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedPiece"));
             }
         }
