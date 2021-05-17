@@ -66,7 +66,7 @@
                 <!--#region Tab Produits-->
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
                             <Image Source="/img/Bike_Logo.png" Height="25" ToolTip="Afficher la liste des modèles" HorizontalAlignment="Left"/>
                             <Label Content="Produits" Foreground="Black" FontStyle="Italic" HorizontalAlignment="Left"/>
                         </StackPanel>
@@ -167,7 +167,7 @@
                                 </StackPanel>
 
                                 <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                                      IsReadOnly="True" ToolTip="Différents vélos proposés par Vélomax" AutoGenerateColumns="False" GridLinesVisibility="All" 
                                       ItemsSource="{Binding Modeles, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedItem="{Binding SelectedModele, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Resources>
@@ -283,7 +283,7 @@
                                 </StackPanel>
 
                                 <DataGrid Grid.Row="2" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      IsReadOnly="True" ToolTip="Pièces détachées proposées par Vélomax" AutoGenerateColumns="False" GridLinesVisibility="All"
                                       ItemsSource="{Binding PiecesDetachees, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedItem="{Binding SelectedPiece, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Resources>
@@ -314,8 +314,8 @@
                 <!--#region Tab Stocks-->
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel Orientation="Horizontal" HorizontalAlignment="Left">
-                            <Image Source="/img/Stock_Logo.png" Height="30" ToolTip="Afficher la liste des modèles" HorizontalAlignment="Left"/>
+                        <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
+                            <Image Source="/img/Stock_Logo.png" Height="30" ToolTip="Afficher le stock de Vélomax" HorizontalAlignment="Left"/>
                             <Label Content="Stock" Foreground="Black" FontStyle="Italic" HorizontalAlignment="Left"/>
                         </StackPanel>
                     </TabItem.Header>
@@ -329,7 +329,7 @@
                             </TabItem.Header>
 
                             <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                                      IsReadOnly="True" ToolTip="Stock de vélos" AutoGenerateColumns="False" GridLinesVisibility="All" 
                                       ItemsSource="{Binding Modeles, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedItem="{Binding SelectedModele, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <DataGrid.Columns>
@@ -339,7 +339,7 @@
                                     <DataGridTemplateColumn>
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Button Content="-" Click="DelQuantiteButton_Click"/>
+                                                <Button Content="-" Click="DelQuantiteButton_Click" ToolTip="Ajouter 1 vélo au stock"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -347,7 +347,7 @@
                                     <DataGridTemplateColumn>
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Button Content="+" Click="AddQuantiteButton_Click"/>
+                                                <Button Content="+" Click="AddQuantiteButton_Click" ToolTip="Enlever 1 vélo au stock"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -363,7 +363,7 @@
                             </TabItem.Header>
 
                             <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                                      IsReadOnly="True" ToolTip="Stock de pièces détachées" AutoGenerateColumns="False" GridLinesVisibility="All" 
                                       ItemsSource="{Binding PiecesDetachees, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedItem="{Binding SelectedPiece, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                 <DataGrid.Columns>
@@ -375,7 +375,7 @@
                                     <DataGridTemplateColumn>
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Button Content="-" Click="DelQuantitePieceButton_Click"/>
+                                                <Button Content="-" Click="DelQuantitePieceButton_Click" ToolTip="Enlever 1 vélo du stock"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -383,7 +383,7 @@
                                     <DataGridTemplateColumn>
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
-                                                <Button Content="+" Click="AddQuantitePieceButton_Click"/>
+                                                <Button Content="+" Click="AddQuantitePieceButton_Click" ToolTip="Ajouter 1 vélo au stock"/>
                                             </DataTemplate>
                                         </DataGridTemplateColumn.CellTemplate>
                                     </DataGridTemplateColumn>
@@ -415,7 +415,7 @@
                                    Margin="10,0,0,0"/>
 
                                 <DataGrid  Margin="10,0,10,10" Grid.Column="0" Grid.Row="1"
-                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                                      IsReadOnly="True" ToolTip="Vélos dont le stock est inférieur ou égal à 2" AutoGenerateColumns="False" GridLinesVisibility="All" 
                                       ItemsSource="{Binding ModelesStock, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" >
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
@@ -430,7 +430,7 @@
                                    Margin="10,0,0,0"/>
 
                                 <DataGrid  Margin="10,0,10,10" Grid.Column="1" Grid.Row="1"
-                                IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                                IsReadOnly="True" ToolTip="Pièces dont le stock est inférieur ou égal à 2" AutoGenerateColumns="False" GridLinesVisibility="All" 
                                       ItemsSource="{Binding PiecesDetacheesStock, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                       SelectedItem="{Binding SelectedPieceStock, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Resources>
@@ -458,8 +458,8 @@
                 <!--#region Tab Clients-->
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/img/Clients_Logo.png" Height="30" ToolTip="Afficher la liste des modèles"/>
+                        <StackPanel Orientation="Vertical">
+                            <Image Source="/img/Clients_Logo.png" Height="30" ToolTip="Afficher la liste des clients"/>
                             <Label Content="Clients" Foreground="Black" FontStyle="Italic"/>
                         </StackPanel>
                     </TabItem.Header>
@@ -561,7 +561,7 @@
                                 </StackPanel>
 
                                 <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      IsReadOnly="True" ToolTip="Clients particuliers" AutoGenerateColumns="False" GridLinesVisibility="All"
                                       ItemsSource="{Binding ClientsParts, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedItem="{Binding SelectedClient, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Resources>
@@ -675,7 +675,7 @@
                                 </StackPanel>
 
                                 <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      IsReadOnly="True" ToolTip="Clients professionnels" AutoGenerateColumns="False" GridLinesVisibility="All"
                                       ItemsSource="{Binding ClientsPros, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedItem="{Binding SelectedClient, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Resources>
@@ -789,7 +789,7 @@
                                 </StackPanel>
 
                                 <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      IsReadOnly="True" ToolTip="Programmes Fidelio" AutoGenerateColumns="False" GridLinesVisibility="All"
                                       ItemsSource="{Binding Fidelios, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedItem="{Binding SelectedFidelio, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Resources>
@@ -818,8 +818,8 @@
                 <!--#region Tab Fournisseurs-->
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/img/Fournisseur_Logo.png" Height="30" ToolTip="Afficher la liste des modèles"/>
+                        <StackPanel Orientation="Vertical">
+                            <Image Source="/img/Fournisseur_Logo.png" Height="30" ToolTip="Afficher la liste des fournisseurs"/>
                             <Label Content="Fournisseurs" Foreground="Black" FontStyle="Italic"/>
                         </StackPanel>
                     </TabItem.Header>
@@ -915,7 +915,7 @@
                         </StackPanel>
 
                         <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
-                              IsReadOnly="True"  ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                              IsReadOnly="True"  ToolTip="Fournisseurs de Velomax" AutoGenerateColumns="False" GridLinesVisibility="All"
                               ItemsSource="{Binding Fournisseurs, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                               SelectedItem="{Binding SelectedFournisseur, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                             <DataGrid.Resources>
@@ -939,8 +939,8 @@
                 <!--#region Tab Commandes-->
                 <TabItem>
                     <TabItem.Header>
-                        <StackPanel Orientation="Horizontal">
-                            <Image Source="/img/Commandes_Logo.png" Height="30" ToolTip="Afficher la liste des modèles"/>
+                        <StackPanel Orientation="Vertical">
+                            <Image Source="/img/Commandes_Logo.png" Height="30" ToolTip="Afficher la liste des commandes"/>
                             <Label Content="Commandes" Foreground="Black" FontStyle="Italic"/>
                         </StackPanel>
                     </TabItem.Header>
@@ -1054,7 +1054,7 @@
                                 </StackPanel>
 
                                 <DataGrid Grid.Row="2" Grid.Column="0" Margin="10" 
-                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      IsReadOnly="True" ToolTip="Toutes les commandes" AutoGenerateColumns="False" GridLinesVisibility="All"
                                       ItemsSource="{Binding Commandes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                       SelectedItem="{Binding SelectedCommande, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Resources>
@@ -1141,7 +1141,7 @@
                                 </StackPanel>
 
                                 <DataGrid x:Name="ordersToPrepare" Grid.Row="2" Grid.Column="0" Margin="10" 
-                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      IsReadOnly="True" ToolTip="Commandes en cours de préparation" AutoGenerateColumns="False" GridLinesVisibility="All"
                                       ItemsSource="{Binding CommandesPrep, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                       SelectedItem="{Binding SelectedCommandeToDo, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Resources>
@@ -1211,7 +1211,7 @@
                                 </TextBox>
 
                                 <DataGrid x:Name="doneOrdersDatagrid" Grid.Row="1" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      IsReadOnly="True" ToolTip="Commandes terminées" AutoGenerateColumns="False" GridLinesVisibility="All"
                                       ItemsSource="{Binding CommandesDone, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                       SelectedItem="{Binding SelectedCommandeDone, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}" Grid.ColumnSpan="2">
                                     <DataGrid.Resources>
@@ -1282,7 +1282,7 @@
                                 </TextBox>
 
                                 <DataGrid x:Name="cancelledOrdersDatagrid" Grid.Row="1" Grid.Column="0" Margin="10" 
-                                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      IsReadOnly="True" ToolTip="Commandes terminées" AutoGenerateColumns="False" GridLinesVisibility="All"
                                       ItemsSource="{Binding CommandesAnnul, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                       SelectedItem="{Binding SelectedCommandeCancelled, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Resources>

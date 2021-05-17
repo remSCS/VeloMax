@@ -67,7 +67,7 @@
 
                     <Label Content="Programme : "
                            Grid.Row="1" Grid.Column="0"/>
-                    <Label Content="{Binding ClientPart.FidelioClient.Nom, Mode=OneWay}" ContentStringFormat="{}{0}%" FontWeight="Bold"
+                    <Label Content="{Binding ClientPart.FidelioClient.Nom, Mode=OneWay}" FontWeight="Bold"
                            Grid.Row="1" Grid.Column="1"/>
 
                 </Grid>
