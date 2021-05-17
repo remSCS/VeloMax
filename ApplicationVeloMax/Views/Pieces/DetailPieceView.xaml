@@ -89,25 +89,54 @@
             </GroupBox>
         </StackPanel>
 
-        <GroupBox Header="Composition" Grid.Column="1" Margin="10,5">
-            <DataGrid ItemsSource="{Binding Modeles, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            <GroupBox Header="Modèles composées avec cette pièce" Grid.Row="0" Margin="10,5">
+                <DataGrid ItemsSource="{Binding Modeles, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                       SelectedItem="{Binding SelectedModele, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" IsReadOnly="True" >
-                <DataGrid.Resources>
-                    <Style TargetType="DataGridRow">
-                        <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
-                    </Style>
-                </DataGrid.Resources>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
-                    <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
-                    <DataGridTextColumn Width="*" Header="Grandeur" Binding="{Binding GrandeurModele}"/>
-                    <DataGridTextColumn Width="*" Header="Ligne" Binding="{Binding LigneProduitModele}"/>
-                    <DataGridTextColumn Width="*" CanUserResize="False" Header="Intro" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
-                    <DataGridTextColumn Width="*" CanUserResize="False" Header="Sortie" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
-                    <DataGridTextColumn Width="*" CanUserResize="False" Header="Prix" Binding="{Binding PrixUnitaire, StringFormat=€ {0}}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </GroupBox>
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
+                        <DataGridTextColumn Width="*" Header="Grandeur" Binding="{Binding GrandeurModele}"/>
+                        <DataGridTextColumn Width="*" Header="Ligne" Binding="{Binding LigneProduitModele}"/>
+                        <DataGridTextColumn Width="*" CanUserResize="False" Header="Intro" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
+                        <DataGridTextColumn Width="*" CanUserResize="False" Header="Sortie" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
+                        <DataGridTextColumn Width="*" CanUserResize="False" Header="Prix" Binding="{Binding PrixUnitaire, StringFormat=€ {0}}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+
+            <GroupBox Header="Fournisseurs pour cette pièce" Grid.Row="1"  Margin="10,5">
+                <DataGrid ItemsSource="{Binding Modeles, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedModele, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" IsReadOnly="True" >
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
+                        <DataGridTextColumn Width="*" Header="Grandeur" Binding="{Binding GrandeurModele}"/>
+                        <DataGridTextColumn Width="*" Header="Ligne" Binding="{Binding LigneProduitModele}"/>
+                        <DataGridTextColumn Width="*" CanUserResize="False" Header="Intro" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
+                        <DataGridTextColumn Width="*" CanUserResize="False" Header="Sortie" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
+                        <DataGridTextColumn Width="*" CanUserResize="False" Header="Prix" Binding="{Binding PrixUnitaire, StringFormat=€ {0}}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+            </GroupBox>
+
+        </Grid>
     </Grid>
 </Window>
