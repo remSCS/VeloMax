@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Commandes"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="Commande - Détails" Icon="/img/Commandes_Logo.png"
-        Height="450" Width="800" FontFamily="Helvetica" Background="#e4e4e4">
+        Height="675" Width="1200" FontFamily="Helvetica" Background="#e4e4e4">
 
     <Grid>
 
@@ -83,7 +83,7 @@
                 <DataGrid.Columns>
                     <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
                     <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
-                    <DataGridTextColumn Width="*" Header="Grandeur" Binding="{Binding Grandeur}"/>
+                    <DataGridTextColumn Width="*" Header="Grandeur" Binding="{Binding Grandeur.Nom}"/>
                     <DataGridTextColumn Width="*" Header="Ligne" Binding="{Binding LigneProduitModele}"/>
                     <DataGridTextColumn Width="*" Header="Prix" Binding="{Binding PrixUnitaire}"/>
                 </DataGrid.Columns>

@@ -74,21 +74,49 @@ namespace ApplicationVeloMax.Models
             }
         }
 
-        public decimal MontantCommandeAvecTVASansRemise(decimal TVAEnPourcentage)
+        public decimal MontantCommandeAvecTVASansRemise
         {
-            return this.MontantCommandeSansRien + (this.MontantCommandeSansRien * TVAEnPourcentage / 100);
+            get { return this.MontantCommandeSansRien + (this.MontantCommandeSansRien * 20 / 100); }
         }
 
-        public decimal MontantCommandeAvecTVAAvecRemise(decimal TVAEnPourcentage)
+        public decimal MontantCommandeAvecTVAAvecRemise
         {
-            decimal prix = this.MontantCommandeAvecTVASansRemise(TVAEnPourcentage);
-            ClientPart part = ClientPart.EnsembleParticuliers.Find(c => c.Id == this.ClientCommande.Id);
-            ClientPro pro = ClientPro.EnsemblePros.Find(c => c.Id == this.ClientCommande.Id);
-            if (part == null) prix = prix + (prix * pro.Remise / 100);
-            else if (part != null && part.FidelioClient != null) prix = prix + (prix * part.FidelioClient.Rabais / 100);
-            return prix;
+            get
+            {
+                decimal prix = this.MontantCommandeAvecTVASansRemise;
+                ClientPart part = ClientPart.EnsembleParticuliers.Find(c => c.Id == this.ClientCommande.Id);
+                ClientPro pro = ClientPro.EnsemblePros.Find(c => c.Id == this.ClientCommande.Id);
+                if (part == null) prix = prix + (prix * pro.Remise / 100);
+                else if (part != null && part.FidelioClient != null) prix = prix + (prix * part.FidelioClient.Rabais / 100);
+                return prix;
+            }
         }
 
+        public string Destinataire
+        {
+            get
+            {
+                string destinataire = "";
+                ClientPart part = ClientPart.EnsembleParticuliers.Find(c => c.Id == this.ClientCommande.Id);
+                ClientPro pro = ClientPro.EnsemblePros.Find(c => c.Id == this.ClientCommande.Id);
+                if (part == null) destinataire = pro.NomEntreprise;
+                else if (part != null) destinataire =part.ContactClient.FullName;
+                return destinataire;
+            }
+        }
+
+        public decimal Remise
+        {
+            get
+            {
+                return MontantCommandeAvecTVAAvecRemise - MontantCommandeAvecTVASansRemise;
+            }
+        }
+
+        public decimal MontantTVA
+        {
+            get { return MontantCommandeAvecTVAAvecRemise * 20 / 100; }
+        }
         public Adresse AdresseLivraison
         {
             get { return adresseLivraison; }
