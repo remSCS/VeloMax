@@ -918,6 +918,11 @@
                               IsReadOnly="True"  ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All"
                               ItemsSource="{Binding Fournisseurs, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                               SelectedItem="{Binding SelectedFournisseur, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                            <DataGrid.Resources>
+                                <Style TargetType="DataGridRow">
+                                    <EventSetter Event="MouseDoubleClick" Handler="FournisseursDetail_Click"/>
+                                </Style>
+                            </DataGrid.Resources>
                             <DataGrid.Columns>
                                 <DataGridTextColumn Width="*" Header="SIRET" Binding="{Binding Siret}"/>
                                 <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
