@@ -113,11 +113,6 @@
         <GroupBox Header="Historique des commandes" Grid.Column="1" Margin="10,5">
             <DataGrid ItemsSource="{Binding Pieces, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" IsReadOnly="True" >
-                <DataGrid.Resources>
-                    <Style TargetType="DataGridRow">
-                        <EventSetter Event="MouseDoubleClick" Handler="DetailCommande_Click"/>
-                    </Style>
-                </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding PieceDetacheeFournisseur.Id}" Width="auto"/>
                     <DataGridTextColumn Header="Nom pièce" Binding="{Binding PieceDetacheeFournisseur.Reference}" Width="*" />

@@ -520,7 +520,7 @@ namespace ApplicationVeloMax.Views
             }
             RefreshProperties();
         }
-       
+
         #region Fidelio
         private void removeFidelioButton_Click(object sender, RoutedEventArgs e)
         {
@@ -696,6 +696,16 @@ namespace ApplicationVeloMax.Views
             {
                 if (e.SystemKey == Key.LeftAlt && displayMenu.Visibility == Visibility.Visible)
                     displayMenu.Visibility = Visibility.Collapsed;
+            }
+        }
+
+        private void FournisseursDetail_Click(object sender, MouseButtonEventArgs e)
+        {
+            if (SelectedFournisseur == null) MessageBox.Show("Veuillez sélectionner un fournisseur !");
+            else
+            {
+                new DetailFournisseurView(SelectedFournisseur).ShowDialog();
+                RefreshProperties();
             }
         }
     }

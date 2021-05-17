@@ -25,7 +25,6 @@ namespace ApplicationVeloMax.Views.Fournisseurs
         public event PropertyChangedEventHandler PropertyChanged;
 
         private Fournisseur _fournisseur;
-
         public Fournisseur Fournisseur
         {
             get { return _fournisseur; }
@@ -38,7 +37,6 @@ namespace ApplicationVeloMax.Views.Fournisseurs
         }
 
         private ObservableCollection<FournisseurPiece> _pieces;
-
         public ObservableCollection<FournisseurPiece> Pieces
         {
             get { return _pieces; }
@@ -48,7 +46,6 @@ namespace ApplicationVeloMax.Views.Fournisseurs
                 PropertyChanged(this, new PropertyChangedEventArgs("Pieces"));
             }
         }
-
 
         public DetailFournisseurView(Fournisseur fourni)
         {
