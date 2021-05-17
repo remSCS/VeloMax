@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Commandes"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="Commande - Détails" Icon="/img/Commandes_Logo.png"
-        Height="675" Width="1200" FontFamily="Helvetica" Background="#e4e4e4">
+        Height="675" Width="1200" FontFamily="Helvetica" Background="White">
 
     <Grid>
 
