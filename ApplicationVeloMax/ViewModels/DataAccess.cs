@@ -236,7 +236,7 @@ namespace ApplicationVeloMax.ViewModels
                 MySqlDataAdapter da = new MySqlDataAdapter(com);
                 da.Fill(dt);
 
-                foreach (DataRow i in dt.Rows)  
+                foreach (DataRow i in dt.Rows)
                     Modele.Ensemble.Find(m => m.Id == i.Field<int>("idModele")).PiecesComposition.Add(PieceDetachee.Ensemble.Find(p => p.Id == i.Field<int>("idPieceDetachee")));
             }
         }
@@ -712,7 +712,7 @@ namespace ApplicationVeloMax.ViewModels
             }
             return toReturn;
         }
-        
+
         static public bool FullyEditFournisseur(int siret, int idLibelle, string nomFournisseur, string nom, string prenom, string tel, string mail, string l1, string l2, string cp, string ville, string province, string pays)
         {
             bool toReturn = true;
@@ -945,6 +945,26 @@ namespace ApplicationVeloMax.ViewModels
                     catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
                     RefreshDBUsingSP();
                 }
+            }
+            return toReturn;
+        }
+
+        static public bool AddFournisseurPiece(FournisseurPiece toAdd)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                connexion.Open();
+                MySqlCommand com = new MySqlCommand("CreateFournisseurPiece", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@idF", MySqlDbType.Int64).Value = toAdd.FournisseurPieceDetachee.Siret;
+                com.Parameters.Add("@idP", MySqlDbType.Int64).Value = toAdd.PieceDetacheeFournisseur.Id;
+                com.Parameters.Add("@prix", MySqlDbType.Decimal).Value = toAdd.Prix;
+                com.Parameters.Add("@delai", MySqlDbType.Int64).Value = toAdd.Delai;
+                com.Parameters.Add("@noC", MySqlDbType.VarChar).Value = toAdd.NumCatalogue;
+                try { com.ExecuteReader(); }
+                catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+                RefreshDBUsingSP();
+
             }
             return toReturn;
         }

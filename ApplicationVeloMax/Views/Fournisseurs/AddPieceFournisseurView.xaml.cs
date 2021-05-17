@@ -24,14 +24,13 @@ namespace ApplicationVeloMax.Views.Fournisseurs
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private Fournisseur _fournisseur;
-
+        private Fournisseur _fournisseurAdd;
         public Fournisseur FournisseurAdd
         {
-            get { return _fournisseur; }
+            get { return _fournisseurAdd; }
             set
             {
-                _fournisseur = value;
+                _fournisseurAdd = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("FournisseurAdd"));
             }
         }
@@ -51,17 +50,32 @@ namespace ApplicationVeloMax.Views.Fournisseurs
 
         public ObservableCollection<PieceDetachee> Pieces
         {
-            get { return new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble); }
+            get
+            {
+                return new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble.Except(FournisseurPiece.PiecesFournies(FournisseurAdd)));
+            }
 
         }
-
-
 
         public AddPieceFournisseurView(Fournisseur fourni)
         {
             InitializeComponent();
             FournisseurAdd = fourni;
 
+        }
+
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedPiece != null && Decimal.TryParse(PrixBox.Text, out decimal prix) && Int32.TryParse(DelaiBox.Text, out int delaiJ))
+            {
+
+            }
+            else MessageBox.Show("Vérifiez vos paramètres", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }
