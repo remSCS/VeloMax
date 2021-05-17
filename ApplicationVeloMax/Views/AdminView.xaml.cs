@@ -156,8 +156,8 @@ namespace ApplicationVeloMax.Views
             set
             {
                 _selectedCommande = value;
-                if (SelectedCommande != null && CommandesPrep.Contains(SelectedCommande)) cancelOrderButton.Visibility = Visibility.Visible;
-                else cancelOrderButton.Visibility = Visibility.Hidden;
+                if (SelectedCommande != null && CommandesPrep.Contains(SelectedCommande)) { cancelOrderButton.Visibility = Visibility.Visible; commandesModifierButton.Visibility = Visibility.Visible; }
+                else { cancelOrderButton.Visibility = Visibility.Hidden; commandesModifierButton.Visibility = Visibility.Hidden; }
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedCommande"));
             }
         }
@@ -510,7 +510,7 @@ namespace ApplicationVeloMax.Views
             }
             RefreshProperties();
         }
-
+       
         #region Fidelio
         private void removeFidelioButton_Click(object sender, RoutedEventArgs e)
         {
@@ -546,6 +546,8 @@ namespace ApplicationVeloMax.Views
             new AddFidelioView().ShowDialog();
             RefreshProperties();
         }
+
+        private void FidelioClients_Click(object sender, MouseButtonEventArgs e) => new FidelioDetailClients(SelectedFidelio).ShowDialog();
         #endregion
 
         #region Particuliers
@@ -564,6 +566,8 @@ namespace ApplicationVeloMax.Views
             new AddClientPartView().ShowDialog();
             RefreshProperties();
         }
+
+        private void DetailPart_Click(object sender, MouseButtonEventArgs e) => new DetailClientPart((ClientPart)SelectedClient).ShowDialog();
         #endregion
 
         #region Profesionnels
@@ -582,6 +586,8 @@ namespace ApplicationVeloMax.Views
             new AddClientProView().ShowDialog();
             RefreshProperties();
         }
+
+        private void DetailPro_Click(object sender, MouseButtonEventArgs e) => new DetailClientPro((ClientPro)SelectedClient).ShowDialog();
         #endregion
         #endregion
 
@@ -681,21 +687,6 @@ namespace ApplicationVeloMax.Views
                 if (e.SystemKey == Key.LeftAlt && displayMenu.Visibility == Visibility.Visible)
                     displayMenu.Visibility = Visibility.Collapsed;
             }
-        }
-
-        private void DetailPro_Click(object sender, MouseButtonEventArgs e)
-        {
-            new DetailClientPro((ClientPro)SelectedClient).ShowDialog();
-        }
-
-        private void DetailPart_Click(object sender, MouseButtonEventArgs e)
-        {
-            new DetailClientPart((ClientPart)SelectedClient).ShowDialog();
-        }
-
-        private void FidelioClients_Click(object sender, MouseButtonEventArgs e)
-        {
-            new FidelioDetailClients(SelectedFidelio).ShowDialog();
         }
     }
 }

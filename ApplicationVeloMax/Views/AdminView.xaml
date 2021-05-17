@@ -941,7 +941,6 @@
                     </TabItem.Header>
 
                     <TabControl TabStripPlacement="Top" Margin="-4">
-
                         <!--#region Toutes-->
                         <TabItem Height="50" VerticalAlignment="Top">
                             <TabItem.Header>
@@ -1007,7 +1006,7 @@
                                     </Button>
 
                                     <Button x:Name="cancelOrderButton" Margin="5,0" Padding="5" Content="Annuler"
-                                Foreground="White" Background="#c14141" Click="cancelOrderButton_Click">
+                                            Foreground="White" Background="#c14141" Click="cancelOrderButton_Click">
                                         <Button.Resources>
                                             <Style TargetType="Border">
                                                 <Setter Property="CornerRadius" Value="10"/>

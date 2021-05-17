@@ -909,7 +909,7 @@ namespace ApplicationVeloMax.ViewModels
             bool toReturn = true;
             using (var connexion = GetConnection())
             {
-                if (Fournisseur.Ensemble.Exists(c => c.Siret == toAdd.Id))
+                if (Commande.Ensemble.Exists(c => c.Id == toAdd.Id))
                 {
                     connexion.Open();
                     MySqlCommand com = new MySqlCommand("CreateCommande", connexion) { CommandType = CommandType.StoredProcedure };
