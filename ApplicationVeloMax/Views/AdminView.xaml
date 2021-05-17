@@ -288,7 +288,7 @@
                                       SelectedItem="{Binding SelectedPiece, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Resources>
                                         <Style TargetType="DataGridRow">
-                                            <EventSetter Event="MouseDoubleClick" Handler="editPieceButton_Click"/>
+                                            <EventSetter Event="MouseDoubleClick" Handler="pieceDataGrid_MouseDoubleClick"/>
                                         </Style>
                                     </DataGrid.Resources>
                                     <DataGrid.Columns>

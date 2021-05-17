@@ -1,13 +1,13 @@
-﻿<Window x:Class="ApplicationVeloMax.Views.Modeles.DetailsModeleView"
+﻿<Window x:Class="ApplicationVeloMax.Views.Pieces.DetailPieceView"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Clients"
         mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="{Binding SelectedModele.Nom, StringFormat={}{0} - Détails}" 
-        Height="600" Width="950" WindowStartupLocation="CenterScreen">
-    
+        Title="{Binding SelectedPiece.Nom, StringFormat={}{0} - Détails}" 
+        Height="600" Width="1000" WindowStartupLocation="CenterScreen">
+
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Vertical" Grid.Column="0">
-            <Label Content="{Binding SelectedModele.Id}" ContentStringFormat="Modèle #{0}" FontSize="16" FontWeight="Light"/>
+            <Label Content="{Binding SelectedPiece.Id}" ContentStringFormat="Pièce #{0}" FontSize="16" FontWeight="Light"/>
             <GroupBox Header="Informations" Margin="10,5">
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
@@ -28,19 +28,19 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Orientation="Vertical" Grid.Column="0">
+                        <Label Height="25" Content="Référence :"/>
                         <Label Height="25" Content="Nom :"/>
-                        <Label Height="25" Content="Grandeur :"/>
-                        <Label Height="25" Content="Ligne de produit :"/>
-                        <Label Height="25" Content="Prix Unitaire :"/>
+                        <Label Height="25" Content="Description :"/>
+                        <Label Height="25" Content="Prix unitaire :"/>
                         <Label Height="25" Content="Quantité en stock :"/>
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Grid.Column="1">
-                        <Label Height="25" Content="{Binding SelectedModele.Nom}" FontWeight="Bold"/>
-                        <Label Height="25" Content="{Binding SelectedModele.GrandeurModele.Nom}" FontWeight="Bold"/>
-                        <Label Height="25" Content="{Binding SelectedModele.LigneProduitModele.Nom}" FontWeight="Bold"/>
-                        <Label Height="25" Content="{Binding SelectedModele.PrixUnitaire, Mode=OneWay}" ContentStringFormat="{}{1} €" FontWeight="Bold"/>
-                        <Label Height="25" Content="{Binding SelectedModele.Quantite}" FontWeight="Bold"/>
+                        <Label Height="25" Content="{Binding SelectedPiece.Reference}" FontWeight="Bold"/>
+                        <Label Height="25" Content="{Binding SelectedPiece.Nom}" FontWeight="Bold"/>
+                        <Label Height="25" Content="{Binding SelectedPiece.Description}" FontWeight="Bold"/>
+                        <Label Height="25" Content="{Binding SelectedPiece.PrixVente, Mode=OneWay}" ContentStringFormat="{}{1} €" FontWeight="Bold"/>
+                        <Label Height="25" Content="{Binding SelectedPiece.Quantite}" FontWeight="Bold"/>
                     </StackPanel>
                 </Grid>
             </GroupBox>
@@ -62,8 +62,8 @@
                     </StackPanel>
 
                     <StackPanel Orientation="Vertical" Grid.Column="1">
-                        <Label Height="25" Content="{Binding SelectedModele.DateE, StringFormat=MM/dd/yyyy}" FontWeight="Bold"/>
-                        <Label Height="25" Content="{Binding SelectedModele.DateS, StringFormat=MM/dd/yyyy}" FontWeight="Bold"/>
+                        <Label Height="25" Content="{Binding SelectedPiece.DateE, StringFormat=MM/dd/yyyy}" FontWeight="Bold"/>
+                        <Label Height="25" Content="{Binding SelectedPiece.DateS, StringFormat=MM/dd/yyyy}" FontWeight="Bold"/>
                     </StackPanel>
                 </Grid>
             </GroupBox>
@@ -78,7 +78,7 @@
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <StackPanel Orientation="Vertical" Grid.Column="0">
                         <Label Height="25" Content="Stat"/>
                         <Label Height="25" Content="Stat"/>
@@ -90,8 +90,8 @@
         </StackPanel>
 
         <GroupBox Header="Composition" Grid.Column="1" Margin="10,5">
-            <DataGrid ItemsSource="{Binding PiecesModele, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                      SelectedItem="{Binding SelectedPiece, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+            <DataGrid ItemsSource="{Binding Modeles, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedModele, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
                       AutoGenerateColumns="False" IsReadOnly="True" >
                 <DataGrid.Resources>
                     <Style TargetType="DataGridRow">
@@ -99,12 +99,13 @@
                     </Style>
                 </DataGrid.Resources>
                 <DataGrid.Columns>
-                    <DataGridTextColumn Width="auto" Header="Référence" Binding="{Binding Reference}"/>
+                    <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
                     <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
-                    <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}"/>
-                    <DataGridTextColumn Width="*" Header="Intro" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
-                    <DataGridTextColumn Width="*"  Header="Sortie" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
-                    <DataGridTextColumn Width="*" Header="Prix" Binding="{Binding PrixVente, StringFormat=€ {0}}"/>
+                    <DataGridTextColumn Width="*" Header="Grandeur" Binding="{Binding GrandeurModele}"/>
+                    <DataGridTextColumn Width="*" Header="Ligne" Binding="{Binding LigneProduitModele}"/>
+                    <DataGridTextColumn Width="*" CanUserResize="False" Header="Intro" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
+                    <DataGridTextColumn Width="*" CanUserResize="False" Header="Sortie" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
+                    <DataGridTextColumn Width="*" CanUserResize="False" Header="Prix" Binding="{Binding PrixUnitaire, StringFormat=€ {0}}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
