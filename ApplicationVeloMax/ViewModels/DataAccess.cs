@@ -236,7 +236,7 @@ namespace ApplicationVeloMax.ViewModels
                 MySqlDataAdapter da = new MySqlDataAdapter(com);
                 da.Fill(dt);
 
-                foreach (DataRow i in dt.Rows)
+                foreach (DataRow i in dt.Rows)  
                     Modele.Ensemble.Find(m => m.Id == i.Field<int>("idModele")).PiecesComposition.Add(PieceDetachee.Ensemble.Find(p => p.Id == i.Field<int>("idPieceDetachee")));
             }
         }
@@ -957,8 +957,8 @@ namespace ApplicationVeloMax.ViewModels
             GetAllGrandeursUsingSP();
             GetAllLigneProduitsUsingSP();
             GetAllFideliosUsingSP();
-            GetAllModelsUsingSP();
             GetAllPiecesDetacheesUsingSP();
+            GetAllModelsUsingSP();
             GetAllFournisseursUsingSP();
             GetAllClientsUsingSP();
             GetAllFournisseursPiecesUsingSP();

@@ -4,9 +4,8 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Fournisseurs"
-        mc:Ignorable="d" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="{Binding Fournisseur.Nom}" Height="900" Width="1200">
+        Title="{Binding Fournisseur.Nom}" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -24,7 +23,7 @@
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
                         <RowDefinition Height="auto"/>
-
+                        
                     </Grid.RowDefinitions>
 
                     <Grid.ColumnDefinitions>
@@ -73,7 +72,7 @@
 
                     <Label Content="Libéllé : "
                            Grid.Row="1" Grid.Column="0"/>
-                    <Label Content="{Binding Fournisseur.LibelleFournisseur.Nom}" FontWeight="Bold"
+                    <Label Content="{Binding Fournisseur.LibelleFournisseur.Nom}" ContentStringFormat="{}{0}%" FontWeight="Bold"
                            Grid.Row="1" Grid.Column="1"/>
 
                 </Grid>
@@ -111,31 +110,17 @@
             </GroupBox>
         </StackPanel>
 
-        <GroupBox Header="Pièces disponibles" Grid.Column="1" Margin="10,5">
-            <StackPanel Orientation="Vertical">
+        <GroupBox Header="Historique des commandes" Grid.Column="1" Margin="10,5">
+            <DataGrid ItemsSource="{Binding Pieces, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" IsReadOnly="True" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding PieceDetacheeFournisseur.Id}" Width="auto"/>
+                    <DataGridTextColumn Header="Nom pièce" Binding="{Binding PieceDetacheeFournisseur.Reference}" Width="*" />
+                    <DataGridTextColumn Header="Num. catalogue" Binding="{Binding NumCatalogue}" Width="auto"/>
+                    <DataGridTextColumn Header="Prix fournisseur" Binding="{Binding Prix}" Width="auto"/>
 
-                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <Button HorizontalAlignment="Right" Margin="10" Click="DelPieceButton_Click" VerticalAlignment="Top">
-                        <materialDesign:PackIcon Kind="RemoveBoxMultiple"/>
-                    </Button>
-                    <Button HorizontalAlignment="Right" Margin="10" Click="AddPieceButton_Click" VerticalAlignment="Top">
-                        <materialDesign:PackIcon Kind="PlusBoxMultipleOutline"/>
-                    </Button>
-                </StackPanel>
-                
-                <DataGrid ItemsSource="{Binding Pieces, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                          SelectedItem="{Binding SelectedPiece, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                          AutoGenerateColumns="False" IsReadOnly="True" >
-                    <DataGrid.Columns>
-                        <DataGridTextColumn Header="ID" Binding="{Binding PieceDetacheeFournisseur.Id}" Width="auto"/>
-                        <DataGridTextColumn Header="Nom pièce" Binding="{Binding PieceDetacheeFournisseur.Reference}" Width="*" />
-                        <DataGridTextColumn Header="Num. catalogue" Binding="{Binding NumCatalogue}" Width="auto"/>
-                        <DataGridTextColumn Header="Délai" Binding="{Binding Delai}" Width="auto"/>
-                        <DataGridTextColumn Header="Prix fournisseur" Binding="{Binding Prix}" Width="auto"/>
-                    </DataGrid.Columns>
-                </DataGrid>
-                
-            </StackPanel>
+                </DataGrid.Columns>
+            </DataGrid>
         </GroupBox>
     </Grid>
 </Window>
