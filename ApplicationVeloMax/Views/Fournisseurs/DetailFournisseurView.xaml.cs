@@ -25,7 +25,6 @@ namespace ApplicationVeloMax.Views.Fournisseurs
         public event PropertyChangedEventHandler PropertyChanged;
 
         private Fournisseur _fournisseur;
-
         public Fournisseur Fournisseur
         {
             get { return _fournisseur; }
@@ -38,7 +37,6 @@ namespace ApplicationVeloMax.Views.Fournisseurs
         }
 
         private ObservableCollection<FournisseurPiece> _pieces;
-
         public ObservableCollection<FournisseurPiece> Pieces
         {
             get { return _pieces; }
@@ -49,11 +47,37 @@ namespace ApplicationVeloMax.Views.Fournisseurs
             }
         }
 
+        private PieceDetachee _selectedPiece;
+        public PieceDetachee SelectedPiece
+        {
+            get { return _selectedPiece; }
+            set
+            {
+                _selectedPiece = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedPiece"));
+            }
+        }
+
+
 
         public DetailFournisseurView(Fournisseur fourni)
         {
             InitializeComponent();
             Fournisseur = fourni;
+        }
+
+        private void AddPieceButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void DelPieceButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedPiece != null)
+            {
+
+            }
+            else MessageBox.Show("Veuillez sélectionner une pièce à supprimer", "Erreur utilisateur", MessageBoxButton.OK, MessageBoxImage.Error);
         }
     }
 }
