@@ -123,8 +123,13 @@
                     </Button>
                 </StackPanel>
                 <DataGrid ItemsSource="{Binding Pieces, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                          SelectedItem="{Binding SelectedPiece, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
-                      AutoGenerateColumns="False" IsReadOnly="True" >
+                          AutoGenerateColumns="False" IsReadOnly="True" 
+                          SelectedItem="{Binding SelectedPieceFournisseur, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick" Handler="DataGridRow_MouseDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
                     <DataGrid.Columns>
                         <DataGridTextColumn Header="ID" Binding="{Binding PieceDetacheeFournisseur.Id}" Width="auto"/>
                         <DataGridTextColumn Header="Nom pièce" Binding="{Binding PieceDetacheeFournisseur.Reference}" Width="*" />
