@@ -43,7 +43,7 @@
                 <TextBox x:Name="siretTb" Margin="5" Height="25" IsReadOnly="True" VerticalContentAlignment="Center"
                      Text="{Binding CommandeToAdd.Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Background="#FF9B9B9B"/>
 
-                <DatePicker Margin="5" Height="25" VerticalContentAlignment="Center" Focusable="False" Background="#FF9B9B9B"
+                <DatePicker Margin="5" Height="25" VerticalContentAlignment="Center" IsHitTestVisible="False" Background="#FF9B9B9B"
                      SelectedDate="{Binding CommandeToAdd.DateE, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" />
 
                 <DatePicker x:Name="dueDate" Margin="5" Height="25" VerticalAlignment="Center"
@@ -69,22 +69,22 @@
             
             <StackPanel x:Name="adresseInputSp" Orientation="Vertical" Margin="5 35 5 5" Grid.Column="4" Grid.Row="1" Grid.RowSpan="3">
                 <TextBox x:Name="l1TB" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding AdresseToAdd.Ligne1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding CommandeToAdd.AdresseLivraison.Ligne1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBox x:Name="l2TB" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding AdresseToAdd.Ligne2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding CommandeToAdd.AdresseLivraison.Ligne2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBox  x:Name="cpTB" Margin="5" Height="25" VerticalContentAlignment="Center"
-                      Text="{Binding AdresseToAdd.CodePostal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                      Text="{Binding CommandeToAdd.AdresseLivraison.CodePostal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBox x:Name="villeTB" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding AdresseToAdd.Ville, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding CommandeToAdd.AdresseLivraison.Ville, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBox x:Name="provTB" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding AdresseToAdd.Province, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding CommandeToAdd.AdresseLivraison.Province, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
                 <TextBox x:Name="paysTB" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding AdresseToAdd.Pays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding CommandeToAdd.AdresseLivraison.Pays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
             <DataGrid x:Name="DataGridPart" Grid.Row="3" Grid.Column="0" Margin="15 5 5 10"

@@ -179,22 +179,34 @@ namespace ApplicationVeloMax.Models
         {
             var co=Ensemble.FindAll(c => c.ClientCommande.Id == client.Id);
             decimal nbarticlesmoyen = 0;
-            foreach(Commande com in co)
+            if (co.Count == 0) nbarticlesmoyen = 0;
+            else
             {
-                if (com.Statut != "Annulée") nbarticlesmoyen += com.NbArticles;
+                foreach (Commande com in co)
+                {
+                    if (com.Statut != "Annulée") nbarticlesmoyen += com.NbArticles;
+                }
+                nbarticlesmoyen /= co.Count;
             }
-            return nbarticlesmoyen / co.Count;
+            
+            return nbarticlesmoyen;
         }
 
         static public decimal PrixMoyen(Client client)
         {
             var co = Ensemble.FindAll(c => c.ClientCommande.Id == client.Id);
-            decimal prixMoyen = 0;
-            foreach (Commande com in co)
+            decimal prixCum = 0;
+            if (co.Count == 0) prixCum = 0;
+            else
             {
-                if(com.Statut!="Annulée") prixMoyen += com.MontantCommandeAvecTVAAvecRemise;
+                foreach (Commande com in co)
+                {
+                    if (com.Statut != "Annulée") prixCum += com.MontantCommandeAvecTVAAvecRemise;
+                }
+                prixCum /= co.Count;
             }
-            return prixMoyen / co.Count;
+
+            return prixCum;
         }
 
         static public decimal MontantTotalCumul(Client client)

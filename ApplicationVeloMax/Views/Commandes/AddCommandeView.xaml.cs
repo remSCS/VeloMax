@@ -131,12 +131,11 @@ namespace ApplicationVeloMax.Views.Commandes
             if (CommandeToAdd != null && CommandeToAdd.ClientCommande != null) CommandeToAdd.AdresseLivraison = AdresseToAdd;
             adresseInputSp.Visibility = Visibility.Visible;
             adresseLblSp.Visibility = Visibility.Visible;
-            if (CommandeToAdd != null) MessageBox.Show(CommandeToAdd.AdresseLivraison.ToString());
         }
 
         private void SetStatusChecked()
         {
-            if (SelectedClient != null) CommandeToAdd.AdresseLivraison = CommandeToAdd.ClientCommande.AdresseClient; MessageBox.Show(CommandeToAdd.AdresseLivraison.ToString());
+            if (SelectedClient != null) CommandeToAdd.AdresseLivraison = CommandeToAdd.ClientCommande.AdresseClient;
             adresseInputSp.Visibility = Visibility.Hidden;
             adresseLblSp.Visibility = Visibility.Hidden;
         }
@@ -149,18 +148,19 @@ namespace ApplicationVeloMax.Views.Commandes
 
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
-
+            if (useCb.IsChecked == false) CommandeToAdd.AdresseLivraison = AdresseToAdd;
+            if (CommandeToAdd.ClientCommande == null) MessageBox.Show("Veuillez choisir un client !");
+            if (!DataAccess.AddCommande(CommandeToAdd)) MessageBox.Show("Modification impossible.");
+            else
+            {
+                MessageBox.Show("Commande ajouté !");
+                this.Close();
+            }
         }
 
-        private void DataGridRowPart_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            new DetailClientPro((ClientPro)SelectedClient).ShowDialog();
-        }
+        private void DataGridRowPart_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new DetailClientPart((ClientPart)SelectedClient).ShowDialog();
 
-        private void DataGridRowPro_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            new DetailClientPro((ClientPro)SelectedClient).ShowDialog();
-        }
+        private void DataGridRowPro_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new DetailClientPro((ClientPro)SelectedClient).ShowDialog();
 
         private void DataGridPro_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
