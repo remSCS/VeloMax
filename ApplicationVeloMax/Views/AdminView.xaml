@@ -566,7 +566,7 @@
                                       SelectedItem="{Binding SelectedClient, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Resources>
                                         <Style TargetType="DataGridRow">
-                                            <EventSetter Event="MouseDoubleClick" Handler="editClientPartButton_Click"/>
+                                            <EventSetter Event="MouseDoubleClick" Handler="DetailPart_Click"/>
                                         </Style>
                                     </DataGrid.Resources>
                                     <DataGrid.Columns>
@@ -794,7 +794,7 @@
                                       SelectedItem="{Binding SelectedFidelio, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Resources>
                                         <Style TargetType="DataGridRow">
-                                            <EventSetter Event="MouseDoubleClick" Handler="editFidelioButton_Click"/>
+                                            <EventSetter Event="MouseDoubleClick" Handler="FidelioClients_Click"/>
                                         </Style>
                                     </DataGrid.Resources>
                                     <DataGrid.Columns>

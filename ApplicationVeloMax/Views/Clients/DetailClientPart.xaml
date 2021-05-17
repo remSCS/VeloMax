@@ -1,11 +1,11 @@
-﻿<Window x:Class="ApplicationVeloMax.Views.Clients.DetailClientPro"
+﻿<Window x:Class="ApplicationVeloMax.Views.Clients.DetailClientPart"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Clients"
         mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="{Binding ClientPro.NomEntreprise, StringFormat={}{0} - Détails}" Height="600" Width="800" WindowStartupLocation="CenterScreen">
+        Title="{Binding ClientPart.ContactClient.FullName, StringFormat={}{0} - Détails}" Height="600" Width="800" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -13,9 +13,9 @@
         </Grid.ColumnDefinitions>
 
         <StackPanel Orientation="Vertical" Grid.Column="0">
-            <Label Content="{Binding ClientPro.NomEntreprise}" FontSize="28" FontWeight="Bold"/>
-           
-            <Label Content="{Binding ClientPro.Id}" ContentStringFormat="ID#{0}" FontSize="16" FontWeight="Light"/>
+            <Label Content="{Binding ClientPart.ContactClient.FullName}" FontSize="28" FontWeight="Bold"/>
+
+            <Label Content="{Binding ClientPart.Id}" ContentStringFormat="ID#{0}" FontSize="16" FontWeight="Light"/>
             <GroupBox Header="Contact" Margin="10,5">
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
@@ -30,30 +30,25 @@
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
 
-                    <Label Content="Contact : " 
-                               Grid.Row="0" Grid.Column="0"/>
-                    <Label Content="{Binding ClientPro.ContactClient.FullName}" FontWeight="Bold"
-                               Grid.Row="0" Grid.Column="1"/>
-
                     <Label Content="E-mail : "
                                Grid.Row="1" Grid.Column="0"/>
-                    <Label Content="{Binding ClientPro.ContactClient.Email}" FontWeight="Bold"
+                    <Label Content="{Binding ClientPart.ContactClient.Email}" FontWeight="Bold"
                                Grid.Row="1" Grid.Column="1"/>
 
                     <Label Content="Téléphone : "
                                Grid.Row="2" Grid.Column="0"/>
-                    <Label Content="{Binding ClientPro.ContactClient.FormatTel}" FontWeight="Bold"
+                    <Label Content="{Binding ClientPart.ContactClient.FormatTel}" FontWeight="Bold"
                                Grid.Row="2" Grid.Column="1"/>
 
                     <Label Content="Adresse : "
                                Grid.Row="3" Grid.Column="0"/>
-                    <Label Content="{Binding ClientPro.AdresseClient.FullAdresse}" FontWeight="Bold"
+                    <Label Content="{Binding ClientPart.AdresseClient.FullAdresse}" FontWeight="Bold"
                                Grid.Row="3" Grid.Column="1"/>
 
                 </Grid>
             </GroupBox>
 
-            <GroupBox Header="Adhérent" Margin="10,5">
+            <GroupBox Header="Fidelio" Margin="10,5">
                 <Grid Grid.Column="0">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="auto"/>
@@ -64,15 +59,15 @@
                         <ColumnDefinition Width="auto"/>
                         <ColumnDefinition Width="*"/>
                     </Grid.ColumnDefinitions>
-                    
+
                     <Label Content="Date adhésion : "
                            Grid.Row="0" Grid.Column="0"/>
-                    <Label Content="{Binding ClientPro.DateAdherance}" FontWeight="Bold"
+                    <Label Content="{Binding ClientPart.DateDebutFidelio}" FontWeight="Bold"
                            Grid.Row="0" Grid.Column="1"/>
 
-                    <Label Content="Remise : "
+                    <Label Content="Programme : "
                            Grid.Row="1" Grid.Column="0"/>
-                    <Label Content="{Binding ClientPro.Remise, Mode=OneWay}" ContentStringFormat="{}{0}%" FontWeight="Bold"
+                    <Label Content="{Binding ClientPart.FidelioClient.Nom, Mode=OneWay}" ContentStringFormat="{}{0}%" FontWeight="Bold"
                            Grid.Row="1" Grid.Column="1"/>
 
                 </Grid>
