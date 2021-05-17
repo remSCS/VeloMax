@@ -181,7 +181,7 @@
     <Compile Include="Views\Modeles\AddModeleView.xaml.cs">
       <DependentUpon>AddModeleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Modeles\DetailsModeleView.xaml.cs">
+    <Compile Include="Views\Modeles\DetailsModeleView.cs">
       <DependentUpon>DetailsModeleView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Modeles\EditModeleView.xaml.cs">
@@ -189,6 +189,9 @@
     </Compile>
     <Compile Include="Views\Pieces\AddPieceView.xaml.cs">
       <DependentUpon>AddPieceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Pieces\DetailPieceView.xaml.cs">
+      <DependentUpon>DetailPieceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Pieces\EditPieceView.xaml.cs">
       <DependentUpon>EditPieceView.xaml</DependentUpon>
@@ -349,6 +352,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pieces\AddPieceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Pieces\DetailPieceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
