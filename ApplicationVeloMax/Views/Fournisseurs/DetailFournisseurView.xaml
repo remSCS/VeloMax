@@ -1,0 +1,131 @@
+﻿<Window x:Class="ApplicationVeloMax.Views.Fournisseurs.DetailFournisseurView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ApplicationVeloMax.Views.Fournisseurs"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="{Binding Fournisseur.Nom}" Height="450" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Column="0">
+            <Label Content="{Binding Fournisseur.Nom}" FontSize="28" FontWeight="Bold"/>
+
+            <GroupBox Header="Contact" Margin="10,5">
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    <Label Content="Nom contact : "
+                               Grid.Row="0" Grid.Column="0"/>
+                    <Label Content="{Binding Fournisseur.ContactFournisseur.FullName}" FontWeight="Bold"
+                               Grid.Row="0" Grid.Column="1"/>
+
+                    <Label Content="E-mail : "
+                               Grid.Row="1" Grid.Column="0"/>
+                    <Label Content="{Binding Fournisseur.ContactFournisseur.Email}" FontWeight="Bold"
+                               Grid.Row="1" Grid.Column="1"/>
+
+                    <Label Content="Téléphone : "
+                               Grid.Row="2" Grid.Column="0"/>
+                    <Label Content="{Binding Fournisseur.ContactFournisseur.FormatTel}" FontWeight="Bold"
+                               Grid.Row="2" Grid.Column="1"/>
+
+                    <Label Content="Adresse : "
+                               Grid.Row="3" Grid.Column="0"/>
+                    <Label Content="{Binding Fournisseur.AdresseFournisseur.FullAdresse}" FontWeight="Bold"
+                               Grid.Row="3" Grid.Column="1"/>
+
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Header="Entreprise" Margin="10,5">
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="SIRET : "
+                           Grid.Row="0" Grid.Column="0"/>
+                    <Label Content="{Binding Fournisseur.Siret}" FontWeight="Bold"
+                           Grid.Row="0" Grid.Column="1"/>
+
+                    <Label Content="Libéllé : "
+                           Grid.Row="1" Grid.Column="0"/>
+                    <Label Content="{Binding Fournisseur.LibelleFournisseur.Nom}" ContentStringFormat="{}{0}%" FontWeight="Bold"
+                           Grid.Row="1" Grid.Column="1"/>
+
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Header="Statistiques" Margin="10,5">
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="  "
+                           Grid.Row="0" Grid.Column="0"/>
+                    <Label x:Name="nbMoyen_Lbl" FontWeight="Bold"
+                           Grid.Row="0" Grid.Column="1"/>
+
+                    <Label Content="  "
+                           Grid.Row="1" Grid.Column="0"/>
+                    <Label x:Name="totalMoyen_Lbl" FontWeight="Bold"
+                           Grid.Row="1" Grid.Column="1"/>
+
+                    <Label Content=" "
+                           Grid.Row="2" Grid.Column="0"/>
+                    <Label x:Name="totalcumul_Lbl" FontWeight="Bold"
+                           Grid.Row="2" Grid.Column="1"/>
+
+                </Grid>
+            </GroupBox>
+        </StackPanel>
+
+        <GroupBox Header="Historique des commandes" Grid.Column="1" Margin="10,5">
+            <DataGrid ItemsSource="{Binding Pieces, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" IsReadOnly="True" >
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDoubleClick" Handler="DetailCommande_Click"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding PieceDetacheeFournisseur.Id}" Width="auto"/>
+                    <DataGridTextColumn Header="Nom pièce" Binding="{Binding PieceDetacheeFournisseur.Reference}" Width="*" />
+                    <DataGridTextColumn Header="Num. catalogue" Binding="{Binding NumCatalogue}" Width="auto"/>
+                    <DataGridTextColumn Header="Prix fournisseur" Binding="{Binding Prix}" Width="auto"/>
+
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+    </Grid>
+</Window>
