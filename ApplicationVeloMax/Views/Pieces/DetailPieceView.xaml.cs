@@ -1,4 +1,5 @@
 ﻿using ApplicationVeloMax.Models;
+using ApplicationVeloMax.Views.Fournisseurs;
 using ApplicationVeloMax.Views.Modeles;
 using System;
 using System.Collections.Generic;
@@ -32,7 +33,6 @@ namespace ApplicationVeloMax.Views.Pieces
             set
             {
                 _selectedPiece = value;
-                Modeles = new ObservableCollection<Modele>(Modele.Ensemble.FindAll(m => m.PiecesComposition.Contains(SelectedPiece)));
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedPiece"));
             }
         }
@@ -59,12 +59,38 @@ namespace ApplicationVeloMax.Views.Pieces
             }
         }
 
+        private ObservableCollection<FournisseurPiece> _fournisseurs;
+        public ObservableCollection<FournisseurPiece> Fournisseurs
+        {
+            get { return _fournisseurs; }
+            set
+            {
+                _fournisseurs = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Fournisseurs"));
+            }
+        }
+
+        private FournisseurPiece _selectedFournisseur;
+        public FournisseurPiece SelectedFournisseur
+        {
+            get { return _selectedFournisseur; }
+            set
+            {
+                _selectedFournisseur = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedFournisseur"));
+            }
+        }
+
         public DetailPieceView(PieceDetachee _input)
         {
             InitializeComponent();
             SelectedPiece = _input;
+            Modeles = new ObservableCollection<Modele>(Modele.Ensemble.FindAll(m => m.PiecesComposition.Contains(SelectedPiece)));
+            Fournisseurs = new ObservableCollection<FournisseurPiece>(FournisseurPiece.Ensemble.FindAll(fp => fp.PieceDetacheeFournisseur == SelectedPiece));
         }
 
-        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new DetailsModeleView(SelectedModele).ShowDialog();
+        private void modelesDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new DetailsModeleView(SelectedModele).ShowDialog();
+
+        private void fournisseursDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new DetailFournisseurView(SelectedFournisseur.FournisseurPieceDetachee).ShowDialog();
     }
 }

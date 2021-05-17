@@ -718,7 +718,5 @@ namespace ApplicationVeloMax.Views
                     displayMenu.Visibility = Visibility.Collapsed;
             }
         }
-
-
     }
 }
