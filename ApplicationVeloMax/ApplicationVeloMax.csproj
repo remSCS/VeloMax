@@ -172,6 +172,9 @@
     <Compile Include="Views\Fournisseurs\AddFournisseurView.xaml.cs">
       <DependentUpon>AddFournisseurView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Fournisseurs\AddPieceFournisseurView.xaml.cs">
+      <DependentUpon>AddPieceFournisseurView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Fournisseurs\DetailFournisseurView.xaml.cs">
       <DependentUpon>DetailFournisseurView.xaml</DependentUpon>
     </Compile>
@@ -325,6 +328,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Fournisseurs\AddFournisseurView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Fournisseurs\AddPieceFournisseurView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
