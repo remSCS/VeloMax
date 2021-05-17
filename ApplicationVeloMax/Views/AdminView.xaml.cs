@@ -687,5 +687,15 @@ namespace ApplicationVeloMax.Views
         {
             new DetailClientPro((ClientPro)SelectedClient).ShowDialog();
         }
+
+        private void DetailPart_Click(object sender, MouseButtonEventArgs e)
+        {
+            new DetailClientPart((ClientPart)SelectedClient).ShowDialog();
+        }
+
+        private void FidelioClients_Click(object sender, MouseButtonEventArgs e)
+        {
+            new FidelioDetailClients(SelectedFidelio).ShowDialog();
+        }
     }
 }

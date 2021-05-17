@@ -139,6 +139,9 @@
     <Compile Include="Views\Clients\AddClientProView.xaml.cs">
       <DependentUpon>AddClientProView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Clients\DetailClientPart.xaml.cs">
+      <DependentUpon>DetailClientPart.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Clients\DetailClientPro.xaml.cs">
       <DependentUpon>DetailClientPro.xaml</DependentUpon>
     </Compile>
@@ -162,6 +165,9 @@
     </Compile>
     <Compile Include="Views\Fidelios\EditFidelioView.xaml.cs">
       <DependentUpon>EditFidelioView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Fidelios\FidelioDetailClients.xaml.cs">
+      <DependentUpon>FidelioDetailClients.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Fournisseurs\AddFournisseurView.xaml.cs">
       <DependentUpon>AddFournisseurView.xaml</DependentUpon>
@@ -272,6 +278,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Clients\DetailClientPart.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Clients\DetailClientPro.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -301,6 +311,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Fidelios\EditFidelioView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Fidelios\FidelioDetailClients.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -56,6 +57,15 @@ namespace ApplicationVeloMax.Models
         {
             get { return dureeJours; }
             set { dureeJours = value; }
+        }
+
+        public List<ClientPart> ClientsFid
+        {
+            get
+            {
+                var cl = ClientPart.EnsembleParticuliers.FindAll(cli => cli.FidelioClient !=null && cli.FidelioClient.Id==Id);
+                return cl;
+            }
         }
 
         static public List<Fidelio> Ensemble
