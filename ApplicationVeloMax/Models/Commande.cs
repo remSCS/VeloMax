@@ -63,7 +63,7 @@ namespace ApplicationVeloMax.Models
             set { statut = value; }
         }
 
-        public decimal MontantCommande
+        public decimal MontantCommandeSansRien
         {
             get
             {
@@ -72,6 +72,21 @@ namespace ApplicationVeloMax.Models
                 foreach (var m in ModelesCommande) output += m.PrixUnitaire;
                 return output;
             }
+        }
+
+        public decimal MontantCommandeAvecTVASansRemise(decimal TVAEnPourcentage)
+        {
+            return this.MontantCommandeSansRien + (this.MontantCommandeSansRien * TVAEnPourcentage / 100);
+        }
+
+        public decimal MontantCommandeAvecTVAAvecRemise(decimal TVAEnPourcentage)
+        {
+            decimal prix = this.MontantCommandeAvecTVASansRemise(TVAEnPourcentage);
+            ClientPart part = ClientPart.EnsembleParticuliers.Find(c => c.Id == this.ClientCommande.Id);
+            ClientPro pro = ClientPro.EnsemblePros.Find(c => c.Id == this.ClientCommande.Id);
+            if (part == null) prix = prix + (prix * pro.Remise / 100);
+            else if (part != null && part.FidelioClient != null) prix = prix + (prix * part.FidelioClient.Rabais / 100);
+            return prix;
         }
 
         public Adresse AdresseLivraison
