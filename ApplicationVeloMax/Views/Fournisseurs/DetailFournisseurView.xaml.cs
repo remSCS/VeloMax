@@ -86,15 +86,19 @@ namespace ApplicationVeloMax.Views.Fournisseurs
                 if (DataAccess.RemoveFromFournisseurPiece(toRemove))
                 {
                     Pieces = new ObservableCollection<FournisseurPiece>(FournisseurPiece.Ensemble.FindAll(fp => fp.FournisseurPieceDetachee.Siret == Fournisseur.Siret));
-                    MessageBox.Show("Pièce supprimé du catalogue du fournisseur", "Suppression réussie", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Pièce supprimée du catalogue du fournisseur", "Suppression réussie", MessageBoxButton.OK, MessageBoxImage.Information);
+                    this.Close();
                 }
+                else MessageBox.Show("Erreur BD", "Suppression impossible", MessageBoxButton.OK, MessageBoxImage.Error);
             }
             else MessageBox.Show("Veuillez sélectionner une pièce à supprimer du catalogue du fournisseur", "Suppression impossible", MessageBoxButton.OK, MessageBoxImage.Error);
+            
         }
 
         private void AddPieceButton_Click(object sender, RoutedEventArgs e)
         {
-
+            new AddPieceFournisseurView(Fournisseur).ShowDialog();
+            this.Close();
         }
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new DetailPieceView(SelectedPiece).ShowDialog();

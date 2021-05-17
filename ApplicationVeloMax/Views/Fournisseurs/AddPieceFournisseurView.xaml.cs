@@ -1,4 +1,5 @@
 ﻿using ApplicationVeloMax.Models;
+using ApplicationVeloMax.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,14 +25,13 @@ namespace ApplicationVeloMax.Views.Fournisseurs
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private Fournisseur _fournisseur;
-
+        private Fournisseur _fournisseurAdd;
         public Fournisseur FournisseurAdd
         {
-            get { return _fournisseur; }
+            get { return _fournisseurAdd; }
             set
             {
-                _fournisseur = value;
+                _fournisseurAdd = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("FournisseurAdd"));
             }
         }
@@ -44,23 +44,78 @@ namespace ApplicationVeloMax.Views.Fournisseurs
             set
             {
                 _selectedPiece = value;
+                
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedPiece"));
+            }
+        }
+        private ObservableCollection<PieceDetachee> _pieces;
+
+        public ObservableCollection<PieceDetachee> Pieces
+        {
+            get { return _pieces; }
+            set
+            {
+                _pieces = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("Pieces"));
             }
         }
 
 
-        public ObservableCollection<PieceDetachee> Pieces
-        {
-            get { return new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble); }
 
+
+        private FournisseurPiece _toAdd;
+
+        public FournisseurPiece ToAdd
+        {
+            get { return _toAdd; }
+            set
+            {
+                _toAdd = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("ToAdd"));
+            }
         }
 
 
+        private void AddButton_Click(object sender, RoutedEventArgs e)
+        {
+            try
+            {
+                ToAdd.Delai = Convert.ToInt32(DelaiBox.Text);
+                ToAdd.Prix = Convert.ToDecimal(PrixBox.Text);
+            }
+            catch
+            {
+                MessageBox.Show("Vérifiez vos paramètres", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
+                return;
+            }
+            if (ToAdd != null)
+            {
+                if (!DataAccess.AddFournisseurPiece(ToAdd))
+                {
+                    MessageBox.Show("Ajout impossible", "Erreur BD", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
+                else
+                {
+                    MessageBox.Show("Pièce ajouté au catalogue du fournisseur");
+                    this.Close();
+                }
+            }
+            else MessageBox.Show("Test");
 
+        }
+
+        private void CloseButton_Click(object sender, RoutedEventArgs e)
+        {
+            FournisseurPiece.Ensemble.Remove(ToAdd);
+            this.Close();
+        }
         public AddPieceFournisseurView(Fournisseur fourni)
         {
             InitializeComponent();
             FournisseurAdd = fourni;
+            FournisseurPiece temp = new FournisseurPiece(-1, FournisseurAdd.Siret) { Delai = 0, NumCatalogue = "", Prix = 0M };
+            ToAdd = temp;
+            Pieces = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble.Except(FournisseurPiece.PiecesFournies(FournisseurAdd)));
 
         }
     }

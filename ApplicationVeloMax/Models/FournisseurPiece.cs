@@ -59,5 +59,16 @@ namespace ApplicationVeloMax.Models
         {
             get { return ensemble; }
         }
+
+        static public List<PieceDetachee> PiecesFournies(Fournisseur fourni)
+        {
+            var a=Ensemble.FindAll(fp => fp.FournisseurPieceDetachee.Siret == fourni.Siret);
+            var b = new List<PieceDetachee>();
+            foreach(FournisseurPiece fp in a)
+            {
+                b.Add(fp.PieceDetacheeFournisseur);
+            }
+            return b;
+        }
     }
 }
