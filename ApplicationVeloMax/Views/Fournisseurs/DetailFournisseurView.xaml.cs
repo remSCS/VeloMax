@@ -1,5 +1,6 @@
 ﻿using ApplicationVeloMax.Models;
 using ApplicationVeloMax.ViewModels;
+using ApplicationVeloMax.Views.Pieces;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -47,8 +48,20 @@ namespace ApplicationVeloMax.Views.Fournisseurs
                 PropertyChanged(this, new PropertyChangedEventArgs("Pieces"));
             }
         }
-        private PieceDetachee _selectedPiece;
 
+        private FournisseurPiece _selectedPieceFournisseur;
+        public FournisseurPiece SelectedPieceFournisseur
+        {
+            get { return _selectedPieceFournisseur; }
+            set
+            {
+                _selectedPieceFournisseur = value;
+                if(SelectedPieceFournisseur != null) SelectedPiece = SelectedPieceFournisseur.PieceDetacheeFournisseur;
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedPieceFournisseur"));
+            }
+        }
+
+        private PieceDetachee _selectedPiece;
         public PieceDetachee SelectedPiece
         {
             get { return _selectedPiece; }
@@ -59,10 +72,10 @@ namespace ApplicationVeloMax.Views.Fournisseurs
             }
         }
 
-        public DetailFournisseurView(Fournisseur fourni)
+        public DetailFournisseurView(Fournisseur _input)
         {
             InitializeComponent();
-            Fournisseur = fourni;
+            Fournisseur = _input;
         }
 
         private void DelPieceButton_Click(object sender, RoutedEventArgs e)
@@ -83,5 +96,7 @@ namespace ApplicationVeloMax.Views.Fournisseurs
         {
 
         }
+
+        private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new DetailPieceView(SelectedPiece).ShowDialog();
     }
 }
