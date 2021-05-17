@@ -496,9 +496,8 @@ namespace ApplicationVeloMax.ViewModels
                 connexion.Open();
                 MySqlCommand com = new MySqlCommand("RemoveFournisseur", connexion) { CommandType = CommandType.StoredProcedure };
                 com.Parameters.Add("@srt", MySqlDbType.Int64).Value = toRemove.Siret;
-                com.ExecuteReader();
-                //try { com.ExecuteReader(); }
-                //catch { return false; }
+                try { com.ExecuteReader(); }
+                catch { return false; }
             }
             Fournisseur.Ensemble.Clear();
             GetAllFournisseursUsingSP();
