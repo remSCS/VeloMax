@@ -1,4 +1,5 @@
 ﻿using ApplicationVeloMax.Models;
+using ApplicationVeloMax.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -46,11 +47,41 @@ namespace ApplicationVeloMax.Views.Fournisseurs
                 PropertyChanged(this, new PropertyChangedEventArgs("Pieces"));
             }
         }
+        private PieceDetachee _selectedPiece;
+
+        public PieceDetachee SelectedPiece
+        {
+            get { return _selectedPiece; }
+            set
+            {
+                _selectedPiece = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SelectedPiece"));
+            }
+        }
 
         public DetailFournisseurView(Fournisseur fourni)
         {
             InitializeComponent();
             Fournisseur = fourni;
+        }
+
+        private void DelPieceButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedPiece != null)
+            {
+                var toRemove = FournisseurPiece.Ensemble.Find(fp => fp.FournisseurPieceDetachee.Siret == Fournisseur.Siret && fp.PieceDetacheeFournisseur.Id == SelectedPiece.Id);
+                if (DataAccess.RemoveFromFournisseurPiece(toRemove))
+                {
+                    Pieces = new ObservableCollection<FournisseurPiece>(FournisseurPiece.Ensemble.FindAll(fp => fp.FournisseurPieceDetachee.Siret == Fournisseur.Siret));
+                    MessageBox.Show("Pièce supprimé du catalogue du fournisseur", "Suppression réussie", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            else MessageBox.Show("Veuillez sélectionner une pièce à supprimer du catalogue du fournisseur", "Suppression impossible", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        private void AddPieceButton_Click(object sender, RoutedEventArgs e)
+        {
+
         }
     }
 }

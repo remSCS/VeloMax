@@ -503,6 +503,22 @@ namespace ApplicationVeloMax.ViewModels
             GetAllFournisseursUsingSP();
             return true;
         }
+
+        static public bool RemoveFromFournisseurPiece(FournisseurPiece toRemove)
+        {
+            using (var connexion = GetConnection())
+            {
+                connexion.Open();
+                MySqlCommand com = new MySqlCommand("RemoveFournisseurPiece", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@idP", MySqlDbType.Int64).Value = toRemove.PieceDetacheeFournisseur.Id;
+                com.Parameters.Add("@idF", MySqlDbType.Int64).Value = toRemove.FournisseurPieceDetachee.Siret;
+                try { com.ExecuteReader(); }
+                catch { return false; }
+            }
+            FournisseurPiece.Ensemble.Clear();
+            GetAllFournisseursPiecesUsingSP();
+            return true;
+        }
         #endregion
 
         #region Editing data from server
