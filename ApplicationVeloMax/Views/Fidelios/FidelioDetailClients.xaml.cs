@@ -35,8 +35,8 @@ namespace ApplicationVeloMax.Views.Fidelios
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedFidelio"));
             }
         }
-        private ClientPart clientPart;
 
+        private ClientPart clientPart;
         public ClientPart ClientPart
         {
             get { return clientPart; }
@@ -46,6 +46,7 @@ namespace ApplicationVeloMax.Views.Fidelios
                 PropertyChanged(this, new PropertyChangedEventArgs("ClientPart"));
             }
         }
+
         private void DetailClient_Click(object sender, MouseButtonEventArgs e)
         {
             new DetailClientPart(ClientPart).ShowDialog();

@@ -172,7 +172,7 @@
                                       SelectedItem="{Binding SelectedModele, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Resources>
                                         <Style TargetType="DataGridRow">
-                                            <EventSetter Event="MouseDoubleClick" Handler="editModeleButton_Click"/>
+                                            <EventSetter Event="MouseDoubleClick" Handler="modeleDataGrid_MouseDoubleClick"/>
                                         </Style>
                                     </DataGrid.Resources>
                                     <DataGrid.Columns>

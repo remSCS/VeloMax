@@ -22,7 +22,7 @@ namespace ApplicationVeloMax.Views.Clients
     /// Logique d'interaction pour DetailClientPart.xaml
     /// </summary>
 
-    public partial class DetailClientPart : Window,INotifyPropertyChanged
+    public partial class DetailClientPart : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -52,31 +52,23 @@ namespace ApplicationVeloMax.Views.Clients
         private Commande _selectedCommande;
         public Commande SelectedCommande
         {
-            get
-            {
-                return _selectedCommande;
-            }
+            get { return _selectedCommande; }
             set
             {
                 _selectedCommande = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedCommande"));
             }
         }
-        public DetailClientPart(ClientPart Part)
+
+        public DetailClientPart(ClientPart part)
         {
             InitializeComponent();
-            ClientPart = Part;
+            ClientPart = part;
             nbMoyen_Lbl.Content = Commande.NbArticlesMoyen(ClientPart);
             totalMoyen_Lbl.Content = Decimal.Round(Commande.PrixMoyen(ClientPart), 2) + " €";
             totalcumul_Lbl.Content = Decimal.Round(Commande.MontantTotalCumul(ClientPart), 2) + " €";
         }
 
-
-        private void DetailCommande_Click(object sender, MouseButtonEventArgs e)
-        {
-            new CommandeDetailView(SelectedCommande).Show();
-        }
-
-
+        private void DetailCommande_Click(object sender, MouseButtonEventArgs e) => new CommandeDetailView(SelectedCommande).Show();
     }
 }

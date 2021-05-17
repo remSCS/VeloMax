@@ -451,6 +451,16 @@ namespace ApplicationVeloMax.Views
             new AddModeleView().ShowDialog();
             RefreshProperties();
         }
+
+        private void modeleDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (SelectedModele == null) MessageBox.Show("Veuillez choisir un modèle");
+            else
+            {
+                new DetailsModeleView(SelectedModele).ShowDialog();
+                RefreshProperties();
+            }
+        }
         #endregion
 
         #region Pièces
