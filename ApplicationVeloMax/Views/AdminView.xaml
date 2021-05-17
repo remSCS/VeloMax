@@ -1060,7 +1060,7 @@
                                     </DataGrid.Resources>
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
-                                        <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ClientCommande}"/>
+                                        <DataGridTextColumn Width="*" Header="Client" Binding="{Binding Destinataire}"/>
                                         <DataGridTextColumn Width="*" Header="Adresse" Binding="{Binding AdresseLivraison}"/>
                                         <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date effectuée" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
                                         <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date à faire pour" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
