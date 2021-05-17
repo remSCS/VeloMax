@@ -92,6 +92,11 @@ namespace ApplicationVeloMax.Models
             }
         }
 
+        public int NbArticles
+        {
+            get { return PiecesCommande.Count + ModelesCommande.Count; }
+        }
+
         public string Destinataire
         {
             get
@@ -117,6 +122,7 @@ namespace ApplicationVeloMax.Models
         {
             get { return MontantCommandeAvecTVAAvecRemise * 20 / 100; }
         }
+
         public Adresse AdresseLivraison
         {
             get { return adresseLivraison; }
@@ -167,6 +173,39 @@ namespace ApplicationVeloMax.Models
             EnsemblePrep.Clear();
             EnsembleAnnul.Clear();
             EnsembleDone.Clear();
+        }
+
+        static public decimal NbArticlesMoyen(Client client)
+        {
+            var co=Ensemble.FindAll(c => c.ClientCommande.Id == client.Id);
+            decimal nbarticlesmoyen = 0;
+            foreach(Commande com in co)
+            {
+                if (com.Statut != "Annulée") nbarticlesmoyen += com.NbArticles;
+            }
+            return nbarticlesmoyen / co.Count;
+        }
+
+        static public decimal PrixMoyen(Client client)
+        {
+            var co = Ensemble.FindAll(c => c.ClientCommande.Id == client.Id);
+            decimal prixMoyen = 0;
+            foreach (Commande com in co)
+            {
+                if(com.Statut!="Annulée") prixMoyen += com.MontantCommandeAvecTVAAvecRemise;
+            }
+            return prixMoyen / co.Count;
+        }
+
+        static public decimal MontantTotalCumul(Client client)
+        {
+            var co = Ensemble.FindAll(c => c.ClientCommande.Id == client.Id);
+            decimal prixCumul = 0;
+            foreach (Commande com in co)
+            {
+                if (com.Statut != "Annulée") prixCumul += com.MontantCommandeAvecTVAAvecRemise;
+            }
+            return prixCumul;
         }
     }
 }

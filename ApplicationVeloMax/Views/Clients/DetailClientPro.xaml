@@ -1,0 +1,132 @@
+﻿<Window x:Class="ApplicationVeloMax.Views.Clients.DetailClientPro"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ApplicationVeloMax.Views.Clients"
+        mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="{Binding ClientPro.NomEntreprise, StringFormat={}{0} - Détails}" Height="600" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="2*"/>
+            <ColumnDefinition Width="3*"/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Orientation="Vertical" Grid.Column="0">
+            <Label Content="{Binding ClientPro.NomEntreprise}" FontSize="28" FontWeight="Bold"/>
+           
+            <Label Content="{Binding ClientPro.Id}" ContentStringFormat="ID#{0}" FontSize="16" FontWeight="Light"/>
+            <GroupBox Header="Contact" Margin="10,5">
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Contact : " 
+                               Grid.Row="0" Grid.Column="0"/>
+                    <Label Content="{Binding ClientPro.ContactClient.FullName}" FontWeight="Bold"
+                               Grid.Row="0" Grid.Column="1"/>
+
+                    <Label Content="E-mail : "
+                               Grid.Row="1" Grid.Column="0"/>
+                    <Label Content="{Binding ClientPro.ContactClient.Email}" FontWeight="Bold"
+                               Grid.Row="1" Grid.Column="1"/>
+
+                    <Label Content="Téléphone : "
+                               Grid.Row="2" Grid.Column="0"/>
+                    <Label Content="{Binding ClientPro.ContactClient.FormatTel}" FontWeight="Bold"
+                               Grid.Row="2" Grid.Column="1"/>
+
+                    <Label Content="Adresse : "
+                               Grid.Row="3" Grid.Column="0"/>
+                    <Label Content="{Binding ClientPro.AdresseClient.FullAdresse}" FontWeight="Bold"
+                               Grid.Row="3" Grid.Column="1"/>
+
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Header="Adhérent" Margin="10,5">
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+                    
+                    <Label Content="Date adhésion : "
+                           Grid.Row="0" Grid.Column="0"/>
+                    <Label Content="{Binding ClientPro.DateAdherance}" FontWeight="Bold"
+                           Grid.Row="0" Grid.Column="1"/>
+
+                    <Label Content="Remise : "
+                           Grid.Row="1" Grid.Column="0"/>
+                    <Label Content="{Binding ClientPro.Remise, Mode=OneWay}" ContentStringFormat="{}{0}%" FontWeight="Bold"
+                           Grid.Row="1" Grid.Column="1"/>
+
+                </Grid>
+            </GroupBox>
+
+            <GroupBox Header="Statistiques" Margin="10,5">
+                <Grid Grid.Column="0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="*"/>
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Nombre moyen d'articles achetés : "
+                           Grid.Row="0" Grid.Column="0"/>
+                    <Label x:Name="nbMoyen_Lbl" FontWeight="Bold"
+                           Grid.Row="0" Grid.Column="1"/>
+
+                    <Label Content="Total moyen d'une commande : "
+                           Grid.Row="1" Grid.Column="0"/>
+                    <Label x:Name="totalMoyen_Lbl" FontWeight="Bold"
+                           Grid.Row="1" Grid.Column="1"/>
+
+                    <Label Content="Montant total cumulé : "
+                           Grid.Row="2" Grid.Column="0"/>
+                    <Label x:Name="totalcumul_Lbl" FontWeight="Bold"
+                           Grid.Row="2" Grid.Column="1"/>
+
+                </Grid>
+            </GroupBox>
+        </StackPanel>
+
+        <GroupBox Header="Historique des commandes" Grid.Column="1" Margin="10,5">
+            <DataGrid ItemsSource="{Binding Commandes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedCommande, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" IsReadOnly="True" >
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDoubleClick" Handler="DetailCommande_Click"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="auto"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding DateE, StringFormat=dd/MM/yyyy}" Width="auto" />
+                    <DataGridTextColumn Header="Nb. articles" Binding="{Binding NbArticles}" Width="auto"/>
+                    <DataGridTextColumn Header="Montant" Binding="{Binding MontantCommandeAvecTVAAvecRemise, StringFormat={}€ {0:0.00}}" Width="auto"/>
+                    <DataGridTextColumn Header="Montant" Binding="{Binding Statut, StringFormat={}€ {0:0.00}}" Width="*"/>
+                </DataGrid.Columns>
+            </DataGrid>
+        </GroupBox>
+    </Grid>
+</Window>
