@@ -22,7 +22,7 @@ namespace ApplicationVeloMax.Models
             if (p != null) this.PieceDetacheeFournisseur = p;
             Fournisseur f = Fournisseur.Ensemble.Find(e => e.Siret == idFournisseur);
             if (f != null) this.FournisseurPieceDetachee = f;
-            if (ensemble.Find(e => e.FournisseurPieceDetachee.Siret == this.FournisseurPieceDetachee.Siret && e.PieceDetacheeFournisseur.Id == this.PieceDetacheeFournisseur.Id) == null) ensemble.Add(this);
+            if (this.PieceDetacheeFournisseur!=null && ensemble.Find(e => e.FournisseurPieceDetachee.Siret == this.FournisseurPieceDetachee.Siret && e.PieceDetacheeFournisseur.Id == this.PieceDetacheeFournisseur.Id) == null) ensemble.Add(this);
         }
 
         public PieceDetachee PieceDetacheeFournisseur

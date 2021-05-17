@@ -73,7 +73,7 @@
 
                     <Label Content="Libéllé : "
                            Grid.Row="1" Grid.Column="0"/>
-                    <Label Content="{Binding Fournisseur.LibelleFournisseur.Nom}" ContentStringFormat="{}{0}%" FontWeight="Bold"
+                    <Label Content="{Binding Fournisseur.LibelleFournisseur.Nom}"  FontWeight="Bold"
                            Grid.Row="1" Grid.Column="1"/>
 
                 </Grid>

@@ -88,7 +88,7 @@ namespace ApplicationVeloMax.Views.Fournisseurs
                 MessageBox.Show("Vérifiez vos paramètres", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
-            if (ToAdd != null)
+            if (ToAdd != null && ToAdd.PieceDetacheeFournisseur!=null)
             {
                 if (!DataAccess.AddFournisseurPiece(ToAdd))
                 {
@@ -100,7 +100,7 @@ namespace ApplicationVeloMax.Views.Fournisseurs
                     this.Close();
                 }
             }
-            else MessageBox.Show("Test");
+            else MessageBox.Show("Veuillez sélectionner une pièce");
 
         }
 
