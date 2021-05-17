@@ -39,13 +39,6 @@
                 <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Date due"/>
             </StackPanel>
 
-            <StackPanel Orientation="Vertical" Margin="5" Grid.Column="0" Grid.Row="3">
-                <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Nom"/>
-                <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Prénom"/>
-                <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Email"/>
-                <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Télephonne"/>
-            </StackPanel>
-
             <StackPanel Orientation="Vertical" Margin="5" Grid.Column="1" Grid.Row="1" >
                 <TextBox x:Name="siretTb" Margin="5" Height="25" IsReadOnly="True" VerticalContentAlignment="Center"
                      Text="{Binding CommandeToAdd.Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" Background="#FF9B9B9B"/>
@@ -56,38 +49,6 @@
                 <DatePicker x:Name="dueDate" Margin="5" Height="25" VerticalAlignment="Center"
                       SelectedDate="{Binding CommandeToAdd.DateS, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
-
-            <DataGrid Grid.Row="3" Grid.Column="0" Margin="15 5 5 10"
-                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
-                      ItemsSource="{Binding ClientsParts, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                      SelectedItem="{Binding SelectedClient, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
-                <DataGrid.Resources>
-                    <Style TargetType="DataGridRow">
-                        <EventSetter Event="MouseDoubleClick" Handler=""/>
-                    </Style>
-                </DataGrid.Resources>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
-                    <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ContactClient}"/>
-                    <DataGridTextColumn Width="auto" Header="Date d'adhérance" Binding="{Binding DateAdherance, StringFormat=dd/MM/yyy}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-
-            <DataGrid Grid.Row="3" Grid.Column="1"  Margin="5 5 10 10"
-                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
-                      ItemsSource="{Binding ClientsPros, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
-                      SelectedItem="{Binding SelectedClient, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
-                <DataGrid.Resources>
-                    <Style TargetType="DataGridRow">
-                        <EventSetter Event="MouseDoubleClick" Handler=""/>
-                    </Style>
-                </DataGrid.Resources>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
-                    <DataGridTextColumn Width="*" Header="Entreprise" Binding="{Binding NomEntreprise}"/>
-                    <DataGridTextColumn Width="*" Header="Remise" Binding="{Binding Remise}"/>
-                </DataGrid.Columns>
-            </DataGrid>
 
             <Rectangle Width="2" Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" Margin="5" Fill="Black"/>
 
@@ -125,6 +86,38 @@
                 <TextBox x:Name="paysTB" Margin="5" Height="25" VerticalContentAlignment="Center"
                      Text="{Binding AdresseToAdd.Pays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
+
+            <DataGrid x:Name="DataGridPart" Grid.Row="3" Grid.Column="0" Margin="15 5 5 10"
+                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                      SelectionChanged="DataGridPart_SelectionChanged"
+                      ItemsSource="{Binding ClientsParts, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDoubleClick" Handler="DataGridRowPart_MouseDoubleClick"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ContactClient}"/>
+                    <DataGridTextColumn Width="auto" Header="Date d'adhérance" Binding="{Binding DateAdherance, StringFormat=dd/MM/yyy}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <DataGrid x:Name="DataGridPro" Grid.Row="3" Grid.Column="1"  Margin="5 5 10 10"
+                      IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                      SelectionChanged="DataGridPro_SelectionChanged"
+                      ItemsSource="{Binding ClientsPros, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}">
+                <DataGrid.Resources>
+                    <Style TargetType="DataGridRow">
+                        <EventSetter Event="MouseDoubleClick" Handler="DataGridRowPro_MouseDoubleClick"/>
+                    </Style>
+                </DataGrid.Resources>
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
+                    <DataGridTextColumn Width="*" Header="Entreprise" Binding="{Binding NomEntreprise}"/>
+                    <DataGridTextColumn Width="*" Header="Remise" Binding="{Binding Remise}"/>
+                </DataGrid.Columns>
+            </DataGrid>
 
             <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="3" Grid.ColumnSpan="5" VerticalAlignment="Bottom"
                     HorizontalAlignment="Right">

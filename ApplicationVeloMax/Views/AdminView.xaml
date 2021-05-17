@@ -1035,7 +1035,7 @@
                                     </Button>
 
                                     <Button x:Name="addOrderButton" Margin="5,0" Padding="5" Content="Ajouter"
-                                Foreground="White" Background="#6abb74">
+                                Foreground="White" Background="#6abb74" Click="addOrderButton_Click">
                                         <Button.Resources>
                                             <Style TargetType="Border">
                                                 <Setter Property="CornerRadius" Value="10"/>

@@ -410,6 +410,12 @@ namespace ApplicationVeloMax.Views
             }
             RefreshProperties();
         }
+
+        private void addOrderButton_Click(object sender, RoutedEventArgs e)
+        {
+            new AddCommandeView().ShowDialog();
+            RefreshProperties();
+        }
         #endregion
 
         #region Produits

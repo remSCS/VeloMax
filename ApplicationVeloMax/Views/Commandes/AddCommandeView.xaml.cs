@@ -1,5 +1,6 @@
 ﻿using ApplicationVeloMax.Models;
 using ApplicationVeloMax.ViewModels;
+using ApplicationVeloMax.Views.Clients;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -65,15 +66,14 @@ namespace ApplicationVeloMax.Views.Commandes
             set
             {
                 _selectedClient = value;
+                if(CommandeToAdd != null) CommandeToAdd.ClientCommande = SelectedClient;
                 if(SelectedClient != null)
                 {
-                    useCb.Visibility = Visibility.Visible;
                     useCb.IsChecked = true;
                     SetStatusChecked();
                 }
                 else
                 {
-                    useCb.Visibility = Visibility.Hidden;
                     useCb.IsChecked = false;
                     SetStatusUnchecked();
                 }
@@ -95,6 +95,11 @@ namespace ApplicationVeloMax.Views.Commandes
         public AddCommandeView()
         {
             InitializeComponent();
+            SelectedClient = null;
+
+            ClientsParts = new ObservableCollection<ClientPart>(ClientPart.EnsembleParticuliers);
+            ClientsPros = new ObservableCollection<ClientPro>(ClientPro.EnsemblePros);
+
             Adresse adresseToAdd = new Adresse()
             {
                 Id = DataAccess.GetHighestId("adresse") + 1,
@@ -106,7 +111,7 @@ namespace ApplicationVeloMax.Views.Commandes
                 Province = ""
             };
             AdresseToAdd = adresseToAdd;
-            SelectedClient = null;
+
             Commande commandeToAdd = new Commande(AdresseToAdd.Id, -1, 1)
             {
                 Id = DataAccess.GetHighestId("commande") + 1,
@@ -123,14 +128,15 @@ namespace ApplicationVeloMax.Views.Commandes
 
         private void SetStatusUnchecked()
         {
-            if (CommandeToAdd.ClientCommande != null) CommandeToAdd.AdresseLivraison = CommandeToAdd.ClientCommande.AdresseClient;
+            if (CommandeToAdd != null && CommandeToAdd.ClientCommande != null) CommandeToAdd.AdresseLivraison = AdresseToAdd;
             adresseInputSp.Visibility = Visibility.Visible;
             adresseLblSp.Visibility = Visibility.Visible;
+            if (CommandeToAdd != null) MessageBox.Show(CommandeToAdd.AdresseLivraison.ToString());
         }
 
         private void SetStatusChecked()
         {
-            if (SelectedClient != null) CommandeToAdd.AdresseLivraison = CommandeToAdd.ClientCommande.AdresseClient;
+            if (SelectedClient != null) CommandeToAdd.AdresseLivraison = CommandeToAdd.ClientCommande.AdresseClient; MessageBox.Show(CommandeToAdd.AdresseLivraison.ToString());
             adresseInputSp.Visibility = Visibility.Hidden;
             adresseLblSp.Visibility = Visibility.Hidden;
         }
@@ -144,6 +150,34 @@ namespace ApplicationVeloMax.Views.Commandes
         private void addButton_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        private void DataGridRowPart_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new DetailClientPro((ClientPro)SelectedClient).ShowDialog();
+        }
+
+        private void DataGridRowPro_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            new DetailClientPro((ClientPro)SelectedClient).ShowDialog();
+        }
+
+        private void DataGridPro_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if(DataGridPro.SelectedItem != null)
+            {
+                SelectedClient = (Client)DataGridPro.SelectedItem;
+                DataGridPart.SelectedItem = null;
+            }
+        }
+
+        private void DataGridPart_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (DataGridPart.SelectedItem != null)
+            {
+                SelectedClient = (Client)DataGridPart.SelectedItem;
+                DataGridPro.SelectedItem = null;
+            }
         }
     }
 }
