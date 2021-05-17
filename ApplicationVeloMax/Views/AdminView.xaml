@@ -899,8 +899,8 @@
                                 </Button.Resources>
                             </Button>
 
-                            <Button x:Name="addFourinsseurButton" Margin="5,0" Padding="5" Content="Ajouter"
-                                Foreground="White" Background="#6abb74" Click="addFourinsseurButton_Click">
+                            <Button x:Name="addFournisseurButton" Margin="5,0" Padding="5" Content="Ajouter"
+                                Foreground="White" Background="#6abb74" Click="addFournisseurButton_Click">
                                 <Button.Resources>
                                     <Style TargetType="Border">
                                         <Setter Property="CornerRadius" Value="10"/>

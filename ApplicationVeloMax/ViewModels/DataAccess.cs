@@ -496,8 +496,9 @@ namespace ApplicationVeloMax.ViewModels
                 connexion.Open();
                 MySqlCommand com = new MySqlCommand("RemoveFournisseur", connexion) { CommandType = CommandType.StoredProcedure };
                 com.Parameters.Add("@srt", MySqlDbType.Int64).Value = toRemove.Siret;
-                try { com.ExecuteReader(); }
-                catch { return false; }
+                com.ExecuteReader();
+                //try { com.ExecuteReader(); }
+                //catch { return false; }
             }
             Fournisseur.Ensemble.Clear();
             GetAllFournisseursUsingSP();
@@ -872,6 +873,37 @@ namespace ApplicationVeloMax.ViewModels
             return toReturn;
         }
 
+        static public bool AddFournisseur(Fournisseur toAdd)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                if (Fournisseur.Ensemble.Exists(c => c.Siret == toAdd.Siret))
+                {
+                    connexion.Open();
+                    MySqlCommand com = new MySqlCommand("CreateFournisseur", connexion) { CommandType = CommandType.StoredProcedure };
+                    com.Parameters.Add("@siret", MySqlDbType.Int64).Value = toAdd.Siret;
+                    com.Parameters.Add("@idC", MySqlDbType.Int64).Value = toAdd.ContactFournisseur.Id;
+                    com.Parameters.Add("@idA", MySqlDbType.Int64).Value = toAdd.AdresseFournisseur.Id;
+                    com.Parameters.Add("@idL", MySqlDbType.Int64).Value = toAdd.LibelleFournisseur.Id;
+                    com.Parameters.Add("@nom", MySqlDbType.VarChar).Value = toAdd.ContactFournisseur.Nom;
+                    com.Parameters.Add("@prenom", MySqlDbType.VarChar).Value = toAdd.ContactFournisseur.Prenom;
+                    com.Parameters.Add("@tel", MySqlDbType.VarChar).Value = toAdd.ContactFournisseur.Tel;
+                    com.Parameters.Add("@mail", MySqlDbType.VarChar).Value = toAdd.ContactFournisseur.Email;
+                    com.Parameters.Add("@l1", MySqlDbType.VarChar).Value = toAdd.AdresseFournisseur.Ligne1;
+                    com.Parameters.Add("@l2", MySqlDbType.VarChar).Value = toAdd.AdresseFournisseur.Ligne2;
+                    com.Parameters.Add("@cp", MySqlDbType.VarChar).Value = toAdd.AdresseFournisseur.CodePostal;
+                    com.Parameters.Add("@ville", MySqlDbType.VarChar).Value = toAdd.AdresseFournisseur.Ville;
+                    com.Parameters.Add("@province", MySqlDbType.VarChar).Value = toAdd.AdresseFournisseur.Province;
+                    com.Parameters.Add("@pays", MySqlDbType.VarChar).Value = toAdd.AdresseFournisseur.Pays;
+                    com.Parameters.Add("@nomF", MySqlDbType.VarChar).Value = toAdd.Nom;
+                    try { com.ExecuteReader(); }
+                    catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+                    RefreshDBUsingSP();
+                }
+            }
+            return toReturn;
+        }
         #endregion
 
         static public void RefreshDBUsingSP()

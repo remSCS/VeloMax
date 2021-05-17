@@ -3,10 +3,113 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ApplicationVeloMax.Views.Fournisseurs"
-        mc:Ignorable="d"
-        Title="AddFournisseurView" Height="450" Width="800">
+        xmlns:local="clr-namespace:ApplicationVeloMax.Converters"
+        mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="Edition Fournisseur - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="CanResize"
+        Height="378" Width="640" FontFamily="Helvetica" Background="#e4e4e4">
+
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Label Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" 
+               FontSize="14" FontWeight="Bold" Content="Fournisseur"/>
+
+        <Label Grid.Row="0" Grid.Column="3" Grid.ColumnSpan="2" HorizontalAlignment="Center" 
+               FontSize="14" FontWeight="Bold" Content="Adresse"/>
+
+        <Label Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Center" 
+               FontSize="14" FontWeight="Bold" Content="Contact"/>
+
+        <StackPanel Orientation="Vertical" Margin="5" Grid.Column="0" Grid.Row="1">
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Siret fournisseur"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Nom du fournisseur"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Libellé"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Margin="5" Grid.Column="0" Grid.Row="3">
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Nom"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Prénom"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Email"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Télephonne"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Margin="5" Grid.Column="1" Grid.Row="1" >
+            <TextBox x:Name="siretTb" Margin="5" Height="25" VerticalContentAlignment="Center"
+                     Text="{Binding FournisseurToAdd.Siret, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox x:Name="nomFournisseurTb" Margin="5" Height="25" VerticalContentAlignment="Center"
+                     Text="{Binding FournisseurToAdd.Nom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <ComboBox x:Name="libelleCombo" Margin="5" Height="25" VerticalAlignment="Center"
+                      ItemsSource="{Binding Libelles, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding FournisseurToAdd.LibelleFournisseur, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Margin="5" Grid.Column="1" Grid.Row="3" >
+            <TextBox x:Name="nomTb" Margin="5" Height="25" VerticalContentAlignment="Center"
+                     Text="{Binding FournisseurToAdd.ContactFournisseur.Nom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox  x:Name="prenomTb" Margin="5" Height="25" VerticalContentAlignment="Center"
+                      Text="{Binding FournisseurToAdd.ContactFournisseur.Prenom, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox x:Name="mailTb" Margin="5" Height="25" VerticalContentAlignment="Center"
+                     Text="{Binding FournisseurToAdd.ContactFournisseur.Email, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox x:Name="telTb" Margin="5" Height="25" VerticalContentAlignment="Center"
+                     Text="{Binding FournisseurToAdd.ContactFournisseur.Tel, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
+        <Rectangle Width="2" Grid.Column="2" Grid.Row="0" Grid.RowSpan="4" Margin="5" Fill="Black"/>
+
+        <StackPanel Orientation="Vertical" Margin="5" Grid.Column="3" Grid.Row="1" Grid.RowSpan="3">
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Ligne 1"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Ligne 2"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Code Postal"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Ville"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Province"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Pays"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Vertical" Margin="5" Grid.Column="4" Grid.Row="1" Grid.RowSpan="3">
+            <TextBox x:Name="l1TB" Margin="5" Height="25" VerticalContentAlignment="Center"
+                     Text="{Binding FournisseurToAdd.AdresseFournisseur.Ligne1, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox x:Name="l2TB" Margin="5" Height="25" VerticalContentAlignment="Center"
+                     Text="{Binding FournisseurToAdd.AdresseFournisseur.Ligne2, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox  x:Name="cpTB" Margin="5" Height="25" VerticalContentAlignment="Center"
+                      Text="{Binding FournisseurToAdd.AdresseFournisseur.CodePostal, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox x:Name="villeTB" Margin="5" Height="25" VerticalContentAlignment="Center"
+                     Text="{Binding FournisseurToAdd.AdresseFournisseur.Ville, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox x:Name="provTB" Margin="5" Height="25" VerticalContentAlignment="Center"
+                     Text="{Binding FournisseurToAdd.AdresseFournisseur.Province, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+
+            <TextBox x:Name="paysTB" Margin="5" Height="25" VerticalContentAlignment="Center"
+                     Text="{Binding FournisseurToAdd.AdresseFournisseur.Pays, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
+
+        <StackPanel Orientation="Horizontal" Margin="5" Grid.Row="3" Grid.ColumnSpan="5" VerticalAlignment="Bottom"
+                    HorizontalAlignment="Right">
+            <Button x:Name="addButton" Padding="5" Margin="5" Content="Ajouter le fournisseur"
+                    Click="addButton_Click" IsDefault="True"/>
+            <Button x:Name="cancelButton" Padding="5" Margin="5" Content="Annuler"
+                    Click="cancelButton_Click" IsCancel="True"/>
+        </StackPanel>
     </Grid>
+
 </Window>

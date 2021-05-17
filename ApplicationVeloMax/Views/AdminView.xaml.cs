@@ -349,24 +349,28 @@ namespace ApplicationVeloMax.Views
         {
             if (CheckIfSelected(SelectedCommande)) new CommandeDetailView(SelectedCommande).ShowDialog();
             else MessageBox.Show("Veuillez choisir une commande");
+            RefreshProperties();
         }
 
         private void commandesDoneModifierButton_Click(object sender, RoutedEventArgs e)
         {
             if (CheckIfSelected(SelectedCommandeDone)) new CommandeDetailView(SelectedCommandeDone).ShowDialog();
             else MessageBox.Show("Veuillez choisir une commande");
+            RefreshProperties();
         }
 
         private void commandesCancelledModifierButton_Click(object sender, RoutedEventArgs e)
         {
             if (CheckIfSelected(SelectedCommandeCancelled)) new CommandeDetailView(SelectedCommandeCancelled).ShowDialog();
             else MessageBox.Show("Veuillez choisir une commande");
+            RefreshProperties();
         }
 
         private void commandesToDoModifierButton_Click(object sender, RoutedEventArgs e)
         {
             if (CheckIfSelected(SelectedCommandeToDo)) new CommandeDetailView(SelectedCommandeToDo).ShowDialog();
             else MessageBox.Show("Veuillez choisir une commande");
+            RefreshProperties();
         }
 
         private void deleteOrderButton_Click(object sender, RoutedEventArgs e)
@@ -385,6 +389,7 @@ namespace ApplicationVeloMax.Views
                     MessageBox.Show("Comande supprimée");
                 }
             }
+            RefreshProperties();
         }
 
         private void cancelOrderButton_Click(object sender, RoutedEventArgs e)
@@ -403,6 +408,7 @@ namespace ApplicationVeloMax.Views
                     MessageBox.Show("Commande annulée");
                 }
             }
+            RefreshProperties();
         }
         #endregion
 
@@ -421,6 +427,7 @@ namespace ApplicationVeloMax.Views
                     MessageBox.Show("Modele supprimé");
                 }
             }
+            RefreshProperties();
         }
 
         private void editModeleButton_Click(object sender, RoutedEventArgs e)
@@ -457,6 +464,7 @@ namespace ApplicationVeloMax.Views
                     }
                 }
             }
+            RefreshProperties();
         }
 
         private void editPieceButton_Click(object sender, RoutedEventArgs e)
@@ -494,6 +502,7 @@ namespace ApplicationVeloMax.Views
                     else MessageBox.Show("Impossible de supprimer un client ayant un historique de commande.");
                 }
             }
+            RefreshProperties();
         }
 
         #region Fidelio
@@ -513,6 +522,7 @@ namespace ApplicationVeloMax.Views
                     else MessageBox.Show("Impossible de supprimer un client ayant un historique de commande. Voulez vous migrer les clients ayant ce type de compte ? (à faire)");
                 }
             }
+            RefreshProperties();
         }
 
         private void editFidelioButton_Click(object sender, RoutedEventArgs e)
@@ -535,7 +545,6 @@ namespace ApplicationVeloMax.Views
         #region Particuliers
         private void editClientPartButton_Click(object sender, RoutedEventArgs e)
         {
-
             if (SelectedClient == null) MessageBox.Show("Veuillez sélectionner un client.");
             else
             {
@@ -611,6 +620,7 @@ namespace ApplicationVeloMax.Views
                     else MessageBox.Show("Impossible de supprimer un fournisseur actif.");
                 }
             }
+            RefreshProperties();
         }
 
         private void editFournisseurButton_Click(object sender, RoutedEventArgs e)
@@ -623,11 +633,10 @@ namespace ApplicationVeloMax.Views
             }
         }
 
-        private void addFourinsseurButton_Click(object sender, RoutedEventArgs e)
+        private void addFournisseurButton_Click(object sender, RoutedEventArgs e)
         {
             new AddFournisseurView().ShowDialog();
             RefreshProperties();
-
         }
         #endregion
 
