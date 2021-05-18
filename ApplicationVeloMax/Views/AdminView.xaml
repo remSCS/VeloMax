@@ -1315,8 +1315,8 @@
                                 </Grid.RowDefinitions>
 
                                 <ComboBox x:Name="triVente_ComboBox" Grid.Row="0" Width="200" HorizontalAlignment="Right" Margin="5" SelectionChanged="triVente_ComboBox_SelectionChanged">
-                                    <ComboBoxItem IsSelected="True">Nb. de ventes</ComboBoxItem>
-                                    <ComboBoxItem >Cumul des ventes</ComboBoxItem>
+                                    <ComboBoxItem >Nb. de ventes</ComboBoxItem>
+                                    <ComboBoxItem IsSelected="True">Cumul des ventes</ComboBoxItem>
                                 </ComboBox>
 
                                 <DataGrid x:Name="Classementclients_DataGrid" Grid.Row="1"
