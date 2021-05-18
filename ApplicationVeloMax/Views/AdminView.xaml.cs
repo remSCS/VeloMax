@@ -64,6 +64,20 @@ namespace ApplicationVeloMax.Views
             get { return _selectedModele; }
             set { _selectedModele = value; }
         }
+
+        private string _searchModelText;
+
+        public string SearchModelText
+        {
+            get { return _searchModelText; }
+            set
+            {
+                _searchModelText = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SearchModelText"));
+                Modeles = new ObservableCollection<Modele>(Modele.ModelesThatMatch(SearchModelText));
+            }
+        }
+
         #endregion
 
         #region Adresses
@@ -195,6 +209,20 @@ namespace ApplicationVeloMax.Views
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedCommandeDone"));
             }
         }
+
+        private string _searchCommandeText;
+
+        public string SearchCommandeText
+        {
+            get { return _searchCommandeText; }
+            set
+            {
+                _searchCommandeText = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SearchCommandeText"));
+                Commandes = new ObservableCollection<Commande>(Commande.CommandesThatMatch(SearchCommandeText));
+            }
+        }
+
         #endregion
 
         #region Pièces
@@ -242,6 +270,19 @@ namespace ApplicationVeloMax.Views
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedPieceStock"));
             }
         }
+
+        private string _searchPieceText;
+
+        public string SearchPieceText
+        {
+            get { return _searchPieceText; }
+            set
+            {
+                _searchPieceText = value;
+                PiecesDetachees = new ObservableCollection<PieceDetachee>(PieceDetachee.PiecesThatMatch(SearchPieceText));
+            }
+        }
+
         #endregion
 
         #region Fournisseurs
@@ -266,6 +307,20 @@ namespace ApplicationVeloMax.Views
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedFournisseur"));
             }
         }
+
+        private string _searchFournisseursText;
+
+        public string SearchFournisseursText
+        {
+            get { return _searchFournisseursText; }
+            set
+            {
+                _searchFournisseursText = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SearchFournisseursText"));
+                Fournisseurs = new ObservableCollection<Fournisseur>(Fournisseur.FournisseursThatMatch(SearchFournisseursText));
+            }
+        }
+
         #endregion
 
         #region Fidelios
@@ -335,24 +390,52 @@ namespace ApplicationVeloMax.Views
 
         public ObservableCollection<Client> EnsembleClients
         {
-            get {return _ensembleClients; }
+            get { return _ensembleClients; }
             set
             {
                 _ensembleClients = value;
                 PropertyChanged(this, new PropertyChangedEventArgs("EnsembleClients"));
             }
-           
+
         }
+
+        private string _searchParticulierText;
+
+        public string SearchParticulierText
+        {
+            get { return _searchParticulierText; }
+            set
+            {
+                _searchParticulierText = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SearchParticulierText"));
+                ClientsParts = new ObservableCollection<ClientPart>(ClientPart.PartThatMatch(SearchParticulierText));
+            }
+        }
+
+        private string _searhProText;
+
+        public string SearhProText
+        {
+            get { return _searhProText; }
+            set
+            {
+                _searhProText = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("SearhProText"));
+                ClientsPros = new ObservableCollection<ClientPro>(ClientPro.ProThatMatch(SearhProText));
+            }
+        }
+
+
         #endregion
         #endregion
 
-        public AdminView(string serverName, string login, string password)
+        public AdminView(string serverName, string nomdb, string login, string password)
         {
             InitializeComponent();
             displayMenu.Visibility = Visibility.Collapsed;
-            string cs = $"SERVER={serverName};PORT=3306;DATABASE=VeloMax;UID={login};PASSWORD={password}";
+            string cs = $"SERVER={serverName};PORT=3306;DATABASE={nomdb};UID={login};PASSWORD={password}";
             new DataAccess(cs);
-            //new DataAccess("SERVER=84.102.235.128;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
+            //new DataAccess("SERVER= ;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
             //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
             //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=root;PASSWORD=root");
 

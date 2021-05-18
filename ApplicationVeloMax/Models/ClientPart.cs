@@ -45,5 +45,12 @@ namespace ApplicationVeloMax.Models
         {
             get { return ensembleParticuliers; }
         }
+
+        static public List<ClientPart> PartThatMatch(string nomClient)
+        {
+
+            return EnsembleParticuliers.FindAll(md => md.ContactClient.FullName.ToLower().Contains(nomClient.ToLower())|| md.Id.ToString().Contains(nomClient) || md.ContactClient.Tel.Contains(nomClient.ToLower()));
+
+        }
     }
 }

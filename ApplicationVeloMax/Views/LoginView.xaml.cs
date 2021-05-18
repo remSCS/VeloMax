@@ -26,13 +26,11 @@ namespace ApplicationVeloMax.Views
             InitializeComponent();
         }
 
-        private void Input_KeyDown(object sender, KeyEventArgs e) { if (e.Key == Key.Enter) userLoginButton_Click(new object(), new RoutedEventArgs()); }
-
         private void userLoginButton_Click(object sender, RoutedEventArgs e)
         {
-            if (DataAccess.TestConnectionString(serverInput.Text, userLoginInput.Text, userPasswordinput.Password.ToString()))
+            if (DataAccess.TestConnectionString(serverInput.Text, dbInput.Text, userLoginInput.Text, userPasswordinput.Password.ToString()))
             {
-                AdminView adminViewWindow = new AdminView(serverInput.Text, userLoginInput.Text, userPasswordinput.Password.ToString());
+                AdminView adminViewWindow = new AdminView(serverInput.Text, dbInput.Text, userLoginInput.Text, userPasswordinput.Password.ToString());
                 adminViewWindow.Closing += new CancelEventHandler(AnyViewWindow_Closing);
                 adminViewWindow.Show();
                 this.Visibility = Visibility.Hidden;

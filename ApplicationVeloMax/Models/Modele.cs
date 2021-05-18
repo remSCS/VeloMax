@@ -110,5 +110,12 @@ namespace ApplicationVeloMax.Models
         {
             get { return ensemble; }
         }
+
+        static public List<Modele> ModelesThatMatch(string nomModele)
+        {
+            
+            return Ensemble.FindAll(md => md.Nom.ToLower().Contains(nomModele.ToLower()) || md.Id.ToString().Contains(nomModele));
+            
+        }
     }
 }

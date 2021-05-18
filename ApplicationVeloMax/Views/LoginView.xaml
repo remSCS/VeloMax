@@ -19,11 +19,11 @@
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-
         <Image Source="/img/VeloMax_Logo.png" Height="250" 
-                   Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center"
+                   Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center"
                ToolTip="Logo crée par nos soins pour les besoins du problème"/>
         
         <Button x:Name="Github_Button"
@@ -41,20 +41,24 @@
             <ComboBoxItem ToolTip="Serveur de Rémi">84.102.235.128</ComboBoxItem>
         </ComboBox>
 
+        <ComboBox x:Name="dbInput" Margin="10" IsEditable="False" Text="Nom de la base de données" FontSize="14" Opacity="0.7"
+                          Grid.Row="1" Grid.Column="1" Background="Gray"
+                  ToolTip="Entrer le nom de la base de données">
+            <ComboBoxItem IsSelected="True">VeloMax</ComboBoxItem>
+        </ComboBox>
+
         <ComboBox x:Name="userLoginInput" Margin="10" IsEditable="True" Text="Identifiant" FontSize="14" Opacity="0.7"
-                          Grid.Row="1" Grid.Column="1" ToolTip="Entrer l'identifiant utilisateur">
+                          Grid.Row="2" Grid.Column="1" ToolTip="Entrer l'identifiant utilisateur">
             <ComboBoxItem ToolTip="Identifiant local">root</ComboBoxItem>
             <ComboBoxItem ToolTip="Identifiant pour le serveur de Rémi">RemoteUser</ComboBoxItem>
         </ComboBox>
 
-        <PasswordBox x:Name="userPasswordinput" MinWidth="200" Margin="10,20" Padding="5" KeyDown="Input_KeyDown" ToolTip="Entrer le mot de passe utilisateur"
-                             Grid.Row="2" Grid.Column="1"/>
-        
+        <PasswordBox x:Name="userPasswordinput" MinWidth="200" Margin="10,15" Padding="5" ToolTip="Entrer le mot de passe utilisateur"
+                             Grid.Row="3" Grid.Column="1"/>
+
         <Button x:Name="userLoginButton"  Padding="6" Content="Login" Margin="10"
-                        Grid.Row="3" Grid.Column="1"
+                        Grid.Row="4" Grid.Column="1" IsDefault="True"
                     VerticalContentAlignment="center" Background="Green" 
                     Foreground="White" Click="userLoginButton_Click"/>
-
-
     </Grid>
 </Window>
