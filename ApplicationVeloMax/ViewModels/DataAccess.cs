@@ -800,7 +800,7 @@ namespace ApplicationVeloMax.ViewModels
                 connexion.Open();
                 MySqlCommand com = new MySqlCommand("AddModeleToCommande", connexion) { CommandType = CommandType.StoredProcedure };
                 com.Parameters.Add("@idC", MySqlDbType.Int64).Value = selCom.Id;
-                com.Parameters.Add("@idP", MySqlDbType.Int64).Value = selMod.Id;
+                com.Parameters.Add("@idP", MySqlDbType.Int64).Value = selPart.Id;
                 com.Parameters.Add("@qte", MySqlDbType.Int64).Value = quantity;
                 try { com.ExecuteReader(); }
                 catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
