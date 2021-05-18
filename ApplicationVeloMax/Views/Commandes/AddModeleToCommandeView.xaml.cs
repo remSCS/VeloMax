@@ -70,7 +70,7 @@ namespace ApplicationVeloMax.Views.Commandes
             Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
         }
 
-        private void modeleDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new DetailsModeleView(SelectedModele).ShowDialog();
+        private void modeleDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new detailPieceView(SelectedModele).ShowDialog();
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -80,7 +80,7 @@ namespace ApplicationVeloMax.Views.Commandes
                 if (QteToAdd == 0) MessageBox.Show("Veuillez indiquer une quantité à ajouter !");
                 else
                 {
-                    //DataAccess.AddPieceCompositionCommande(SelectedCommande, SelectedModele, QteToAdd);
+                    //DataAccess.AddModeleCompositionCommande(SelectedCommande, SelectedModele, QteToAdd);
                     
                 }
             }

@@ -508,7 +508,7 @@ namespace ApplicationVeloMax.Views
             if (SelectedModele == null) MessageBox.Show("Veuillez choisir un modèle");
             else
             {
-                new DetailsModeleView(SelectedModele).ShowDialog();
+                new detailPieceView(SelectedModele).ShowDialog();
                 RefreshProperties();
             }
         }

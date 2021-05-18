@@ -104,11 +104,11 @@ namespace ApplicationVeloMax.Views.Commandes
 
         private void addModeleButton_Click(object sender, RoutedEventArgs e) => new AddModeleToCommandeView(SelectedCommande).ShowDialog();
 
-        private void addPieceButton_Click(object sender, RoutedEventArgs e) => new AddPieceToCommandeView().ShowDialog();
+        private void addPieceButton_Click(object sender, RoutedEventArgs e) => new AddPieceToCommandeView(SelectedCommande).ShowDialog();
 
         private void piecesDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new DetailPieceView(SelectedPiece).ShowDialog();
 
-        private void modelesDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new DetailsModeleView(SelectedModele).ShowDialog();
+        private void modelesDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new detailPieceView(SelectedModele).ShowDialog();
 
         private void detailClientButton_Click(object sender, RoutedEventArgs e)
         {

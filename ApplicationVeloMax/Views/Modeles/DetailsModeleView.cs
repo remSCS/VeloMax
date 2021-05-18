@@ -22,7 +22,7 @@ namespace ApplicationVeloMax.Views.Modeles
     /// <summary>
     /// Interaction logic for DetailsModeleView.xaml
     /// </summary>
-    public partial class DetailsModeleView : Window, INotifyPropertyChanged
+    public partial class detailPieceView : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -72,7 +72,7 @@ namespace ApplicationVeloMax.Views.Modeles
             }
         }
 
-        public DetailsModeleView(Modele _input)
+        public detailPieceView(Modele _input)
         {
             InitializeComponent();
             SelectedModele = _input;
