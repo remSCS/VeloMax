@@ -202,6 +202,9 @@
     <Compile Include="Views\Pieces\EditPieceView.xaml.cs">
       <DependentUpon>EditPieceView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Statistiques\StatistiquesView.xaml.cs">
+      <DependentUpon>StatistiquesView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Stock\StockPieceFournisseurs.xaml.cs">
       <DependentUpon>StockPieceFournisseurs.xaml</DependentUpon>
     </Compile>
@@ -371,6 +374,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Pieces\EditPieceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Statistiques\StatistiquesView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
