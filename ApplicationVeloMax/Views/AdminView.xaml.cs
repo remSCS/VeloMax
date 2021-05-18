@@ -753,7 +753,7 @@ namespace ApplicationVeloMax.Views
             }
         }
 
-        public static void SortDataGrid(DataGrid datagrid,int colidx, ListSortDirection direction=ListSortDirection.Descending)
+        public static void SortDataGrid(DataGrid datagrid,int colidx, ListSortDirection direction = ListSortDirection.Descending)
         {
             var colonne = datagrid.Columns[colidx];
             datagrid.Items.SortDescriptions.Clear();

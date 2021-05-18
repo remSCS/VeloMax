@@ -999,53 +999,53 @@ namespace ApplicationVeloMax.ViewModels
             RefreshDBUsingSP();
             return toReturn;
         }
-    #endregion
+        #endregion
 
-    static public void RefreshDBUsingSP()
-    {
-        Adresse.Ensemble.Clear();
-        Client.Ensemble.Clear();
-        ClientPart.EnsembleParticuliers.Clear();
-        ClientPro.EnsemblePros.Clear();
-        Commande.ClearEnsembles();
-        Contact.Ensemble.Clear();
-        Fidelio.Ensemble.Clear();
-        Fournisseur.Ensemble.Clear();
-        FournisseurPiece.Ensemble.Clear();
-        Grandeur.Ensemble.Clear();
-        Libelle.Ensemble.Clear();
-        LigneProduit.Ensemble.Clear();
-        Modele.Ensemble.Clear();
-        PieceDetachee.Ensemble.Clear();
-
-        GetAllAdressesUsingSP();
-        GetAllContactsUsingSP();
-        GetAllLibellesUsingSP();
-        GetAllGrandeursUsingSP();
-        GetAllLigneProduitsUsingSP();
-        GetAllFideliosUsingSP();
-        GetAllPiecesDetacheesUsingSP();
-        GetAllModelsUsingSP();
-        GetAllFournisseursUsingSP();
-        GetAllClientsUsingSP();
-        GetAllFournisseursPiecesUsingSP();
-        GetAllCommandesUsingSP();
-    }
-
-    static public int GetHighestId(string tableName)
-    {
-        int toReturn = 0;
-        using (var connexion = GetConnection())
+        static public void RefreshDBUsingSP()
         {
-            connexion.Open();
-            MySqlCommand com = new MySqlCommand("HighestId", connexion) { CommandType = CommandType.StoredProcedure };
-            com.Parameters.Add("@tableName", MySqlDbType.VarChar).Value = tableName;
-            var returnedParameter = com.Parameters.Add("@n", MySqlDbType.Int64);
-            returnedParameter.Direction = ParameterDirection.Output;
-            com.ExecuteNonQuery();
-            toReturn = Convert.ToInt32(returnedParameter.Value);
+            Adresse.Ensemble.Clear();
+            Client.Ensemble.Clear();
+            ClientPart.EnsembleParticuliers.Clear();
+            ClientPro.EnsemblePros.Clear();
+            Commande.ClearEnsembles();
+            Contact.Ensemble.Clear();
+            Fidelio.Ensemble.Clear();
+            Fournisseur.Ensemble.Clear();
+            FournisseurPiece.Ensemble.Clear();
+            Grandeur.Ensemble.Clear();
+            Libelle.Ensemble.Clear();
+            LigneProduit.Ensemble.Clear();
+            Modele.Ensemble.Clear();
+            PieceDetachee.Ensemble.Clear();
+
+            GetAllAdressesUsingSP();
+            GetAllContactsUsingSP();
+            GetAllLibellesUsingSP();
+            GetAllGrandeursUsingSP();
+            GetAllLigneProduitsUsingSP();
+            GetAllFideliosUsingSP();
+            GetAllPiecesDetacheesUsingSP();
+            GetAllModelsUsingSP();
+            GetAllFournisseursUsingSP();
+            GetAllClientsUsingSP();
+            GetAllFournisseursPiecesUsingSP();
+            GetAllCommandesUsingSP();
         }
-        return toReturn;
+
+        static public int GetHighestId(string tableName)
+        {
+            int toReturn = 0;
+            using (var connexion = GetConnection())
+            {
+                connexion.Open();
+                MySqlCommand com = new MySqlCommand("HighestId", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@tableName", MySqlDbType.VarChar).Value = tableName;
+                var returnedParameter = com.Parameters.Add("@n", MySqlDbType.Int64);
+                returnedParameter.Direction = ParameterDirection.Output;
+                com.ExecuteNonQuery();
+                toReturn = Convert.ToInt32(returnedParameter.Value);
+            }
+            return toReturn;
+        }
     }
-}
 }
