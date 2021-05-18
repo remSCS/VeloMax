@@ -72,6 +72,22 @@ namespace ApplicationVeloMax.Models
             set { quantite = value; }
         }
 
+        public int Nbvendus
+        {
+            get
+            {
+                int compteur = 0;
+                foreach (Commande co in Commande.Ensemble)
+                {
+                    foreach (PieceDetachee pd in co.PiecesCommande)
+                    {
+                        if (pd.Id == this.Id) compteur++;
+                    }
+                }
+                return compteur;
+            }
+        }
+
         static public List<PieceDetachee> Ensemble
         {
             get { return ensemble; }
