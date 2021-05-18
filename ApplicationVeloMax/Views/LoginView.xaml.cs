@@ -40,9 +40,6 @@ namespace ApplicationVeloMax.Views
         }
         private void AnyViewWindow_Closing(object sender, CancelEventArgs e) { this.Visibility = Visibility.Visible; }
 
-        private void Github_Button_Click(object sender, RoutedEventArgs e)
-        {
-            System.Diagnostics.Process.Start("https://github.com/remSCS/VeloMax.git");
-        }
+        private void Github_Button_Click(object sender, RoutedEventArgs e) => System.Diagnostics.Process.Start("https://github.com/remSCS/VeloMax.git");
     }
 }

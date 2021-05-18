@@ -1,0 +1,57 @@
+﻿<Window x:Class="ApplicationVeloMax.Views.Commandes.SelectionFournisseurDelaiView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:ApplicationVeloMax.Views.Fournisseurs"
+        mc:Ignorable="d" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
+        WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
+        Title="Sélection d'un Fournisseur - VéloMax" Height="380" Width="726.5" Icon="/img/Velomax_Logo.png">
+
+    <Grid>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
+            </Grid.RowDefinitions>
+
+            <DataGrid ItemsSource="{Binding FournisseursPiece, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding SelectedFournisseurPiece, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}"
+                      AutoGenerateColumns="False" IsReadOnly="True" >
+                <DataGrid.Columns>
+                    <DataGridTextColumn Width="auto" Header="Siret" CanUserResize="False" Binding="{Binding FournisseurPieceDetachee.Siret}"/>
+                    <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding FournisseurPieceDetachee.Nom}"/>
+                    <DataGridTextColumn Width="auto" Header="Libellé" Binding="{Binding FournisseurPieceDetachee.LibelleFournisseur.Nom}"/>
+                    <DataGridTextColumn Width="*" Header="Numéro catalgoque" Binding="{Binding NumCatalogue}"/>
+                    <DataGridTextColumn Width="*" Header="Délai en jours" Binding="{Binding Delai}"/>
+                    <DataGridTextColumn Width="auto" Header="Prix" Binding="{Binding Prix, StringFormat=€ {0}}"/>
+                </DataGrid.Columns>
+            </DataGrid>
+
+            <Grid Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Left">
+                    <Label Height="25" Margin="5" VerticalAlignment="Center" Content="Quantité à ajouter à la commande :"/>
+                    <TextBox x:Name="qteTb" Height="25" MinWidth="30" Margin="5" VerticalAlignment="Center" 
+                             Text="{Binding QuantiteToAdd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">
+                    <Button HorizontalAlignment="Right" Margin="10" IsCancel="True"
+                        Click="CloseButton_Click" VerticalAlignment="Top">
+                        <materialDesign:PackIcon Kind="Close"/>
+                    </Button>
+                    <Button HorizontalAlignment="Right" Margin="10" IsDefault="True"
+                        Click="AddButton_Click"  VerticalAlignment="Top">
+                        <materialDesign:PackIcon Kind="AddBox"/>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Grid>
+    </Grid>
+    
+</Window>

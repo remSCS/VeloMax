@@ -43,7 +43,8 @@
 
             <StackPanel Orientation="Horizontal" Grid.Column="0" HorizontalAlignment="Left">
                 <Label Height="25" Margin="5" VerticalAlignment="Center" Content="Quantité à ajouter à la commande :"/>
-                <TextBox x:Name="qteTb" Height="25" MinWidth="30" Margin="5" VerticalAlignment="Center" Text="{Binding QteToAdd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBox x:Name="qteTb" Height="25" MinWidth="30" Margin="5" VerticalAlignment="Center" 
+                         Text="{Binding QteToAdd, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
             </StackPanel>
 
             <StackPanel Orientation="Horizontal" Grid.Column="1" HorizontalAlignment="Right">

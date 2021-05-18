@@ -27,7 +27,7 @@ namespace ApplicationVeloMax.ViewModels
                 MySqlConnection c = new MySqlConnection($"SERVER ={ co }; PORT = 3306; DATABASE = VeloMax; UID ={ id}; PASSWORD ={ pw}");
                 c.Open();
             }
-            catch(MySqlException e)
+            catch
             {
                 StringBuilder messageErreur = new StringBuilder(200);
                 messageErreur.Append($"Votre tentative de connexion a échoué pour l'utilisateur \'{id}\' au serveur MySQL à {co}:3306:");
@@ -801,6 +801,7 @@ namespace ApplicationVeloMax.ViewModels
                 com.Parameters.Add("@qte", MySqlDbType.Int64).Value = quantity;
                 try { com.ExecuteReader(); }
                 catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+                ModifyStockModele(selMod, selMod.Quantite - quantity);
             }
             RefreshDBUsingSP();
             return toReturn;
@@ -818,6 +819,7 @@ namespace ApplicationVeloMax.ViewModels
                 com.Parameters.Add("@qte", MySqlDbType.Int64).Value = quantity;
                 try { com.ExecuteReader(); }
                 catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+                ModifyStockPiece(selPart, selPart.Quantite - quantity);
             }
             RefreshDBUsingSP();
             return toReturn;
@@ -848,6 +850,22 @@ namespace ApplicationVeloMax.ViewModels
                 MySqlCommand com = new MySqlCommand("RemoveOnePieceFromCommande", connexion) { CommandType = CommandType.StoredProcedure };
                 com.Parameters.Add("@idC", MySqlDbType.Int64).Value = selCom.Id;
                 com.Parameters.Add("@idP", MySqlDbType.Int64).Value = selPart.Id;
+                try { com.ExecuteReader(); }
+                catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+            }
+            RefreshDBUsingSP();
+            return toReturn;
+        }
+
+        static public bool EditOrderDueDate(Commande selCom)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                connexion.Open();
+                MySqlCommand com = new MySqlCommand("EditCommandeDueDate", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@idC", MySqlDbType.Int64).Value = selCom.Id;
+                com.Parameters.Add("@newDs", MySqlDbType.Int64).Value = selCom.DateS;
                 try { com.ExecuteReader(); }
                 catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
             }

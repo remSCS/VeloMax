@@ -167,6 +167,9 @@
     <Compile Include="Views\Commandes\FactureCommande.xaml.cs">
       <DependentUpon>FactureCommande.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Commandes\SelectionFournisseurDelaiView.xaml.cs">
+      <DependentUpon>SelectionFournisseurDelaiView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Fidelios\AddFidelioView.xaml.cs">
       <DependentUpon>AddFidelioView.xaml</DependentUpon>
     </Compile>
@@ -336,6 +339,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Commandes\FactureCommande.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Commandes\SelectionFournisseurDelaiView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -64,7 +64,7 @@ namespace ApplicationVeloMax.Views.Commandes
         {
             InitializeComponent();
             SelectedCommande = _inputCommande;
-            if(SelectedCommande.Statut != "En cours de préparation")
+            if (SelectedCommande.Statut != "En cours de préparation")
             {
                 addModeleButton.Visibility = Visibility.Hidden;
                 removeModeleButton.Visibility = Visibility.Hidden;
@@ -80,7 +80,7 @@ namespace ApplicationVeloMax.Views.Commandes
             if (SelectedPiece == null) MessageBox.Show("Veuillez sélectionner une pièce à supprimer.");
             else
             {
-                if(!DataAccess.RemovePieceCompositionCommande(SelectedCommande, SelectedPiece)) MessageBox.Show("Impossible de retirer la pièce de cette commande.");
+                if (!DataAccess.RemovePieceCompositionCommande(SelectedCommande, SelectedPiece)) MessageBox.Show("Impossible de retirer la pièce de cette commande.");
                 else
                 {
                     MessageBox.Show("Pièce supprimée !");
@@ -103,9 +103,9 @@ namespace ApplicationVeloMax.Views.Commandes
             }
         }
 
-        private void addModeleButton_Click(object sender, RoutedEventArgs e) => new AddModeleToCommandeView(SelectedCommande).ShowDialog();
+        private void addModeleButton_Click(object sender, RoutedEventArgs e) { new AddModeleToCommandeView(SelectedCommande).ShowDialog(); this.Close(); }
 
-        private void addPieceButton_Click(object sender, RoutedEventArgs e) => new AddPieceToCommandeView(SelectedCommande).ShowDialog();
+        private void addPieceButton_Click(object sender, RoutedEventArgs e) { new AddPieceToCommandeView(SelectedCommande).ShowDialog(); this.Close(); }
 
         private void piecesDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new DetailPieceView(SelectedPiece).ShowDialog();
 
