@@ -83,12 +83,16 @@ namespace ApplicationVeloMax.Models
         {
             get
             {
-                decimal prix = this.MontantCommandeAvecTVASansRemise;
-                ClientPart part = ClientPart.EnsembleParticuliers.Find(c => c.Id == this.ClientCommande.Id);
-                ClientPro pro = ClientPro.EnsemblePros.Find(c => c.Id == this.ClientCommande.Id);
-                if (part == null) prix = prix + (prix * pro.Remise / 100);
-                else if (part != null && part.FidelioClient != null) prix = prix + (prix * part.FidelioClient.Rabais / 100);
-                return prix;
+                decimal prix = 0;
+                if(this.ClientCommande != null)
+                {
+                    prix = this.MontantCommandeAvecTVASansRemise;
+                    ClientPart part = ClientPart.EnsembleParticuliers.Find(c => c.Id == this.ClientCommande.Id);
+                    ClientPro pro = ClientPro.EnsemblePros.Find(c => c.Id == this.ClientCommande.Id);
+                    if (part == null) prix = prix + (prix * pro.Remise / 100);
+                    else if (part != null && part.FidelioClient != null) prix = prix + (prix * part.FidelioClient.Rabais / 100);
+                }
+                return decimal.Round(prix, 2);
             }
         }
 

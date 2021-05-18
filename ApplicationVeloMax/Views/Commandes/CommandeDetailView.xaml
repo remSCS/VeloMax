@@ -7,88 +7,160 @@
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Commandes"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="Commande - Détails" Icon="/img/Commandes_Logo.png"
-        Height="675" Width="1200" FontFamily="Helvetica" Background="White">
-
+        Height="625" Width="1200" FontFamily="Helvetica" Background="White">
     <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <StackPanel Orientation="Horizontal" Grid.Row="0">
-            <Label Content="Commande n°" FontFamily="Helvetica" FontSize="24" FontWeight="Bold" />
-            <Label Content="{Binding SelectedCommande.Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="Helvetica" FontSize="24" FontWeight="Bold" />
-        </StackPanel>
-        <Button HorizontalAlignment="Right" Margin="10" Click="FactureButton_Click" VerticalAlignment="Top" Grid.Row="0">
-            <materialDesign:PackIcon Kind="Receipt"/>
-        </Button>
-        <Grid Grid.Row="1">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="auto"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-
-            <StackPanel Orientation="Vertical" Grid.Column="0">
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Date : "/>
-                    <Label Content="{Binding SelectedCommande.DateE, StringFormat=dd/MM/yyyy }" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Nom client : "/>
-                    <Label Content="{Binding SelectedCommande.ClientCommande.ContactClient.FullName }" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Adresse client : "/>
-                    <Label Content="{Binding SelectedCommande.ClientCommande.AdresseClient.FullAdresse }" />
-                </StackPanel>
-
-                <StackPanel Orientation="Horizontal">
-                    <Label Content="Date de livraison prévue : "/>
-                    <Label Content="{Binding SelectedCommande.DateS , StringFormat=dd/MM/yyyy}" />
-                </StackPanel>
+        <StackPanel Orientation="Vertical" Grid.Row="0" Grid.Column="0">
+            <StackPanel Orientation="Horizontal">
+                <Label Content="Commande n°" FontFamily="Helvetica" FontSize="24" FontWeight="Bold" />
+                <Label Content="{Binding SelectedCommande.Id, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontFamily="Helvetica" FontSize="24" FontWeight="Bold" />
             </StackPanel>
 
-        </Grid>
+            <StackPanel Orientation="Vertical" Grid.Column="0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Label Height="25" Content="Ouvrir la fiche client" VerticalAlignment="Center"/>
+                    <Button Margin="10 5" Click="detailClientButton_Click"  Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                            VerticalAlignment="Center"  HorizontalAlignment="Right" >
+                        <materialDesign:PackIcon Kind="ArrowUpRightBold"/>
+                    </Button>
+                </StackPanel>
 
-        <Grid Grid.Row="2">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
+                <GroupBox Header="Fiche Client" Margin="10,5">
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
 
-            <DataGrid Grid.Column="0" Margin="10"
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <Label Height="25" Margin="3" Content="Nom :"/>
+                            <Label Height="25" Margin="3" Content="Prénom :"/>
+                            <Label Height="25" Margin="3" Content="Email :"/>
+                            <Label Height="25" Margin="3" Content="Téléphonne :"/>
+                            <Label Height="25" Margin="3" Content="Adresse du client :"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                            <Label Height="25" Margin="3" Content="{Binding SelectedCommande.ClientCommande.ContactClient.Nom, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
+                            <Label Height="25" Margin="3" Content="{Binding SelectedCommande.ClientCommande.ContactClient.Prenom, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
+                            <Label Height="25" Margin="3" Content="{Binding SelectedCommande.ClientCommande.ContactClient.Email, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
+                            <Label Height="25" Margin="3" Content="{Binding SelectedCommande.ClientCommande.ContactClient.FormatTel, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
+                            <Label Margin="3" Content="{Binding SelectedCommande.ClientCommande.AdresseClient.FullAdresse, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+
+                <GroupBox Header="Informations sur la commande" Margin="10 5 10 5">
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="auto"/>
+                        </Grid.RowDefinitions>
+
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="auto"/>
+                            <ColumnDefinition Width="*"/>
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="0">
+                            <Label Height="25" Content="Date de prise de commande :"/>
+                            <Label Height="25" Content="Date due :"/>
+                            <Label Height="25" Content="Montant total (TTC remisé) :"/>
+                            <Label Height="25" Content="Adresse de livraison :"/>
+                        </StackPanel>
+
+                        <StackPanel Orientation="Vertical" Grid.Column="1">
+                            <Label Height="25" Content="{Binding SelectedCommande.DateE, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=MM/dd/yyyy}" FontWeight="Bold"/>
+                            <Label Height="25" Content="{Binding SelectedCommande.DateS, Mode=OneWay, UpdateSourceTrigger=PropertyChanged, StringFormat=MM/dd/yyyy}" FontWeight="Bold"/>
+                            <Label Height="25" Content="{Binding SelectedCommande.MontantCommandeAvecTVAAvecRemise, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" ContentStringFormat="{}{0}€" FontWeight="Bold"/>
+                            <Label Content="{Binding SelectedCommande.AdresseLivraison.FullAdresse}" FontWeight="Bold"/>
+                        </StackPanel>
+                    </Grid>
+                </GroupBox>
+
+                <Button Margin="10" Click="FactureButton_Click" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="3"
+                VerticalAlignment="Center"  HorizontalAlignment="Right" >
+                    <materialDesign:PackIcon Kind="Receipt"/>
+                </Button>
+
+            </StackPanel>
+        </StackPanel>
+
+        <GroupBox Header="Composition de la commande" Margin="10,5" Grid.Column="1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+                <Label Margin="10" Content="Pieces" FontSize="22" FontWeight="Bold" Grid.Column="0" Grid.Row="0"/>
+                <Label Margin="10" Content="Modèles" FontSize="22" FontWeight="Bold" Grid.Column="1" Grid.Row="0"/>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1">
+                    <Button Margin="10" Click="removeModeleButton_Click"  Grid.Row="0" Grid.Column="0"
+                            VerticalAlignment="Center"  HorizontalAlignment="Right" >
+                        <materialDesign:PackIcon Kind="TrashCan"/>
+                    </Button>
+                    <Button Margin="10" Click="addPieceButton_Click"  Grid.Row="0" Grid.Column="1"
+                            VerticalAlignment="Center"  HorizontalAlignment="Right" >
+                        <materialDesign:PackIcon Kind="PlusBoxMultipleOutline"/>
+                    </Button>
+                </StackPanel>
+
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0">
+                    <Button Margin="10" Click="removePieceButton_Click"  Grid.Row="0" Grid.Column="1"
+                            VerticalAlignment="Center"  HorizontalAlignment="Right" >
+                        <materialDesign:PackIcon Kind="TrashCan"/>
+                    </Button>
+                    <Button Margin="10" Click="addPieceButton_Click"  Grid.Row="0" Grid.Column="1"
+                            VerticalAlignment="Center"  HorizontalAlignment="Right" >
+                        <materialDesign:PackIcon Kind="PlusBoxMultipleOutline"/>
+                    </Button>
+                </StackPanel>
+
+
+
+                <DataGrid Grid.Column="0" Grid.Row="1" Margin="10"
                   IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
-                  ItemsSource="{Binding SelectedCommande.PiecesCommande, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  >
-                <DataGrid.Columns>
-                    <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
-                    <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
-                    <DataGridTextColumn Width="*" Header="Référence" Binding="{Binding Reference}"/>
-                    <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}"/>
-                    <DataGridTextColumn Width="*" Header="Prix" Binding="{Binding PrixVente}"/>
-                </DataGrid.Columns>
-            </DataGrid>
+                  ItemsSource="{Binding SelectedCommande.PiecesCommande, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  >
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
+                        <DataGridTextColumn Width="*" Header="Référence" Binding="{Binding Reference}"/>
+                        <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}"/>
+                        <DataGridTextColumn Width="*" Header="Prix" Binding="{Binding PrixVente}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
 
-            <DataGrid Grid.Column="1" Margin="10"
+                <DataGrid Grid.Column="1" Grid.Row="1" Margin="10"
                   IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
-                  ItemsSource="{Binding SelectedCommande.ModelesCommande, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"  >
-                <DataGrid.Resources>
-                    <Style TargetType="DataGridRow">
-                        <EventSetter Event="MouseDoubleClick" Handler="commandesModifierButton_Click"/>
-                    </Style>
-                </DataGrid.Resources>
-                <DataGrid.Columns>
-                    <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
-                    <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
-                    <DataGridTextColumn Width="*" Header="Grandeur" Binding="{Binding Grandeur.Nom}"/>
-                    <DataGridTextColumn Width="*" Header="Ligne" Binding="{Binding LigneProduitModele}"/>
-                    <DataGridTextColumn Width="*" Header="Prix" Binding="{Binding PrixUnitaire}"/>
-                </DataGrid.Columns>
-            </DataGrid>
-        </Grid>
+                  ItemsSource="{Binding SelectedCommande.ModelesCommande, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  >
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick" Handler="commandesModifierButton_Click"/>
+                        </Style>
+                    </DataGrid.Resources>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
+                        <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
+                        <DataGridTextColumn Width="*" Header="Grandeur" Binding="{Binding GrandeurModele}"/>
+                        <DataGridTextColumn Width="*" Header="Ligne" Binding="{Binding LigneProduitModele}"/>
+                        <DataGridTextColumn Width="*" Header="Prix" Binding="{Binding PrixUnitaire}"/>
+                    </DataGrid.Columns>
+                </DataGrid>
+
+            </Grid>
+        </GroupBox>
     </Grid>
-
 </Window>
