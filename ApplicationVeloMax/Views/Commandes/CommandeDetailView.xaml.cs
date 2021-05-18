@@ -1,4 +1,5 @@
 ﻿using ApplicationVeloMax.Models;
+using ApplicationVeloMax.Views.Clients;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -38,7 +39,6 @@ namespace ApplicationVeloMax.Views.Commandes
         public CommandeDetailView(Commande _inputCommande)
         {
             InitializeComponent();
-
             SelectedCommande = _inputCommande;
         }
 
@@ -55,6 +55,32 @@ namespace ApplicationVeloMax.Views.Commandes
         private void FactureButton_Click(object sender, RoutedEventArgs e)
         {
             new FactureCommande(SelectedCommande).ShowDialog();
+        }
+
+        private void removePieceButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addModeleButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void removeModeleButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void addPieceButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void detailClientButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (ClientPart.EnsembleParticuliers.Contains(SelectedCommande.ClientCommande)) new DetailClientPart((ClientPart) SelectedCommande.ClientCommande).ShowDialog();
+            else new DetailClientPro((ClientPro)SelectedCommande.ClientCommande).ShowDialog();
         }
     }
 }
