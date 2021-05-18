@@ -1,4 +1,5 @@
 ﻿using ApplicationVeloMax.Models;
+using ApplicationVeloMax.ViewModels;
 using ApplicationVeloMax.Views.Modeles;
 using ApplicationVeloMax.Views.Pieces;
 using System;
@@ -92,6 +93,7 @@ namespace ApplicationVeloMax.Views.Commandes
                     }
                     else
                     {
+                        if (!DataAccess.AddPieceCompositionCommande(SelectedCommande, SelectedPiece, QteToAdd)) MessageBox.Show("Impossible d'ajouter ce modèle");
                         MessageBox.Show("Pièce ajouté à la commande !");
                         this.Close();
                     }
