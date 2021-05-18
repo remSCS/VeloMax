@@ -1,4 +1,5 @@
 ﻿using ApplicationVeloMax.Models;
+using ApplicationVeloMax.ViewModels;
 using ApplicationVeloMax.Views.Clients;
 using ApplicationVeloMax.Views.Modeles;
 using ApplicationVeloMax.Views.Pieces;
@@ -72,16 +73,6 @@ namespace ApplicationVeloMax.Views.Commandes
             }
         }
 
-        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-        private void commandesModifierButton_Click(object sender, MouseButtonEventArgs e)
-        {
-            new FactureCommande(SelectedCommande).ShowDialog();
-        }
-
         private void FactureButton_Click(object sender, RoutedEventArgs e) => new FactureCommande(SelectedCommande).ShowDialog();
 
         private void removePieceButton_Click(object sender, RoutedEventArgs e)
@@ -89,16 +80,26 @@ namespace ApplicationVeloMax.Views.Commandes
             if (SelectedPiece == null) MessageBox.Show("Veuillez sélectionner une pièce à supprimer.");
             else
             {
-                MessageBox.Show("Pièce supprimée !");
+                if(!DataAccess.RemovePieceCompositionCommande(SelectedCommande, SelectedPiece)) MessageBox.Show("Impossible de retirer la pièce de cette commande.");
+                else
+                {
+                    MessageBox.Show("Pièce supprimée !");
+                    this.Close();
+                }
             }
         }
 
         private void removeModeleButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedModele == null) MessageBox.Show("Veuillez sélectionner une pièce à supprimer.");
+            if (SelectedModele == null) MessageBox.Show("Veuillez sélectionner un modèle à supprimer.");
             else
             {
-
+                if (!DataAccess.RemoveModeleCompositionCommande(SelectedCommande, SelectedModele)) MessageBox.Show("Impossible de retirer le modèle de cette commande.");
+                else
+                {
+                    MessageBox.Show("Modèle supprimé !");
+                    this.Close();
+                }
             }
         }
 
