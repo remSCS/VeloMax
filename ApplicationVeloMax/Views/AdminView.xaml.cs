@@ -717,7 +717,8 @@ namespace ApplicationVeloMax.Views
             Fournisseurs = new ObservableCollection<Fournisseur>(Fournisseur.Ensemble);
             Fidelios = new ObservableCollection<Fidelio>(Fidelio.Ensemble);
             Clients = new ObservableCollection<Client>(Client.Ensemble);
-           
+            SortDataGrid(Classementclients_DataGrid, 1);
+            Classementclients_DataGrid.Columns[2].Visibility = Visibility.Collapsed;
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -740,10 +741,14 @@ namespace ApplicationVeloMax.Views
                 if (triVente_ComboBox.Text == "Nb. de ventes")
                 {
                     SortDataGrid(Classementclients_DataGrid, 1);
+                    Classementclients_DataGrid.Columns[2].Visibility = Visibility.Collapsed;
+                    Classementclients_DataGrid.Columns[1].Visibility = Visibility.Visible;
                 }
                 else
                 {
                     SortDataGrid(Classementclients_DataGrid, 2);
+                    Classementclients_DataGrid.Columns[1].Visibility = Visibility.Collapsed;
+                    Classementclients_DataGrid.Columns[2].Visibility = Visibility.Visible;
                 }
             }
         }

@@ -76,6 +76,20 @@ namespace ApplicationVeloMax.Models
             }
         }
 
+        public int QuantiteCumul
+        {
+            get
+            {
+                int qteCumul = 0;
+                var co = Commande.Ensemble.FindAll(c => c.ClientCommande.Id == this.Id);
+                foreach (Commande com in co)
+                {
+                    if (com.Statut != "Annulée") qteCumul += com.NbArticles;
+                }
+                return qteCumul;
+            }
+        }
+
         public override string ToString()
         {
             return $"{this.ContactClient}";

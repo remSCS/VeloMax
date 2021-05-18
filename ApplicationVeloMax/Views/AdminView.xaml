@@ -1325,7 +1325,7 @@
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Nom client" Binding="{Binding Nom}" Width="*"/>
                                         <DataGridTextColumn Header="Montant cumulé" Binding="{Binding MontantCumul, StringFormat={}€ {0:0.00}}" Width="auto"/>
-                                        <DataGridTextColumn Header="Nombre d'articles cumulés" Binding="{Binding MontantCumul, StringFormat={}€ {0:0.00}}" Width="auto"/>
+                                        <DataGridTextColumn Header="Nombre d'articles cumulés" Binding="{Binding QuantiteCumul}" Width="auto"/>
                                     </DataGrid.Columns>
 
                                 </DataGrid>
