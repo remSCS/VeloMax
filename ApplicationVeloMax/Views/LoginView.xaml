@@ -7,67 +7,48 @@
         mc:Ignorable="d"
         Title="Connexion - VéloMax" Icon="/img/VeloMax_Logo.png" 
         WindowStartupLocation="CenterScreen"
-        Height="340" Width="350" ResizeMode="NoResize">
+        Height="360" Width="620" ResizeMode="NoResize">
     <Grid Margin="10">
 
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
 
-        <StackPanel Grid.Row="0" Grid.Column="0" Orientation="Vertical">
-            <Image Source="/img/VeloMax_Logo.png" Height="70"/>
 
-            <TextBox x:Name="serverInput" MinWidth="200" Opacity="0.7" Margin="20,20" Padding="5" KeyDown="Input_KeyDown" ToolTip="Please enter your email adress">
-                <TextBox.Style>
-                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                        <Style.Resources>
-                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                <VisualBrush.Visual>
-                                    <Label Content="Adresse du serveur" Opacity="0.7" FontSize="16" />
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </Style.Resources>
-                        <Style.Triggers>
-                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                            </Trigger>
-                            <Trigger Property="Text" Value="{x:Null}">
-                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Style>
-            </TextBox>
-            
-            <TextBox x:Name="userLoginInput" MinWidth="200" Opacity="0.7" Margin="20,20" Padding="5" KeyDown="Input_KeyDown" ToolTip="Please enter your email adress">
-                <TextBox.Style>
-                    <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                        <Style.Resources>
-                            <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                <VisualBrush.Visual>
-                                    <Label Content="Identifiant" Opacity="0.7" FontSize="16" />
-                                </VisualBrush.Visual>
-                            </VisualBrush>
-                        </Style.Resources>
-                        <Style.Triggers>
-                            <Trigger Property="Text" Value="{x:Static sys:String.Empty}">
-                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                            </Trigger>
-                            <Trigger Property="Text" Value="{x:Null}">
-                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                            </Trigger>
-                        </Style.Triggers>
-                    </Style>
-                </TextBox.Style>
-            </TextBox>
-            <PasswordBox x:Name="userPasswordinput" MinWidth="200" Margin="20,5" Padding="5" KeyDown="Input_KeyDown" ToolTip="Please enter your password"/>
+        <Image Source="/img/VeloMax_Logo.png" Height="250"
+                   Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center"
+               ToolTip="Logo crée par nos soins pour les besoins du problème"/>
 
-            <Button x:Name="userLoginButton"  Padding="6" Content="Login" Margin="60,20"
+
+
+        <ComboBox x:Name="serverInput" Margin="10" IsEditable="True" Text="Adresse du serveur" FontSize="14" Opacity="0.7"
+                          Grid.Row="0" Grid.Column="1"
+                  ToolTip="Entrer l'adresse du serveur MySql">
+            <ComboBoxItem ToolTip="Serveur local">localhost</ComboBoxItem>
+            <ComboBoxItem ToolTip="Serveur de Rémi">84.102.235.128</ComboBoxItem>
+        </ComboBox>
+
+        <ComboBox x:Name="userLoginInput" Margin="10" IsEditable="True" Text="Identifiant" FontSize="14" Opacity="0.7"
+                          Grid.Row="1" Grid.Column="1" ToolTip="Entrer l'identifiant utilisateur">
+            <ComboBoxItem ToolTip="Identifiant local">root</ComboBoxItem>
+            <ComboBoxItem ToolTip="Identifiant pour le serveur de Rémi">RemoteUser</ComboBoxItem>
+        </ComboBox>
+
+        <PasswordBox x:Name="userPasswordinput" MinWidth="200" Margin="10" Padding="5" KeyDown="Input_KeyDown" ToolTip="Entrer le mot de passe utilisateur"
+                             Grid.Row="2" Grid.Column="1"/>
+        
+        <Button x:Name="userLoginButton"  Padding="6" Content="Login" Margin="10"
+                        Grid.Row="3" Grid.Column="1"
                     VerticalContentAlignment="center" Background="Green" 
                     Foreground="White" Click="userLoginButton_Click"/>
-        </StackPanel>
+
+
     </Grid>
 </Window>
