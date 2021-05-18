@@ -61,5 +61,12 @@ namespace ApplicationVeloMax.Models
         {
             get { return ensemble; }
         }
+
+        static public List<Fournisseur> FournisseursThatMatch(string nomClient)
+        {
+
+            return Ensemble.FindAll(md => md.ContactFournisseur.FullName.ToLower().Contains(nomClient.ToLower()) || md.Siret.ToString().Contains(nomClient) || md.Nom.ToLower().Contains(nomClient.ToLower()));
+
+        }
     }
 }

@@ -238,5 +238,12 @@ namespace ApplicationVeloMax.Models
             }
             return prixCumul;
         }
+
+        static public List<Commande> CommandesThatMatch(string nomClient)
+        {
+
+            return Ensemble.FindAll(md => md.Destinataire.ToLower().Contains(nomClient.ToLower()) || md.Id.ToString().Contains(nomClient) || md.DateE.ToString().Contains(nomClient));
+
+        }
     }
 }

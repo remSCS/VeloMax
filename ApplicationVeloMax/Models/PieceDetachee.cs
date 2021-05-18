@@ -97,5 +97,12 @@ namespace ApplicationVeloMax.Models
         {
             ensemble = new List<PieceDetachee>();
         }
+
+        static public List<PieceDetachee> PiecesThatMatch(string nomPiece)
+        {
+
+            return Ensemble.FindAll(md => md.Reference.ToLower().Contains(nomPiece.ToLower()) || md.Description.ToLower().Contains(nomPiece.ToLower()) || md.Nom.ToLower().Contains(nomPiece.ToLower()));
+
+        }
     }
 }

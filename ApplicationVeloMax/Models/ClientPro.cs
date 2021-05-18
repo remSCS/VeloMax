@@ -34,5 +34,12 @@ namespace ApplicationVeloMax.Models
         {
             get { return ensemblePros; }
         }
+
+        static public List<ClientPro> ProThatMatch(string nomClient)
+        {
+
+            return EnsemblePros.FindAll(md => md.ContactClient.FullName.ToLower().Contains(nomClient.ToLower()) || md.Id.ToString().Contains(nomClient) || md.NomEntreprise.ToLower().Contains(nomClient.ToLower())) ;
+
+        }
     }
 }

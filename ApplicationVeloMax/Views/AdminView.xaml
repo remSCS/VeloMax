@@ -94,8 +94,8 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox Grid.Row="1" Padding="5" Margin="10,10,10,0"
-                                 Text="Rechercher par nom de modele...">
+                                <TextBox Grid.Row="1" Padding="5" Margin="10,10,10,0" ToolTip="Rechercher par nom de modele, ID"
+                                 Text="{Binding SearchModelText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <TextBox.Background>
                                         <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
                                     </TextBox.Background>
@@ -107,7 +107,7 @@
                                                 </Style>
                                                 <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
                                                     <VisualBrush.Visual>
-                                                        <Label Content="Rechercher par nom de modele..." Opacity="0.5" FontSize="14" />
+                                                        <Label Content="Rechercher par nom de modele, ID" Opacity="0.5" FontSize="14" />
                                                     </VisualBrush.Visual>
                                                 </VisualBrush>
                                             </Style.Resources>
@@ -209,8 +209,8 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox Grid.Row="0" Padding="5" Margin="10,10,10,0"
-                                 Text="Rechercher par nom de modele...">
+                                <TextBox Grid.Row="0" Padding="5" Margin="10,10,10,0" ToolTip="Rechercher par nom de modele, ID"
+                                 Text="{Binding SearchPieceText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <TextBox.Background>
                                         <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
                                     </TextBox.Background>
@@ -222,7 +222,7 @@
                                                 </Style>
                                                 <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
                                                     <VisualBrush.Visual>
-                                                        <Label Content="Rechercher par nom de modele..." Opacity="0.5" FontSize="14" />
+                                                        <Label Content="Rechercher par nom de modele, ID" Opacity="0.5" FontSize="14" />
                                                     </VisualBrush.Visual>
                                                 </VisualBrush>
                                             </Style.Resources>
@@ -485,8 +485,8 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox Grid.Row="1" Padding="5" Margin="10,10,10,0"
-                                 Text="Rechercher par nom de modele...">
+                                <TextBox Grid.Row="1" Padding="5" Margin="10,10,10,0" ToolTip="Rechercher par prénom, nom, numéro de téléphone"
+                                 Text="{Binding SearchParticulierText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <TextBox.Background>
                                         <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
                                     </TextBox.Background>
@@ -498,7 +498,7 @@
                                                 </Style>
                                                 <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
                                                     <VisualBrush.Visual>
-                                                        <Label Content="Rechercher par nom de modele..." Opacity="0.5" FontSize="14" />
+                                                        <Label Content="Rechercher par prénom, nom, numéro de téléphone" Opacity="0.5" FontSize="14" />
                                                     </VisualBrush.Visual>
                                                 </VisualBrush>
                                             </Style.Resources>
@@ -599,8 +599,8 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox Grid.Row="1" Padding="5" Margin="10,10,10,0"
-                                 Text="Rechercher par nom de modele...">
+                                <TextBox Grid.Row="1" Padding="5" Margin="10,10,10,0"  ToolTip="Rechercher par nom de l'entreprise, du commercial, de l'ID"
+                                 Text="{Binding SearhProText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <TextBox.Background>
                                         <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
                                     </TextBox.Background>
@@ -612,7 +612,7 @@
                                                 </Style>
                                                 <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
                                                     <VisualBrush.Visual>
-                                                        <Label Content="Rechercher par nom de modele..." Opacity="0.5" FontSize="14" />
+                                                        <Label Content="Rechercher par nom de l'entreprise, du commercial, de l'ID" Opacity="0.5" FontSize="14" />
                                                     </VisualBrush.Visual>
                                                 </VisualBrush>
                                             </Style.Resources>
@@ -713,39 +713,6 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox Grid.Row="1" Padding="5" Margin="10,10,10,0"
-                                 Text="Rechercher par nom de modele...">
-                                    <TextBox.Background>
-                                        <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
-                                    </TextBox.Background>
-                                    <TextBox.Style>
-                                        <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                                            <Style.Resources>
-                                                <Style TargetType="Border">
-                                                    <Setter Property="CornerRadius" Value="10"/>
-                                                </Style>
-                                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                                    <VisualBrush.Visual>
-                                                        <Label Content="Rechercher par nom de modele..." Opacity="0.5" FontSize="14" />
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
-                                            </Style.Resources>
-                                            <Style.Triggers>
-                                                <MultiTrigger>
-                                                    <MultiTrigger.Conditions>
-                                                        <Condition Property="Text" Value="{x:Static sys:String.Empty}"/>
-                                                        <Condition Property="IsFocused"  Value="False"/>
-                                                    </MultiTrigger.Conditions>
-                                                    <MultiTrigger.Setters>
-                                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                                    </MultiTrigger.Setters>
-                                                </MultiTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBox.Style>
-
-                                </TextBox>
-
                                 <StackPanel Grid.Row="2" Margin="10,10,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
                                     <Button x:Name="editFidelioButton" Margin="5,0" Padding="5" Content="Modifier"
                                 Foreground="White" Background="#a7a7a7" Click="editFidelioButton_Click">
@@ -839,8 +806,8 @@
 
                         <Label Grid.Row="0" Margin="10,10,10,0" Content="Fournisseurs" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
 
-                        <TextBox Grid.Row="1" Padding="5" Margin="10,10,10,0"
-                                 Text="Rechercher par nom de modele...">
+                        <TextBox Grid.Row="1" Padding="5" Margin="10,10,10,0" ToolTip="Rechercher par Siret, nom de l'entreprise, nom du commercial"
+                                 Text="{Binding SearchFournisseursText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                             <TextBox.Background>
                                 <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
                             </TextBox.Background>
@@ -852,7 +819,7 @@
                                         </Style>
                                         <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
                                             <VisualBrush.Visual>
-                                                <Label Content="Rechercher par nom de modele..." Opacity="0.5" FontSize="14" />
+                                                <Label Content="Rechercher par Siret, nom de l'entreprise, nom du commercial" Opacity="0.5" FontSize="14" />
                                             </VisualBrush.Visual>
                                         </VisualBrush>
                                     </Style.Resources>
@@ -965,7 +932,7 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBox Grid.Row="0" Padding="5" Margin="10,10,10,0"
-                             Text="Rechercher par nom de modele...">
+                             Text="{Binding SearchCommandeText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <TextBox.Background>
                                         <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
                                     </TextBox.Background>
@@ -977,7 +944,7 @@
                                                 </Style>
                                                 <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
                                                     <VisualBrush.Visual>
-                                                        <Label Content="Rechercher par nom de modele..." Opacity="0.5" FontSize="14" />
+                                                        <Label Content="Rechercher par numéro de commande, par destinataire, par date de prise de commande" Opacity="0.5" FontSize="14" />
                                                     </VisualBrush.Visual>
                                                 </VisualBrush>
                                             </Style.Resources>
@@ -1093,39 +1060,6 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox Grid.Row="0" Padding="5" Margin="10,10,10,0"
-                                         Text="Rechercher par nom de modele...">
-                                    <TextBox.Background>
-                                        <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
-                                    </TextBox.Background>
-                                    <TextBox.Style>
-                                        <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                                            <Style.Resources>
-                                                <Style TargetType="Border">
-                                                    <Setter Property="CornerRadius" Value="10"/>
-                                                </Style>
-                                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                                    <VisualBrush.Visual>
-                                                        <Label Content="Rechercher par nom de modele..." Opacity="0.5" FontSize="14" />
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
-                                            </Style.Resources>
-                                            <Style.Triggers>
-                                                <MultiTrigger>
-                                                    <MultiTrigger.Conditions>
-                                                        <Condition Property="Text" Value="{x:Static sys:String.Empty}"/>
-                                                        <Condition Property="IsFocused"  Value="False"/>
-                                                    </MultiTrigger.Conditions>
-                                                    <MultiTrigger.Setters>
-                                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                                    </MultiTrigger.Setters>
-                                                </MultiTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBox.Style>
-
-                                </TextBox>
-
                                 <StackPanel Grid.Row="1" Margin="10,10,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
                                     <Button Margin="5,0" Padding="5" Content="Modifier"
                                         Foreground="White" Background="#a7a7a7" Click="commandesToDoModifierButton_Click" >
@@ -1179,39 +1113,6 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox Grid.Row="0" Padding="5" Margin="10,10,10,0"
-                                         Text="Rechercher par nom de modele..." Grid.ColumnSpan="2">
-                                    <TextBox.Background>
-                                        <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
-                                    </TextBox.Background>
-                                    <TextBox.Style>
-                                        <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                                            <Style.Resources>
-                                                <Style TargetType="Border">
-                                                    <Setter Property="CornerRadius" Value="10"/>
-                                                </Style>
-                                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                                    <VisualBrush.Visual>
-                                                        <Label Content="Rechercher par nom de modele..." Opacity="0.5" FontSize="14" />
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
-                                            </Style.Resources>
-                                            <Style.Triggers>
-                                                <MultiTrigger>
-                                                    <MultiTrigger.Conditions>
-                                                        <Condition Property="Text" Value="{x:Static sys:String.Empty}"/>
-                                                        <Condition Property="IsFocused"  Value="False"/>
-                                                    </MultiTrigger.Conditions>
-                                                    <MultiTrigger.Setters>
-                                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                                    </MultiTrigger.Setters>
-                                                </MultiTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBox.Style>
-
-                                </TextBox>
-
                                 <DataGrid x:Name="doneOrdersDatagrid" Grid.Row="1" Grid.Column="0" Margin="10"
                                       IsReadOnly="True" ToolTip="Commandes terminées" AutoGenerateColumns="False" GridLinesVisibility="All"
                                       ItemsSource="{Binding CommandesDone, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
@@ -1249,39 +1150,6 @@
 
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
-
-                                <TextBox Grid.Row="0" Padding="5" Margin="10,10,10,0"
-                             Text="Rechercher par nom de modele...">
-                                    <TextBox.Background>
-                                        <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
-                                    </TextBox.Background>
-                                    <TextBox.Style>
-                                        <Style TargetType="TextBox" xmlns:sys="clr-namespace:System;assembly=mscorlib">
-                                            <Style.Resources>
-                                                <Style TargetType="Border">
-                                                    <Setter Property="CornerRadius" Value="10"/>
-                                                </Style>
-                                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                                    <VisualBrush.Visual>
-                                                        <Label Content="Rechercher par nom de modele..." Opacity="0.5" FontSize="14" />
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
-                                            </Style.Resources>
-                                            <Style.Triggers>
-                                                <MultiTrigger>
-                                                    <MultiTrigger.Conditions>
-                                                        <Condition Property="Text" Value="{x:Static sys:String.Empty}"/>
-                                                        <Condition Property="IsFocused"  Value="False"/>
-                                                    </MultiTrigger.Conditions>
-                                                    <MultiTrigger.Setters>
-                                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                                    </MultiTrigger.Setters>
-                                                </MultiTrigger>
-                                            </Style.Triggers>
-                                        </Style>
-                                    </TextBox.Style>
-
-                                </TextBox>
 
                                 <DataGrid x:Name="cancelledOrdersDatagrid" Grid.Row="1" Grid.Column="0" Margin="10" 
                                       IsReadOnly="True" ToolTip="Commandes terminées" AutoGenerateColumns="False" GridLinesVisibility="All"
