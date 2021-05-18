@@ -181,6 +181,9 @@
     <Compile Include="Views\Fournisseurs\EditFournisseurView.xaml.cs">
       <DependentUpon>EditFournisseurView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Modeles\AddCompositionView.xaml.cs">
+      <DependentUpon>AddCompositionView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Modeles\AddModeleView.xaml.cs">
       <DependentUpon>AddModeleView.xaml</DependentUpon>
     </Compile>
@@ -343,6 +346,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Fournisseurs\EditFournisseurView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Modeles\AddCompositionView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

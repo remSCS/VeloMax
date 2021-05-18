@@ -37,14 +37,12 @@ namespace ApplicationVeloMax.Views.Fournisseurs
         }
 
         private PieceDetachee _selectedPiece;
-
         public PieceDetachee SelectedPiece
         {
             get { return _selectedPiece; }
             set
             {
                 _selectedPiece = value;
-                
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedPiece"));
             }
         }
@@ -60,11 +58,7 @@ namespace ApplicationVeloMax.Views.Fournisseurs
             }
         }
 
-
-
-
         private FournisseurPiece _toAdd;
-
         public FournisseurPiece ToAdd
         {
             get { return _toAdd; }
@@ -75,6 +69,15 @@ namespace ApplicationVeloMax.Views.Fournisseurs
             }
         }
 
+        public AddPieceFournisseurView(Fournisseur _input)
+        {
+            InitializeComponent();
+            FournisseurAdd = _input;
+            FournisseurPiece temp = new FournisseurPiece(-1, FournisseurAdd.Siret) { Delai = 0, NumCatalogue = "", Prix = 0M };
+            ToAdd = temp;
+            Pieces = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble.Except(FournisseurPiece.PiecesFournies(FournisseurAdd)));
+
+        }
 
         private void AddButton_Click(object sender, RoutedEventArgs e)
         {
@@ -109,14 +112,6 @@ namespace ApplicationVeloMax.Views.Fournisseurs
             FournisseurPiece.Ensemble.Remove(ToAdd);
             this.Close();
         }
-        public AddPieceFournisseurView(Fournisseur fourni)
-        {
-            InitializeComponent();
-            FournisseurAdd = fourni;
-            FournisseurPiece temp = new FournisseurPiece(-1, FournisseurAdd.Siret) { Delai = 0, NumCatalogue = "", Prix = 0M };
-            ToAdd = temp;
-            Pieces = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble.Except(FournisseurPiece.PiecesFournies(FournisseurAdd)));
-
-        }
+        
     }
 }

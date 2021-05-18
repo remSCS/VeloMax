@@ -519,6 +519,21 @@ namespace ApplicationVeloMax.ViewModels
             GetAllFournisseursPiecesUsingSP();
             return true;
         }
+
+        static public bool RemoveFromComposition(Modele mToRemove, PieceDetachee pToRemove)
+        {
+            using (var connexion = GetConnection())
+            {
+                connexion.Open();
+                MySqlCommand com = new MySqlCommand("RemoveComposition", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@idM", MySqlDbType.Int64).Value = mToRemove.Id;
+                com.Parameters.Add("@idP", MySqlDbType.Int64).Value = pToRemove.Id;
+                try { com.ExecuteReader(); }
+                catch { return false; }
+            }
+            RefreshDBUsingSP();
+            return true;
+        }
         #endregion
 
         #region Editing data from server
@@ -968,53 +983,69 @@ namespace ApplicationVeloMax.ViewModels
             }
             return toReturn;
         }
-        #endregion
 
-        static public void RefreshDBUsingSP()
+        static public bool AddCompositionPieceModele(Modele toAdd, PieceDetachee piece)
         {
-            Adresse.Ensemble.Clear();
-            Client.Ensemble.Clear();
-            ClientPart.EnsembleParticuliers.Clear();
-            ClientPro.EnsemblePros.Clear();
-            Commande.ClearEnsembles();
-            Contact.Ensemble.Clear();
-            Fidelio.Ensemble.Clear();
-            Fournisseur.Ensemble.Clear();
-            FournisseurPiece.Ensemble.Clear();
-            Grandeur.Ensemble.Clear();
-            Libelle.Ensemble.Clear();
-            LigneProduit.Ensemble.Clear();
-            Modele.Ensemble.Clear();
-            PieceDetachee.Ensemble.Clear();
-
-            GetAllAdressesUsingSP();
-            GetAllContactsUsingSP();
-            GetAllLibellesUsingSP();
-            GetAllGrandeursUsingSP();
-            GetAllLigneProduitsUsingSP();
-            GetAllFideliosUsingSP();
-            GetAllPiecesDetacheesUsingSP();
-            GetAllModelsUsingSP();
-            GetAllFournisseursUsingSP();
-            GetAllClientsUsingSP();
-            GetAllFournisseursPiecesUsingSP();
-            GetAllCommandesUsingSP();
-        }
-
-        static public int GetHighestId(string tableName)
-        {
-            int toReturn = 0;
+            bool toReturn = true;
             using (var connexion = GetConnection())
             {
                 connexion.Open();
-                MySqlCommand com = new MySqlCommand("HighestId", connexion) { CommandType = CommandType.StoredProcedure };
-                com.Parameters.Add("@tableName", MySqlDbType.VarChar).Value = tableName;
-                var returnedParameter = com.Parameters.Add("@n", MySqlDbType.Int64);
-                returnedParameter.Direction = ParameterDirection.Output;
-                com.ExecuteNonQuery();
-                toReturn = Convert.ToInt32(returnedParameter.Value);
+                MySqlCommand com = new MySqlCommand("CreateComposition", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@idM", MySqlDbType.Int64).Value = toAdd.Id;
+                com.Parameters.Add("@idP", MySqlDbType.Int64).Value = piece.Id;
+                try { com.ExecuteReader(); }
+                catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
             }
+            RefreshDBUsingSP();
             return toReturn;
         }
+    #endregion
+
+    static public void RefreshDBUsingSP()
+    {
+        Adresse.Ensemble.Clear();
+        Client.Ensemble.Clear();
+        ClientPart.EnsembleParticuliers.Clear();
+        ClientPro.EnsemblePros.Clear();
+        Commande.ClearEnsembles();
+        Contact.Ensemble.Clear();
+        Fidelio.Ensemble.Clear();
+        Fournisseur.Ensemble.Clear();
+        FournisseurPiece.Ensemble.Clear();
+        Grandeur.Ensemble.Clear();
+        Libelle.Ensemble.Clear();
+        LigneProduit.Ensemble.Clear();
+        Modele.Ensemble.Clear();
+        PieceDetachee.Ensemble.Clear();
+
+        GetAllAdressesUsingSP();
+        GetAllContactsUsingSP();
+        GetAllLibellesUsingSP();
+        GetAllGrandeursUsingSP();
+        GetAllLigneProduitsUsingSP();
+        GetAllFideliosUsingSP();
+        GetAllPiecesDetacheesUsingSP();
+        GetAllModelsUsingSP();
+        GetAllFournisseursUsingSP();
+        GetAllClientsUsingSP();
+        GetAllFournisseursPiecesUsingSP();
+        GetAllCommandesUsingSP();
     }
+
+    static public int GetHighestId(string tableName)
+    {
+        int toReturn = 0;
+        using (var connexion = GetConnection())
+        {
+            connexion.Open();
+            MySqlCommand com = new MySqlCommand("HighestId", connexion) { CommandType = CommandType.StoredProcedure };
+            com.Parameters.Add("@tableName", MySqlDbType.VarChar).Value = tableName;
+            var returnedParameter = com.Parameters.Add("@n", MySqlDbType.Int64);
+            returnedParameter.Direction = ParameterDirection.Output;
+            com.ExecuteNonQuery();
+            toReturn = Convert.ToInt32(returnedParameter.Value);
+        }
+        return toReturn;
+    }
+}
 }

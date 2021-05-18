@@ -6,52 +6,44 @@
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Fournisseurs"
         mc:Ignorable="d" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="Ajouter une pièce" Height="230" Width="400">
+        Title="Ajout Pièce Fournisseur - VéloMax" Height="230" Width="300" Icon="/img/Velomax_Logo.png">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="auto"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
-
         <Grid.RowDefinitions>
             <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="auto"/>
+            <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        
+        <StackPanel Grid.Row="0" Grid.Column="0">
+            <Label Height="25" Margin="5" Content="Pièce"/>
+            <Label Height="25" Margin="5" Content="Prix fournisseur"/>
+            <Label Height="25" Margin="5" Content="Délai"/>
+            <Label Height="25" Margin="5" Content="No. catalogue"/>
+        </StackPanel>
 
-        <Label Content="Pièce"
-               Grid.Row="0" Grid.Column="0"/>
-        <ComboBox Grid.Row="0" Grid.Column="1" Margin="5"
+        <StackPanel Grid.Row="0" Grid.Column="1">
+            <ComboBox Margin="5" Height="25"
                   ItemsSource="{Binding Pieces,Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" DisplayMemberPath="Nom"
                   SelectedItem="{Binding ToAdd.PieceDetacheeFournisseur, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Label Content="Prix fournisseur"
-               Grid.Row="1" Grid.Column="0"/>
-        <TextBox x:Name="PrixBox" Margin="5"
-                 Grid.Row="1" Grid.Column="1"
+            <TextBox x:Name="PrixBox" Margin="5" Height="25"
                  Text="{Binding ToAdd.Prix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Label Content="Délai"
-               Grid.Row="2" Grid.Column="0"/>
-        <TextBox x:Name="DelaiBox" Margin="5"
-                 Grid.Row="2" Grid.Column="1"
+            <TextBox x:Name="DelaiBox" Margin="5" Height="25"
                  Text="{Binding ToAdd.Delai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
-        <Label Content="No. catalogue"
-               Grid.Row="3" Grid.Column="0"/>
-        <TextBox x:Name="NoCatalogueBox" Margin="5"
-                 Grid.Row="3" Grid.Column="1"
+            <TextBox x:Name="NoCatalogueBox" Margin="5" Height="25"
                  Text="{Binding ToAdd.NumCatalogue, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+        </StackPanel>
 
-        <StackPanel Orientation="Horizontal" Grid.Row="5" Grid.Column="1" HorizontalAlignment="Right">
+        <StackPanel Orientation="Horizontal" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" HorizontalAlignment="Right">
             <Button HorizontalAlignment="Right" Margin="10" Click="CloseButton_Click" VerticalAlignment="Top">
                 <materialDesign:PackIcon Kind="Close"/>
             </Button>
-            <Button HorizontalAlignment="Right" 
-                Margin="10"
+            <Button HorizontalAlignment="Right" Margin="10"
                 Click="AddButton_Click" VerticalAlignment="Top">
                 <materialDesign:PackIcon Kind="AddBox"/>
             </Button>

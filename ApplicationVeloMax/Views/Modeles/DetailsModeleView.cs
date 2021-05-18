@@ -1,4 +1,5 @@
 ﻿using ApplicationVeloMax.Models;
+using ApplicationVeloMax.ViewModels;
 using ApplicationVeloMax.Views.Pieces;
 using System;
 using System.Collections.Generic;
@@ -33,6 +34,7 @@ namespace ApplicationVeloMax.Views.Modeles
             {
                 _selectedModele = value;
                 PiecesModele = new ObservableCollection<PieceDetachee>(SelectedModele.PiecesComposition);
+                PiecesNonComprises = PieceDetachee.Ensemble.Except(PiecesModele).ToList<PieceDetachee>();
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedModele"));
             }
         }
@@ -59,6 +61,17 @@ namespace ApplicationVeloMax.Views.Modeles
             }
         }
 
+        private List<PieceDetachee> _piecesNonComprises = new List<PieceDetachee>();
+        public List<PieceDetachee> PiecesNonComprises
+        {
+            get { return _piecesNonComprises; }
+            set
+            {
+                _piecesNonComprises = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("PiecesNonComprises"));
+            }
+        }
+
         public DetailsModeleView(Modele _input)
         {
             InitializeComponent();
@@ -66,5 +79,25 @@ namespace ApplicationVeloMax.Views.Modeles
         }
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new DetailPieceView(SelectedPiece).ShowDialog();
+
+        private void addPieceButton_Click(object sender, RoutedEventArgs e)
+        {
+            new AddCompositionView(SelectedModele, PiecesNonComprises).ShowDialog();
+            this.Close();
+        }
+
+        private void deletePieceButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedPiece == null) MessageBox.Show("Veuillez sélectionner une pièce à retirer de la composition de ce modèle");
+            else
+            {
+                if (!DataAccess.RemoveFromComposition(SelectedModele, SelectedPiece)) MessageBox.Show("Erreur de suppression");
+                else
+                {
+                    MessageBox.Show("Pièce retirée de la composition");
+                    this.Close();
+                }
+            }
+        }
     }
 }
