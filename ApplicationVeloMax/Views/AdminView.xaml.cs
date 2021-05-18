@@ -765,5 +765,11 @@ namespace ApplicationVeloMax.Views
             colonne.SortDirection = direction;
             datagrid.Items.Refresh();
         }
+
+        private void Classementclients_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (ClientPro.EnsemblePros.Contains(SelectedClient)) new DetailClientPro((ClientPro)SelectedClient).ShowDialog();
+            if (ClientPart.EnsembleParticuliers.Contains(SelectedClient)) new DetailClientPart((ClientPart)SelectedClient).ShowDialog();
+        }
     }
 }

@@ -465,7 +465,6 @@
                     </TabItem.Header>
 
                     <TabControl Margin="-4">
-
                         <!--#region Particuliers-->
                         <TabItem Height="50" VerticalAlignment="Top">
                             <TabItem.Header>
@@ -1319,9 +1318,14 @@
                                     <ComboBoxItem IsSelected="True">Cumul des ventes</ComboBoxItem>
                                 </ComboBox>
 
-                                <DataGrid x:Name="Classementclients_DataGrid" Grid.Row="1"
-                                          ItemsSource="{Binding Clients}" AutoGenerateColumns="False">
-
+                                <DataGrid x:Name="Classementclients_DataGrid" Grid.Row="1" IsReadOnly="True"
+                                          ItemsSource="{Binding Clients, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" AutoGenerateColumns="False"
+                                          SelectedItem="{Binding SelectedClient, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                                    <DataGrid.Resources>
+                                        <Style TargetType="DataGridRow">
+                                            <EventSetter Event="MouseDoubleClick" Handler="Classementclients_MouseDoubleClick"/>
+                                        </Style>
+                                    </DataGrid.Resources>
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Nom client" Binding="{Binding Nom}" Width="*"/>
                                         <DataGridTextColumn Header="Montant cumulé" Binding="{Binding MontantCumul, StringFormat={}€ {0:0.00}}" Width="auto"/>

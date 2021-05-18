@@ -165,6 +165,7 @@ namespace ApplicationVeloMax.Models
                 return meilleursclients;
             }
         }
+
         static public List<Commande> Ensemble
         {
             get { return ensemble; }
