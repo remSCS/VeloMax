@@ -808,6 +808,38 @@ namespace ApplicationVeloMax.ViewModels
             RefreshDBUsingSP();
             return toReturn;
         }
+
+        static public bool RemoveModeleCompositionCommande(Commande selCom, Modele selMod)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                connexion.Open();
+                MySqlCommand com = new MySqlCommand("RemoveOneModeleFromCommande", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@idC", MySqlDbType.Int64).Value = selCom.Id;
+                com.Parameters.Add("@idM", MySqlDbType.Int64).Value = selMod.Id;
+                try { com.ExecuteReader(); }
+                catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+            }
+            RefreshDBUsingSP();
+            return toReturn;
+        }
+
+        static public bool RemovePieceCompositionCommande(Commande selCom, PieceDetachee selPart)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                connexion.Open();
+                MySqlCommand com = new MySqlCommand("RemoveOnePieceFromCommande", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@idC", MySqlDbType.Int64).Value = selCom.Id;
+                com.Parameters.Add("@idP", MySqlDbType.Int64).Value = selPart.Id;
+                try { com.ExecuteReader(); }
+                catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+            }
+            RefreshDBUsingSP();
+            return toReturn;
+        }
         #endregion
 
         #region Adding data to server
