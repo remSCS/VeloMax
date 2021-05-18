@@ -77,10 +77,18 @@ namespace ApplicationVeloMax.Views.Commandes
             if (SelectedModele == null) MessageBox.Show("Veuillez sélectionner un modèle à ajouter !");
             else
             {
+                try
+                {
+                    QteToAdd = Convert.ToInt32(qteTb.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("Veuillez indiquer une quantité à ajouter !");
+                }
+
                 if (QteToAdd == 0) MessageBox.Show("Veuillez indiquer une quantité à ajouter !");
                 else
                 {
-                    //DataAccess.AddModeleCompositionCommande(SelectedCommande, SelectedModele, QteToAdd);
                     if (SelectedModele.Quantite - QteToAdd < 0)
                     {
                         MessageBoxResult result = MessageBox.Show("Il ne reste pas suffisamment de modèles en stock.\nVoulez-vous passer commande au près du fournisseur ?", "Stock insufisant", MessageBoxButton.YesNo, MessageBoxImage.Warning);
@@ -92,8 +100,12 @@ namespace ApplicationVeloMax.Views.Commandes
                     }
                     else
                     {
-                        MessageBox.Show("Modèle ajouté à la commande !");
-                        this.Close();
+                        if (!DataAccess.AddModeleCompositionCommande(SelectedCommande, SelectedModele, QteToAdd)) MessageBox.Show("Impossible d'ajouter ce modèle");
+                        else
+                        {
+                            MessageBox.Show("Modèle ajouté à la commande !");
+                            this.Close();
+                        }
                     }
                 }
             }

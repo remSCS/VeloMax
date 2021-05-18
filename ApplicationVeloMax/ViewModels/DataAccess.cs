@@ -759,6 +759,40 @@ namespace ApplicationVeloMax.ViewModels
             }
             return toReturn;
         }
+       
+        static public bool AddModeleCompositionCommande(Commande selCom, Modele selMod, int quantity)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                connexion.Open();
+                MySqlCommand com = new MySqlCommand("AddModeleToCommande", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@idC", MySqlDbType.Int64).Value = selCom.Id;
+                com.Parameters.Add("@idM", MySqlDbType.Int64).Value = selMod.Id;
+                com.Parameters.Add("@qte", MySqlDbType.Int64).Value = quantity;
+                try { com.ExecuteReader(); }
+                catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+            }
+            RefreshDBUsingSP();
+            return toReturn;
+        }
+
+        static public bool AddPieceCompositionCommande(Commande selCom, PieceDetachee selPart, int quantity)
+        {
+            bool toReturn = true;
+            using (var connexion = GetConnection())
+            {
+                connexion.Open();
+                MySqlCommand com = new MySqlCommand("AddModeleToCommande", connexion) { CommandType = CommandType.StoredProcedure };
+                com.Parameters.Add("@idC", MySqlDbType.Int64).Value = selCom.Id;
+                com.Parameters.Add("@idP", MySqlDbType.Int64).Value = selMod.Id;
+                com.Parameters.Add("@qte", MySqlDbType.Int64).Value = quantity;
+                try { com.ExecuteReader(); }
+                catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
+            }
+            RefreshDBUsingSP();
+            return toReturn;
+        }
         #endregion
 
         #region Adding data to server
