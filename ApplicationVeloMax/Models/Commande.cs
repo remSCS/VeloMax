@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -109,7 +110,7 @@ namespace ApplicationVeloMax.Models
                 ClientPart part = ClientPart.EnsembleParticuliers.Find(c => c.Id == this.ClientCommande.Id);
                 ClientPro pro = ClientPro.EnsemblePros.Find(c => c.Id == this.ClientCommande.Id);
                 if (part == null) destinataire = pro.NomEntreprise;
-                else if (part != null) destinataire =part.ContactClient.FullName;
+                else if (part != null) destinataire = part.ContactClient.FullName;
                 return destinataire;
             }
         }
@@ -151,6 +152,19 @@ namespace ApplicationVeloMax.Models
             set { modelesCommande = value; }
         }
 
+        static public ObservableCollection<Client> MeilleursClientsQte
+        {
+            get
+            {
+                var meilleurscmd = EnsembleDone.OrderBy(c => c.NbArticles).ToList();
+                var meilleursclients = new ObservableCollection<Client>();
+                foreach(Commande cm in meilleurscmd)
+                {
+                    meilleursclients.Add(cm.clientCommande);
+                }
+                return meilleursclients;
+            }
+        }
         static public List<Commande> Ensemble
         {
             get { return ensemble; }
@@ -165,7 +179,7 @@ namespace ApplicationVeloMax.Models
         {
             get { return ensembleAnnul; }
         }
-               
+
         static public List<Commande> EnsembleDone
         {
             get { return ensembleDone; }
@@ -181,7 +195,7 @@ namespace ApplicationVeloMax.Models
 
         static public decimal NbArticlesMoyen(Client client)
         {
-            var co=Ensemble.FindAll(c => c.ClientCommande.Id == client.Id);
+            var co = Ensemble.FindAll(c => c.ClientCommande.Id == client.Id);
             decimal nbarticlesmoyen = 0;
             if (co.Count == 0) nbarticlesmoyen = 0;
             else
@@ -192,7 +206,7 @@ namespace ApplicationVeloMax.Models
                 }
                 nbarticlesmoyen /= co.Count;
             }
-            
+
             return nbarticlesmoyen;
         }
 
