@@ -63,6 +63,13 @@ namespace ApplicationVeloMax.Views.Commandes
         {
             InitializeComponent();
             SelectedCommande = _inputCommande;
+            if(SelectedCommande.Statut != "En cours de préparation")
+            {
+                addModeleButton.Visibility = Visibility.Hidden;
+                removeModeleButton.Visibility = Visibility.Hidden;
+                addPieceButton.Visibility = Visibility.Hidden;
+                removePieceButton.Visibility = Visibility.Hidden;
+            }
         }
 
         private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)

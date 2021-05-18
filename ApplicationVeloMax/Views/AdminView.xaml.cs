@@ -429,6 +429,44 @@ namespace ApplicationVeloMax.Views
             new AddCommandeView().ShowDialog();
             RefreshProperties();
         }
+
+        private void triVente_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Classementclients_DataGrid != null)
+            {
+                if (triVente_ComboBox.Text == "Nb. de ventes")
+                {
+                    SortDataGrid(Classementclients_DataGrid, 1);
+                    Classementclients_DataGrid.Columns[2].Visibility = Visibility.Collapsed;
+                    Classementclients_DataGrid.Columns[1].Visibility = Visibility.Visible;
+                }
+                else
+                {
+                    SortDataGrid(Classementclients_DataGrid, 2);
+                    Classementclients_DataGrid.Columns[1].Visibility = Visibility.Collapsed;
+                    Classementclients_DataGrid.Columns[2].Visibility = Visibility.Visible;
+                }
+            }
+        }
+
+        public static void SortDataGrid(DataGrid datagrid, int colidx, ListSortDirection direction = ListSortDirection.Descending)
+        {
+            var colonne = datagrid.Columns[colidx];
+            datagrid.Items.SortDescriptions.Clear();
+            datagrid.Items.SortDescriptions.Add(new SortDescription(colonne.SortMemberPath, direction));
+            foreach (var col in datagrid.Columns)
+            {
+                col.SortDirection = null;
+            }
+            colonne.SortDirection = direction;
+            datagrid.Items.Refresh();
+        }
+
+        private void Classementclients_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (ClientPro.EnsemblePros.Contains(SelectedClient)) new DetailClientPro((ClientPro)SelectedClient).ShowDialog();
+            if (ClientPart.EnsembleParticuliers.Contains(SelectedClient)) new DetailClientPart((ClientPart)SelectedClient).ShowDialog();
+        }
         #endregion
 
         #region Produits
@@ -732,44 +770,6 @@ namespace ApplicationVeloMax.Views
                 if (e.SystemKey == Key.LeftAlt && displayMenu.Visibility == Visibility.Visible)
                     displayMenu.Visibility = Visibility.Collapsed;
             }
-        }
-
-        private void triVente_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (Classementclients_DataGrid != null)
-            {
-                if (triVente_ComboBox.Text == "Nb. de ventes")
-                {
-                    SortDataGrid(Classementclients_DataGrid, 1);
-                    Classementclients_DataGrid.Columns[2].Visibility = Visibility.Collapsed;
-                    Classementclients_DataGrid.Columns[1].Visibility = Visibility.Visible;
-                }
-                else
-                {
-                    SortDataGrid(Classementclients_DataGrid, 2);
-                    Classementclients_DataGrid.Columns[1].Visibility = Visibility.Collapsed;
-                    Classementclients_DataGrid.Columns[2].Visibility = Visibility.Visible;
-                }
-            }
-        }
-
-        public static void SortDataGrid(DataGrid datagrid,int colidx, ListSortDirection direction = ListSortDirection.Descending)
-        {
-            var colonne = datagrid.Columns[colidx];
-            datagrid.Items.SortDescriptions.Clear();
-            datagrid.Items.SortDescriptions.Add(new SortDescription(colonne.SortMemberPath, direction));
-            foreach(var col in datagrid.Columns)
-            {
-                col.SortDirection = null;
-            }
-            colonne.SortDirection = direction;
-            datagrid.Items.Refresh();
-        }
-
-        private void Classementclients_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            if (ClientPro.EnsemblePros.Contains(SelectedClient)) new DetailClientPro((ClientPro)SelectedClient).ShowDialog();
-            if (ClientPart.EnsembleParticuliers.Contains(SelectedClient)) new DetailClientPart((ClientPart)SelectedClient).ShowDialog();
         }
     }
 }
