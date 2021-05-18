@@ -29,7 +29,19 @@ namespace ApplicationVeloMax.ViewModels
             }
             catch(MySqlException e)
             {
-                MessageBox.Show(e.ToString());
+                StringBuilder messageErreur = new StringBuilder(200);
+                messageErreur.Append($"Votre tentative de connexion a échoué pour l'utilisateur \'{id}\' au serveur MySQL à {co}:3306:");
+                messageErreur.Append(Environment.NewLine);
+                messageErreur.Append($"Accès refusé pour l'utilisateur \'{id}\'@\'{co}\'");
+                messageErreur.Append(Environment.NewLine);
+                messageErreur.Append(Environment.NewLine);
+                messageErreur.Append("\t\u2022 Vérifiez si le serveur est démarré");
+                messageErreur.Append(Environment.NewLine);
+                messageErreur.Append("\t\u2022 Vérifiez l'identifiant de l'utilisateur");
+                messageErreur.Append(Environment.NewLine);
+                messageErreur.Append("\t\u2022 Vérifiez le mot de passe");
+                MessageBox.Show(messageErreur.ToString(),"Erreur de connexion", MessageBoxButton.OK,MessageBoxImage.Error);
+                //MessageBox.Show(e.ToString());
                 return false;
             }
             return true;

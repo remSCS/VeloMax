@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:ApplicationVeloMax.Views"
+        xmlns:local="clr-namespace:ApplicationVeloMax.Views" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         Title="Connexion - VéloMax" Icon="/img/VeloMax_Logo.png" 
         WindowStartupLocation="CenterScreen"
@@ -22,10 +22,16 @@
         </Grid.RowDefinitions>
 
 
-        <Image Source="/img/VeloMax_Logo.png" Height="250"
+        <Image Source="/img/VeloMax_Logo.png" Height="250" 
                    Grid.Row="0" Grid.Column="0" Grid.RowSpan="4" HorizontalAlignment="Center" VerticalAlignment="Center"
                ToolTip="Logo crée par nos soins pour les besoins du problème"/>
-
+        
+        <Button x:Name="Github_Button"
+                Grid.Column="0" Grid.Row="0" 
+                Width="50" HorizontalAlignment="Left" VerticalAlignment="Top"
+                Click="Github_Button_Click">
+            <materialDesign:PackIcon Kind="Github"/>
+        </Button>
 
 
         <ComboBox x:Name="serverInput" Margin="10" IsEditable="True" Text="Adresse du serveur" FontSize="14" Opacity="0.7"
@@ -41,7 +47,7 @@
             <ComboBoxItem ToolTip="Identifiant pour le serveur de Rémi">RemoteUser</ComboBoxItem>
         </ComboBox>
 
-        <PasswordBox x:Name="userPasswordinput" MinWidth="200" Margin="10" Padding="5" KeyDown="Input_KeyDown" ToolTip="Entrer le mot de passe utilisateur"
+        <PasswordBox x:Name="userPasswordinput" MinWidth="200" Margin="10,20" Padding="5" KeyDown="Input_KeyDown" ToolTip="Entrer le mot de passe utilisateur"
                              Grid.Row="2" Grid.Column="1"/>
         
         <Button x:Name="userLoginButton"  Padding="6" Content="Login" Margin="10"
