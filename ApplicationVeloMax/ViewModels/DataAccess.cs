@@ -555,6 +555,7 @@ namespace ApplicationVeloMax.ViewModels
         static public bool ModifyStockModele(Modele toModify, int newStock)
         {
             bool toReturn = true;
+            if (newStock < 0) return false;
             using (var connexion = GetConnection())
             {
                 connexion.Open();
@@ -571,6 +572,7 @@ namespace ApplicationVeloMax.ViewModels
         static public bool ModifyStockPiece(PieceDetachee toModify, int newStock)
         {
             bool toReturn = true;
+            if (newStock < 0) return false;
             using (var connexion = GetConnection())
             {
                 connexion.Open();
