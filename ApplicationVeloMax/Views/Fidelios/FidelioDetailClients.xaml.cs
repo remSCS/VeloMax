@@ -57,5 +57,10 @@ namespace ApplicationVeloMax.Views.Fidelios
             InitializeComponent();
             SelectedFidelio = fid;
         }
+
+        private void DataGrid_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
     }
 }

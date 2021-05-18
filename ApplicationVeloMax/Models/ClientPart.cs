@@ -36,6 +36,11 @@ namespace ApplicationVeloMax.Models
             set { dateDebutFidelo = value; }
         }
 
+        public DateTime DateFinFidelio
+        {
+            get { return DateDebutFidelio.AddDays(FidelioClient.DureeJours); }
+        }
+
         static public List<ClientPart> EnsembleParticuliers
         {
             get { return ensembleParticuliers; }

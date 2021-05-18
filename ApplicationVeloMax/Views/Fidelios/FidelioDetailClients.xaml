@@ -5,14 +5,14 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Fidelios"
         mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}" WindowStartupLocation="CenterScreen"
-        Title="FidelioDetailClients" Height="450" Width="800">
+        Title="FidelioDetailClients" Height="450" Width="900">
     <Grid>
         <StackPanel Orientation="Vertical">
             <Label Content="{Binding SelectedFidelio.Nom}" FontSize="28" FontWeight="Bold" Margin="5"/>
 
             <DataGrid IsReadOnly="True" Margin="5" AutoGenerateColumns="False"
                   ItemsSource="{Binding SelectedFidelio.ClientsFid, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
-                  SelectedItem="{Binding ClientPart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                  SelectedItem="{Binding ClientPart, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" SelectionChanged="DataGrid_SelectionChanged">
                 <DataGrid.Resources>
                     <Style TargetType="DataGridRow">
                         <EventSetter Event="MouseDoubleClick" Handler="DetailClient_Click"/>
@@ -22,6 +22,7 @@
                     <DataGridTextColumn Header="ID" Width="auto" Binding="{Binding Id}"/>
                     <DataGridTextColumn Header="Nom" Width="*" Binding="{Binding ContactClient.FullName}"/>
                     <DataGridTextColumn Header="Date adhésion" Width="auto" Binding="{Binding DateAdherance.Date, StringFormat=dd/MM/yyyy}"/>
+                    <DataGridTextColumn Header="Date fin" Width="auto" Binding="{Binding DateFinFidelio.Date, StringFormat=dd/MM/yyyy}"/>
                 </DataGrid.Columns>
             </DataGrid>
         </StackPanel>
