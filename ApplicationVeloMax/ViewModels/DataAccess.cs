@@ -20,11 +20,11 @@ namespace ApplicationVeloMax.ViewModels
 
         static private MySqlConnection GetConnection() => new MySqlConnection(_connectionString);
 
-        static public bool TestConnectionString(string co,string id, string pw)
+        static public bool TestConnectionString(string co,string nomdb,string id, string pw)
         {
             try
             {
-                MySqlConnection c = new MySqlConnection($"SERVER ={ co }; PORT = 3306; DATABASE = VeloMax; UID ={ id}; PASSWORD ={ pw}");
+                MySqlConnection c = new MySqlConnection($"SERVER ={ co }; PORT = 3306; DATABASE = {nomdb}; UID ={ id}; PASSWORD ={ pw}");
                 c.Open();
             }
             catch(MySqlException e)

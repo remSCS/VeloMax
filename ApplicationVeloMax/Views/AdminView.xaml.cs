@@ -429,11 +429,11 @@ namespace ApplicationVeloMax.Views
         #endregion
         #endregion
 
-        public AdminView(string serverName, string login, string password)
+        public AdminView(string serverName, string nomdb, string login, string password)
         {
             InitializeComponent();
             displayMenu.Visibility = Visibility.Collapsed;
-            string cs = $"SERVER={serverName};PORT=3306;DATABASE=VeloMax;UID={login};PASSWORD={password}";
+            string cs = $"SERVER={serverName};PORT=3306;DATABASE={nomdb};UID={login};PASSWORD={password}";
             new DataAccess(cs);
             //new DataAccess("SERVER= ;PORT=3306;DATABASE=VeloMax;UID=RemoteAdmin;PASSWORD=Password@123");
             //new DataAccess("SERVER=localhost;PORT=3306;DATABASE=VeloMax;UID=RemoteUser;PASSWORD=Password@123");
