@@ -81,7 +81,20 @@ namespace ApplicationVeloMax.Views.Commandes
                 else
                 {
                     //DataAccess.AddPieceCompositionCommande(SelectedCommande, SelectedModele, QteToAdd);
-
+                    if (SelectedPiece.Quantite - QteToAdd < 0)
+                    {
+                        MessageBoxResult result = MessageBox.Show("Il ne reste pas suffisamment de pièces en stock.\nVoulez-vous passer commande au près du fournisseur ?", "Stock insufisant", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                        if (result == MessageBoxResult.Yes)
+                        {
+                            MessageBox.Show("je gère");
+                            this.Close();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Pièce ajouté à la commande !");
+                        this.Close();
+                    }
                 }
             }
         }
