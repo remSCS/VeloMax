@@ -329,6 +329,19 @@ namespace ApplicationVeloMax.Views
             get { return _selectedClient; }
             set { _selectedClient = value; }
         }
+
+        private ObservableCollection<Client> _ensembleClients;
+
+        public ObservableCollection<Client> EnsembleClients
+        {
+            get {return _ensembleClients; }
+            set
+            {
+                _ensembleClients = value;
+                PropertyChanged(this, new PropertyChangedEventArgs("EnsembleClients"));
+            }
+           
+        }
         #endregion
         #endregion
 
@@ -704,6 +717,7 @@ namespace ApplicationVeloMax.Views
             Fournisseurs = new ObservableCollection<Fournisseur>(Fournisseur.Ensemble);
             Fidelios = new ObservableCollection<Fidelio>(Fidelio.Ensemble);
             Clients = new ObservableCollection<Client>(Client.Ensemble);
+           
         }
 
         private void Window_KeyDown(object sender, KeyEventArgs e)
@@ -717,6 +731,34 @@ namespace ApplicationVeloMax.Views
                 if (e.SystemKey == Key.LeftAlt && displayMenu.Visibility == Visibility.Visible)
                     displayMenu.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void triVente_ComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (Classementclients_DataGrid != null)
+            {
+                if (triVente_ComboBox.Text == "Nb. de ventes")
+                {
+                    SortDataGrid(Classementclients_DataGrid, 1);
+                }
+                else
+                {
+                    SortDataGrid(Classementclients_DataGrid, 2);
+                }
+            }
+        }
+
+        public static void SortDataGrid(DataGrid datagrid,int colidx, ListSortDirection direction=ListSortDirection.Descending)
+        {
+            var colonne = datagrid.Columns[colidx];
+            datagrid.Items.SortDescriptions.Clear();
+            datagrid.Items.SortDescriptions.Add(new SortDescription(colonne.SortMemberPath, direction));
+            foreach(var col in datagrid.Columns)
+            {
+                col.SortDirection = null;
+            }
+            colonne.SortDirection = direction;
+            datagrid.Items.Refresh();
         }
     }
 }

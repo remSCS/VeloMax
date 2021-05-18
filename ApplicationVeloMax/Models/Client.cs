@@ -49,6 +49,33 @@ namespace ApplicationVeloMax.Models
             set { dateAdherance = value; }
         }
 
+        public string Nom
+        {
+            get
+            {
+                string destinataire = "";
+                ClientPart part = ClientPart.EnsembleParticuliers.Find(c => c.Id == this.Id);
+                ClientPro pro = ClientPro.EnsemblePros.Find(c => c.Id == this.Id);
+                if (part == null) destinataire = pro.NomEntreprise;
+                else if (part != null) destinataire = part.ContactClient.FullName;
+                return destinataire;
+            }
+        }
+
+        public decimal MontantCumul
+        {
+            get
+            {
+                decimal prixCumul = 0;
+                var co = Commande.Ensemble.FindAll(c => c.ClientCommande.Id == this.Id);
+                foreach (Commande com in co)
+                {
+                    if (com.Statut != "Annulée") prixCumul += com.MontantCommandeAvecTVAAvecRemise;
+                }
+                return prixCumul;
+            }
+        }
+
         public override string ToString()
         {
             return $"{this.ContactClient}";
@@ -58,5 +85,7 @@ namespace ApplicationVeloMax.Models
         {
             get { return ensemble; }
         }
+
+       
     }
 }
