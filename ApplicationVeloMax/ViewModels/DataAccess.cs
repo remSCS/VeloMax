@@ -34,6 +34,7 @@ namespace ApplicationVeloMax.ViewModels
             }
             return true;
         }
+
         static private MySqlCommand GetCorrectCommand(string param)
         {
             using (var connexion = GetConnection())
