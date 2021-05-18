@@ -188,6 +188,9 @@
     <Compile Include="Views\Fournisseurs\EditFournisseurView.xaml.cs">
       <DependentUpon>EditFournisseurView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\LoginView.xaml.cs">
+      <DependentUpon>LoginView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Modeles\AddCompositionView.xaml.cs">
       <DependentUpon>AddCompositionView.xaml</DependentUpon>
     </Compile>
@@ -361,6 +364,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\Fournisseurs\EditFournisseurView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
