@@ -25,6 +25,7 @@ using ApplicationVeloMax.Views.Stock;
 using ApplicationVeloMax.Views.Fidelios;
 using ApplicationVeloMax.Views.Clients;
 using ApplicationVeloMax.Views.Fournisseurs;
+using ApplicationVeloMax.Views.Statistiques;
 
 namespace ApplicationVeloMax.Views
 {
@@ -770,6 +771,11 @@ namespace ApplicationVeloMax.Views
                 if (e.SystemKey == Key.LeftAlt && displayMenu.Visibility == Visibility.Visible)
                     displayMenu.Visibility = Visibility.Collapsed;
             }
+        }
+
+        private void Statistiques_MenuItem_Click(object sender, RoutedEventArgs e)
+        {
+            new StatistiquesView().ShowDialog();
         }
     }
 }

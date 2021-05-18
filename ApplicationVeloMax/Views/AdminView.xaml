@@ -58,6 +58,9 @@
                     <MenuItem Header="Table 3"/>
                 </MenuItem>
             </MenuItem>
+            <MenuItem Header="Statistiques">
+                <MenuItem Header="Ouvrir" Click="Statistiques_MenuItem_Click"/>
+            </MenuItem>
         </Menu>
 
         <Grid>
