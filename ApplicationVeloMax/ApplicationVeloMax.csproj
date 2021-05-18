@@ -260,22 +260,19 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\Bike_Logo.png" />
+    <Resource Include="img\Bike_LogoOld.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\Pieces_Logo.png" />
+    <Resource Include="img\Stock_LogoOld.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\Stock_Logo.png" />
+    <Resource Include="img\Clients_LogoOld.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\Clients_Logo.png" />
+    <Resource Include="img\Fournisseur_LogoOld.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\Fournisseur_Logo.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="img\Commandes_Logo.png" />
+    <Resource Include="img\Commandes_LogoOld.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\Search_Logo.png" />
@@ -385,7 +382,13 @@
   <ItemGroup>
     <Resource Include="img\Velomax_Logo.png" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="img\Bike_Logo.png" />
+    <Resource Include="img\Clients_Logo.png" />
+    <Resource Include="img\Commandes_Logo.png" />
+    <Resource Include="img\Fournisseur_Logo.png" />
+    <Resource Include="img\Stock_Logo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Import Project="..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets" Condition="Exists('..\packages\MaterialDesignThemes.4.0.0\build\MaterialDesignThemes.targets')" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
