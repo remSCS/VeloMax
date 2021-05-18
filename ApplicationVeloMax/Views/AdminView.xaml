@@ -67,8 +67,8 @@
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                            <Image Source="/img/Bike_Logo.png" Height="25" ToolTip="Afficher la liste des modèles" HorizontalAlignment="Left"/>
-                            <Label Content="Produits" Foreground="Black" FontStyle="Italic" HorizontalAlignment="Left"/>
+                            <Image Source="/img/Bike_Logo.png" Height="60" ToolTip="Afficher la liste des modèles" HorizontalAlignment="Center"/>
+                            <Label Content="Produits" Foreground="Black" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </TabItem.Header>
 
@@ -315,8 +315,8 @@
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                            <Image Source="/img/Stock_Logo.png" Height="30" ToolTip="Afficher le stock de Vélomax" HorizontalAlignment="Left"/>
-                            <Label Content="Stock" Foreground="Black" FontStyle="Italic" HorizontalAlignment="Left"/>
+                            <Image Source="/img/Stock_Logo.png" Height="60" ToolTip="Afficher le stock de Vélomax" HorizontalAlignment="Center"/>
+                            <Label Content="Stock" Foreground="Black" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </TabItem.Header>
 
@@ -459,8 +459,8 @@
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Orientation="Vertical">
-                            <Image Source="/img/Clients_Logo.png" Height="30" ToolTip="Afficher la liste des clients"/>
-                            <Label Content="Clients" Foreground="Black" FontStyle="Italic"/>
+                            <Image Source="/img/Clients_Logo.png" Height="60" ToolTip="Afficher la liste des clients" HorizontalAlignment="Center"/>
+                            <Label Content="Clients" Foreground="Black" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </TabItem.Header>
 
@@ -819,8 +819,8 @@
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Orientation="Vertical">
-                            <Image Source="/img/Fournisseur_Logo.png" Height="30" ToolTip="Afficher la liste des fournisseurs"/>
-                            <Label Content="Fournisseurs" Foreground="Black" FontStyle="Italic"/>
+                            <Image Source="/img/Fournisseur_Logo.png" Height="60" ToolTip="Afficher la liste des fournisseurs" HorizontalAlignment="Center"/>
+                            <Label Content="Fournisseurs" Foreground="Black" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </TabItem.Header>
 
@@ -940,8 +940,8 @@
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Orientation="Vertical">
-                            <Image Source="/img/Commandes_Logo.png" Height="30" ToolTip="Afficher la liste des commandes"/>
-                            <Label Content="Commandes" Foreground="Black" FontStyle="Italic"/>
+                            <Image Source="/img/Commandes_Logo.png" Height="60" ToolTip="Afficher la liste des commandes" HorizontalAlignment="Center"/>
+                            <Label Content="Commandes" Foreground="Black" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </TabItem.Header>
 
@@ -1303,6 +1303,7 @@
                         </TabItem>
                         <!--#endregion-->
 
+                        <!--#region Classement-->
                         <TabItem Height="50" VerticalAlignment="Top">
                             <TabItem.Header>
                                 <Label Grid.Row="0" Margin="10,10,10,0" Content="Classement"  FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
@@ -1318,20 +1319,19 @@
                                     <ComboBoxItem >Cumul des ventes</ComboBoxItem>
                                 </ComboBox>
 
-                                <DataGrid x:Name="Classementclients_DataGrid" 
-                                          Grid.Row="1"
-                                          ItemsSource="{Binding Clients}" AutoGenerateColumns="True">
+                                <DataGrid x:Name="Classementclients_DataGrid" Grid.Row="1"
+                                          ItemsSource="{Binding Clients}" AutoGenerateColumns="False">
 
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Header="Nom client" Binding="{Binding Nom}" Width="*"/>
                                         <DataGridTextColumn Header="Montant cumulé" Binding="{Binding MontantCumul, StringFormat={}€ {0:0.00}}" Width="auto"/>
                                         <DataGridTextColumn Header="Nombre d'articles cumulés" Binding="{Binding MontantCumul, StringFormat={}€ {0:0.00}}" Width="auto"/>
                                     </DataGrid.Columns>
-                                    
+
                                 </DataGrid>
                             </Grid>
-                            
                         </TabItem>
+                        <!--#endregion-->
                     </TabControl>
 
                 </TabItem>

@@ -260,19 +260,19 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\Bike_LogoOld.png" />
+    <Resource Include="img\Old\Bike_LogoOld.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\Stock_LogoOld.png" />
+    <Resource Include="img\Old\Stock_LogoOld.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\Clients_LogoOld.png" />
+    <Resource Include="img\Old\Clients_LogoOld.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\Fournisseur_LogoOld.png" />
+    <Resource Include="img\Old\Fournisseur_LogoOld.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="img\Commandes_LogoOld.png" />
+    <Resource Include="img\Old\Commandes_LogoOld.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="img\Search_Logo.png" />
