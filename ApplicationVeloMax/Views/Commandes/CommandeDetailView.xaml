@@ -108,32 +108,36 @@
                 <Label Margin="10" Content="Modèles" FontSize="22" FontWeight="Bold" Grid.Column="1" Grid.Row="0"/>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="1">
-                    <Button Margin="10" Click="removeModeleButton_Click"  Grid.Row="0" Grid.Column="0"
+                    <Button x:Name="removeModeleButton" Margin="10" Click="removeModeleButton_Click"  Grid.Row="0" Grid.Column="0"
                             VerticalAlignment="Center"  HorizontalAlignment="Right" >
                         <materialDesign:PackIcon Kind="TrashCan"/>
                     </Button>
-                    <Button Margin="10" Click="addPieceButton_Click"  Grid.Row="0" Grid.Column="1"
+                    <Button x:Name="addModeleButton" Margin="10" Click="addModeleButton_Click"  Grid.Row="0" Grid.Column="1"
                             VerticalAlignment="Center"  HorizontalAlignment="Right" >
                         <materialDesign:PackIcon Kind="PlusBoxMultipleOutline"/>
                     </Button>
                 </StackPanel>
 
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Grid.Row="0" Grid.Column="0">
-                    <Button Margin="10" Click="removePieceButton_Click"  Grid.Row="0" Grid.Column="1"
+                    <Button x:Name="removePieceButton" Margin="10" Click="removePieceButton_Click"  Grid.Row="0" Grid.Column="1"
                             VerticalAlignment="Center"  HorizontalAlignment="Right" >
                         <materialDesign:PackIcon Kind="TrashCan"/>
                     </Button>
-                    <Button Margin="10" Click="addPieceButton_Click"  Grid.Row="0" Grid.Column="1"
+                    <Button x:Name="addPieceButton" Margin="10" Click="addPieceButton_Click"  Grid.Row="0" Grid.Column="1"
                             VerticalAlignment="Center"  HorizontalAlignment="Right" >
                         <materialDesign:PackIcon Kind="PlusBoxMultipleOutline"/>
                     </Button>
                 </StackPanel>
 
-
-
                 <DataGrid Grid.Column="0" Grid.Row="1" Margin="10"
-                  IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
-                  ItemsSource="{Binding SelectedCommande.PiecesCommande, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  >
+                          IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                          ItemsSource="{Binding SelectedCommande.PiecesCommande, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SelectedPiece, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
+                    <DataGrid.Resources>
+                        <Style TargetType="DataGridRow">
+                            <EventSetter Event="MouseDoubleClick" Handler="piecesDataGrid_MouseDoubleClick"/>
+                        </Style>
+                    </DataGrid.Resources>
                     <DataGrid.Columns>
                         <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
                         <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
@@ -144,11 +148,12 @@
                 </DataGrid>
 
                 <DataGrid Grid.Column="1" Grid.Row="1" Margin="10"
-                  IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
-                  ItemsSource="{Binding SelectedCommande.ModelesCommande, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"  >
+                          IsReadOnly="True" ToolTip="A faire" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                          ItemsSource="{Binding SelectedCommande.ModelesCommande, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
+                          SelectedItem="{Binding SelectedModele, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                     <DataGrid.Resources>
                         <Style TargetType="DataGridRow">
-                            <EventSetter Event="MouseDoubleClick" Handler="commandesModifierButton_Click"/>
+                            <EventSetter Event="MouseDoubleClick" Handler="modelesDataGrid_MouseDoubleClick"/>
                         </Style>
                     </DataGrid.Resources>
                     <DataGrid.Columns>

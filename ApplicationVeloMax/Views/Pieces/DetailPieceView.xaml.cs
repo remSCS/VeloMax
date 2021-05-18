@@ -89,7 +89,7 @@ namespace ApplicationVeloMax.Views.Pieces
             Fournisseurs = new ObservableCollection<FournisseurPiece>(FournisseurPiece.Ensemble.FindAll(fp => fp.PieceDetacheeFournisseur == SelectedPiece));
         }
 
-        private void modelesDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new DetailsModeleView(SelectedModele).ShowDialog();
+        private void modelesDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new detailPieceView(SelectedModele).ShowDialog();
 
         private void fournisseursDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new DetailFournisseurView(SelectedFournisseur.FournisseurPieceDetachee).ShowDialog();
     }
