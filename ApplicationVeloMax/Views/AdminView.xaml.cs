@@ -869,13 +869,6 @@ namespace ApplicationVeloMax.Views
 
         private void almostexpiredFidelioMembers_Click(object sender, RoutedEventArgs e)
         {
-            /* Working
-            JsonSerializer serializer = new JsonSerializer();
-            serializer.NullValueHandling = NullValueHandling.Ignore;
-            using (StreamWriter sw = new StreamWriter("FidelioExport.json"))
-            using (JsonWriter writer = new JsonTextWriter(sw)) serializer.Serialize(writer, ClientPart.ProgrammeFidelioBientotExpired(1000));
-            System.Diagnostics.Process.Start("FidelioExport.json");*/
-
             string json = JsonConvert.SerializeObject(ClientPart.ProgrammeFidelioBientotExpired(Convert.ToInt32(((MenuItem)sender).Tag.ToString())), Newtonsoft.Json.Formatting.Indented);
             File.WriteAllText("FidelioExport.json", json);
             System.Diagnostics.Process.Start("FidelioExport.json");

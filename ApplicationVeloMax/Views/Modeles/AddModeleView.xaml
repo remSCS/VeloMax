@@ -41,7 +41,7 @@
                       ItemsSource="{Binding Grandeurs, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox x:Name="prixTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding Modele.PrixUnitaire, Mode=TwoWay}"/>
+                     Text="{Binding Modele.PrixUnitaire, Mode=TwoWay, StringFormat=N2}"/>
 
             <ComboBox x:Name="ligneTb" Margin="5" Height="25" DisplayMemberPath="Nom" VerticalContentAlignment="Center"
                       SelectedValue="{Binding Modele.LigneProduitModele, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"

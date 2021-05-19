@@ -6,7 +6,8 @@
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Fournisseurs"
         mc:Ignorable="d" xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="Ajout Pièces Modèle - VéloMax" Height="380" Width="620" Icon="/img/Velomax_Logo.png">
+        Title="Ajout de pièces - VéloMax" 
+        Height="380" Width="620" Icon="/img/Velomax_Logo.png">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
