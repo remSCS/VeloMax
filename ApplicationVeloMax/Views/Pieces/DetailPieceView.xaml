@@ -129,7 +129,7 @@
                         <DataGridTextColumn Width="auto" Header="Libellé" Binding="{Binding FournisseurPieceDetachee.LibelleFournisseur.Nom}"/>
                         <DataGridTextColumn Width="*" Header="Numéro catalgoque" Binding="{Binding NumCatalogue}"/>
                         <DataGridTextColumn Width="*" Header="Délai" Binding="{Binding Delai, StringFormat={}{0}j}"/>
-                        <DataGridTextColumn Width="auto" Header="Prix" Binding="{Binding Prix, StringFormat=€ {0}}"/>
+                        <DataGridTextColumn Width="*" Header="Prix" Binding="{Binding Prix, StringFormat=€ {0}}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </GroupBox>

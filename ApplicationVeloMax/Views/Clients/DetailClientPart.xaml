@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Clients"
         mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="{Binding ClientPart.ContactClient.FullName, StringFormat={}{0} - Détails}" Height="600" Width="800" WindowStartupLocation="CenterScreen">
+        Title="{Binding ClientPart.ContactClient.FullName, StringFormat={}{0} - Détails}" Height="600" Width="850" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>

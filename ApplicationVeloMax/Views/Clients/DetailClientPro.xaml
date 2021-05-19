@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Clients"
         mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="{Binding ClientPro.NomEntreprise, StringFormat={}{0} - Détails}" Height="600" Width="800" WindowStartupLocation="CenterScreen">
+        Title="{Binding ClientPro.NomEntreprise, StringFormat={}{0} - Détails}" Height="600" Width="850" WindowStartupLocation="CenterScreen">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="2*"/>
@@ -124,7 +124,7 @@
                     <DataGridTextColumn Header="Date" Binding="{Binding DateE, StringFormat=dd/MM/yyyy}" Width="auto" />
                     <DataGridTextColumn Header="Nb. articles" Binding="{Binding NbArticles}" Width="auto"/>
                     <DataGridTextColumn Header="Montant" Binding="{Binding MontantCommandeAvecTVAAvecRemise, StringFormat={}€ {0:0.00}}" Width="auto"/>
-                    <DataGridTextColumn Header="Statut" Binding="{Binding Statut, StringFormat={}€ {0:0.00}}" Width="*"/>
+                    <DataGridTextColumn Header="Statut" Binding="{Binding Statut}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>
