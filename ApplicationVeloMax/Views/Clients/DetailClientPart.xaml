@@ -116,10 +116,10 @@
                 </DataGrid.Resources>
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="ID" Binding="{Binding Id}" Width="auto"/>
-                    <DataGridTextColumn Header="Date" Binding="{Binding DateE, StringFormat=dd/MM/yyyy}" Width="auto" />
-                    <DataGridTextColumn Header="Nb. articles" Binding="{Binding NbArticles}" Width="auto"/>
-                    <DataGridTextColumn Header="Montant" Binding="{Binding MontantCommandeAvecTVAAvecRemise, StringFormat={}€ {0:0.00}}" Width="auto"/>
-                    <DataGridTextColumn Header="Statut" Binding="{Binding Statut, StringFormat={}€ {0:0.00}}" Width="*"/>
+                    <DataGridTextColumn Header="Date" Binding="{Binding DateE, StringFormat=dd/MM/yyyy}" Width="*" />
+                    <DataGridTextColumn Header="Nb. articles" Binding="{Binding NbArticles}" Width="*"/>
+                    <DataGridTextColumn Header="Montant" Binding="{Binding MontantCommandeAvecTVAAvecRemise, StringFormat={}€ {0:0.00}}" Width="*"/>
+                    <DataGridTextColumn Header="Statut" Binding="{Binding Statut}" Width="*"/>
                 </DataGrid.Columns>
             </DataGrid>
         </GroupBox>

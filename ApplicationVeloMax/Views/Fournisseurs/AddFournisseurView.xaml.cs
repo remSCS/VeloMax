@@ -75,7 +75,6 @@ namespace ApplicationVeloMax.Views.Fournisseurs
                 Nom = ""
             };
             FournisseurToAdd = fournisseurToAdd;
-            MessageBox.Show(fournisseurToAdd.ContactFournisseur.ToString());
         }
 
         private void addButton_Click(object sender, RoutedEventArgs e)

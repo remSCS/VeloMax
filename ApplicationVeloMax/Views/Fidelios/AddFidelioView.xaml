@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ApplicationVeloMax.Converters"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="Ajouter Programme Fidélio - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="NoResize"
-        Height="300" Width="320" FontFamily="Helvetica" Background="#e4e4e4">
+        Height="305" Width="320" FontFamily="Helvetica" Background="#e4e4e4">
     
     <Grid>
 
@@ -39,10 +39,10 @@
                       Text="{Binding FidelioToAdd.Description, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox x:Name="coutTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding FidelioToAdd.Cout, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding FidelioToAdd.Cout, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
 
             <TextBox x:Name="rabaisTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding FidelioToAdd.Rabais, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                     Text="{Binding FidelioToAdd.Rabais, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
 
             <TextBox x:Name="dureeTb" Margin="5" Height="25" VerticalContentAlignment="Center"
                      Text="{Binding FidelioToAdd.DureeJours, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>

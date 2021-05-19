@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Converters"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="Edition Fournisseur - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="CanResize"
+        Title="Ajout Fournisseur - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="CanResize"
         Height="378" Width="640" FontFamily="Helvetica" Background="#e4e4e4">
 
     <Grid>
