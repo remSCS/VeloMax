@@ -26,6 +26,9 @@ using ApplicationVeloMax.Views.Fidelios;
 using ApplicationVeloMax.Views.Clients;
 using ApplicationVeloMax.Views.Fournisseurs;
 using ApplicationVeloMax.Views.Statistiques;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
+using System.IO;
 
 namespace ApplicationVeloMax.Views
 {
@@ -860,6 +863,20 @@ namespace ApplicationVeloMax.Views
         private void Statistiques_MenuItem_Click(object sender, RoutedEventArgs e)
         {
             new StatistiquesView().ShowDialog();
+        }
+
+        private void almostexpiredFidelioMembers_Click(object sender, RoutedEventArgs e)
+        {
+            JsonSerializer serializer = new JsonSerializer();
+            serializer.NullValueHandling = NullValueHandling.Ignore;
+
+            using (StreamWriter sw = new StreamWriter("FidelioExport.json"))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                serializer.Serialize(writer, ClientPart.ProgrammeFidelioBientotExpired(1000));
+            }
+
+            System.Diagnostics.Process.Start("FidelioExport.json");
         }
     }
 }

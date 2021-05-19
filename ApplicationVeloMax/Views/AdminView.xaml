@@ -53,7 +53,7 @@
                     <MenuItem Header="Table 3"/>
                 </MenuItem>
                 <MenuItem Header="Exporter en JSON">
-                    <MenuItem Header="Table 1"/>
+                    <MenuItem Header="Membres dont le programme Fidélio arrive à expiration" Click="almostexpiredFidelioMembers_Click"/>
                     <MenuItem Header="Table 2"/>
                     <MenuItem Header="Table 3"/>
                 </MenuItem>

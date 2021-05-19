@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -59,6 +60,7 @@ namespace ApplicationVeloMax.Models
             set { dureeJours = value; }
         }
 
+        [JsonIgnore]
         public List<ClientPart> ClientsFid
         {
             get
@@ -68,6 +70,7 @@ namespace ApplicationVeloMax.Models
             }
         }
 
+        [JsonIgnore]
         static public List<Fidelio> Ensemble
         {
             get { return ensemble; }

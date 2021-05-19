@@ -592,9 +592,8 @@ namespace ApplicationVeloMax.ViewModels
                 com.Parameters.Add("@id", MySqlDbType.Int64).Value = toModify.Id;
                 com.Parameters.Add("@qte", MySqlDbType.Int64).Value = newStock;
                 var reader = com.ExecuteReader();
-                PieceDetachee.Ensemble.Clear();
-                GetAllPiecesDetacheesUsingSP();
             }
+            RefreshDBUsingSP();
             return toReturn;
         }
 
@@ -837,6 +836,7 @@ namespace ApplicationVeloMax.ViewModels
                 try { com.ExecuteReader(); }
                 catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
             }
+            ModifyStockModele(selMod, selMod.Quantite + 1);
             RefreshDBUsingSP();
             return toReturn;
         }
@@ -853,6 +853,7 @@ namespace ApplicationVeloMax.ViewModels
                 try { com.ExecuteReader(); }
                 catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
             }
+            ModifyStockPiece(selPart, selPart.Quantite + 1);
             RefreshDBUsingSP();
             return toReturn;
         }
@@ -865,7 +866,7 @@ namespace ApplicationVeloMax.ViewModels
                 connexion.Open();
                 MySqlCommand com = new MySqlCommand("EditCommandeDueDate", connexion) { CommandType = CommandType.StoredProcedure };
                 com.Parameters.Add("@idC", MySqlDbType.Int64).Value = selCom.Id;
-                com.Parameters.Add("@newDs", MySqlDbType.Int64).Value = selCom.DateS;
+                com.Parameters.Add("@newDs", MySqlDbType.Date).Value = selCom.DateS;
                 try { com.ExecuteReader(); }
                 catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
             }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -48,9 +49,21 @@ namespace ApplicationVeloMax.Models
 
         static public List<ClientPart> PartThatMatch(string nomClient)
         {
+            return EnsembleParticuliers.FindAll(md => md.ContactClient.FullName.ToLower().Contains(nomClient.ToLower()) || md.Id.ToString().Contains(nomClient) || md.ContactClient.Tel.Contains(nomClient.ToLower()));
+        }
 
-            return EnsembleParticuliers.FindAll(md => md.ContactClient.FullName.ToLower().Contains(nomClient.ToLower())|| md.Id.ToString().Contains(nomClient) || md.ContactClient.Tel.Contains(nomClient.ToLower()));
-
+        static public List<ClientPart> ProgrammeFidelioBientotExpired(int nbJoursRestant)
+        {
+            List<ClientPart> toReturn = new List<ClientPart>();
+            foreach (var c in EnsembleParticuliers)
+            {
+                if (c.FidelioClient != null)
+                {
+                    int tempsRestant = (c.DateFinFidelio - DateTime.Today).Days;
+                    if (tempsRestant <= nbJoursRestant) toReturn.Add(c);
+                }
+            }
+            return toReturn;
         }
     }
 }

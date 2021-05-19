@@ -92,15 +92,17 @@ namespace ApplicationVeloMax.Views.Commandes
                 if (QuantiteToAdd < quantiteMinimale) MessageBox.Show($"Veuillez sélectionner au minimum {quantiteMinimale} pièces à commander chez {SelectedFournisseurPiece.FournisseurPieceDetachee.Nom}.");
                 else
                 {
-                    if (commandeConcernee.DateS < commandeConcernee.DateE.AddDays(SelectedFournisseurPiece.Delai)) MessageBox.Show($"Cette commande n'influencera pas la date de livraison définie au {commandeConcernee.DateS}.");
-                    else MessageBox.Show($"La date de livraison prévue au {commandeConcernee.DateS} ne pourra pas être maintenue. Elle sera déplacée au {commandeConcernee.DateE.AddDays(SelectedFournisseurPiece.Delai)}");
+                    DateTime estimatedDate = commandeConcernee.DateE.AddDays(SelectedFournisseurPiece.Delai);
+                    if (commandeConcernee.DateS > estimatedDate) MessageBox.Show($"Cette commande n'influencera pas la date de livraison définie au {commandeConcernee.DateS}.");
+                    else MessageBox.Show($"La date de livraison prévue au {commandeConcernee.DateS} ne pourra pas être maintenue. Elle sera déplacée au {estimatedDate}");
                     MessageBoxResult result = MessageBox.Show("Souhaitez-vous maintenir l'ajout de cette pièce ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result == MessageBoxResult.No) this.Close();
                     else
                     {
-                        var com = Commande.Ensemble.Find(c => c.Id == commandeConcernee.Id);
-                        com.DateS = commandeConcernee.DateE.AddDays(SelectedFournisseurPiece.Delai);
-                        DataAccess.EditOrderDueDate(com);
+                        commandeConcernee.DateS = commandeConcernee.DateE.AddDays(SelectedFournisseurPiece.Delai);
+                        DataAccess.ModifyStockPiece(SelectedPiece, QuantiteToAdd - quantiteMinimale);
+                        DataAccess.AddPieceCompositionCommande(commandeConcernee, SelectedPiece, quantiteMinimale);
+                        DataAccess.EditOrderDueDate(commandeConcernee);
                         this.Close();
                     }
                 }
