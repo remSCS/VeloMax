@@ -20,9 +20,6 @@ using System.Windows.Shapes;
 
 namespace ApplicationVeloMax.Views.Commandes
 {
-    /// <summary>
-    /// Logique d'interaction pour CommandeDetailView.xaml
-    /// </summary>
     public partial class CommandeDetailView : Window, INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;

@@ -876,17 +876,17 @@ namespace ApplicationVeloMax.Views
             using (JsonWriter writer = new JsonTextWriter(sw)) serializer.Serialize(writer, ClientPart.ProgrammeFidelioBientotExpired(1000));
             System.Diagnostics.Process.Start("FidelioExport.json");*/
 
-            string json = JsonConvert.SerializeObject(ClientPart.ProgrammeFidelioBientotExpired(1000), Newtonsoft.Json.Formatting.Indented);
+            string json = JsonConvert.SerializeObject(ClientPart.ProgrammeFidelioBientotExpired(Convert.ToInt32(((MenuItem)sender).Tag.ToString())), Newtonsoft.Json.Formatting.Indented);
             File.WriteAllText("FidelioExport.json", json);
             System.Diagnostics.Process.Start("FidelioExport.json");
         }
 
         private void faiblePiece_Click(object sender, RoutedEventArgs e)
         {
-            using(FileStream fs = File.Create("ExportPiecesStockFaible.xml"))
+            using (FileStream fs = File.Create("ExportPiecesStockFaible.xml"))
             {
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<PieceDetachee>));
-                xmlSerializer.Serialize(fs, PieceDetachee.Ensemble.FindAll(p => p.Quantite <= 2));
+                xmlSerializer.Serialize(fs, PieceDetachee.Ensemble.FindAll(p => p.Quantite <= Convert.ToInt32(((MenuItem)sender).Tag.ToString())));
                 System.Diagnostics.Process.Start("ExportPiecesStockFaible.xml");
             }
 
@@ -897,7 +897,7 @@ namespace ApplicationVeloMax.Views
             using (FileStream fs = File.Create("ExportModeleStockFaible.xml"))
             {
                 XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Modele>));
-                xmlSerializer.Serialize(fs, Modele.Ensemble.FindAll(m => m.Quantite <= 2));
+                xmlSerializer.Serialize(fs, Modele.Ensemble.FindAll(m => m.Quantite <= Convert.ToInt32(((MenuItem)sender).Tag.ToString())));
                 System.Diagnostics.Process.Start("ExportModeleStockFaible.xml");
             }
         }
