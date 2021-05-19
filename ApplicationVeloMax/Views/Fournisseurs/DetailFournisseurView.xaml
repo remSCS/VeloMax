@@ -78,37 +78,6 @@
 
                 </Grid>
             </GroupBox>
-
-            <GroupBox Header="Statistiques" Margin="10,5">
-                <Grid Grid.Column="0">
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                        <RowDefinition Height="auto"/>
-                    </Grid.RowDefinitions>
-
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="auto"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-
-                    <Label Content="  "
-                           Grid.Row="0" Grid.Column="0"/>
-                    <Label x:Name="nbMoyen_Lbl" FontWeight="Bold"
-                           Grid.Row="0" Grid.Column="1"/>
-
-                    <Label Content="  "
-                           Grid.Row="1" Grid.Column="0"/>
-                    <Label x:Name="totalMoyen_Lbl" FontWeight="Bold"
-                           Grid.Row="1" Grid.Column="1"/>
-
-                    <Label Content=" "
-                           Grid.Row="2" Grid.Column="0"/>
-                    <Label x:Name="totalcumul_Lbl" FontWeight="Bold"
-                           Grid.Row="2" Grid.Column="1"/>
-
-                </Grid>
-            </GroupBox>
         </StackPanel>
 
         <GroupBox Header="Historique des commandes" Grid.Column="1" Margin="10,5">
@@ -133,7 +102,7 @@
                         <DataGridTextColumn Header="ID" Binding="{Binding PieceDetacheeFournisseur.Id}" Width="auto"/>
                         <DataGridTextColumn Header="Nom pièce" Binding="{Binding PieceDetacheeFournisseur.Reference}" Width="*" />
                         <DataGridTextColumn Header="Num. catalogue" Binding="{Binding NumCatalogue}" Width="auto"/>
-                        <DataGridTextColumn Header="Prix fournisseur" Binding="{Binding Prix}" Width="auto"/>
+                        <DataGridTextColumn Header="Prix fournisseur" Binding="{Binding Prix, StringFormat=€ {0}}" Width="auto"/>
 
                     </DataGrid.Columns>
                 </DataGrid>

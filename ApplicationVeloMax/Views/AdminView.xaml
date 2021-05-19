@@ -871,6 +871,7 @@
                                 </Grid.RowDefinitions>
 
                                 <TextBox Grid.Row="0" Padding="5" Height="25" Margin="10,10,10,0" VerticalContentAlignment="Center"
+                                         ToolTip="Rechercher par numéro, client et date de prise de commande"
                                          Text="{Binding SearchCommandeText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <TextBox.Background>
                                         <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>

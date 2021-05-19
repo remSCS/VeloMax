@@ -43,7 +43,7 @@
             <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Nom"/>
             <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Prénom"/>
             <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Email"/>
-            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Télephonne"/>
+            <Label Height="25" HorizontalAlignment="Right" Margin="5" Content="Télephone"/>
         </StackPanel>
 
         <StackPanel Orientation="Vertical" Margin="5" Grid.Column="1" Grid.Row="1" >
