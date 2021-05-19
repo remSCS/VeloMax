@@ -93,16 +93,16 @@ namespace ApplicationVeloMax.Views.Commandes
                 else
                 {
                     DateTime estimatedDate = commandeConcernee.DateE.AddDays(SelectedFournisseurPiece.Delai);
-                    if (commandeConcernee.DateS > estimatedDate) MessageBox.Show($"Cette commande n'influencera pas la date de livraison définie au {commandeConcernee.DateS}.");
-                    else MessageBox.Show($"La date de livraison prévue au {commandeConcernee.DateS} ne pourra pas être maintenue. Elle sera déplacée au {estimatedDate}");
+                    if (commandeConcernee.DateS > estimatedDate && commandeConcernee.DateS != estimatedDate) MessageBox.Show($"Cette commande n'influencera pas la date de livraison définie au {commandeConcernee.DateS.ToString("dd/MM/yyyy")}.");
+                    else MessageBox.Show($"La date de livraison prévue au {commandeConcernee.DateS.ToString("dd/MM/yyyy")} ne pourra pas être maintenue. Elle sera déplacée au {estimatedDate.ToString("dd/MM/yyyy")}");
                     MessageBoxResult result = MessageBox.Show("Souhaitez-vous maintenir l'ajout de cette pièce ?", "Confirmation", MessageBoxButton.YesNo, MessageBoxImage.Question);
                     if (result == MessageBoxResult.No) this.Close();
                     else
                     {
                         commandeConcernee.DateS = commandeConcernee.DateE.AddDays(SelectedFournisseurPiece.Delai);
-                        DataAccess.ModifyStockPiece(SelectedPiece, QuantiteToAdd - quantiteMinimale);
-                        DataAccess.AddPieceCompositionCommande(commandeConcernee, SelectedPiece, quantiteMinimale);
                         DataAccess.EditOrderDueDate(commandeConcernee);
+                        DataAccess.ModifyStockPiece(SelectedPiece, QuantiteToAdd);
+                        DataAccess.AddPieceCompositionCommande(commandeConcernee, SelectedPiece, quantiteMinimale);
                         this.Close();
                     }
                 }

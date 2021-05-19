@@ -901,5 +901,7 @@ namespace ApplicationVeloMax.Views
                 System.Diagnostics.Process.Start("ExportModeleStockFaible.xml");
             }
         }
+
+        private void closeWindow_Click(object sender, RoutedEventArgs e) => this.Close();
     }
 }

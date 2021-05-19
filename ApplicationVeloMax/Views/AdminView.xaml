@@ -44,7 +44,7 @@
     <DockPanel>
         <Menu DockPanel.Dock="Top" x:Name="displayMenu">
             <MenuItem Header="Fichier">
-                <MenuItem Header="Fermer"/>
+                <MenuItem Header="Fermer" Click="closeWindow_Click"/>
             </MenuItem>
             <MenuItem Header="Outils">
                 <MenuItem Header="Exporter en XML">

@@ -587,9 +587,10 @@ namespace ApplicationVeloMax.ViewModels
             if (newStock < 0) return false;
             using (var connexion = GetConnection())
             {
+                PieceDetachee pieceToUse = PieceDetachee.Ensemble.Find(p => p.Id == toModify.Id);
                 connexion.Open();
                 MySqlCommand com = new MySqlCommand("UpdateStockPiece", connexion) { CommandType = CommandType.StoredProcedure };
-                com.Parameters.Add("@id", MySqlDbType.Int64).Value = toModify.Id;
+                com.Parameters.Add("@id", MySqlDbType.Int64).Value = pieceToUse.Id;
                 com.Parameters.Add("@qte", MySqlDbType.Int64).Value = newStock;
                 var reader = com.ExecuteReader();
             }
@@ -811,14 +812,16 @@ namespace ApplicationVeloMax.ViewModels
             bool toReturn = true;
             using (var connexion = GetConnection())
             {
+                Commande comToUse = Commande.Ensemble.Find(c => c.Id == selCom.Id);
+                PieceDetachee pieceToUse = PieceDetachee.Ensemble.Find(p => p.Id == selPart.Id);
                 connexion.Open();
                 MySqlCommand com = new MySqlCommand("AddPieceToCommande", connexion) { CommandType = CommandType.StoredProcedure };
-                com.Parameters.Add("@idC", MySqlDbType.Int64).Value = selCom.Id;
-                com.Parameters.Add("@idP", MySqlDbType.Int64).Value = selPart.Id;
+                com.Parameters.Add("@idC", MySqlDbType.Int64).Value = comToUse.Id;
+                com.Parameters.Add("@idP", MySqlDbType.Int64).Value = pieceToUse.Id;
                 com.Parameters.Add("@qte", MySqlDbType.Int64).Value = quantity;
                 try { com.ExecuteReader(); }
                 catch (Exception e) { MessageBox.Show(e.ToString()); return false; }
-                ModifyStockPiece(selPart, selPart.Quantite - quantity);
+                ModifyStockPiece(pieceToUse, pieceToUse.Quantite - quantity);
             }
             RefreshDBUsingSP();
             return toReturn;
