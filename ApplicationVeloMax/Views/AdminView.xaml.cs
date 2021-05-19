@@ -176,8 +176,8 @@ namespace ApplicationVeloMax.Views
             set
             {
                 _selectedCommande = value;
-                if (SelectedCommande != null && CommandesPrep.Contains(SelectedCommande)) { cancelOrderButton.Visibility = Visibility.Visible; commandesModifierButton.Visibility = Visibility.Visible; }
-                else { cancelOrderButton.Visibility = Visibility.Hidden; commandesModifierButton.Visibility = Visibility.Hidden; }
+                if (SelectedCommande != null && CommandesPrep.Contains(SelectedCommande)) { cancelOrderButton.Visibility = Visibility.Visible; commandesModifierButton.Visibility = Visibility.Visible; setOrderDoneButton.Visibility = Visibility.Visible; }
+                else { cancelOrderButton.Visibility = Visibility.Hidden; commandesModifierButton.Visibility = Visibility.Hidden; setOrderDoneButton.Visibility = Visibility.Hidden; }
                 PropertyChanged(this, new PropertyChangedEventArgs("SelectedCommande"));
             }
         }
@@ -550,6 +550,22 @@ namespace ApplicationVeloMax.Views
             }
             colonne.SortDirection = direction;
             datagrid.Items.Refresh();
+        }
+
+        private void setOrderDoneButton_Click(object sender, RoutedEventArgs e)
+        {
+            if (SelectedCommande == null || !Commande.Ensemble.Contains(SelectedCommande)) MessageBox.Show("Veuillez sélectionner une commande à supprimer", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            else
+            {
+                MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir marquer cette commande comme terminée ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                if (res == MessageBoxResult.Yes)
+                {
+                    DataAccess.EditOrderStatus(SelectedCommande, 2);
+                    RefreshProperties();
+                    MessageBox.Show("Commande déclarée terminée !", "Succès !", MessageBoxButton.OK, MessageBoxImage.Information);
+                }
+            }
+            RefreshProperties();
         }
 
         private void Classementclients_MouseDoubleClick(object sender, MouseButtonEventArgs e)

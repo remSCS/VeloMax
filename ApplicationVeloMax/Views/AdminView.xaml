@@ -916,6 +916,20 @@
                                         </Button.Resources>
                                     </Button>
 
+                                    <Button x:Name="setOrderDoneButton" Margin="5,0" Padding="5" Content="Terminée"
+                                Foreground="White" Background="#c14141" Click="setOrderDoneButton_Click">
+                                        <Button.Resources>
+                                            <Style TargetType="Border">
+                                                <Setter Property="CornerRadius" Value="10"/>
+                                                <Style.Triggers>
+                                                    <Trigger Property="IsFocused" Value="true">
+                                                        <Setter Property="Background" Value="Black"/>
+                                                    </Trigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Button.Resources>
+                                    </Button>
+                                    
                                     <Button x:Name="deleteOrderButton" Margin="5,0" Padding="5" Content="Supprimer"
                                 Foreground="White" Background="#c14141" Click="deleteOrderButton_Click">
                                         <Button.Resources>

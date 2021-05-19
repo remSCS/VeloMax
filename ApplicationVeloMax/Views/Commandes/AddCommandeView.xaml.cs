@@ -153,7 +153,7 @@ namespace ApplicationVeloMax.Views.Commandes
             if (!DataAccess.AddCommande(CommandeToAdd)) MessageBox.Show("Modification impossible.");
             else
             {
-                MessageBox.Show("Commande ajouté !");
+                MessageBox.Show("Commande ajoutée !");
                 this.Close();
             }
         }
