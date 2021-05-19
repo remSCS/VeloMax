@@ -814,7 +814,7 @@ namespace ApplicationVeloMax.Views
 
         private void editFournisseurButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedFournisseur == null) MessageBox.Show("Veuillez sélectioner un fournisseur à modifider", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+            if (SelectedFournisseur == null) MessageBox.Show("Veuillez sélectioner un fournisseur à modifier", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
                 new EditFournisseurView(SelectedFournisseur).ShowDialog();

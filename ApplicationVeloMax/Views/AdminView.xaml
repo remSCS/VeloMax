@@ -58,7 +58,7 @@
                         <MenuItem Header="Aucun" Click="faiblePiece_Click" Tag="0"/>
                         <MenuItem Header="Moins de 2" Click="faiblePiece_Click" Tag="2"/>
                         <MenuItem Header="Moins de 5" Click="faiblePiece_Click" Tag="5"/>
-                        <MenuItem Header="Mopins de 10" Click="faiblePiece_Click" Tag="10"/>
+                        <MenuItem Header="Moins de 10" Click="faiblePiece_Click" Tag="10"/>
                     </MenuItem>
                 </MenuItem>
                 <MenuItem Header="Exporter en JSON">
@@ -69,6 +69,8 @@
                         <MenuItem Header="Dans moins de deux mois" Click="almostexpiredFidelioMembers_Click" Tag="62"/>
                         <MenuItem Header="Dans moins de trois mois" Click="almostexpiredFidelioMembers_Click" Tag="93"/>
                         <MenuItem Header="Dans moins de six mois" Click="almostexpiredFidelioMembers_Click" Tag="186"/>
+                        <MenuItem Header="Dans moins d'un an" Click="almostexpiredFidelioMembers_Click" Tag="365"/>
+                        <MenuItem Header="Dans moins de deux ans" Click="almostexpiredFidelioMembers_Click" Tag="730"/>
                     </MenuItem>
                 </MenuItem>
             </MenuItem>

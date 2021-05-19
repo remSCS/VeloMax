@@ -30,7 +30,7 @@
                   SelectedItem="{Binding ToAdd.PieceDetacheeFournisseur, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
 
             <TextBox x:Name="PrixBox" Margin="5" Height="25"
-                 Text="{Binding ToAdd.Prix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                 Text="{Binding ToAdd.Prix, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged, StringFormat=N2}"/>
 
             <TextBox x:Name="DelaiBox" Margin="5" Height="25"
                  Text="{Binding ToAdd.Delai, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
