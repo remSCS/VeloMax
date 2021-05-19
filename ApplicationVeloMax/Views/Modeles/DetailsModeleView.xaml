@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"
         Title="{Binding SelectedModele.Nom, StringFormat={}{0} - Détails}" 
-        Height="600" Width="980" WindowStartupLocation="CenterScreen">
+        Height="600" Width="990" WindowStartupLocation="CenterScreen">
 
     <Grid>
         <Grid.ColumnDefinitions>
@@ -112,9 +112,9 @@
                         <DataGridTextColumn Width="auto" Header="Référence" Binding="{Binding Reference}"/>
                         <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
                         <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}"/>
-                        <DataGridTextColumn Width="auto" Header="Intro" Binding="{Binding DateE, StringFormat=dd/MM/yyyy}"/>
-                        <DataGridTextColumn Width="auto"  Header="Sortie" Binding="{Binding DateS, StringFormat=dd/MM/yyyy}"/>
-                        <DataGridTextColumn Width="auto" Header="Prix" Binding="{Binding PrixVente, StringFormat=€ {0}}"/>
+                        <DataGridTextColumn Width="*" Header="Intro" Binding="{Binding DateE, StringFormat=dd/MM/yyyy}"/>
+                        <DataGridTextColumn Width="*"  Header="Sortie" Binding="{Binding DateS, StringFormat=dd/MM/yyyy}"/>
+                        <DataGridTextColumn Width="*" Header="Prix" Binding="{Binding PrixVente, StringFormat=€ {0}}"/>
                     </DataGrid.Columns>
                 </DataGrid>
             </StackPanel>

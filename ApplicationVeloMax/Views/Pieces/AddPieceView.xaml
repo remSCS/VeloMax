@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Converters"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="Ajout Pièce - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="NoResize"
-        Height="330" Width="400" FontFamily="Helvetica" Background="#e4e4e4">
+        Title="Ajout pièce - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="NoResize"
+        Height="340" Width="400" FontFamily="Helvetica" Background="#e4e4e4">
 
     <Grid>
 
@@ -43,7 +43,7 @@
                      Text="{Binding Piece.Description, Mode=TwoWay}"/>
 
             <TextBox x:Name="prixTb" Margin="5" Height="25" VerticalContentAlignment="Center"
-                     Text="{Binding Piece.PrixVente, Mode=TwoWay}"/>
+                     Text="{Binding Piece.PrixVente, Mode=TwoWay, StringFormat=N2}"/>
 
             <DatePicker x:Name="dateETb" Margin="5" Height="25" VerticalContentAlignment="Center"
                         SelectedDate="{Binding Piece.DateE, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
