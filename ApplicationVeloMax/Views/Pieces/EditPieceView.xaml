@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Converters"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="Edition Pièce - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="NoResize"
-        Height="330" Width="400" FontFamily="Helvetica" Background="#e4e4e4">
+        Title="Edition pièce - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="NoResize"
+        Height="340" Width="400" FontFamily="Helvetica" Background="#e4e4e4">
     
     <Grid>
 

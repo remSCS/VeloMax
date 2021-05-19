@@ -39,7 +39,7 @@
                         <Label Height="25" Content="{Binding SelectedPiece.Reference}" FontWeight="Bold"/>
                         <Label Height="25" Content="{Binding SelectedPiece.Nom}" FontWeight="Bold"/>
                         <Label Height="25" Content="{Binding SelectedPiece.Description}" FontWeight="Bold"/>
-                        <Label Height="25" Content="{Binding SelectedPiece.PrixVente, Mode=OneWay}" ContentStringFormat="{}{1} €" FontWeight="Bold"/>
+                        <Label Height="25" Content="{Binding SelectedPiece.PrixVente, Mode=OneWay}" ContentStringFormat="€ {0}" FontWeight="Bold"/>
                         <Label Height="25" Content="{Binding SelectedPiece.Quantite}" FontWeight="Bold"/>
                     </StackPanel>
                 </Grid>
@@ -80,10 +80,8 @@
                     </Grid.ColumnDefinitions>
 
                     <StackPanel Orientation="Vertical" Grid.Column="0">
-                        <Label Height="25" Content="Stat"/>
-                        <Label Height="25" Content="Stat"/>
-                        <Label Height="25" Content="Stat"/>
-                        <Label Height="25" Content="Stat"/>
+                        <Label Height="25" Content="Nombre de ventes :"/>
+                        <Label Height="25" Content="% de ventes :"/>
                     </StackPanel>
                 </Grid>
             </GroupBox>
@@ -130,7 +128,7 @@
                         <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding FournisseurPieceDetachee.Nom}"/>
                         <DataGridTextColumn Width="auto" Header="Libellé" Binding="{Binding FournisseurPieceDetachee.LibelleFournisseur.Nom}"/>
                         <DataGridTextColumn Width="*" Header="Numéro catalgoque" Binding="{Binding NumCatalogue}"/>
-                        <DataGridTextColumn Width="*" Header="Délai en jours" Binding="{Binding Delai}"/>
+                        <DataGridTextColumn Width="*" Header="Délai" Binding="{Binding Delai, StringFormat={}{0}j}"/>
                         <DataGridTextColumn Width="auto" Header="Prix" Binding="{Binding Prix, StringFormat=€ {0}}"/>
                     </DataGrid.Columns>
                 </DataGrid>
