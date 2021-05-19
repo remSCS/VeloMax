@@ -24,9 +24,9 @@
 
         <Image Source="/img/VeloMax_Logo.png" Height="250" 
                    Grid.Row="0" Grid.Column="0" Grid.RowSpan="5" HorizontalAlignment="Center" VerticalAlignment="Center"
-               ToolTip="Logo crée par nos soins pour les besoins du problème"/>
+               ToolTip="Application développée par NGUYEN Christophe, MAREK Gwendoline et LOMBARD Rémi"/>
         
-        <Button x:Name="Github_Button"
+        <Button x:Name="Github_Button" ToolTip="Accéder au GitHub du projet"
                 Grid.Column="0" Grid.Row="0" 
                 Width="50" HorizontalAlignment="Left" VerticalAlignment="Top"
                 Click="Github_Button_Click">

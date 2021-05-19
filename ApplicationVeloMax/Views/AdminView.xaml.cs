@@ -451,37 +451,37 @@ namespace ApplicationVeloMax.Views
         private void commandesModifierButton_Click(object sender, RoutedEventArgs e)
         {
             if (CheckIfSelected(SelectedCommande)) new CommandeDetailView(SelectedCommande).ShowDialog();
-            else MessageBox.Show("Veuillez choisir une commande");
+            else MessageBox.Show("Veuillez sélectionner une commande", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             RefreshProperties();
         }
 
         private void commandesDoneModifierButton_Click(object sender, RoutedEventArgs e)
         {
             if (CheckIfSelected(SelectedCommandeDone)) new CommandeDetailView(SelectedCommandeDone).ShowDialog();
-            else MessageBox.Show("Veuillez choisir une commande");
+            else MessageBox.Show("Veuillez sélectionner une commande", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             RefreshProperties();
         }
 
         private void commandesCancelledModifierButton_Click(object sender, RoutedEventArgs e)
         {
             if (CheckIfSelected(SelectedCommandeCancelled)) new CommandeDetailView(SelectedCommandeCancelled).ShowDialog();
-            else MessageBox.Show("Veuillez choisir une commande");
+            else MessageBox.Show("Veuillez sélectionner une commande", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             RefreshProperties();
         }
 
         private void commandesToDoModifierButton_Click(object sender, RoutedEventArgs e)
         {
             if (CheckIfSelected(SelectedCommandeToDo)) new CommandeDetailView(SelectedCommandeToDo).ShowDialog();
-            else MessageBox.Show("Veuillez choisir une commande");
+            else MessageBox.Show("Veuillez sélectionner une commande", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             RefreshProperties();
         }
 
         private void deleteOrderButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedCommande == null || !Commande.Ensemble.Contains(SelectedCommande)) MessageBox.Show("Veuillez sélectionner une commande à supprimer.");
+            if (SelectedCommande == null || !Commande.Ensemble.Contains(SelectedCommande)) MessageBox.Show("Veuillez sélectionner une commande à supprimer", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
-                MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir défnitivement supprimer cette commande ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir supprimer définitivement cette commande ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
                 if (res == MessageBoxResult.Yes)
                 {
                     DataAccess.RemoveFromOrders(SelectedCommande);
@@ -489,7 +489,7 @@ namespace ApplicationVeloMax.Views
                     CommandesAnnul = new ObservableCollection<Commande>(Commande.EnsembleAnnul);
                     CommandesPrep = new ObservableCollection<Commande>(Commande.EnsemblePrep);
                     CommandesDone = new ObservableCollection<Commande>(Commande.EnsembleDone);
-                    MessageBox.Show("Comande supprimée");
+                    MessageBox.Show("Commande supprimée", "Succès !", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             RefreshProperties();
@@ -497,7 +497,7 @@ namespace ApplicationVeloMax.Views
 
         private void cancelOrderButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedCommande == null || !Commande.Ensemble.Contains(SelectedCommande)) MessageBox.Show("Veuillez sélectionner une commande à supprimer.");
+            if (SelectedCommande == null || !Commande.Ensemble.Contains(SelectedCommande)) MessageBox.Show("Veuillez sélectionner une commande à supprimer", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
                 MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir annuler et archiver cette commande ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
@@ -508,7 +508,7 @@ namespace ApplicationVeloMax.Views
                     CommandesAnnul = new ObservableCollection<Commande>(Commande.EnsembleAnnul);
                     CommandesPrep = new ObservableCollection<Commande>(Commande.EnsemblePrep);
                     CommandesDone = new ObservableCollection<Commande>(Commande.EnsembleDone);
-                    MessageBox.Show("Commande annulée");
+                    MessageBox.Show("Commande annulée", "Succès !", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             RefreshProperties();
@@ -563,7 +563,7 @@ namespace ApplicationVeloMax.Views
         #region Modeles
         private void removeModeleButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedModele == null || !Modeles.Contains(SelectedModele)) MessageBox.Show("Veuillez sélectionner un modèle à supprimer.");
+            if (SelectedModele == null || !Modeles.Contains(SelectedModele)) MessageBox.Show("Veuillez sélectionner un modèle à supprimer", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
                 MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir supprimer ce modèle ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
@@ -571,7 +571,7 @@ namespace ApplicationVeloMax.Views
                 {
                     DataAccess.RemoveFromModeles(SelectedModele);
                     Modeles = new ObservableCollection<Modele>(Modele.Ensemble);
-                    MessageBox.Show("Modele supprimé");
+                    MessageBox.Show("Modele supprimé", "Succès !", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
             RefreshProperties();
@@ -579,7 +579,7 @@ namespace ApplicationVeloMax.Views
 
         private void editModeleButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedModele == null) MessageBox.Show("Veuillez sélectionner un modèle.");
+            if (SelectedModele == null) MessageBox.Show("Veuillez sélectionner un modèle", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
                 new EditModeleView(SelectedModele).ShowDialog();
@@ -595,7 +595,7 @@ namespace ApplicationVeloMax.Views
 
         private void modeleDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (SelectedModele == null) MessageBox.Show("Veuillez choisir un modèle");
+            if (SelectedModele == null) MessageBox.Show("Veuillez sélectionner un modèle", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
                 new detailPieceView(SelectedModele).ShowDialog();
@@ -607,17 +607,17 @@ namespace ApplicationVeloMax.Views
         #region Pièces
         private void removePartButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedPiece == null || !PiecesDetachees.Contains(SelectedPiece)) MessageBox.Show("Veuillez sélectionner une pièce à supprimer.");
+            if (SelectedPiece == null || !PiecesDetachees.Contains(SelectedPiece)) MessageBox.Show("Veuillez sélectionner une pièce à supprimer", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
                 MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir supprimer cette pièce ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
                 if (res == MessageBoxResult.Yes)
                 {
-                    if (!DataAccess.RemoveFromParts(SelectedPiece)) MessageBox.Show("Cette pièce est utilisée ailleurs !");
+                    if (!DataAccess.RemoveFromParts(SelectedPiece)) MessageBox.Show("Cette pièce est utilisée ailleurs !", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                     else
                     {
                         PiecesDetachees = new ObservableCollection<PieceDetachee>(PieceDetachee.Ensemble);
-                        MessageBox.Show("Pièce supprimé");
+                        MessageBox.Show("Pièce supprimée", "Succès !", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 }
             }
@@ -642,7 +642,7 @@ namespace ApplicationVeloMax.Views
 
         private void pieceDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            if (SelectedPiece == null) MessageBox.Show("Veuillez choisir une pièce");
+            if (SelectedPiece == null) MessageBox.Show("Veuillez sélectionner une pièce", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
                 new DetailPieceView(SelectedPiece).ShowDialog();
@@ -655,7 +655,7 @@ namespace ApplicationVeloMax.Views
         #region Clients
         private void supprimerClientButtons_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedClient == null || !Clients.Contains(SelectedClient)) MessageBox.Show("Veuillez sélectionner un client à supprimer.");
+            if (SelectedClient == null || !Clients.Contains(SelectedClient)) MessageBox.Show("Veuillez sélectionner un client à supprimer", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
                 MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir supprimer ce client ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
@@ -664,9 +664,9 @@ namespace ApplicationVeloMax.Views
                     if (DataAccess.RemoveFromClients(SelectedClient))
                     {
                         Clients = new ObservableCollection<Client>(Client.Ensemble);
-                        MessageBox.Show("Client supprimé");
+                        MessageBox.Show("Client supprimé", "Succès !", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                    else MessageBox.Show("Impossible de supprimer un client ayant un historique de commande.");
+                    else MessageBox.Show("Impossible de supprimer un client ayant un historique de commande", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             RefreshProperties();
@@ -675,7 +675,7 @@ namespace ApplicationVeloMax.Views
         #region Fidelio
         private void removeFidelioButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedFidelio == null || !Fidelios.Contains(SelectedFidelio)) MessageBox.Show("Veuillez sélectionner un type de compte Fidélio.");
+            if (SelectedFidelio == null || !Fidelios.Contains(SelectedFidelio)) MessageBox.Show("Veuillez sélectionner un type de compte Fidélio", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
                 MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir supprimer ce type de compte Fidélio ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
@@ -684,9 +684,9 @@ namespace ApplicationVeloMax.Views
                     if (DataAccess.RemoveFromFidelios(SelectedFidelio))
                     {
                         Fidelios = new ObservableCollection<Fidelio>(Fidelio.Ensemble);
-                        MessageBox.Show("Fidélio supprimé");
+                        MessageBox.Show("Fidélio supprimé", "Succès !", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                    else MessageBox.Show("Impossible de supprimer un client ayant un historique de commande. Voulez vous migrer les clients ayant ce type de compte ? (à faire)");
+                    else MessageBox.Show("Impossible de supprimer un programme Fidélio auquel des clients ont adhéré", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             RefreshProperties();
@@ -694,7 +694,7 @@ namespace ApplicationVeloMax.Views
 
         private void editFidelioButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedFidelio == null) MessageBox.Show("Veuillez sélectionner un programme.");
+            if (SelectedFidelio == null) MessageBox.Show("Veuillez sélectionner un programme", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
                 new EditFidelioView(SelectedFidelio).ShowDialog();
@@ -714,7 +714,7 @@ namespace ApplicationVeloMax.Views
         #region Particuliers
         private void editClientPartButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedClient == null) MessageBox.Show("Veuillez sélectionner un client.");
+            if (SelectedClient == null) MessageBox.Show("Veuillez sélectionner un client", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
                 new EditClientPartView((ClientPart)SelectedClient).ShowDialog();
@@ -734,7 +734,7 @@ namespace ApplicationVeloMax.Views
         #region Profesionnels
         private void editClientProButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedClient == null) MessageBox.Show("Veuillez sélectionner un client.");
+            if (SelectedClient == null) MessageBox.Show("Veuillez sélectionner un client", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
                 new EditClientProView((ClientPro)SelectedClient).ShowDialog();
@@ -779,18 +779,18 @@ namespace ApplicationVeloMax.Views
         #region Fournisseurs
         private void removeFournisseurButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedFournisseur == null || !Fournisseurs.Contains(SelectedFournisseur)) MessageBox.Show("Veuillez sélectionner un fournisseur.");
+            if (SelectedFournisseur == null || !Fournisseurs.Contains(SelectedFournisseur)) MessageBox.Show("Veuillez sélectionner un fournisseur", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
-                MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir supprimer fournisseur ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
+                MessageBoxResult res = MessageBox.Show("Etes vous certain de vouloir supprimer ce fournisseur ?", "Vérification", MessageBoxButton.YesNoCancel, MessageBoxImage.Warning);
                 if (res == MessageBoxResult.Yes)
                 {
                     if (DataAccess.RemoveFromFournisseurs(SelectedFournisseur))
                     {
                         Fournisseurs = new ObservableCollection<Fournisseur>(Fournisseur.Ensemble);
-                        MessageBox.Show("Fournisseur supprimé");
+                        MessageBox.Show("Fournisseur supprimé", "Succès !", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                    else MessageBox.Show("Impossible de supprimer un fournisseur actif.");
+                    else MessageBox.Show("Impossible de supprimer un fournisseur actif", "Erreur", MessageBoxButton.OK, MessageBoxImage.Error);
                 }
             }
             RefreshProperties();
@@ -798,7 +798,7 @@ namespace ApplicationVeloMax.Views
 
         private void editFournisseurButton_Click(object sender, RoutedEventArgs e)
         {
-            if (SelectedFournisseur == null) MessageBox.Show("Veuillez sélectioner un fournisseur à modifider.");
+            if (SelectedFournisseur == null) MessageBox.Show("Veuillez sélectioner un fournisseur à modifider", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
                 new EditFournisseurView(SelectedFournisseur).ShowDialog();
@@ -814,7 +814,7 @@ namespace ApplicationVeloMax.Views
 
         private void FournisseursDetail_Click(object sender, MouseButtonEventArgs e)
         {
-            if (SelectedFournisseur == null) MessageBox.Show("Veuillez sélectionner un fournisseur !");
+            if (SelectedFournisseur == null) MessageBox.Show("Veuillez sélectionner un fournisseur", "Erreur sélection", MessageBoxButton.OK, MessageBoxImage.Exclamation);
             else
             {
                 new DetailFournisseurView(SelectedFournisseur).ShowDialog();

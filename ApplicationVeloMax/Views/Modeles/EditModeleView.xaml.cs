@@ -88,7 +88,7 @@ namespace ApplicationVeloMax.Views.Modeles
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Veuillez vérifier le format !\nErreur : " + ex.ToString());
+                MessageBox.Show("Veuillez vérifier le format !\nErreur : " + ex.ToString(), "Erreur de format", MessageBoxButton.OK, MessageBoxImage.Error);
                 return;
             }
 
@@ -96,7 +96,7 @@ namespace ApplicationVeloMax.Views.Modeles
 
             else
             {
-                MessageBox.Show("Modifications effectuées");
+                MessageBox.Show("Modifications effectuées", "Succès !", MessageBoxButton.OK, MessageBoxImage.Information);
                 this.Close();
             }
         }

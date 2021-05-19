@@ -70,8 +70,6 @@
                         <MenuItem Header="Dans moins de trois mois" Click="almostexpiredFidelioMembers_Click" Tag="93"/>
                         <MenuItem Header="Dans moins de six mois" Click="almostexpiredFidelioMembers_Click" Tag="186"/>
                     </MenuItem>
-                    <MenuItem Header="Autre..."/>
-                    <MenuItem Header="Autre..."/>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Statistiques">
@@ -110,8 +108,8 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox Grid.Row="1" Padding="5" Margin="10,10,10,0" ToolTip="Rechercher par nom de modele, ID"
-                                 Text="{Binding SearchModelText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBox Grid.Row="1" Height="25" Padding="5" Margin="10,10,10,0" ToolTip="Rechercher par ID et nom de modele"
+                                 Text="{Binding SearchModelText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center">
                                     <TextBox.Background>
                                         <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
                                     </TextBox.Background>
@@ -121,23 +119,7 @@
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="10"/>
                                                 </Style>
-                                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                                    <VisualBrush.Visual>
-                                                        <Label Content="Rechercher par nom de modele, ID" Opacity="0.5" FontSize="14" />
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
                                             </Style.Resources>
-                                            <Style.Triggers>
-                                                <MultiTrigger>
-                                                    <MultiTrigger.Conditions>
-                                                        <Condition Property="Text" Value="{x:Static sys:String.Empty}"/>
-                                                        <Condition Property="IsFocused"  Value="False"/>
-                                                    </MultiTrigger.Conditions>
-                                                    <MultiTrigger.Setters>
-                                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                                    </MultiTrigger.Setters>
-                                                </MultiTrigger>
-                                            </Style.Triggers>
                                         </Style>
                                     </TextBox.Style>
 
@@ -186,7 +168,7 @@
                                 </StackPanel>
 
                                 <DataGrid Grid.Row="3" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ToolTip="Différents vélos proposés par Vélomax" AutoGenerateColumns="False" GridLinesVisibility="All" 
+                                      IsReadOnly="True" ToolTip="Différents vélos proposés par VéloMax" AutoGenerateColumns="False" GridLinesVisibility="All" 
                                       ItemsSource="{Binding Modeles, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedItem="{Binding SelectedModele, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Resources>
@@ -225,8 +207,8 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox Grid.Row="0" Padding="5" Margin="10,10,10,0" ToolTip="Rechercher par nom de modele, ID"
-                                 Text="{Binding SearchPieceText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBox Grid.Row="0" Height="25" Padding="5" Margin="10,10,10,0" ToolTip="Rechercher par nom de modele, ID"
+                                 Text="{Binding SearchPieceText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center">
                                     <TextBox.Background>
                                         <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
                                     </TextBox.Background>
@@ -236,23 +218,7 @@
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="10"/>
                                                 </Style>
-                                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                                    <VisualBrush.Visual>
-                                                        <Label Content="Rechercher par nom de modele, ID" Opacity="0.5" FontSize="14" />
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
                                             </Style.Resources>
-                                            <Style.Triggers>
-                                                <MultiTrigger>
-                                                    <MultiTrigger.Conditions>
-                                                        <Condition Property="Text" Value="{x:Static sys:String.Empty}"/>
-                                                        <Condition Property="IsFocused"  Value="False"/>
-                                                    </MultiTrigger.Conditions>
-                                                    <MultiTrigger.Setters>
-                                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                                    </MultiTrigger.Setters>
-                                                </MultiTrigger>
-                                            </Style.Triggers>
                                         </Style>
                                     </TextBox.Style>
                                 </TextBox>
@@ -302,7 +268,7 @@
                                 </StackPanel>
 
                                 <DataGrid Grid.Row="2" Grid.Column="0" Margin="10"
-                                      IsReadOnly="True" ToolTip="Pièces détachées proposées par Vélomax" AutoGenerateColumns="False" GridLinesVisibility="All"
+                                      IsReadOnly="True" ToolTip="Pièces détachées proposées par VéloMax" AutoGenerateColumns="False" GridLinesVisibility="All"
                                       ItemsSource="{Binding PiecesDetachees, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}" 
                                       SelectedItem="{Binding SelectedPiece, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
                                     <DataGrid.Resources>
@@ -314,10 +280,9 @@
                                         <DataGridTextColumn Width="*" Header="Référence" Binding="{Binding Reference}"/>
                                         <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
                                         <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}"/>
-                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Intro" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
-                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Sortie" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
-                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Quantité" Binding="{Binding Quantite}"/>
-                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Prix" Binding="{Binding PrixVente, StringFormat=€ {0}}"/>
+                                        <DataGridTextColumn Width="auto" Header="Date intro." Binding="{Binding DateE, StringFormat=dd/MM/yyyy}"/>
+                                        <DataGridTextColumn Width="auto" Header="Date sortie" Binding="{Binding DateS, StringFormat=dd/MM/yyyy}"/>
+                                        <DataGridTextColumn Width="auto" Header="Prix" Binding="{Binding PrixVente, StringFormat=€ {0}}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -334,7 +299,7 @@
                 <TabItem>
                     <TabItem.Header>
                         <StackPanel Orientation="Vertical" HorizontalAlignment="Left">
-                            <Image Source="/img/Stock_Logo.png" Height="60" ToolTip="Afficher le stock de Vélomax" HorizontalAlignment="Center"/>
+                            <Image Source="/img/Stock_Logo.png" Height="60" ToolTip="Afficher le stock de VéloMax" HorizontalAlignment="Center"/>
                             <Label Content="Stock" Foreground="Black" FontSize="20" FontWeight="SemiBold" HorizontalAlignment="Center"/>
                         </StackPanel>
                     </TabItem.Header>
@@ -354,7 +319,7 @@
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
                                     <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
-                                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Prix" Binding="{Binding PrixUnitaire}"/>
+                                    <DataGridTextColumn Width="auto" CanUserResize="False" Header="Prix" Binding="{Binding PrixUnitaire, StringFormat=€ {0}}"/>
                                     <DataGridTemplateColumn>
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
@@ -388,9 +353,9 @@
                                 <DataGrid.Columns>
                                     <DataGridTextColumn Width="auto" Header="ID" CanUserResize="False" Binding="{Binding Id}"/>
                                     <DataGridTextColumn Width="auto" Header="Ref." CanUserResize="False" Binding="{Binding Reference}"/>
-                                    <DataGridTextColumn Width="auto" Header="Nom" Binding="{Binding Nom}"/>
+                                    <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
                                     <DataGridTextColumn Width="*" Header="Description"  Binding="{Binding Description}"/>
-
+                                    <DataGridTextColumn Width="auto" Header="Prix" Binding="{Binding PrixVente, StringFormat=€ {0}}"/>
                                     <DataGridTemplateColumn>
                                         <DataGridTemplateColumn.CellTemplate>
                                             <DataTemplate>
@@ -501,8 +466,8 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox Grid.Row="1" Padding="5" Margin="10,10,10,0" ToolTip="Rechercher par prénom, nom, numéro de téléphone"
-                                 Text="{Binding SearchParticulierText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBox Grid.Row="1" Padding="5" Height="25" Margin="10,10,10,0" ToolTip="Rechercher par nom, prénom ou numéro de téléphone"
+                                 Text="{Binding SearchParticulierText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center">
                                     <TextBox.Background>
                                         <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
                                     </TextBox.Background>
@@ -512,23 +477,7 @@
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="10"/>
                                                 </Style>
-                                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                                    <VisualBrush.Visual>
-                                                        <Label Content="Rechercher par prénom, nom, numéro de téléphone" Opacity="0.5" FontSize="14" />
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
                                             </Style.Resources>
-                                            <Style.Triggers>
-                                                <MultiTrigger>
-                                                    <MultiTrigger.Conditions>
-                                                        <Condition Property="Text" Value="{x:Static sys:String.Empty}"/>
-                                                        <Condition Property="IsFocused"  Value="False"/>
-                                                    </MultiTrigger.Conditions>
-                                                    <MultiTrigger.Setters>
-                                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                                    </MultiTrigger.Setters>
-                                                </MultiTrigger>
-                                            </Style.Triggers>
                                         </Style>
                                     </TextBox.Style>
 
@@ -589,8 +538,10 @@
                                     </DataGrid.Resources>
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
-                                        <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ContactClient}"/>
-                                        <DataGridTextColumn Width="*" Header="Date d'adhérance" Binding="{Binding DateAdherance, StringFormat=dd/MM/yyy}"/>
+                                        <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ContactClient.FullName}"/>
+                                        <DataGridTextColumn Width="*" Header="Téléphone" Binding="{Binding ContactClient.FormatTel}"/>
+                                        <DataGridTextColumn Width="*" Header="Adresse email" Binding="{Binding ContactClient.Email}"/>
+                                        <DataGridTextColumn Width="auto" Header="Date d'adhésion" Binding="{Binding DateAdherance, StringFormat=dd/MM/yyy}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -615,8 +566,8 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox Grid.Row="1" Padding="5" Margin="10,10,10,0"  ToolTip="Rechercher par nom de l'entreprise, du commercial, de l'ID"
-                                 Text="{Binding SearhProText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBox Grid.Row="1" Padding="5" Height="25" Margin="10,10,10,0"  ToolTip="Rechercher par numéro de client, nom de l'entreprise ou nom du commercial"
+                                         Text="{Binding SearhProText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center">
                                     <TextBox.Background>
                                         <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
                                     </TextBox.Background>
@@ -626,26 +577,9 @@
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="10"/>
                                                 </Style>
-                                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                                    <VisualBrush.Visual>
-                                                        <Label Content="Rechercher par nom de l'entreprise, du commercial, de l'ID" Opacity="0.5" FontSize="14" />
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
                                             </Style.Resources>
-                                            <Style.Triggers>
-                                                <MultiTrigger>
-                                                    <MultiTrigger.Conditions>
-                                                        <Condition Property="Text" Value="{x:Static sys:String.Empty}"/>
-                                                        <Condition Property="IsFocused"  Value="False"/>
-                                                    </MultiTrigger.Conditions>
-                                                    <MultiTrigger.Setters>
-                                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                                    </MultiTrigger.Setters>
-                                                </MultiTrigger>
-                                            </Style.Triggers>
                                         </Style>
                                     </TextBox.Style>
-
                                 </TextBox>
 
                                 <StackPanel Grid.Row="2" Margin="10,10,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
@@ -704,7 +638,11 @@
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
                                         <DataGridTextColumn Width="*" Header="Entreprise" Binding="{Binding NomEntreprise}"/>
-                                        <DataGridTextColumn Width="*" Header="Remise" Binding="{Binding Remise}"/>
+                                        <DataGridTextColumn Width="*" Header="Nom du contact" Binding="{Binding ContactClient.FullName}"/>
+                                        <DataGridTextColumn Width="*" Header="Téléphone" Binding="{Binding ContactClient.FormatTel}"/>
+                                        <DataGridTextColumn Width="*" Header="Adresse Email" Binding="{Binding ContactClient.Email}"/>
+                                        <DataGridTextColumn Width="*" Header="Remise" Binding="{Binding Remise, StringFormat={}{0} %}"/>
+                                        <DataGridTextColumn Width="auto" Header="Date d'adhésino" Binding="{Binding DateAdherance, StringFormat=dd/MM/yyy}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -786,9 +724,9 @@
                                         <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
                                         <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
                                         <DataGridTextColumn Width="*" Header="Description" Binding="{Binding Description}"/>
-                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Coût annuel" Binding="{Binding Cout}"/>
-                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Rabais" Binding="{Binding Rabais}"/>
-                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Durée" Binding="{Binding DureeJours}"/>
+                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Coût" Binding="{Binding Cout, StringFormat=€ {0}}"/>
+                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Rabais" Binding="{Binding Rabais, StringFormat={}{0} %}"/>
+                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Durée" Binding="{Binding DureeJours, StringFormat={}{0}j}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -822,8 +760,8 @@
 
                         <Label Grid.Row="0" Margin="10,10,10,0" Content="Fournisseurs" FontFamily="Helvetica" FontSize="24" FontWeight="Bold"/>
 
-                        <TextBox Grid.Row="1" Padding="5" Margin="10,10,10,0" ToolTip="Rechercher par Siret, nom de l'entreprise, nom du commercial"
-                                 Text="{Binding SearchFournisseursText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                        <TextBox Grid.Row="1" Padding="5" Height="25" Margin="10,10,10,0" ToolTip="Rechercher par SIRET, nom d'entreprise ou nom du commercial"
+                                 Text="{Binding SearchFournisseursText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center">
                             <TextBox.Background>
                                 <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
                             </TextBox.Background>
@@ -833,23 +771,7 @@
                                         <Style TargetType="Border">
                                             <Setter Property="CornerRadius" Value="10"/>
                                         </Style>
-                                        <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                            <VisualBrush.Visual>
-                                                <Label Content="Rechercher par Siret, nom de l'entreprise, nom du commercial" Opacity="0.5" FontSize="14" />
-                                            </VisualBrush.Visual>
-                                        </VisualBrush>
                                     </Style.Resources>
-                                    <Style.Triggers>
-                                        <MultiTrigger>
-                                            <MultiTrigger.Conditions>
-                                                <Condition Property="Text" Value="{x:Static sys:String.Empty}"/>
-                                                <Condition Property="IsFocused"  Value="False"/>
-                                            </MultiTrigger.Conditions>
-                                            <MultiTrigger.Setters>
-                                                <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                            </MultiTrigger.Setters>
-                                        </MultiTrigger>
-                                    </Style.Triggers>
                                 </Style>
                             </TextBox.Style>
 
@@ -909,11 +831,12 @@
                                 </Style>
                             </DataGrid.Resources>
                             <DataGrid.Columns>
-                                <DataGridTextColumn Width="*" Header="SIRET" Binding="{Binding Siret}"/>
+                                <DataGridTextColumn Width="auto" Header="SIRET" Binding="{Binding Siret}"/>
                                 <DataGridTextColumn Width="*" Header="Nom" Binding="{Binding Nom}"/>
-                                <DataGridTextColumn Width="*" Header="Contact" Binding="{Binding ContactFournisseur}"/>
-                                <DataGridTextColumn Width="auto" CanUserResize="False" Header="Adresse" Binding="{Binding AdresseFournisseur, StringFormat=dd/MM/yyy}"/>
-                                <DataGridTextColumn Width="auto" CanUserResize="False" Header="Libéllé" Binding="{Binding LibelleFournisseur, StringFormat=dd/MM/yyy}"/>
+                                <DataGridTextColumn Width="*" Header="Contact" Binding="{Binding ContactFournisseur.FullName}"/>
+                                <DataGridTextColumn Width="*" Header="Téléphonne" Binding="{Binding ContactFournisseur.FormatTel}"/>
+                                <DataGridTextColumn Width="*" Header="Adresse Email" Binding="{Binding ContactFournisseur.Email}"/>
+                                <DataGridTextColumn Width="auto" Header="Libéllé" Binding="{Binding LibelleFournisseur, StringFormat=dd/MM/yyy}"/>
                             </DataGrid.Columns>
                         </DataGrid>
                     </Grid>
@@ -947,8 +870,8 @@
                                     <RowDefinition Height="*"/>
                                 </Grid.RowDefinitions>
 
-                                <TextBox Grid.Row="0" Padding="5" Margin="10,10,10,0"
-                             Text="{Binding SearchCommandeText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
+                                <TextBox Grid.Row="0" Padding="5" Height="25" Margin="10,10,10,0" VerticalContentAlignment="Center"
+                                         Text="{Binding SearchCommandeText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}">
                                     <TextBox.Background>
                                         <ImageBrush ImageSource="/img/Search_Logo.png" Stretch="Uniform" AlignmentX="Right"/>
                                     </TextBox.Background>
@@ -958,26 +881,9 @@
                                                 <Style TargetType="Border">
                                                     <Setter Property="CornerRadius" Value="10"/>
                                                 </Style>
-                                                <VisualBrush x:Key="CueBannerBrush" AlignmentX="Left" AlignmentY="Center" Stretch="None">
-                                                    <VisualBrush.Visual>
-                                                        <Label Content="Rechercher par numéro de commande, par destinataire, par date de prise de commande" Opacity="0.5" FontSize="14" />
-                                                    </VisualBrush.Visual>
-                                                </VisualBrush>
                                             </Style.Resources>
-                                            <Style.Triggers>
-                                                <MultiTrigger>
-                                                    <MultiTrigger.Conditions>
-                                                        <Condition Property="Text" Value="{x:Static sys:String.Empty}"/>
-                                                        <Condition Property="IsFocused"  Value="False"/>
-                                                    </MultiTrigger.Conditions>
-                                                    <MultiTrigger.Setters>
-                                                        <Setter Property="Background" Value="{StaticResource CueBannerBrush}" />
-                                                    </MultiTrigger.Setters>
-                                                </MultiTrigger>
-                                            </Style.Triggers>
                                         </Style>
                                     </TextBox.Style>
-
                                 </TextBox>
 
                                 <StackPanel Grid.Row="1" Margin="10,10,5,0" Orientation="Horizontal" HorizontalAlignment="Right">
@@ -1038,7 +944,7 @@
                                     </Button>
                                 </StackPanel>
 
-                                <DataGrid Grid.Row="2" Grid.Column="0" Margin="10" 
+                                <DataGrid Grid.Row="2" Grid.Column="0" Margin="10,20,10,0" 
                                       IsReadOnly="True" ToolTip="Toutes les commandes" AutoGenerateColumns="False" GridLinesVisibility="All"
                                       ItemsSource="{Binding Commandes, Mode=OneWay, UpdateSourceTrigger=PropertyChanged}"
                                       SelectedItem="{Binding SelectedCommande, Mode=OneWayToSource, UpdateSourceTrigger=PropertyChanged}">
@@ -1050,10 +956,10 @@
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
                                         <DataGridTextColumn Width="*" Header="Client" Binding="{Binding Destinataire}"/>
-                                        <DataGridTextColumn Width="*" Header="Adresse" Binding="{Binding AdresseLivraison}"/>
-                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date effectuée" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
-                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date à faire pour" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
-                                        <DataGridTextColumn Width="*" Header="Statut" Binding="{Binding Statut}"/>
+                                        <DataGridTextColumn Width="*" Header="Adresse de livraison" Binding="{Binding AdresseLivraison}"/>
+                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Prise commande" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
+                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Livraison" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
+                                        <DataGridTextColumn Width="auto" Header="Statut" Binding="{Binding Statut}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -1103,11 +1009,11 @@
                                     </DataGrid.Resources>
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
-                                        <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ClientCommande}"/>
-                                        <DataGridTextColumn Width="*" Header="Adresse" Binding="{Binding AdresseLivraison}"/>
-                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date effectuée" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
-                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date à faire pour" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
-                                        <DataGridTextColumn Width="*" Header="Statut" Binding="{Binding Statut}"/>
+                                        <DataGridTextColumn Width="*" Header="Client" Binding="{Binding Destinataire}"/>
+                                        <DataGridTextColumn Width="*" Header="Adresse de livraison" Binding="{Binding AdresseLivraison}"/>
+                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Prise commande" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
+                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Livraison" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
+                                        <DataGridTextColumn Width="auto" Header="Statut" Binding="{Binding Statut}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -1140,11 +1046,11 @@
                                     </DataGrid.Resources>
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
-                                        <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ClientCommande}"/>
-                                        <DataGridTextColumn Width="*" Header="Adresse" Binding="{Binding AdresseLivraison}"/>
-                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date effectuée" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
-                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date à faire pour" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
-                                        <DataGridTextColumn Width="*" Header="Statut" Binding="{Binding Statut}"/>
+                                        <DataGridTextColumn Width="*" Header="Client" Binding="{Binding Destinataire}"/>
+                                        <DataGridTextColumn Width="*" Header="Adresse de livraison" Binding="{Binding AdresseLivraison}"/>
+                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Prise commande" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
+                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Livraison" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
+                                        <DataGridTextColumn Width="auto" Header="Statut" Binding="{Binding Statut}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -1178,11 +1084,11 @@
                                     </DataGrid.Resources>
                                     <DataGrid.Columns>
                                         <DataGridTextColumn Width="auto" CanUserResize="False" Header="Numéro" Binding="{Binding Id}"/>
-                                        <DataGridTextColumn Width="*" Header="Client" Binding="{Binding ClientCommande}"/>
-                                        <DataGridTextColumn Width="*" Header="Adresse" Binding="{Binding AdresseLivraison}"/>
-                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date effectuée" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
-                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Date à faire pour" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
-                                        <DataGridTextColumn Width="*" Header="Statut" Binding="{Binding Statut}"/>
+                                        <DataGridTextColumn Width="*" Header="Client" Binding="{Binding Destinataire}"/>
+                                        <DataGridTextColumn Width="*" Header="Adresse de livraison" Binding="{Binding AdresseLivraison}"/>
+                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Prise commande" Binding="{Binding DateE, StringFormat=dd/MM/yyy}"/>
+                                        <DataGridTextColumn Width="auto" CanUserResize="False" Header="Livraison" Binding="{Binding DateS, StringFormat=dd/MM/yyy}"/>
+                                        <DataGridTextColumn Width="auto" Header="Statut" Binding="{Binding Statut}"/>
                                     </DataGrid.Columns>
                                 </DataGrid>
                             </Grid>
@@ -1201,8 +1107,8 @@
                                 </Grid.RowDefinitions>
 
                                 <ComboBox x:Name="triVente_ComboBox" Grid.Row="0" Width="200" HorizontalAlignment="Right" Margin="5" SelectionChanged="triVente_ComboBox_SelectionChanged">
-                                    <ComboBoxItem >Nb. de ventes</ComboBoxItem>
-                                    <ComboBoxItem IsSelected="True">Cumul des ventes</ComboBoxItem>
+                                    <ComboBoxItem >Nombre d'articles vendus</ComboBoxItem>
+                                    <ComboBoxItem IsSelected="True">Montant cumulé des ventes</ComboBoxItem>
                                 </ComboBox>
 
                                 <DataGrid x:Name="Classementclients_DataGrid" Grid.Row="1" IsReadOnly="True"
@@ -1214,9 +1120,9 @@
                                         </Style>
                                     </DataGrid.Resources>
                                     <DataGrid.Columns>
-                                        <DataGridTextColumn Header="Nom client" Binding="{Binding Nom}" Width="*"/>
-                                        <DataGridTextColumn Header="Montant cumulé" Binding="{Binding MontantCumul, StringFormat={}€ {0:0.00}}" Width="auto"/>
-                                        <DataGridTextColumn Header="Nombre d'articles cumulés" Binding="{Binding QuantiteCumul}" Width="auto"/>
+                                        <DataGridTextColumn Header="Nom du client" Binding="{Binding Nom}" Width="*"/>
+                                        <DataGridTextColumn Header="Montant cumulé des ventes" Binding="{Binding MontantCumul, StringFormat={}€ {0:0.00}}" Width="auto"/>
+                                        <DataGridTextColumn Header="Nombre d'articles vendus" Binding="{Binding QuantiteCumul}" Width="auto"/>
                                     </DataGrid.Columns>
 
                                 </DataGrid>

@@ -5,8 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Converters"
         mc:Ignorable="d" WindowStartupLocation="CenterScreen" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="Edition Modèle - VéloMax" Icon="/img/Velomax_Logo.png" ResizeMode="NoResize"
-        Height="340" Width="400" FontFamily="Helvetica" Background="#e4e4e4">
+        Title="{Binding SelectedModele.Nom, Mode=OneWay, StringFormat={}Edition {0} - VéloMax}" Icon="/img/Velomax_Logo.png" ResizeMode="NoResize"
+        Height="350" Width="400" FontFamily="Helvetica" Background="#e4e4e4">
 
     <Grid>
         
