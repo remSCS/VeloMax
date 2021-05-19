@@ -6,7 +6,7 @@
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Clients"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="{Binding SelectedModele.Nom, StringFormat={}{0} - Détails}" 
+        Title="{Binding SelectedModele.Nom, StringFormat={}{0} - Détails}" Icon="/img/VeloMax_Logo.png"
         Height="600" Width="990" WindowStartupLocation="CenterScreen">
 
     <Grid>
@@ -83,6 +83,10 @@
                     <StackPanel Orientation="Vertical" Grid.Column="0">
                         <Label Height="25" Content="Nombre vendus :"/>
                         <Label Height="25" Content="% de vente de modèles :"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                        <Label Height="25" x:Name="nbVendus" FontWeight="Bold"/>
+                        <Label Height="25" x:Name="pourcentageVendu" FontWeight="Bold"/>
                     </StackPanel>
                 </Grid>
             </GroupBox>

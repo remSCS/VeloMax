@@ -239,6 +239,20 @@ namespace ApplicationVeloMax.Models
             return prixCumul;
         }
 
+        static public int NbPiecesVendues()
+        {
+            int tot = 0;
+            foreach (var com in Ensemble) tot += com.PiecesCommande.Count();
+            return tot;
+        }
+
+        static public int NbModelesVendus()
+        {
+            int tot = 0;
+            foreach (var com in Ensemble) tot += com.ModelesCommande.Count();
+            return tot;
+        }
+
         static public List<Commande> CommandesThatMatch(string nomClient)
         {
 

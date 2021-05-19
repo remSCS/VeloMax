@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Statistiques"
         mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        WindowStartupLocation="CenterScreen"
+        WindowStartupLocation="CenterScreen" Icon="/img/VeloMax_Logo.png"
         Title="Statistiques" Height="450" Width="850">
     <Grid>
         <Grid.ColumnDefinitions>

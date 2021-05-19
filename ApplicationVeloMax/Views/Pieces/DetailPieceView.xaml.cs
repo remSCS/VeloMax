@@ -87,6 +87,8 @@ namespace ApplicationVeloMax.Views.Pieces
             SelectedPiece = _input;
             Modeles = new ObservableCollection<Modele>(Modele.Ensemble.FindAll(m => m.PiecesComposition.Contains(SelectedPiece)));
             Fournisseurs = new ObservableCollection<FournisseurPiece>(FournisseurPiece.Ensemble.FindAll(fp => fp.PieceDetacheeFournisseur == SelectedPiece));
+            nbVendu.Content = SelectedPiece.Nbvendus;
+            pourcentageVendu.Content = $"{100 * SelectedPiece.Nbvendus / Commande.NbPiecesVendues()} %";
         }
 
         private void modelesDataGrid_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new detailPieceView(SelectedModele).ShowDialog();

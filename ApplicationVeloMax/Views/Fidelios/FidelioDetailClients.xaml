@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Fidelios"
         mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}" WindowStartupLocation="CenterScreen"
-        Title="FidelioDetailClients" Height="450" Width="900">
+        Title="FidelioDetailClients" Height="450" Width="900" Icon="/img/VeloMax_Logo.png">
     <Grid>
         <StackPanel Orientation="Vertical">
             <Label Content="{Binding SelectedFidelio.Nom}" FontSize="28" FontWeight="Bold" Margin="5"/>

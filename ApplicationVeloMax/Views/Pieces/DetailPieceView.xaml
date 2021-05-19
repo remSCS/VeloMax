@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:ApplicationVeloMax.Views.Clients"
         mc:Ignorable="d" DataContext="{Binding RelativeSource={RelativeSource Self}}"
-        Title="{Binding SelectedPiece.Nom, StringFormat={}{0} - Détails}" 
+        Title="{Binding SelectedPiece.Nom, StringFormat={}{0} - Détails}"  Icon="/img/VeloMax_Logo.png"
         Height="600" Width="1000" WindowStartupLocation="CenterScreen">
 
     <Grid>
@@ -82,6 +82,10 @@
                     <StackPanel Orientation="Vertical" Grid.Column="0">
                         <Label Height="25" Content="Nombre de ventes :"/>
                         <Label Height="25" Content="% de ventes :"/>
+                    </StackPanel>
+                    <StackPanel Orientation="Vertical" Grid.Column="1">
+                        <Label Height="25" x:Name="nbVendu" FontWeight="Bold"/>
+                        <Label Height="25" x:Name="pourcentageVendu" FontWeight="Bold"/>
                     </StackPanel>
                 </Grid>
             </GroupBox>

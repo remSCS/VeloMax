@@ -76,6 +76,8 @@ namespace ApplicationVeloMax.Views.Modeles
         {
             InitializeComponent();
             SelectedModele = _input;
+            nbVendus.Content = SelectedModele.Nbvendus;
+            pourcentageVendu.Content = $"{100 * SelectedModele.Nbvendus / Commande.NbModelesVendus()} %";
         }
 
         private void DataGridRow_MouseDoubleClick(object sender, MouseButtonEventArgs e) => new DetailPieceView(SelectedPiece).ShowDialog();
