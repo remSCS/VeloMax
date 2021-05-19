@@ -48,14 +48,14 @@
             </MenuItem>
             <MenuItem Header="Outils">
                 <MenuItem Header="Exporter en XML">
-                    <MenuItem Header="Table 1"/>
-                    <MenuItem Header="Table 2"/>
+                    <MenuItem Header="Pièces avec faible stock" Click="faiblePiece_Click"/>
+                    <MenuItem Header="Modèles avec faible stock" Click="faibleModele_Click"/>
                     <MenuItem Header="Table 3"/>
                 </MenuItem>
                 <MenuItem Header="Exporter en JSON">
                     <MenuItem Header="Membres dont le programme Fidélio arrive à expiration" Click="almostexpiredFidelioMembers_Click"/>
-                    <MenuItem Header="Table 2"/>
-                    <MenuItem Header="Table 3"/>
+                    <MenuItem Header="Autre..."/>
+                    <MenuItem Header="Autre..."/>
                 </MenuItem>
             </MenuItem>
             <MenuItem Header="Statistiques">

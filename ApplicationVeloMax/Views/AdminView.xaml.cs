@@ -29,6 +29,8 @@ using ApplicationVeloMax.Views.Statistiques;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 using System.IO;
+using System.Xml.Serialization;
+using System.Xml;
 
 namespace ApplicationVeloMax.Views
 {
@@ -867,16 +869,37 @@ namespace ApplicationVeloMax.Views
 
         private void almostexpiredFidelioMembers_Click(object sender, RoutedEventArgs e)
         {
+            /* Working
             JsonSerializer serializer = new JsonSerializer();
             serializer.NullValueHandling = NullValueHandling.Ignore;
-
             using (StreamWriter sw = new StreamWriter("FidelioExport.json"))
-            using (JsonWriter writer = new JsonTextWriter(sw))
+            using (JsonWriter writer = new JsonTextWriter(sw)) serializer.Serialize(writer, ClientPart.ProgrammeFidelioBientotExpired(1000));
+            System.Diagnostics.Process.Start("FidelioExport.json");*/
+
+            string json = JsonConvert.SerializeObject(ClientPart.ProgrammeFidelioBientotExpired(1000), Newtonsoft.Json.Formatting.Indented);
+            File.WriteAllText("FidelioExport.json", json);
+            System.Diagnostics.Process.Start("FidelioExport.json");
+        }
+
+        private void faiblePiece_Click(object sender, RoutedEventArgs e)
+        {
+            using(FileStream fs = File.Create("ExportPiecesStockFaible.xml"))
             {
-                serializer.Serialize(writer, ClientPart.ProgrammeFidelioBientotExpired(1000));
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<PieceDetachee>));
+                xmlSerializer.Serialize(fs, PieceDetachee.Ensemble.FindAll(p => p.Quantite <= 2));
+                System.Diagnostics.Process.Start("ExportPiecesStockFaible.xml");
             }
 
-            System.Diagnostics.Process.Start("FidelioExport.json");
+        }
+
+        private void faibleModele_Click(object sender, RoutedEventArgs e)
+        {
+            using (FileStream fs = File.Create("ExportModeleStockFaible.xml"))
+            {
+                XmlSerializer xmlSerializer = new XmlSerializer(typeof(List<Modele>));
+                xmlSerializer.Serialize(fs, Modele.Ensemble.FindAll(m => m.Quantite <= 2));
+                System.Diagnostics.Process.Start("ExportModeleStockFaible.xml");
+            }
         }
     }
 }
